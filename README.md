@@ -1,6 +1,6 @@
 # couver-shell
 
-![logo](http://imgur.com/tuyZk7W)
+![logo](http://i.imgur.com/PgMmcMZ.png)
 
 ## Description
 
