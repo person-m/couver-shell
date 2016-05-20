@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Thu May 19 13:52:59 2016 vincent riamon
+** Last update Fri May 20 17:22:58 2016 vincent riamon
 */
 
 #include "my.h"
@@ -41,7 +41,7 @@ void		my_setenv(char **tab, char ***env)
 
   i = -1;
   bool = 0;
-  if (!exit_setenv(tab, env))
+  if (strcmp(tab[0], "setenv") != 0 || !exit_setenv(tab, env))
     return ;
   while ((*env)[++i])
     if (!strncmp((*env)[i], tab[1], strlen(tab[1])))
@@ -63,6 +63,8 @@ void		my_unsetenv(char **tab, char ***env)
   int		j;
 
   j = 0;
+  if (strcmp(tab[0], "unsetenv") != 0)
+    return ;
   if (!tab[1])
     {
       fprintf(stderr, "unsetenv: Too few arguments.\n");
@@ -87,6 +89,8 @@ void		cmd_cd(char **tab, char **env)
 {
   char		*s;
 
+  if (strcmp(tab[0], "cd") != 0)
+    return ;
   if ((s = get_var_env(env, "OLDPWD=")) == NULL)
     s = NULL;
   else

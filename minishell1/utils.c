@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:46:12 2016 Melvin Personnier
-** Last update Thu May 19 14:59:33 2016 vincent riamon
+** Last update Fri May 20 16:38:05 2016 vincent riamon
 */
 
 #include "my.h"
@@ -57,4 +57,27 @@ void		free_tab(char **tab)
   while (tab[++i])
     free(tab[i]);
   free(tab);
+}
+
+int	my_getnbr(const char *str)
+{
+  int   div;
+  int   i;
+  int   nb;
+
+  nb = 0;
+  div = 1;
+  i = 0;
+  while ((str[i] >= 48 && str[i] <= 57)
+         || str[i] == 45 || str[i] == 43)
+    i = i + 1;
+  while (--i >= 0)
+    {
+      if (str[i] == 45 || (nb < 0 && str[i] == 45))
+	nb = nb * -1;
+      else if (str[i] >= 48 && str[i] <= 57)
+	nb = nb + ((str[i] - 48) * div);
+      div = div * 10;
+    }
+  return (nb);
 }
