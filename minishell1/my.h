@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Fri May 20 17:47:37 2016 vincent riamon
+** Last update Fri May 20 18:17:30 2016 vincent riamon
 */
 
 
@@ -31,11 +31,11 @@ int	my_getnbr(const char *str);
 void	aff_tab(char **tab);
 void	my_setenv(char **tab, char ***env);
 void	my_unsetenv(char **tab, char ***env);
-/* void	cmd_cd(char **tab, char **tmp); */
+void	cmd_cd(char **tab, char **tmp);
 void	verif_cd(char **tab, char **env);
-/* void	my_echo(char **tab, char **env); */
-/* void	my_exit(char **tab); */
-/* void	built_in(char **tab, char **env); */
+void	my_echo(char **tab, char **env);
+void	my_exit(char **tab);
+void	built_in(char **tab, char ***env);
 
 char	*get_var_env(char **env, char *name);
 
