@@ -1,16 +1,16 @@
 /*
 ** builtin2.c for builtin2	 in /home/riamon_v/rendu/PSU/couver-shell/minishell1
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Fri May 20 17:47:04 2016 vincent riamon
+** Last update Fri May 20 20:42:17 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-void		verif_cd(char **tab, char **env)
+void		verif_cd(char **tab)
 {
   struct stat	s;
 
@@ -25,14 +25,12 @@ void		verif_cd(char **tab, char **env)
     fprintf(stderr, "Not a directory.\n");
 }
 
-void		my_echo(char **tab, char **env)
+void		my_echo(char **tab, __attribute((unused))char ***env)
 {
   int		i;
 
   i = 0;
-  if (strcmp(tab[0], "echo") != 0)
-    return ;
-  if (!strcmp(tab[1], "-n"))
+  if (tab[1] && !strcmp(tab[1], "-n"))
     i += 1;
   while (tab[++i])
     {
@@ -40,16 +38,14 @@ void		my_echo(char **tab, char **env)
       if (tab[i + 1])
         printf(" ");
     }
-  if (strcmp(tab[1], "-n"))
+  if ((tab[1] && strcmp(tab[1], "-n")) || !tab[1])
     printf("\n");
 }
 
-void		my_exit(char **tab)
+void		my_exit(char **tab, __attribute((unused))char ***env)
 {
   int		nb;
 
-  if (strcmp(tab[0], "exit") != 0)
-    return ;
   if (tab[2] || (tab[1] && !my_getnbr(tab[1])))
     {
       fprintf(stderr, "exit: Expression syntax.\n");
@@ -62,9 +58,9 @@ void		my_exit(char **tab)
 
 void		built_in(char **tab, char ***env)
 {
-  my_exit(tab);
-  my_echo(tab, *env);
-  cmd_cd(tab, *env);
+  my_exit(tab, env);
+  my_echo(tab, env);
+  cmd_cd(tab, env);
   my_setenv(tab, env);
   my_unsetenv(tab, env);
   if (!strcmp(tab[0], "env"))

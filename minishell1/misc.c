@@ -1,11 +1,11 @@
 /*
 ** misc.c for misc in /home/riamon_v/rendu/PSU/couver-shell/minishell1
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Thu May 19 13:57:36 2016 vincent riamon
+** Last update Fri May 20 21:13:45 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -16,14 +16,15 @@ void		my_pwd(char **env, char *var)
   char		*s;
   int		i;
 
-  getcwd(pwd, 2000);
   i = -1;
+  getcwd(pwd, 2000);
   s = my_malloc(sizeof(char) * (strlen(var) + strlen(pwd) + 1));
   strconcat(var, pwd, s);
   while (env[++i] && strncmp(env[i], var, strlen(var)));
   if (!env[i])
     return ;
-  env[i] = s;
+  free(env[i]);
+  env[i] = strdup(s);
   free(s);
 }
 
@@ -70,4 +71,13 @@ char		**cpy_env(char **env)
     tmp[i] = strdup(env[i]);
   tmp[i] = NULL;
   return (tmp);
+}
+
+void	        aff_tab(char **tab)
+{
+  int		i;
+
+  i = -1;
+  while (tab[++i])
+    printf("%s\n", tab[i]);
 }
