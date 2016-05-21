@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:18:36 2016 vincent riamon
-** Last update Sat May 21 13:31:08 2016 vincent riamon
+** Last update Sat May 21 14:57:51 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -25,7 +25,7 @@ int		main(__attribute__((unused))int argc,
   tab[5] = NULL;
   tmp = cpy_env(env);
   my_setenv(tab, &tmp);
-  builtins(argv + 1, &tmp);
+  minishell1(argv + 1, &tmp);
   if (!strcmp(argv[1], "setenv") ||
       !strcmp(argv[1], "unsetenv"))
     aff_tab(tmp);

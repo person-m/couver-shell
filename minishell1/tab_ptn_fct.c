@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat May 21 14:38:55 2016 vincent riamon
+** Last update Sat May 21 14:59:06 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -46,5 +46,14 @@ int     builtins(char **tab, char ***env)
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
 	is_builtin = builtins[i](tab, env);
     }
+  return (is_builtin);
+}
+
+int	minishell1(char **tab, char ***env)
+{
+  int	is_builtin;
+
+  if ((is_builtin = builtins(tab, env)) == 1)
+    return (execve(tab[0], tab, *env));
   return (is_builtin);
 }
