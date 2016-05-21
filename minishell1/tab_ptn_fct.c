@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat May 21 14:59:06 2016 Melvin Personnier
+** Last update Sat May 21 16:48:07 2016 vincent riamon
 */
 
 #include "my.h"
@@ -30,7 +30,7 @@ static void	init_builtins(int (**builtins)(char **tab, char ***env))
   builtins[5] = &my_env;
 }
 
-int     builtins(char **tab, char ***env)
+static int     builtins(char **tab, char ***env)
 {
   int	(*builtins[6])(char **tab, char ***env);
   char	*builtins_cmp[6];

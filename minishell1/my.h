@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Sat May 21 14:57:13 2016 Melvin Personnier
+** Last update Sat May 21 16:48:41 2016 vincent riamon
 */
 
 
@@ -37,7 +37,6 @@ void	verif_cd(char **tab);
 int	my_echo(char **tab, char ***env);
 int	my_exit(char **tab, char ***env);
 int	my_env(char **tab, char ***env);
-int	builtins(char **tab, char ***env);
 int	minishell1(char **tab, char ***env);
 
 char	*get_var_env(char **env, char *name);
