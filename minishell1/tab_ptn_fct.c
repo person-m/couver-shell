@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat May 21 14:59:06 2016 Melvin Personnier
+** Last update Sat May 21 17:15:07 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -30,7 +30,7 @@ static void	init_builtins(int (**builtins)(char **tab, char ***env))
   builtins[5] = &my_env;
 }
 
-int     builtins(char **tab, char ***env)
+static int     builtins(char **tab, char ***env)
 {
   int	(*builtins[6])(char **tab, char ***env);
   char	*builtins_cmp[6];
@@ -54,6 +54,7 @@ int	minishell1(char **tab, char ***env)
   int	is_builtin;
 
   if ((is_builtin = builtins(tab, env)) == 1)
-    return (execve(tab[0], tab, *env));
-  return (is_builtin);
+    return (exec_sh1(tab, *env));
+  return (is_builtin);   // 0 -> builtin OK fonctionne OK
+  			 // -1 -> builtin OK fonctionne KO
 }
