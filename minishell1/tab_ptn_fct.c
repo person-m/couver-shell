@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Fri May 20 19:52:33 2016 Melvin Personnier
+** Last update Sat May 21 13:30:48 2016 vincent riamon
 */
 
 #include "my.h"
@@ -20,7 +20,7 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[5] = "env";
 }
 
-static void	init_builtins(void (**builtins)(char **tab, char ***env))
+static void	init_builtins(int (**builtins)(char **tab, char ***env))
 {
   builtins[0] = &cmd_cd;
   builtins[1] = &my_echo;
@@ -30,9 +30,9 @@ static void	init_builtins(void (**builtins)(char **tab, char ***env))
   builtins[5] = &my_env;
 }
 
-int	tab_ptn_fct(char **tab, char ***env)
+int     builtins(char **tab, char ***env)
 {
-  void	(*builtins[6])(char **tab, char ***env);
+  int	(*builtins[6])(char **tab, char ***env);
   char	*builtins_cmp[6];
   int	i;
   int	is_builtin;

@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Sat May 21 09:44:39 2016 vincent riamon
+** Last update Sat May 21 13:19:48 2016 vincent riamon
 */
 
 #include "my.h"
@@ -25,7 +25,7 @@ void		verif_cd(char **tab)
     fprintf(stderr, "Not a directory.\n");
 }
 
-void		my_echo(char **tab, __attribute((unused))char ***env)
+int		my_echo(char **tab, __attribute((unused))char ***env)
 {
   int		i;
 
@@ -40,29 +40,20 @@ void		my_echo(char **tab, __attribute((unused))char ***env)
     }
   if ((tab[1] && strcmp(tab[1], "-n")) || !tab[1])
     printf("\n");
+  return (0);
 }
 
-void		my_exit(char **tab, __attribute((unused))char ***env)
+int		my_exit(char **tab, __attribute((unused))char ***env)
 {
   int		nb;
 
   if (tab[2] || (tab[1] && !my_getnbr(tab[1])))
     {
       fprintf(stderr, "exit: Expression syntax.\n");
-      return ;
+      return (-1);
     }
   nb = (!tab[1]) ? 0 : my_getnbr(tab[1]);
   printf("exit\n");
   exit(nb);
+  return (0);
 }
-
-/* void		built_in(char **tab, char ***env) */
-/* { */
-/*   my_exit(tab, env); */
-/*   my_echo(tab, env); */
-/*   cmd_cd(tab, env); */
-/*   my_setenv(tab, env); */
-/*   my_unsetenv(tab, env); */
-/*   if (!strcmp(tab[0], "env")) */
-/*     aff_tab(*env); */
-/* } */
