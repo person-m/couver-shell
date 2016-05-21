@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Fri May 20 21:39:40 2016 vincent riamon
+** Last update Sat May 21 11:09:11 2016 vincent riamon
 */
 
 #include "my.h"
@@ -85,8 +85,7 @@ void		cmd_cd(char **tab, char ***env)
 {
   char		*s;
 
-  if ((s = get_var_env(*env, "OLDPWD=")) == NULL)
-    s = NULL;
+  if (!(s = get_var_env(*env, "OLDPWD=")));
   else
     my_pwd(*env, "OLDPWD=");
   if (tab_len(tab) > 2)

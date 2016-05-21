@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Fri May 20 21:13:45 2016 Melvin Personnier
+** Last update Sat May 21 11:07:15 2016 vincent riamon
 */
 
 #include "my.h"
@@ -23,9 +23,7 @@ void		my_pwd(char **env, char *var)
   while (env[++i] && strncmp(env[i], var, strlen(var)));
   if (!env[i])
     return ;
-  free(env[i]);
-  env[i] = strdup(s);
-  free(s);
+  env[i] = s;
 }
 
 char		*concat_str(char *s1, char *s2, char c)

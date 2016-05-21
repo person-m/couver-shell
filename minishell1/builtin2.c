@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Fri May 20 20:42:17 2016 Melvin Personnier
+** Last update Sat May 21 09:44:39 2016 vincent riamon
 */
 
 #include "my.h"
@@ -56,13 +56,13 @@ void		my_exit(char **tab, __attribute((unused))char ***env)
   exit(nb);
 }
 
-void		built_in(char **tab, char ***env)
-{
-  my_exit(tab, env);
-  my_echo(tab, env);
-  cmd_cd(tab, env);
-  my_setenv(tab, env);
-  my_unsetenv(tab, env);
-  if (!strcmp(tab[0], "env"))
-    aff_tab(*env);
-}
+/* void		built_in(char **tab, char ***env) */
+/* { */
+/*   my_exit(tab, env); */
+/*   my_echo(tab, env); */
+/*   cmd_cd(tab, env); */
+/*   my_setenv(tab, env); */
+/*   my_unsetenv(tab, env); */
+/*   if (!strcmp(tab[0], "env")) */
+/*     aff_tab(*env); */
+/* } */
