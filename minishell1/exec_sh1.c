@@ -5,10 +5,16 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Sat May 21 17:49:26 2016 Melvin Personnier
+** Last update Sat May 21 18:19:58 2016 vincent riamon
 */
 
 #include "my.h"
+
+static int      cmd_not_found(char **tab)
+{
+  fprintf(stderr, "%s: Command not found.\n", tab[0]);
+  return (-1);
+}
 
 static int	test_path(char **tab, char **env)
 {
@@ -19,20 +25,22 @@ static int	test_path(char **tab, char **env)
   int		a;
 
   if ((path_in_str = get_var_env(env, "PATH=")) == NULL)
-    {
-      fprintf(stderr, "%s: Command not found.\n", tab[0]);
-      return (-1);
-    }
+    return (cmd_not_found(tab));
   path_in_array = my_str_to_wordtab_pattern(path_in_str, ":");
   i = -1;
   while (path_in_array[++i])
     {
       cmd = concat_str(path_in_array[i], tab[0], '/');
       if ((a = execve(cmd, tab, env)) != -1)
-	return (a);
+	{
+	  free(cmd);
+	  free_tab(path_in_array);
+	  return (a);
+	}
+      free(cmd);
     }
-  fprintf(stderr, "%s: Command not found.\n", tab[0]);
-  return (-1);
+  free_tab(path_in_array);
+  return (cmd_not_found(tab));
 }
 
 static int	instant_exec(char **tab, char **env)
@@ -49,6 +57,5 @@ int		exec_sh1(char **tab, char **env)
 {
   if (tab[0][0] == '.' || tab[0][0] == '/')
     return (instant_exec(tab, env));
-  test_path(tab, env);
-  return (0);
+  return (test_path(tab, env));
 }
