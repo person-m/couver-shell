@@ -5,18 +5,18 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Sat May 21 13:23:44 2016 vincent riamon
+** Last update Sat May 21 13:46:29 2016 vincent riamon
 */
 
 #include "my.h"
 
-int	my_env(__attribute((unused))char **tab, char ***env)
+int	my_env(__attribute__((unused))char **tab, char ***env)
 {
   aff_tab(*env);
   return (0);
 }
 
-int		exit_setenv(char **tab, char ***env)
+static int	exit_setenv(char **tab, char ***env)
 {
   if (tab_len(tab) > 3)
     {

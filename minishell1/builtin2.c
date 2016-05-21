@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Sat May 21 13:19:48 2016 vincent riamon
+** Last update Sat May 21 13:46:19 2016 vincent riamon
 */
 
 #include "my.h"
@@ -25,7 +25,7 @@ void		verif_cd(char **tab)
     fprintf(stderr, "Not a directory.\n");
 }
 
-int		my_echo(char **tab, __attribute((unused))char ***env)
+int		my_echo(char **tab, __attribute__((unused))char ***env)
 {
   int		i;
 
@@ -43,7 +43,7 @@ int		my_echo(char **tab, __attribute((unused))char ***env)
   return (0);
 }
 
-int		my_exit(char **tab, __attribute((unused))char ***env)
+int		my_exit(char **tab, __attribute__((unused))char ***env)
 {
   int		nb;
 
@@ -55,5 +55,14 @@ int		my_exit(char **tab, __attribute((unused))char ***env)
   nb = (!tab[1]) ? 0 : my_getnbr(tab[1]);
   printf("exit\n");
   exit(nb);
+  return (0);
+}
+
+int		is_a_builtin(char *str)
+{
+  if (!my_strcmp(str, "setenv") || !my_strcmp(str, "unsetenv")
+      !my_strcmp(str, "exit") || !my_strcmp(str, "echo")
+      !my_strcmp(str, "cd") || !my_strcmp(str, "env"))
+    return (1);
   return (0);
 }
