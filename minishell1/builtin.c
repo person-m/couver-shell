@@ -1,22 +1,18 @@
 /*
 ** builtin.c for builtin in /home/riamon_v/rendu/PSU/couver-shell/minishell1
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Fri May 20 21:35:50 2016 vincent riamon
+** Last update Fri May 20 21:39:40 2016 vincent riamon
 */
 
 #include "my.h"
 
-void	        aff_tab(char **tab)
+void	my_env(__attribute((unused))char **tab, char ***env)
 {
-  int		i;
-
-  i = -1;
-  while (tab[++i])
-    printf("%s\n", tab[i]);
+  aff_tab(*env);
 }
 
 int		exit_setenv(char **tab, char ***env)
@@ -41,14 +37,16 @@ void		my_setenv(char **tab, char ***env)
 
   i = -1;
   bool = 0;
-  if (strcmp(tab[0], "setenv") != 0 || !exit_setenv(tab, env))
+  if (!exit_setenv(tab, env))
     return ;
   while ((*env)[++i])
-    if (!strncmp((*env)[i], tab[1], strlen(tab[1])))
-      {
-	(*env)[i] = concat_str(tab[1], tab[2], '=');
-	bool = 1;
-      }
+    {
+      if (!strncmp((*env)[i], tab[1], strlen(tab[1])))
+	{
+	  (*env)[i] = concat_str(tab[1], tab[2], '=');
+	  bool = 1;
+	}
+    }
   if (!bool)
     {
       *env = realloc(*env, ((tab_len(*env) + 2) * sizeof(char *)));
@@ -63,8 +61,6 @@ void		my_unsetenv(char **tab, char ***env)
   int		j;
 
   j = 0;
-  if (strcmp(tab[0], "unsetenv") != 0)
-    return ;
   if (!tab[1])
     {
       fprintf(stderr, "unsetenv: Too few arguments.\n");
@@ -85,26 +81,24 @@ void		my_unsetenv(char **tab, char ***env)
     }
 }
 
-void		cmd_cd(char **tab, char **env)
+void		cmd_cd(char **tab, char ***env)
 {
   char		*s;
 
-  if (strcmp(tab[0], "cd") != 0)
-    return ;
-  if ((s = get_var_env(env, "OLDPWD=")) == NULL)
+  if ((s = get_var_env(*env, "OLDPWD=")) == NULL)
     s = NULL;
   else
-    my_pwd(env, "OLDPWD=");
+    my_pwd(*env, "OLDPWD=");
   if (tab_len(tab) > 2)
     {
       fprintf(stderr, "cd: Too many arguments.\n");
       return ;
     }
   if (!tab[1])
-    chdir(get_var_env(env, "HOME="));
+    chdir(get_var_env(*env, "HOME="));
   else if (!strcmp(tab[1], "-"))
     chdir(s);
   else if (chdir(tab[1]) == -1)
-    verif_cd(tab, env);
-  my_pwd(env, "PWD=");
+    verif_cd(tab);
+  my_pwd(*env, "PWD=");
 }
