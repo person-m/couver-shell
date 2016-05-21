@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat May 21 13:30:48 2016 vincent riamon
+** Last update Sat May 21 14:38:55 2016 vincent riamon
 */
 
 #include "my.h"
@@ -38,16 +38,13 @@ int     builtins(char **tab, char ***env)
   int	is_builtin;
 
   i = -1;
-  is_builtin = 0;
+  is_builtin = 1;
   init_builtins_cmp(builtins_cmp);
   init_builtins(builtins);
   while (++i < 6)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
-	{
-	  builtins[i](tab, env);
-	  is_builtin = 1;
-	}
+	is_builtin = builtins[i](tab, env);
     }
   return (is_builtin);
 }

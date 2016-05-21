@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Sat May 21 13:46:19 2016 vincent riamon
+** Last update Sat May 21 13:51:29 2016 vincent riamon
 */
 
 #include "my.h"
@@ -60,9 +60,9 @@ int		my_exit(char **tab, __attribute__((unused))char ***env)
 
 int		is_a_builtin(char *str)
 {
-  if (!my_strcmp(str, "setenv") || !my_strcmp(str, "unsetenv")
-      !my_strcmp(str, "exit") || !my_strcmp(str, "echo")
-      !my_strcmp(str, "cd") || !my_strcmp(str, "env"))
+  if (!strcmp(str, "setenv") || !strcmp(str, "unsetenv")
+      || !strcmp(str, "exit") || !strcmp(str, "echo")
+      || !strcmp(str, "cd") || !strcmp(str, "env"))
     return (1);
   return (0);
 }
