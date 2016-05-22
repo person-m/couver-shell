@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:18:36 2016 vincent riamon
-** Last update Sat May 21 14:57:51 2016 Melvin Personnier
+** Last update Sun May 22 18:41:43 2016 vincent riamon
 */
 
 #include "my.h"
@@ -33,12 +33,12 @@ int		main(__attribute__((unused))int argc,
     {
       printf("PWD= %s\nOLDPWD= %s\n", get_var_env(tmp, "PWD="),
 	     get_var_env(tmp, "OLDPWD="));
-      printf("\n------------------------\n");
+      printf("\n------------------------\n\n");
       cmd_cd(tab + 3, &tmp);
       printf("PWD= %s\nOLDPWD= %s\n", get_var_env(tmp, "PWD="),
 	     get_var_env(tmp, "OLDPWD="));
     }
   free_tab(tmp);
-  /* free_tab(tab); */
+  free(tab);
   return (0);
 }

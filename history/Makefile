@@ -5,7 +5,7 @@
 ## Login   <person_m@epitech.eu>
 ##
 ## Started on  Wed May 18 15:34:23 2016 Melvin Personnier
-## Last update Sun May 22 10:36:13 2016 vincent riamon
+## Last update Sun May 22 15:12:59 2016 vincent riamon
 ##
 
 SRC	= get_next_line.c \

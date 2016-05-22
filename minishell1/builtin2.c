@@ -5,25 +5,10 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Sat May 21 16:49:28 2016 vincent riamon
+** Last update Sun May 22 18:04:42 2016 vincent riamon
 */
 
 #include "my.h"
-
-void		verif_cd(char **tab)
-{
-  struct stat	s;
-
-  s.st_mode = 0;
-  stat(tab[1], &s);
-  fprintf(stderr, "%s: ", tab[1]);
-  if (S_ISDIR(s.st_mode))
-    fprintf(stderr, "Permissions denied.\n");
-  else if (stat(tab[1], &s) == -1)
-    fprintf(stderr, "No such file or directory.\n");
-  else if (S_ISREG(s.st_mode))
-    fprintf(stderr, "Not a directory.\n");
-}
 
 int		my_echo(char **tab, __attribute__((unused))char ***env)
 {

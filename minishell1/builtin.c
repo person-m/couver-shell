@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Sat May 21 13:46:29 2016 vincent riamon
+** Last update Sun May 22 17:51:08 2016 vincent riamon
 */
 
 #include "my.h"
@@ -44,6 +44,7 @@ int		my_setenv(char **tab, char ***env)
     {
       if (!strncmp((*env)[i], tab[1], strlen(tab[1])))
 	{
+	  free((*env)[i]);
 	  (*env)[i] = concat_str(tab[1], tab[2], '=');
 	  bool = 1;
 	}
@@ -81,30 +82,5 @@ int		my_unsetenv(char **tab, char ***env)
 	}
       (*env)[i] = NULL;
     }
-  return (0);
-}
-
-int		cmd_cd(char **tab, char ***env)
-{
-  char		*s;
-
-  if (!(s = get_var_env(*env, "OLDPWD=")));
-  else
-    my_pwd(*env, "OLDPWD=");
-  if (tab_len(tab) > 2)
-    {
-      fprintf(stderr, "cd: Too many arguments.\n");
-      return (-1);
-    }
-  if (!tab[1])
-    chdir(get_var_env(*env, "HOME="));
-  else if (!strcmp(tab[1], "-"))
-    chdir(s);
-  else if (chdir(tab[1]) == -1)
-    {
-      verif_cd(tab);
-      return (-1);
-    }
-  my_pwd(*env, "PWD=");
   return (0);
 }

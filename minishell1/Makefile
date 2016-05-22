@@ -5,7 +5,7 @@
 ## Login   <person_m@epitech.eu>
 ##
 ## Started on  Wed May 18 15:34:23 2016 Melvin Personnier
-## Last update Sat May 21 17:38:10 2016 Melvin Personnier
+## Last update Sun May 22 18:04:11 2016 vincent riamon
 ##
 
 SRC	= main.c \
@@ -16,6 +16,7 @@ SRC	= main.c \
 	  tab_ptn_fct.c \
 	  exec_sh1.c \
 	  my_str_to_wordtab_pattern.c \
+	  cd.c \
 
 OBJ	= $(SRC:.c=.o)
 

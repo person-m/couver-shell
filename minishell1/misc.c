@@ -5,26 +5,10 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Sun May 22 13:47:32 2016 vincent riamon
+** Last update Sun May 22 18:48:30 2016 vincent riamon
 */
 
 #include "my.h"
-
-void		my_pwd(char **env, char *var)
-{
-  char		pwd[2000];
-  char		*s;
-  int		i;
-
-  i = -1;
-  getcwd(pwd, 2000);
-  s = my_malloc(sizeof(char) * (strlen(var) + strlen(pwd) + 1));
-  strconcat(var, pwd, s);
-  while (env[++i] && strncmp(env[i], var, strlen(var)));
-  if (!env[i])
-    return ;
-  env[i] = s;
-}
 
 char		*concat_str(char *s1, char *s2, char c)
 {
@@ -55,6 +39,7 @@ char		*get_var_env(char **env, char *name)
   while (env[++i] && strncmp(env[i], name, strlen(name)));
   if (!env[i])
     return (NULL);
+  env[i][strlen(env[i])] = 0;
   return (env[i] + strlen(name));
 }
 
