@@ -5,12 +5,12 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sun May 22 17:50:50 2016 vincent riamon
-** Last update Sun May 22 18:59:30 2016 vincent riamon
+** Last update Mon May 23 11:29:44 2016 vincent riamon
 */
 
 #include "my.h"
 
-static void	        cd_error(char *str)
+static int 	        cd_error(char *str)
 {
   struct stat	s;
 
@@ -18,6 +18,9 @@ static void	        cd_error(char *str)
     fprintf(stderr, "%s: No such file or directory.\n", str);
   else if (!S_ISDIR(s.st_mode))
     fprintf(stderr, "%s: Not a directory.\n", str);
+  else
+    fprintf(stderr, "%s: Permissions denied.\n", str);
+  return (-1);
 }
 
 static void		my_pwd(char **env, char *name, char *pwd)
@@ -61,13 +64,17 @@ int			cmd_cd(char **tab, char ***env)
 {
   char		pwd[2000];
 
+  if (tab_len(tab) > 2)
+    {
+      fprintf(stderr, "cd: Too many arguments.\n");
+      return (-1);
+    }
   if (!tab[1])
     return (basic_cd(env, 1));
   else if (!strcmp(tab[1], "-"))
     return (basic_cd(env, 2));
   else
     {
-      cd_error(tab[1]);
       getcwd(pwd, 2000);
       if (chdir(tab[1]) == 0)
 	{
@@ -76,7 +83,7 @@ int			cmd_cd(char **tab, char ***env)
 	  my_pwd(*env, "PWD=", pwd);
 	}
       else
-	return (-1);
+	return (cd_error(tab[1]));
     }
   return (0);
 }
