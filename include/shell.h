@@ -1,5 +1,5 @@
 /*
-** 42sh.h for  in /home/buffat_b/42sh_tmp/include
+** shell.h for  in /home/buffat_b/42sh_tmp/include
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
@@ -8,8 +8,8 @@
 ** Last update Mon May 23 21:05:07 2016 
 */
 
-# ifndef _42SH_H
-# define _42SH_H
+#ifndef SHELL_H_
+# define SHELL_H_
 
 /*
 **	Libraries
@@ -21,8 +21,12 @@
 #include <string.h>
 #include "prompt.h"
 
-/*
-**	Structure
-*/
+typedef struct		s_shell
+{
+  char			**env;
+  char			**alias;
+  char			**history;
+  t_prompt		*prompt;
+}			t_shell;
 
-# endif
+#endif /* !SHELL_H_ */
