@@ -5,22 +5,26 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Sat May 21 22:06:40 2016 mohamed-laid hedia
+** Last update Mon May 23 22:03:12 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
 # define MO_H_
 
+#include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include "../minishell1/my.h"
 
 typedef struct	s_pipe
 {
   int		i;
   int		p[1][2];
-}
+}		t_pipe;
 
 typedef struct	s_command
 {
@@ -28,5 +32,46 @@ typedef struct	s_command
   int		failed;
   int		i;
 }		t_command;
+
+/* minishell2.c */
+
+void            the_execution(char **tab, char **env);
+
+/* pars.c */
+
+int		length_param(char **tab, int i);
+char		**pars_param(char **tab, int i);
+
+/* pipe.c */
+
+void		wait_process(t_command *s, t_pipe *p);
+void		do_fork(char **tab, char **env, t_command *s, t_pipe *p);
+void		last_process(char **tab, char **env, t_command *s, t_pipe *p);
+void		do_process(char **tab, char **env, t_command *s, t_pipe *p);
+void		pipe_execution(char **tab, char **env, t_command *s);
+
+/* redirections.c */
+
+void		write_on_pipe(int fd, char *file);
+int		double_left_redirection(char *red, char *file);
+int		left_redirectin(char *red, char *file);
+int		double_right_redirection(char *red, char *file);
+int		right_redirection(char *red, char *file);
+
+/* verif_return.c */
+
+void		verif_sig(int st, int *t, t_command *s);
+void		verif_ret_pipe(int *f, t_command *s, t_pipe *p);
+
+/* verifs.c */
+
+int		next_is_pipe(char **tab, int i);
+int		is_sep_param(char *str);
+int		is_redirection(char *str);
+int		is_builtin(char *str);
+
+/* get_line */
+
+char		*get_next_line(const int fd);
 
 #endif  /* !MO_H_ */
