@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Fri May 13 21:44:59 2016
-** Last update Mon May 23 21:05:07 2016 
+** Last update Mon May 23 22:18:02 2016 
 */
 
 # ifndef _42SH_H
@@ -24,5 +24,7 @@
 /*
 **	Structure
 */
+
+
 
 # endif

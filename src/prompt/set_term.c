@@ -5,10 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 14:49:08 2016
-** Last update Mon May 23 20:05:45 2016 
+** Last update Mon May 23 22:31:00 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	get_non_canon(t_prompt *prompt)
 {
