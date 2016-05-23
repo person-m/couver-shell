@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Sun May 22 15:23:58 2016 vincent riamon
+** Last update Mon May 23 22:11:02 2016 vincent riamon
 */
 
 #include "my.h"
@@ -63,7 +63,32 @@ char		**fill_history(char **env)
   return (tab);
 }
 
-void		update_history(char *line, char ***tab, char **env)
+char		*wortab_in_str(char **tab)
+{
+  char		*str;
+  int		i;
+  int		j;
+  int		k;
+  int		len;
+
+  i = -1;
+  k = 0;
+  str = NULL;
+  len = 0;
+  while (tab[++i])
+    {
+      j = 0;
+      len += strlen(tab[i]) + 1;
+      str = realloc(str, sizeof(char) * (len + 1));
+      while (tab[i][j])
+	str[k++] = tab[i][j++];
+      str[k++] = ' ';
+    }
+  str[k - 1] = 0;
+  return (str);
+}
+
+void		update_history(char **line, char ***tab, char **env)
 {
   int		fd;
   int		i;
@@ -73,8 +98,8 @@ void		update_history(char *line, char ***tab, char **env)
   hist = concat_str(get_var_env(env, "HOME="), ".history", '/');
   if ((fd = open(hist, O_RDWR | O_APPEND)) == -1)
     return ;
-   *tab = realloc(*tab, (sizeof(char *) * (i + 2)));
-  (*tab)[i] = strdup(line);
+  *tab = realloc(*tab, (sizeof(char *) * (i + 2)));
+  (*tab)[i] = wortab_in_str(line);
   (*tab)[i + 1] = NULL;
   write(fd, (*tab)[i], strlen((*tab)[i]));
   write(fd, "\n", 1);
@@ -93,7 +118,7 @@ int		main(__attribute__((unused))int argc, char **argv, char **env)
   /*     write(1, "$> ", 3); */
   /*     if (s[0] != 0) */
   /* 	{ */
-  update_history(argv[1], &tab, env);
+  update_history(argv + 1, &tab, env);
     /* 	  i += 1; */
     /* 	} */
     /*   if (!strcmp(s, "history")) */
