@@ -5,10 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 14 12:13:47 2016
-** Last update Mon May 23 15:41:18 2016 
+** Last update Mon May 23 22:33:15 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	str(char *s)
 {

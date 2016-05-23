@@ -5,10 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon Mar  7 13:20:39 2016 Bertrand BUFFAT
-** Last update Mon May 23 20:50:21 2016 
+** Last update Mon May 23 22:33:06 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	loop_42sh(t_prompt *prompt)
 {

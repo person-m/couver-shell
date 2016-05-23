@@ -5,10 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 19:11:45 2016
-** Last update Mon May 23 20:50:16 2016 
+** Last update Mon May 23 22:33:36 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	aff_prompt(t_prompt *prompt)
 {

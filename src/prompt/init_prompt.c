@@ -5,10 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 18 22:21:57 2016
-** Last update Mon May 23 20:43:44 2016 
+** Last update Mon May 23 22:33:31 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	free_prompt(t_prompt *prompt)
 {
