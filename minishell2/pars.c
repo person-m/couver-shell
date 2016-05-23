@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Fri May 20 21:09:54 2016 mohamed-laid hedia
-** Last update Sun May 22 20:56:03 2016 mohamed-laid hedia
+** Last update Mon May 23 21:59:27 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -37,7 +37,7 @@ char	**pars_param(char **tab, int i)
     {
       if (is_redirection(tab[i]))
 	{
-	  if (change_fd(tab[i], tab[i + 1]) == -1)
+	  if (right_redirection(tab[i], tab[i + 1]) == -1)
 	    {
 	      free(b);
 	      return (NULL);

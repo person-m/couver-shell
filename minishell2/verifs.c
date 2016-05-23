@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Fri May 20 21:39:14 2016 mohamed-laid hedia
-** Last update Sun May 22 21:24:20 2016 mohamed-laid hedia
+** Last update Mon May 23 14:10:34 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -43,7 +43,7 @@ int	is_redirection(char *str)
 
 int	is_builtin(char *str)
 {
-  if (my_strcmp(str, "cd") && stcrmp(str, "echo") && strcmp(str, "exit") &&
+  if (strcmp(str, "cd") && strcmp(str, "echo") && strcmp(str, "exit") &&
       strcmp(str, "setenv") && strcmp(str, "unsetenv") && strcmp(str, "env"))
     return (0);
   return (1);
