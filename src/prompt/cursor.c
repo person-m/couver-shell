@@ -5,10 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 19:06:33 2016
-** Last update Mon May 23 20:43:19 2016 
+** Last update Mon May 23 22:44:52 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	move_cursor(t_prompt *prompt, char *buffer)
 {
