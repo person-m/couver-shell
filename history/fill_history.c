@@ -1,11 +1,11 @@
 /*
 ** fill_history.c for fill_history in /home/riamon_v/rendu/PSU/couver-shell/history
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Sun May 22 15:23:58 2016 vincent riamon
+** Last update Mon May 23 20:29:28 2016 
 */
 
 #include "my.h"
@@ -101,6 +101,6 @@ int		main(__attribute__((unused))int argc, char **argv, char **env)
     /*   free(s); */
     /* } */
   free_tab(tab);
-  execl("/bin/sh", "/bin/sh", "-c", "cat /home/riamon_v/.history", NULL);
+  execl("/bin/sh", "/bin/sh", "-c", "cat /$home/.history", NULL);
   return (0);
 }
