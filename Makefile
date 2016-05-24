@@ -1,11 +1,11 @@
 ##
 ## Makefile for  in /home/buffat_b/42sh_tmp
-## 
-## Made by 
+##
+## Made by
 ## Login   <buffat_b@epitech.net>
-## 
+##
 ## Started on  Fri May 13 21:45:10 2016
-## Last update Tue May 24 14:56:06 2016 vincent riamon
+## Last update Tue May 24 15:33:29 2016 Melvin Personnier
 ##
 
 NAME	=	42sh

@@ -5,13 +5,14 @@
 ## Login   <person_m@epitech.eu>
 ##
 ## Started on  Wed May 18 15:34:23 2016 Melvin Personnier
-## Last update Tue May 24 14:24:52 2016 vincent riamon
+## Last update Tue May 24 15:33:42 2016 Melvin Personnier
 ##
 
 SRC	= main.c \
 	  misc.c \
 	  builtin.c \
 	  builtin2.c \
+	  builtin3.c \
 	  utils.c \
 	  tab_ptn_fct.c \
 	  exec_sh1.c \

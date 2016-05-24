@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Tue May 24 14:43:11 2016 vincent riamon
+** Last update Tue May 24 16:00:13 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -21,6 +21,7 @@
 # include "../../include/shell.h"
 
 char	**cpy_env(char **env);
+void	create_alias(t_shell *sh);
 char	*concat_str(char *s1, char *s2, char c);
 void	strconcat(const char *s1, const char *s2, char *s3);
 void	*my_malloc(int size);
@@ -30,8 +31,10 @@ int	my_getnbr(const char *str);
 char	**my_str_to_wordtab_pattern(char *str, char *pattern);
 
 void	aff_tab(char **t);
+void	aff_tab_alias(char **tab);
 int	my_setenv(char **t, t_shell *sh);
 int	my_unsetenv(char **t, t_shell *sh);
+int	my_alias(char **tab, t_shell *sh);
 int	cmd_cd(char **t, t_shell *sh);
 int	my_echo(char **t, t_shell *sh);
 int	my_exit(char **t, t_shell *sh);

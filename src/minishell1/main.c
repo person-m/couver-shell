@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:18:36 2016 vincent riamon
-** Last update Tue May 24 14:46:02 2016 vincent riamon
+** Last update Tue May 24 16:08:27 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -24,7 +24,8 @@ int		main(__attribute__((unused))int argc,
   tab[4] = "-";
   tab[5] = NULL;
   sh.env = cpy_env(env);
-  my_setenv(tab, &sh);
+  create_alias(&sh);
+  //my_setenv(tab, &sh);
   minishell1(argv + 1, &sh);
   if (!strcmp(argv[1], "setenv") ||
       !strcmp(argv[1], "unsetenv"))
@@ -39,6 +40,7 @@ int		main(__attribute__((unused))int argc,
 	     get_var_env(sh.env, "OLDPWD="));
     }
   free_tab(sh.env);
+  free_tab(sh.alias);
   free(tab);
   return (0);
 }
