@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Sun May 22 18:26:56 2016 mohamed-laid hedia
-** Last update Mon May 23 22:03:38 2016 mohamed-laid hedia
+** Last update Tue May 24 13:47:41 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -56,7 +56,7 @@ int	left_redirection(char *red, char *file)
     {
       if ((fd = open(file, O_RDONLY)) == -1)
         {
-          fprintf(stderr, "%s\n", strerror(errno));
+          fprintf(stderr, "%s%s\n", file, strerror(errno));
           return (-1);
         }
       else

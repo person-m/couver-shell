@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Mon May 23 21:50:03 2016 mohamed-laid hedia
+** Last update Tue May 24 20:36:25 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -28,7 +28,7 @@ void	wait_process(t_command *s, t_pipe *p)
   verif_ret_pipe(f, s, p);
 }
 
-void	do_fork(char **tab, char **env, t_command *s, t_pipe *p)
+void	do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p)
 {
   char	**b;
   int	f;
@@ -44,7 +44,7 @@ void	do_fork(char **tab, char **env, t_command *s, t_pipe *p)
       if ((b = pars_param(tab, s->i)) == NULL)
 	exit(-1);
       else
-	if (minishell1(b, &env) == -1)
+	if (minishell1(b, env) == -1)
 	  exit(-1);
     }
   close(p->p[p->i % 2][0]);
@@ -55,7 +55,7 @@ void	do_fork(char **tab, char **env, t_command *s, t_pipe *p)
 
 }
 
-void	last_process(char **tab, char **env, t_command *s, t_pipe *p)
+void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 {
   char	**b;
 
@@ -69,7 +69,7 @@ void	last_process(char **tab, char **env, t_command *s, t_pipe *p)
 	  s->failed = -1;
 	  return ;
 	}
-      if (minishell1(b, &env) == -1)
+      if (minishell1(b, env) == -1)
 	s->failed = -1;
       free(b);
       return ;
@@ -79,7 +79,7 @@ void	last_process(char **tab, char **env, t_command *s, t_pipe *p)
   wait_process(s, p);
 }
 
-void	do_process(char **tab, char **env, t_command *s, t_pipe *p)
+void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 {
   int	t;
   char	**b;
@@ -97,7 +97,7 @@ void	do_process(char **tab, char **env, t_command *s, t_pipe *p)
 	  return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if ((b = pars_param(tab, s->i)) == NULL)
         exit(-1);
-      f = minishell1(b, &env);
+      f = minishell1(b, env);
       f == -1 ? exit(-1) : exit(0);
     }
   if (p->i != 0)
@@ -105,7 +105,7 @@ void	do_process(char **tab, char **env, t_command *s, t_pipe *p)
   close(p->p[p->i % 2][1]);
 }
 
-void		pipe_execution(char **tab, char **env, t_command *s)
+void		pipe_execution(char **tab, t_shell *env, t_command *s)
 {
   t_pipe	p;
 

@@ -5,7 +5,7 @@
 ## Login   <hedia_m@epitech.net>
 ## 
 ## Started on  Mon May 23 13:09:56 2016 mohamed-laid hedia
-## Last update Mon May 23 14:18:50 2016 mohamed-laid hedia
+## Last update Tue May 24 20:39:11 2016 mohamed-laid hedia
 ##
 
 SRC	= main.c \
@@ -24,13 +24,15 @@ SRC	= main.c \
 	  ../minishell1/my_str_to_wordtab_pattern.c \
 	  ../minishell1/utils.c \
 	  ../minishell1/tab_ptn_fct.c \
+	  ../history/history_gestion.c \
+	  ../minishell1/builtin3.c \
 
 
 OBJ	= $(SRC:.c=.o)
 
 NAME	= test42
 
-CFLAGS	= -Wall -Wextra -W
+CFLAGS	= -Wall -Wextra -W -g
 
 $(NAME): $(OBJ)
 	cc $(OBJ) -o $(NAME)

@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Mon May 23 22:03:12 2016 mohamed-laid hedia
+** Last update Tue May 24 20:34:05 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "../../include/shell.h"
 #include "../minishell1/my.h"
 
 typedef struct	s_pipe
@@ -30,12 +31,13 @@ typedef struct	s_command
 {
   int		save[2];
   int		failed;
+  int		op;
   int		i;
 }		t_command;
 
 /* minishell2.c */
 
-void            the_execution(char **tab, char **env);
+void            the_execution(char **tab, t_shell *env);
 
 /* pars.c */
 
@@ -45,10 +47,10 @@ char		**pars_param(char **tab, int i);
 /* pipe.c */
 
 void		wait_process(t_command *s, t_pipe *p);
-void		do_fork(char **tab, char **env, t_command *s, t_pipe *p);
-void		last_process(char **tab, char **env, t_command *s, t_pipe *p);
-void		do_process(char **tab, char **env, t_command *s, t_pipe *p);
-void		pipe_execution(char **tab, char **env, t_command *s);
+void		do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p);
+void		last_process(char **tab, t_shell *env, t_command *s, t_pipe *p);
+void		do_process(char **tab, t_shell *env, t_command *s, t_pipe *p);
+void		pipe_execution(char **tab, t_shell *env, t_command *s);
 
 /* redirections.c */
 
@@ -60,6 +62,7 @@ int		right_redirection(char *red, char *file);
 
 /* verif_return.c */
 
+void		verif_one_sig(int st, t_command *s);
 void		verif_sig(int st, int *t, t_command *s);
 void		verif_ret_pipe(int *f, t_command *s, t_pipe *p);
 
