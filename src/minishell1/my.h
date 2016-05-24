@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Tue May 24 10:59:17 2016 vincent riamon
+** Last update Tue May 24 11:27:40 2016 vincent riamon
 */
 
 #ifndef	MY_H_
@@ -39,5 +39,6 @@ int	minishell1(char **t, char ***env);
 int	exec_sh1(char **t, char **env);
 
 char	*get_var_env(char **env, char *name);
+int	is_a_builtin(char *str);
 
 #endif /* MY_H_ */
