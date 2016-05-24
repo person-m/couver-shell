@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Tue May 24 16:27:06 2016 Melvin Personnier
+** Last update Tue May 24 16:53:23 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -20,7 +20,6 @@ static int	exit_alias(char **tab, t_shell *sh)
   if (!tab[1])
     {
       aff_tab(sh->alias);
-      free(sh->alias);
       return (0);
     }
   if (tab_len(tab) <= 2)
@@ -55,6 +54,7 @@ int		my_alias(char **tab, t_shell *sh)
       sh->alias[i] = concat_str(tab[1], tab[2], '=');
       sh->alias[i + 1] = NULL;
     }
+  aff_tab_alias(sh->alias);
   return (0);
 }
 
