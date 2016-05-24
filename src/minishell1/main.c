@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:18:36 2016 vincent riamon
-** Last update Tue May 24 16:46:14 2016 Melvin Personnier
+** Last update Tue May 24 17:06:19 2016 vincent riamon
 */
 
 #include "my.h"
@@ -26,7 +26,7 @@ int		main(__attribute__((unused))int argc,
   sh.env = cpy_env(env);
   sh.history = fill_history(env);
   create_alias(&sh);
-  //my_setenv(tab, &sh);
+  my_setenv(tab, &sh);
   update_history(argv + 1, &sh.history, env);
   minishell1(argv + 1, &sh);
   if (!strcmp(argv[1], "setenv") ||

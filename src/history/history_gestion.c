@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Tue May 24 15:56:54 2016 vincent riamon
+** Last update Tue May 24 17:05:55 2016 vincent riamon
 */
 
 #include "my.h"
@@ -43,7 +43,7 @@ void		update_history(char **line, char ***tab, char **env)
   char		*hist;
 
   i = tab_len(*tab);
-  hist = concat_str(get_var_env(env, "HOME="), ".history", '/');
+  hist = concat_str(get_var_env(env, "HOME="), ".42_history", '/');
   if ((fd = open(hist, O_RDWR | O_APPEND)) == -1)
     return ;
   *tab = realloc(*tab, (sizeof(char *) * (i + 2)));
@@ -64,7 +64,7 @@ char		**fill_history(char **env)
   char		*hist;
 
   i = 0;
-  hist = concat_str(get_var_env(env, "HOME="), ".history", '/');
+  hist = concat_str(get_var_env(env, "HOME="), ".42_history", '/');
   if ((fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
     return (NULL);
   tab = my_malloc(sizeof(char *) * 1);
@@ -96,9 +96,12 @@ int		cmd_history(char **tab, t_shell *sh)
       printf("   %d  %s\n", i + 1, sh->history[i]);
   else if (!strcmp(tab[1], "-c"))
     {
-      free_tab(sh->history);
-      sh->history = my_malloc(sizeof(char) * 1);
-      sh->history[0] = NULL;
+      i = tab_len(sh->history) + 1;
+      while (--i > 0)
+	{
+	  free(sh->history[i]);
+	  sh->history[i] = NULL;
+	}
       if ((fd = open(hist, O_RDONLY | O_TRUNC)) == -1)
 	return (-1);
     }
