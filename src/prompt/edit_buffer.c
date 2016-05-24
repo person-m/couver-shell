@@ -5,7 +5,11 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 19:04:03 2016
+<<<<<<< HEAD
 ** Last update Mon May 23 22:33:21 2016 
+=======
+** Last update Mon May 23 22:30:37 2016 
+>>>>>>> buffat_b
 */
 
 #include "shell.h"
