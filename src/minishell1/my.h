@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Tue May 24 16:00:13 2016 Melvin Personnier
+** Last update Tue May 24 16:42:08 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include "../../include/shell.h"
+# include "../history/my.h"
 
 char	**cpy_env(char **env);
 void	create_alias(t_shell *sh);

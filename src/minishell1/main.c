@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:18:36 2016 vincent riamon
-** Last update Tue May 24 16:08:27 2016 Melvin Personnier
+** Last update Tue May 24 16:46:14 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -24,8 +24,10 @@ int		main(__attribute__((unused))int argc,
   tab[4] = "-";
   tab[5] = NULL;
   sh.env = cpy_env(env);
+  sh.history = fill_history(env);
   create_alias(&sh);
   //my_setenv(tab, &sh);
+  update_history(argv + 1, &sh.history, env);
   minishell1(argv + 1, &sh);
   if (!strcmp(argv[1], "setenv") ||
       !strcmp(argv[1], "unsetenv"))
@@ -41,6 +43,7 @@ int		main(__attribute__((unused))int argc,
     }
   free_tab(sh.env);
   free_tab(sh.alias);
+  free_tab(sh.history);
   free(tab);
   return (0);
 }

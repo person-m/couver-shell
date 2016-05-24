@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Tue May 24 15:32:19 2016 Melvin Personnier
+** Last update Tue May 24 16:44:27 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -19,6 +19,7 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[4] = "unsetenv";
   builtins_cmp[5] = "env";
   builtins_cmp[6] = "alias";
+  builtins_cmp[7] = "history";
 }
 
 static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
@@ -30,12 +31,13 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[4] = &my_unsetenv;
   builtins[5] = &my_env;
   builtins[6] = &my_alias;
+  builtins[7] = &cmd_history;
 }
 
 static int     builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[7])(char **tab, t_shell *sh);
-  char	*builtins_cmp[7];
+  int	(*builtins[8])(char **tab, t_shell *sh);
+  char	*builtins_cmp[8];
   int	i;
   int	is_builtin;
 
@@ -43,7 +45,7 @@ static int     builtins(char **tab, t_shell *sh)
   is_builtin = 1;
   init_builtins_cmp(builtins_cmp);
   init_builtins(builtins);
-  while (++i < 7)
+  while (++i < 8)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
 	is_builtin = builtins[i](tab, sh);
