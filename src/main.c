@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon Mar  7 13:20:39 2016 Bertrand BUFFAT
-** Last update Mon May 23 22:33:06 2016 
+** Last update Tue May 24 11:12:39 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -23,7 +23,9 @@ void	loop_42sh(t_prompt *prompt)
     }
 }
 
-int		main(void)
+int		main(__attribute__((unused))int argc,
+		     __attribute__((unused))char **argv,
+		     char **env)
 {
   t_prompt	*prompt;
 
@@ -31,7 +33,7 @@ int		main(void)
     return (0);
 
   ioctl(0, TCSETS, &prompt->non_canon_mode);
-  loop_42sh(prompt);
+  loop_42sh(prompt, &sh);
   ioctl(0, TCSETS, &prompt->standard_mode);
 
   free_prompt(prompt);
