@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 18 22:21:57 2016
-** Last update Mon May 23 22:30:43 2016 
+** Last update Tue May 24 00:03:07 2016 
 */
 
 #include "shell.h"
@@ -83,6 +83,10 @@ t_prompt	*init_prompt(void)
   prompt->nbcols = tigetnum("cols");
   prompt->nblines = tigetnum("lines");
 
+  //init prompt
+  prompt->prompt = str_dup("Ceci est un prompt > ");
+  prompt->size_prompt = strlen(prompt->prompt);
+
   //malloc buffer line
   if (!(prompt->line = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
     return (NULL);
@@ -92,6 +96,12 @@ t_prompt	*init_prompt(void)
   if (!(prompt->space = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
     return (NULL);
   memset(prompt->space, ' ', prompt->nbcols * prompt->nblines - 1);
+
+  //init auto completion
+  if (!(prompt->auto_completion = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
+    return (NULL);
+  prompt->size_completion = strlen("\n\n\tauto_completion here");
+  memcpy(prompt->auto_completion, "\n\n\tauto_completion here", prompt->size_completion);
 
   //initialize counters
   prompt->count_char = 0;
