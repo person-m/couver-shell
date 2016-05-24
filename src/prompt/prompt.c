@@ -5,21 +5,36 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 19:11:45 2016
+<<<<<<< HEAD
 ** Last update Mon May 23 22:33:36 2016 
+=======
+** Last update Tue May 24 00:13:53 2016 
+>>>>>>> buffat_b
 */
 
 #include "shell.h"
 
+void	erase_screen(t_prompt *prompt)
+{
+  int	size;
+
+  //get to the start
+  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
+
+  size = prompt->size_prompt;
+  size += prompt->count_char;
+  size += prompt->size_completion;
+
+  write(1, prompt->space, size);
+
+  //get to the start
+  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
+}
+
 void	aff_prompt(t_prompt *prompt)
 {
-  //get to the start
-  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
 
-  //erase screen
-  write(1, prompt->space, prompt->nbcols * (prompt->nblines - prompt->start_line));
-
-  //get to the start
-  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
+  erase_screen(prompt);
 
   //aff prompt
   write(1, "Ceci est un prompt > ", 21);
@@ -27,9 +42,9 @@ void	aff_prompt(t_prompt *prompt)
   //write buffer
   write(1, prompt->line, strlen(prompt->line));
 
-  // auto complete
+  //auto complete
   write(1, "\033[s", 3);
-  str("\n\n\tautocompletion here\n");
+  write(1, prompt->auto_completion, prompt->size_completion);
   write(1, "\033[u", 3);
 
   //get cursor back to its place

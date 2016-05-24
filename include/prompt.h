@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 20:55:48 2016
-** Last update Mon May 23 21:05:01 2016 
+** Last update Tue May 24 11:44:36 2016 
 */
 
 # ifndef _PROMPT_H
@@ -27,6 +27,12 @@ struct                  s_prompt
 
   char                  *line;
   char                  *space;
+
+  char			*prompt;
+  int			size_prompt;
+
+  char			*auto_completion;
+  int			size_completion;
 
   int                   count_char;
   int                   count_pos;
