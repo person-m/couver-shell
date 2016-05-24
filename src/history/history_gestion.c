@@ -5,40 +5,13 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Tue May 24 15:15:30 2016 vincent riamon
+** Last update Tue May 24 15:56:54 2016 vincent riamon
 */
 
 #include "my.h"
+#include "../../include/shell.h"
 
-char		**fill_history(char **env)
-{
-  int		fd;
-  char		*s;
-  char		**tab;
-  int		i;
-  char		*hist;
-
-  i = 0;
-  hist = concat_str(get_var_env(env, "HOME="), ".history", '/');
-  if ((fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
-    return (NULL);
-  tab = my_malloc(sizeof(char *) * 1);
-  tab[0] = NULL;
-  while ((s = get_next_line(fd)))
-    {
-      tab = realloc(tab, sizeof(char *) * (i + 2));
-      tab[i] = strdup(s);
-      tab[i + 1] = NULL;
-      free(s);
-      i++;
-    }
-  tab[tab_len(tab)] = NULL;
-  close(fd);
-  free(hist);
-  return (tab);
-}
-
-char		*wortab_in_str(char **tab)
+static char	*wortab_in_str(char **tab)
 {
   char		*str;
   int		i;
@@ -80,6 +53,57 @@ void		update_history(char **line, char ***tab, char **env)
   write(fd, "\n", 1);
   close(fd);
   free(hist);
+}
+
+char		**fill_history(char **env)
+{
+  int		fd;
+  char		*s;
+  char		**tab;
+  int		i;
+  char		*hist;
+
+  i = 0;
+  hist = concat_str(get_var_env(env, "HOME="), ".history", '/');
+  if ((fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
+    return (NULL);
+  tab = my_malloc(sizeof(char *) * 1);
+  tab[0] = NULL;
+  while ((s = get_next_line(fd)))
+    {
+      tab = realloc(tab, sizeof(char *) * (i + 2));
+      tab[i] = strdup(s);
+      tab[i + 1] = NULL;
+      free(s);
+      i++;
+    }
+  tab[tab_len(tab)] = NULL;
+  close(fd);
+  free(hist);
+  return (tab);
+}
+
+int		cmd_history(char **tab, t_shell *sh)
+{
+  int		i;
+  int		fd;
+  char		*hist;
+
+  i = -1;
+  hist = concat_str(get_var_env(sh->env, "HOME="), ".42_history", '/');
+  if (tab_len(tab) == 1)
+    while (sh->history[++i])
+      printf("   %d  %s\n", i + 1, sh->history[i]);
+  else if (!strcmp(tab[1], "-c"))
+    {
+      free_tab(sh->history);
+      sh->history = my_malloc(sizeof(char) * 1);
+      sh->history[0] = NULL;
+      if ((fd = open(hist, O_RDONLY | O_TRUNC)) == -1)
+	return (-1);
+    }
+  free(hist);
+  return (0);
 }
 
 /* int		main(__attribute__((unused))int argc, char **argv, char **env) */
