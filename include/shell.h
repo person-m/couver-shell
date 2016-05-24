@@ -1,11 +1,11 @@
 /*
-** shell.h for  in /home/buffat_b/42sh_tmp/include
+** shell.h for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Fri May 13 21:44:59 2016
-** Last update Tue May 24 11:35:59 2016 
+** Started on  Tue May 24 11:50:52 2016
+** Last update Tue May 24 11:50:53 2016 
 */
 
 #ifndef SHELL_H_
@@ -19,11 +19,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "prompt.h"
+#include "../src/minishell1/my.h"
 
 typedef struct		s_shell
 {
   char			**env;
+  char			**cmd;
   char			**alias;
   char			**history;
   t_prompt		*prompt;
