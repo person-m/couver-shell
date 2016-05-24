@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:18:36 2016 vincent riamon
-** Last update Sun May 22 18:41:43 2016 vincent riamon
+** Last update Tue May 24 14:46:02 2016 vincent riamon
 */
 
 #include "my.h"
@@ -14,7 +14,7 @@ int		main(__attribute__((unused))int argc,
 		     char **argv, char **env)
 {
   char		**tab;
-  char		**tmp;
+  t_shell	sh;
 
   tab = malloc(sizeof(char *) * 6);
   tab[0] = "setenv";
@@ -23,22 +23,22 @@ int		main(__attribute__((unused))int argc,
   tab[3] = "cd";
   tab[4] = "-";
   tab[5] = NULL;
-  tmp = cpy_env(env);
-  my_setenv(tab, &tmp);
-  minishell1(argv + 1, &tmp);
+  sh.env = cpy_env(env);
+  my_setenv(tab, &sh);
+  minishell1(argv + 1, &sh);
   if (!strcmp(argv[1], "setenv") ||
       !strcmp(argv[1], "unsetenv"))
-    aff_tab(tmp);
+    aff_tab(sh.env);
   if (!strcmp(argv[1], "cd"))
     {
-      printf("PWD= %s\nOLDPWD= %s\n", get_var_env(tmp, "PWD="),
-	     get_var_env(tmp, "OLDPWD="));
+      printf("PWD= %s\nOLDPWD= %s\n", get_var_env(sh.env, "PWD="),
+	     get_var_env(sh.env, "OLDPWD="));
       printf("\n------------------------\n\n");
-      cmd_cd(tab + 3, &tmp);
-      printf("PWD= %s\nOLDPWD= %s\n", get_var_env(tmp, "PWD="),
-	     get_var_env(tmp, "OLDPWD="));
+      cmd_cd(tab + 3, &sh);
+      printf("PWD= %s\nOLDPWD= %s\n", get_var_env(sh.env, "PWD="),
+	     get_var_env(sh.env, "OLDPWD="));
     }
-  free_tab(tmp);
+  free_tab(sh.env);
   free(tab);
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat May 21 18:47:52 2016 vincent riamon
+** Last update Tue May 24 14:39:05 2016 vincent riamon
 */
 
 #include "my.h"
@@ -20,7 +20,7 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[5] = "env";
 }
 
-static void	init_builtins(int (**builtins)(char **tab, char ***env))
+static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
 {
   builtins[0] = &cmd_cd;
   builtins[1] = &my_echo;
@@ -30,9 +30,9 @@ static void	init_builtins(int (**builtins)(char **tab, char ***env))
   builtins[5] = &my_env;
 }
 
-static int     builtins(char **tab, char ***env)
+static int     builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[6])(char **tab, char ***env);
+  int	(*builtins[6])(char **tab, t_shell *sh);
   char	*builtins_cmp[6];
   int	i;
   int	is_builtin;
@@ -44,16 +44,16 @@ static int     builtins(char **tab, char ***env)
   while (++i < 6)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
-	is_builtin = builtins[i](tab, env);
+	is_builtin = builtins[i](tab, sh);
     }
   return (is_builtin);
 }
 
-int	minishell1(char **tab, char ***env)
+int	minishell1(char **tab, t_shell *sh)
 {
   int	is_builtin;
 
-  if ((is_builtin = builtins(tab, env)) == 1)
-    return (exec_sh1(tab, *env));
+  if ((is_builtin = builtins(tab, sh)) == 1)
+    return (exec_sh1(tab, sh->env));
   return (is_builtin);
 }

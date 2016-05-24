@@ -5,35 +5,10 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Mon May 23 22:16:17 2016 vincent riamon
+** Last update Tue May 24 15:15:30 2016 vincent riamon
 */
 
 #include "my.h"
-
-void		my_putnbr(int nb)
-{
-  char		c;
-
-  if (nb > 9)
-    my_putnbr(nb / 10);
-  c = nb % 10 + 48;
-  write(1, &c, 1);
-}
-
-void		print_history(char **tab)
-{
-  int		i;
-
-  i = -1;
-  while (tab[++i])
-    {
-      write(1, "   ", 3);
-      my_putnbr(i + 1);
-      write(1, "  ", 2);
-      write(1, tab[i], strlen(tab[i]));
-      write(1, "\n", 1);
-    }
-}
 
 char		**fill_history(char **env)
 {
@@ -107,25 +82,25 @@ void		update_history(char **line, char ***tab, char **env)
   free(hist);
 }
 
-int		main(__attribute__((unused))int argc, char **argv, char **env)
-{
-  char		**tab;
+/* int		main(__attribute__((unused))int argc, char **argv, char **env) */
+/* { */
+/*   char		**tab; */
 
-  tab = fill_history(env);
+  /* tab = fill_history(env); */
   /* write(1, "$> ", 3); */
   /* while ((s = get_next_line(0))) */
   /*   { */
   /*     write(1, "$> ", 3); */
   /*     if (s[0] != 0) */
   /* 	{ */
-  update_history(argv + 1, &tab, env);
+  /* update_history(argv + 1, &tab, env); */
     /* 	  i += 1; */
     /* 	} */
     /*   if (!strcmp(s, "history")) */
     /*     print_tab_fd(tab, 1, 1); */
     /*   free(s); */
     /* } */
-  free_tab(tab);
-  execl("/bin/sh", "/bin/sh", "-c", "cat /$home/.history", NULL);
-  return (0);
-}
+  /* free_tab(tab); */
+  /* execl("/bin/sh", "/bin/sh", "-c", "cat /$home/.history", NULL); */
+  /* return (0); */
+/* } */

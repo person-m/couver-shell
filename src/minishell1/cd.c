@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 17:50:50 2016 vincent riamon
-** Last update Mon May 23 22:43:52 2016 
+** Last update Tue May 24 14:38:44 2016 vincent riamon
 */
 
 #include "my.h"
@@ -60,7 +60,7 @@ static int		basic_cd(char ***env, int mode)
   return (0);
 }
 
-int			cmd_cd(char **tab, char ***env)
+int			cmd_cd(char **tab, t_shell *sh)
 {
   char		pwd[2000];
 
@@ -70,17 +70,17 @@ int			cmd_cd(char **tab, char ***env)
       return (-1);
     }
   if (!tab[1])
-    return (basic_cd(env, 1));
+    return (basic_cd(&sh->env, 1));
   else if (!strcmp(tab[1], "-"))
-    return (basic_cd(env, 2));
+    return (basic_cd(&sh->env, 2));
   else
     {
       getcwd(pwd, 2000);
       if (chdir(tab[1]) == 0)
 	{
-	  my_pwd(*env, "OLDPWD=", pwd);
+	  my_pwd(sh->env, "OLDPWD=", pwd);
 	  getcwd(pwd, 2000);
-	  my_pwd(*env, "PWD=", pwd);
+	  my_pwd(sh->env, "PWD=", pwd);
 	}
       else
 	return (cd_error(tab[1]));

@@ -5,12 +5,12 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Sun May 22 18:04:42 2016 vincent riamon
+** Last update Tue May 24 14:38:25 2016 vincent riamon
 */
 
 #include "my.h"
 
-int		my_echo(char **tab, __attribute__((unused))char ***env)
+int		my_echo(char **tab, __attribute__((unused))t_shell *sh)
 {
   int		i;
 
@@ -28,7 +28,7 @@ int		my_echo(char **tab, __attribute__((unused))char ***env)
   return (0);
 }
 
-int		my_exit(char **tab, __attribute__((unused))char ***env)
+int		my_exit(char **tab, __attribute__((unused))t_shell *sh)
 {
   int		nb;
 

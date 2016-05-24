@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 20:55:48 2016
-** Last update Tue May 24 11:44:36 2016 
+** Last update Tue May 24 14:40:11 2016 vincent riamon
 */
 
 # ifndef _PROMPT_H
@@ -17,8 +17,10 @@
 
 #include <ncurses.h>
 #include <term.h>
+# undef tab
 #include <sys/ioctl.h>
 #include <termios.h>
+#include "shell.h"
 
 struct                  s_prompt
 {

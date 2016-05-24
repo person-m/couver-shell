@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Tue May 24 11:27:40 2016 vincent riamon
+** Last update Tue May 24 14:43:11 2016 vincent riamon
 */
 
 #ifndef	MY_H_
@@ -18,6 +18,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include "../../include/shell.h"
 
 char	**cpy_env(char **env);
 char	*concat_str(char *s1, char *s2, char c);
@@ -29,13 +30,13 @@ int	my_getnbr(const char *str);
 char	**my_str_to_wordtab_pattern(char *str, char *pattern);
 
 void	aff_tab(char **t);
-int	my_setenv(char **t, char ***env);
-int	my_unsetenv(char **t, char ***env);
-int	cmd_cd(char **t, char ***env);
-int	my_echo(char **t, char ***env);
-int	my_exit(char **t, char ***env);
-int	my_env(char **t, char ***env);
-int	minishell1(char **t, char ***env);
+int	my_setenv(char **t, t_shell *sh);
+int	my_unsetenv(char **t, t_shell *sh);
+int	cmd_cd(char **t, t_shell *sh);
+int	my_echo(char **t, t_shell *sh);
+int	my_exit(char **t, t_shell *sh);
+int	my_env(char **t, t_shell *sh);
+int	minishell1(char **t, t_shell *sh);
 int	exec_sh1(char **t, char **env);
 
 char	*get_var_env(char **env, char *name);
