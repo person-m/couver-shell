@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 12:08:26 2016
-** Last update Tue May 24 14:45:30 2016 
+** Last update Wed May 25 16:03:08 2016 
 */
 
 #include "shell.h"
@@ -15,9 +15,8 @@ void	get_non_canon(t_prompt *prompt)
   ioctl(0, TCGETS, &prompt->non_canon_mode);
   prompt->non_canon_mode.c_lflag &= ~ECHO;
   prompt->non_canon_mode.c_lflag &= ~ICANON;
-  prompt->non_canon_mode.c_cc[VMIN] = 0;
+  prompt->non_canon_mode.c_cc[VMIN] = 1;
   prompt->non_canon_mode.c_cc[VTIME] = 0;
-
   prompt->non_canon_mode.c_oflag &= ~ONLRET;
 }
 

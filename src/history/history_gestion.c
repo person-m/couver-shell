@@ -5,35 +5,23 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Wed May 25 16:55:49 2016 vincent riamon
+** Last update Wed May 25 18:43:32 2016 vincent riamon
 */
 
 #include "my.h"
 #include "../../include/shell.h"
 
-static void	create_history_file(char **hist, t_shell *sh)
+static int	create_history_file(char **hist, t_shell *sh)
 {
-  static int	i = 0;
-  char		pwd[2000];
-  char		**tab;
-
-  if (get_var_env(sh->env, "HOME=") != NULL && i == 0)
+  if (get_var_env(sh->env, "HOME=") != NULL)
     *hist = concat_str(get_var_env(sh->env, "HOME="),
 		       ".42_history", '/');
-  else if (i == 0)
+  else
     {
-      tab = my_malloc(sizeof(char *) * 4);
-      getcwd(pwd, 2000);
-      tab[0] = "setenv";
-      tab[1] = "PWD_HISTORY";
-      tab[2] = pwd;
-      tab[3] = NULL;
-      my_setenv(tab, sh);
-      *hist = concat_str(get_var_env(sh->env, "PWD_HISTORY="),
-			 ".42_history", '/');
-      free(tab);
+      *hist = NULL;
+      return (-1);
     }
-  i++;
+  return (0);
 }
 
 static char	*wortab_in_str(char **tab)
@@ -68,15 +56,16 @@ void		update_history(char **line, t_shell *sh)
   int		fd;
   int		i;
   char		*hist;
+  int		ret;
 
   i = tab_len(sh->history);
-  create_history_file(&hist, sh);
-  if ((fd = open(hist, O_RDWR | O_APPEND)) == -1)
-    return ;
+  ret = create_history_file(&hist, sh);
   sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
   if ((sh->history[i] = wortab_in_str(line)) == NULL)
     return ;
   sh->history[i + 1] = NULL;
+  if (ret == -1 || (fd = open(hist, O_RDWR | O_APPEND)) == -1)
+    return ;
   write(fd, sh->history[i], strlen(sh->history[i]));
   write(fd, "\n", 1);
   close(fd);
@@ -89,13 +78,14 @@ void		fill_history(t_shell *sh)
   char		*s;
   int		i;
   char		*hist;
+  int		ret;
 
   i = 0;
-  create_history_file(&hist, sh);
-  if ((fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
-    return ;
   sh->history = my_malloc(sizeof(char *) * 1);
   sh->history[0] = NULL;
+  ret = create_history_file(&hist, sh);
+  if (ret == -1 || (fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
+    return ;
   while ((s = get_next_line(fd)))
     {
       sh->history = realloc(sh->history, sizeof(char *) * (i + 2));
@@ -114,9 +104,10 @@ int		cmd_history(char **tab, t_shell *sh)
   int		i;
   int		fd;
   char		*hist;
+  int		ret;
 
   i = -1;
-  create_history_file(&hist, sh);
+  ret = create_history_file(&hist, sh);
   if (tab_len(tab) == 1)
     while (sh->history[++i])
       printf("   %d  %s\n", i + 1, sh->history[i]);
@@ -128,10 +119,11 @@ int		cmd_history(char **tab, t_shell *sh)
 	  free(sh->history[i]);
 	  sh->history[i] = NULL;
 	}
-      if ((fd = open(hist, O_RDONLY | O_TRUNC)) == -1)
+      if (ret == -1 || (fd = open(hist, O_RDONLY | O_TRUNC)) == -1)
 	return (-1);
     }
-  free(hist);
+  if (ret == 0)
+    free(hist);
   return (0);
 }
 

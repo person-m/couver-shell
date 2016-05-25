@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Tue May 24 16:44:27 2016 Melvin Personnier
+** Last update Wed May 25 10:45:39 2016 
 */
 
 #include "my.h"
@@ -30,7 +30,7 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[3] = &my_setenv;
   builtins[4] = &my_unsetenv;
   builtins[5] = &my_env;
-  builtins[6] = &my_alias;
+  //  builtins[6] = &my_alias;
   builtins[7] = &cmd_history;
 }
 

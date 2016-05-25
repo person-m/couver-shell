@@ -5,29 +5,49 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 16:41:03 2016 vincent riamon
+** Last update Wed May 25 17:06:09 2016 vincent riamon
 */
 
 #include "shell.h"
 
-void	loop_42sh(t_prompt *prompt, t_shell *sh)
+bool			check_std_input(t_shell *sh)
+{
+  char	**cmd;
+  char	buffer[1024];
+  int	ret;
+
+  sh->prompt->non_canon_mode.c_cc[VMIN] = 0;
+  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
+  sh->prompt->non_canon_mode.c_cc[VMIN] = 1;
+  ret = read(0, buffer, 1024);
+  ioctl(0, TCSETS, &sh->prompt->standard_mode);
+  if (!ret)
+    return (0);
+  buffer[ret - 1] = 0;
+  cmd = my_str_to_wordtab_pattern(buffer, " \t");
+  update_history(cmd, sh);
+  the_execution(cmd, sh);
+  return (1);
+}
+
+void	loop_42sh(t_shell *sh)
 {
   int	lol = 1;
   char	**cmd;
 
   while (lol)
     {
-      loop_prompt(prompt);
-      prompt->line[prompt->count_char] = 0;
-      cmd = my_str_to_wordtab_pattern(prompt->line, " \t");
+      loop_prompt(sh->prompt);
+      cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
       update_history(cmd, sh);
       the_execution(cmd, sh);
+
       /* if (!is_a_builtin(cmd[0])) */
       /* 	fork(); */
 
       /* write(1, prompt->line, strlen(prompt->line)); */
 
-       update_prompt(prompt);
+       update_prompt(sh->prompt);
        free_tab(cmd);
     }
 }
@@ -36,11 +56,9 @@ int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
 		     char **env)
 {
-  t_prompt	*prompt;
   t_shell	sh;
 
-
-  if (!(prompt = init_prompt()))
+  if (!(sh.prompt = init_prompt()))
     return (0);
 
   sh.env = cpy_env(env);
@@ -48,17 +66,14 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
 
-  ioctl(0, TCSETS, &prompt->non_canon_mode);
+  if (!check_std_input(&sh))
+    {
+      ioctl(0, TCSETS, &sh.prompt->non_canon_mode);
+      loop_42sh(&sh);
+      ioctl(0, TCSETS, &sh.prompt->standard_mode);
+    }
 
-  loop_42sh(prompt, &sh);
-
-
-  ioctl(0, TCSETS, &prompt->non_canon_mode);
-  loop_42sh(prompt, &sh);
-
-  ioctl(0, TCSETS, &prompt->standard_mode);
-
-  free_prompt(prompt);
+  free_prompt(sh.prompt);
   free_tab(sh.env);
   free_tab(sh.alias);
   free_tab(sh.history);

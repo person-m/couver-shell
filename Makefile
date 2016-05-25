@@ -5,14 +5,16 @@
 ## Login   <buffat_b@epitech.net>
 ## 
 ## Started on  Wed May 25 00:12:22 2016 
-## Last update Wed May 25 14:36:56 2016 vincent riamon
+## Last update Wed May 25 17:15:32 2016 vincent riamon
 ##
 
 NAME	=	42sh
 
 SRC	=	src/main.c \
-		src/prompt/init_prompt.c \
 		src/prompt/prompt.c \
+		src/prompt/init_prompt.c \
+		src/prompt/aff_prompt.c \
+		src/prompt/end_prompt.c \
 		src/prompt/cursor.c \
 		src/prompt/edit_buffer.c \
 		src/prompt/set_term.c \
@@ -39,7 +41,7 @@ OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	=	-I./include/
 
-CC	=	gcc -Wall -Wextra -g # -Werror -pedantic
+CC	=	gcc -Wall -Wextra -Werror -g
 
 
 all:	$(NAME)

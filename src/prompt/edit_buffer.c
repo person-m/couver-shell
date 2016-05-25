@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:22 2016
-** Last update Tue May 24 22:31:47 2016 
+** Last update Wed May 25 13:50:28 2016 
 */
 
 #include "shell.h"
@@ -23,9 +23,6 @@ void	delete_char(t_prompt *prompt)
       ++i;
     }
   prompt->line[--prompt->count_char] = 0;
-
-  //yolo
-  //  aff_prompt(prompt);
 }
 
 void	add_char(t_prompt *prompt, char input)
