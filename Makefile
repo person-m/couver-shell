@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ## 
 ## Started on  Wed May 25 00:12:22 2016 
-## Last update Wed May 25 15:20:59 2016 
+## Last update Wed May 25 18:14:58 2016 
 ##
 
 NAME	=	42sh
@@ -35,7 +35,8 @@ SRC	=	src/main.c \
 		src/minishell2/verif_return.c \
 		src/minishell2/verifs.c \
 		src/history/history_gestion.c \
-		src/history/get_next_line.c
+		src/history/get_next_line.c \
+		src/signals.c \
 
 OBJ	=	$(SRC:.c=.o)
 

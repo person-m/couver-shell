@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:25:06 2016
-** Last update Wed May 25 14:33:11 2016 
+** Last update Wed May 25 19:39:36 2016 
 */
 
 #include "prompt.h"
@@ -33,4 +33,28 @@ void	update_prompt(t_prompt *prompt)
 
   //erase buffer
   memset(prompt->final_line, ' ', prompt->nbcols * prompt->nblines - 1);
+}
+
+void	clean_screen(t_prompt *prompt)
+{
+  int	nb_lines_buffer;
+
+  //line's buffer size
+  nb_lines_buffer = (prompt->size_prompt + prompt->count_char + prompt->size_completion)
+    / prompt->nbcols;
+
+  //clear previous characters
+  erase_down_lines(prompt, nb_lines_buffer);
+
+  //put prompt
+  memcpy(prompt->final_line, prompt->prompt, prompt->size_prompt);
+
+  //put line
+  memcpy(prompt->final_line + prompt->size_prompt, prompt->line, prompt->count_char);
+
+  //aff buffer
+  write(1, prompt->final_line, prompt->size_prompt + prompt->count_char);
+
+  //ready for std output
+  write(1, "\n", 1);
 }

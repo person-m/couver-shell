@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:05:49 2016
-** Last update Wed May 25 14:08:42 2016 
+** Last update Wed May 25 19:39:30 2016 
 */
 
 #include "shell.h"
@@ -66,28 +66,4 @@ void	aff_prompt(t_prompt *prompt)
 
   //move cursor to its place
   move_cursor_back(prompt);
-}
-
-void	clean_screen(t_prompt *prompt)
-{
-  int	nb_lines_buffer;
-
-  //line's buffer size
-  nb_lines_buffer = (prompt->size_prompt + prompt->count_char + prompt->size_completion)
-    / prompt->nbcols;
-
-  //clear previous characters
-  erase_down_lines(prompt, nb_lines_buffer);
-
-  //put prompt
-  memcpy(prompt->final_line, prompt->prompt, prompt->size_prompt);
-
-  //put line
-  memcpy(prompt->final_line + prompt->size_prompt, prompt->line, prompt->count_char);
-
-  //aff buffer
-  write(1, prompt->final_line, prompt->size_prompt + prompt->count_char);
-
-  //ready for std output
-  write(1, "\n", 1);
 }

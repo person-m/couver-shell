@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Wed May 25 14:29:04 2016 
+** Last update Wed May 25 19:42:51 2016 
 */
 
 # ifndef _PROMPT_H
@@ -70,21 +70,19 @@ typedef struct s_caps t_caps;
 void            get_non_canon(t_prompt *);
 void            get_raw_mode(t_prompt *);
 
+int             get_actual_line(t_prompt *);
 void		int_to_str_rec(char *, int, int);
 int		size_of_int(int);
 void		fill_tab_caps(char *, int, int);
 
-int             get_actual_line(t_prompt *);
-void            free_prompt(t_prompt *);
 t_prompt        *init_prompt(void);
+
+void		clean_screen(t_prompt *);
 void            update_prompt(t_prompt *);
+void            free_prompt(t_prompt *);
 
 void            aff_prompt(t_prompt *);
-void		clean_screen(t_prompt *);
-
-char            get_input(t_prompt *);
-void            which_input(t_prompt *, char);
-void            loop_prompt(t_prompt *);
+void		erase_down_lines(t_prompt *, int);
 
 void            move_cursor(t_prompt *, char *);
 void            move_cursor_back(t_prompt *);

@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Wed May 25 14:44:15 2016 vincent riamon
+** Last update Wed May 25 22:21:45 2016 
 */
 
 #include "my.h"
@@ -115,22 +115,23 @@ int		cmd_history(char **tab, t_shell *sh)
 /* int		main(__attribute__((unused))int argc, char **argv, char **env) */
 /* { */
 /*   char		**tab; */
+/*   char	*s; */
 
-  /* tab = fill_history(env); */
-  /* write(1, "$> ", 3); */
-  /* while ((s = get_next_line(0))) */
-  /*   { */
-  /*     write(1, "$> ", 3); */
-  /*     if (s[0] != 0) */
-  /* 	{ */
-  /* update_history(argv + 1, &tab, env); */
-    /* 	  i += 1; */
-    /* 	} */
-    /*   if (!strcmp(s, "history")) */
-    /*     print_tab_fd(tab, 1, 1); */
-    /*   free(s); */
-    /* } */
-  /* free_tab(tab); */
-  /* execl("/bin/sh", "/bin/sh", "-c", "cat /$home/.history", NULL); */
-  /* return (0); */
+/*   tab = fill_history(env); */
+/*   write(1, "$> ", 3); */
+/*   while ((s = get_next_line(0))) */
+/*     { */
+/*       write(1, "$> ", 3); */
+/*       if (s[0] != 0) */
+/*   	{ */
+/*   update_history(argv + 1, &tab, env); */
+/*     	  i += 1; */
+/*     	} */
+/*       if (!strcmp(s, "history")) */
+/*         print_tab_fd(tab, 1, 1); */
+/*       free(s); */
+/*     } */
+/*   free_tab(tab); */
+/*   execl("/bin/sh", "/bin/sh", "-c", "cat /$home/.history", NULL); */
+/*   return (0); */
 /* } */

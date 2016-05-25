@@ -5,50 +5,45 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 16:43:44 2016 
+** Last update Wed May 25 22:10:14 2016 
 */
 
 #include "shell.h"
 
 bool			check_std_input(t_shell *sh)
 {
-  char	**cmd;
   char	buffer[1024];
+  char	**cmd;
   int	ret;
 
-  sh->prompt->non_canon_mode.c_cc[VMIN] = 0;
   ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
-  sh->prompt->non_canon_mode.c_cc[VMIN] = 1;
   ret = read(0, buffer, 1024);
   ioctl(0, TCSETS, &sh->prompt->standard_mode);
   if (!ret)
     return (0);
   buffer[ret - 1] = 0;
+
+  //temporary minishell
   cmd = my_str_to_wordtab_pattern(buffer, " \t");
   update_history(cmd, &sh->history, sh->env);
   the_execution(cmd, sh);
+  //end
+
   return (1);
 }
 
 void	loop_42sh(t_shell *sh)
 {
-  int	lol = 1;
   char	**cmd;
 
-  while (lol)
+  while (2 + 2 == 4)
     {
-      loop_prompt(sh->prompt);
+      loop_prompt(sh);
       cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
       update_history(cmd, &sh->history, sh->env);
       the_execution(cmd, sh);
-
-      /* if (!is_a_builtin(cmd[0])) */
-      /* 	fork(); */
-
-      /* write(1, prompt->line, strlen(prompt->line)); */
-
-       update_prompt(sh->prompt);
-       free_tab(cmd);
+      update_prompt(sh->prompt);
+      free_tab(cmd);
     }
 }
 
@@ -66,12 +61,10 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
 
+  signal_handler();
+
   if (!check_std_input(&sh))
-    {
-      ioctl(0, TCSETS, &sh.prompt->non_canon_mode);
-      loop_42sh(&sh);
-      ioctl(0, TCSETS, &sh.prompt->standard_mode);
-    }
+    loop_42sh(&sh);
 
   free_prompt(sh.prompt);
   free_tab(sh.env);
