@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ## 
 ## Started on  Wed May 25 00:12:22 2016 
-## Last update Wed May 25 01:20:29 2016 vincent riamon
+## Last update Wed May 25 12:40:18 2016 vincent riamon
 ##
 
 NAME	=	42sh
@@ -26,6 +26,12 @@ SRC	=	src/main.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \
 		src/minishell1/cd.c \
 		src/minishell1/exec_sh1.c \
+		src/minishell2/minishell2.c \
+		src/minishell2/pars.c \
+		src/minishell2/pipe.c \
+		src/minishell2/redirections.c \
+		src/minishell2/verif_return.c \
+		src/minishell2/verifs.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c
 
