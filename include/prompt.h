@@ -1,11 +1,11 @@
 /*
-** prompt.h for  in /home/buffat_b/couver-shell/include
+** prompt.h for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon May 23 20:55:48 2016
-** Last update Tue May 24 23:50:23 2016 
+** Started on  Wed May 25 00:11:58 2016
+** Last update Wed May 25 00:11:58 2016 
 */
 
 # ifndef _PROMPT_H
@@ -17,8 +17,10 @@
 
 #include <ncurses.h>
 #include <term.h>
+# undef tab
 #include <sys/ioctl.h>
 #include <termios.h>
+#include "shell.h"
 
 struct                  s_prompt
 {

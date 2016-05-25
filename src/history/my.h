@@ -1,11 +1,11 @@
 /*
 ** get_next_line.h for get_next_line in /home/riamon_v/rendu/CPE/CPE_2015_getnextline
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Mon Jan  4 13:27:16 2016 vincent riamon
-** Last update Sun May 22 15:20:45 2016 vincent riamon
+** Last update Tue May 24 16:44:53 2016 Melvin Personnier
 */
 
 #ifndef MY_H
@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
+#include "../minishell1/my.h"
 
 #ifndef READ_SIZE
 # define READ_SIZE (7)
@@ -26,5 +27,9 @@ void	*my_malloc(int size);
 void	free_tab(char **tab);
 char	*get_var_env(char **env, char *name);
 char	*concat_str(char *str, char *s2, char c);
+
+char	**fill_history(char **env);
+void	update_history(char **line, char ***tab, char **env);
+int		cmd_history(char **tab, t_shell *sh);
 
 #endif /* !MY_H */

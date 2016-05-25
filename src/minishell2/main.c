@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Mon May 23 13:02:51 2016 mohamed-laid hedia
-** Last update Mon May 23 13:25:06 2016 mohamed-laid hedia
+** Last update Tue May 24 20:35:05 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -26,6 +26,7 @@ int	main(int ac, char **argv, char **tab)
 {
   int	i;
   char	**env;
+  t_shell	enver;
 
   i = 0;
   env = malloc(sizeof(char *) * (my_tablen(tab) + 1));
@@ -36,6 +37,7 @@ int	main(int ac, char **argv, char **tab)
       i = i + 1;
       env[i] = 0;
     }
-  the_execution(argv + 1, env);
+  enver.env = env;
+  the_execution(argv + 1, &enver);
   return (0);
 }

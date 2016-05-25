@@ -1,11 +1,11 @@
 ##
-## Makefile for  in /home/buffat_b/42sh_tmp
+## Makefile for  in /home/buffat_b/couver-shell
 ## 
 ## Made by 
 ## Login   <buffat_b@epitech.net>
 ## 
-## Started on  Fri May 13 21:45:10 2016
-## Last update Tue May 24 22:32:09 2016 
+## Started on  Wed May 25 00:12:22 2016 
+## Last update Wed May 25 00:12:22 2016 
 ##
 
 NAME	=	42sh
@@ -24,7 +24,9 @@ SRC	=	src/main.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \
 		src/minishell1/cd.c \
-		src/minishell1/exec_sh1.c
+		src/minishell1/exec_sh1.c \
+		src/history/history_gestion.c \
+		src/history/get_next_line.c
 
 OBJ	=	$(SRC:.c=.o)
 

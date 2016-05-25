@@ -4,8 +4,8 @@
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Tue May 24 11:50:43 2016
-** Last update Wed May 25 00:07:14 2016 
+** Started on  Wed May 25 00:09:58 2016
+** Last update Wed May 25 00:11:34 2016 
 */
 
 #include "shell.h"
@@ -13,6 +13,7 @@
 void	loop_42sh(t_prompt *prompt, t_shell *sh)
 {
   int	lol = 1;
+   char	**cmd;
 
   while (lol)
     {
@@ -22,9 +23,9 @@ void	loop_42sh(t_prompt *prompt, t_shell *sh)
 
       if (!is_a_builtin(sh->cmd[0]))
 	fork();
-      minishell1(sh->cmd, &sh->env);
 
-      //      write(1, prompt->line, strlen(prompt->line));
+      write(1, prompt->line, strlen(prompt->line));
+
       update_prompt(prompt);
     }
   (void)sh;
@@ -32,7 +33,7 @@ void	loop_42sh(t_prompt *prompt, t_shell *sh)
 
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
-		     char **env)
+		      __attribute__((unused))char **env)
 {
   t_prompt	*prompt;
   t_shell	sh;
@@ -41,13 +42,14 @@ int		main(__attribute__((unused))int argc,
   if (!(prompt = init_prompt()))
     return (0);
 
-  //  printf("%d  %d  %d ", prompt->nbcols, prompt->nblines, prompt->start_line);
-  //  return (0);
-
   sh.env = cpy_env(env);
 
   ioctl(0, TCSETS, &prompt->non_canon_mode);
 
+  loop_42sh(prompt, &sh);
+
+
+  ioctl(0, TCSETS, &prompt->non_canon_mode);
   loop_42sh(prompt, &sh);
 
   ioctl(0, TCSETS, &prompt->standard_mode);
