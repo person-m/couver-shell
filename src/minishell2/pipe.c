@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Tue May 24 20:36:25 2016 mohamed-laid hedia
+** Last update Wed May 25 15:21:07 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -110,6 +110,7 @@ void		pipe_execution(char **tab, t_shell *env, t_command *s)
   t_pipe	p;
 
   p.i = 0;
+  s->failed = 1;
   while (next_is_pipe(tab, s->i))
     {
       if (pipe(p.p[p.i % 2]) == -1)

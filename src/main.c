@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 22:10:14 2016 
+** Last update Wed May 25 22:31:07 2016 
 */
 
 #include "shell.h"
@@ -25,7 +25,7 @@ bool			check_std_input(t_shell *sh)
 
   //temporary minishell
   cmd = my_str_to_wordtab_pattern(buffer, " \t");
-  update_history(cmd, &sh->history, sh->env);
+  update_history(cmd, sh);
   the_execution(cmd, sh);
   //end
 
@@ -40,7 +40,7 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
-      update_history(cmd, &sh->history, sh->env);
+      update_history(cmd, sh);
       the_execution(cmd, sh);
       update_prompt(sh->prompt);
       free_tab(cmd);
@@ -57,7 +57,7 @@ int		main(__attribute__((unused))int argc,
     return (0);
 
   sh.env = cpy_env(env);
-  sh.history = fill_history(env);
+  fill_history(&sh);
   create_alias(&sh);
   create_oldpwd(&sh);
 

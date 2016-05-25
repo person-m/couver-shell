@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Mon Jan  4 13:27:16 2016 vincent riamon
-** Last update Tue May 24 16:44:53 2016 Melvin Personnier
+** Last update Wed May 25 16:26:28 2016 vincent riamon
 */
 
 #ifndef MY_H
@@ -28,8 +28,8 @@ void	free_tab(char **tab);
 char	*get_var_env(char **env, char *name);
 char	*concat_str(char *str, char *s2, char c);
 
-char	**fill_history(char **env);
-void	update_history(char **line, char ***tab, char **env);
-int		cmd_history(char **tab, t_shell *sh);
+/* char	**fill_history(char **env); */
+/* void	update_history(char **line, char ***tab, char **env); */
+/* int		cmd_history(char **tab, t_shell *sh); */
 
 #endif /* !MY_H */

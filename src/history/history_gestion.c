@@ -5,11 +5,24 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Wed May 25 22:21:45 2016 
+** Last update Wed May 25 22:32:14 2016 
 */
 
 #include "my.h"
 #include "../../include/shell.h"
+
+static int	create_history_file(char **hist, t_shell *sh)
+{
+  if (get_var_env(sh->env, "HOME=") != NULL)
+    *hist = concat_str(get_var_env(sh->env, "HOME="),
+		       ".42_history", '/');
+  else
+    {
+      *hist = NULL;
+      return (-1);
+    }
+  return (0);
+}
 
 static char	*wortab_in_str(char **tab)
 {
@@ -38,52 +51,52 @@ static char	*wortab_in_str(char **tab)
   return (str);
 }
 
-void		update_history(char **line, char ***tab, char **env)
+void		update_history(char **line, t_shell *sh)
 {
   int		fd;
   int		i;
   char		*hist;
+  int		ret;
 
-  i = tab_len(*tab);
-  hist = concat_str(get_var_env(env, "HOME="), ".42_history", '/');
-  if ((fd = open(hist, O_RDWR | O_APPEND)) == -1)
+  i = tab_len(sh->history);
+  ret = create_history_file(&hist, sh);
+  sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
+  if ((sh->history[i] = wortab_in_str(line)) == NULL)
     return ;
-  *tab = realloc(*tab, (sizeof(char *) * (i + 2)));
-  if (((*tab)[i] = wortab_in_str(line)) == NULL)
+  sh->history[i + 1] = NULL;
+  if (ret == -1 || (fd = open(hist, O_RDWR | O_APPEND)) == -1)
     return ;
-  (*tab)[i + 1] = NULL;
-  write(fd, (*tab)[i], strlen((*tab)[i]));
+  write(fd, sh->history[i], strlen(sh->history[i]));
   write(fd, "\n", 1);
   close(fd);
   free(hist);
 }
 
-char		**fill_history(char **env)
+void		fill_history(t_shell *sh)
 {
   int		fd;
   char		*s;
-  char		**tab;
   int		i;
   char		*hist;
+  int		ret;
 
   i = 0;
-  hist = concat_str(get_var_env(env, "HOME="), ".42_history", '/');
-  if ((fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
-    return (NULL);
-  tab = my_malloc(sizeof(char *) * 1);
-  tab[0] = NULL;
+  sh->history = my_malloc(sizeof(char *) * 1);
+  sh->history[0] = NULL;
+  ret = create_history_file(&hist, sh);
+  if (ret == -1 || (fd = open(hist, O_CREAT | O_RDONLY, 0644)) == -1)
+    return ;
   while ((s = get_next_line(fd)))
     {
-      tab = realloc(tab, sizeof(char *) * (i + 2));
-      tab[i] = strdup(s);
-      tab[i + 1] = NULL;
+      sh->history = realloc(sh->history, sizeof(char *) * (i + 2));
+      sh->history[i] = strdup(s);
+      sh->history[i + 1] = NULL;
       free(s);
       i++;
     }
-  tab[tab_len(tab)] = NULL;
+  sh->history[tab_len(sh->history)] = NULL;
   close(fd);
   free(hist);
-  return (tab);
 }
 
 int		cmd_history(char **tab, t_shell *sh)
@@ -91,9 +104,10 @@ int		cmd_history(char **tab, t_shell *sh)
   int		i;
   int		fd;
   char		*hist;
+  int		ret;
 
   i = -1;
-  hist = concat_str(get_var_env(sh->env, "HOME="), ".42_history", '/');
+  ret = create_history_file(&hist, sh);
   if (tab_len(tab) == 1)
     while (sh->history[++i])
       printf("   %d  %s\n", i + 1, sh->history[i]);
@@ -105,33 +119,35 @@ int		cmd_history(char **tab, t_shell *sh)
 	  free(sh->history[i]);
 	  sh->history[i] = NULL;
 	}
-      if ((fd = open(hist, O_RDONLY | O_TRUNC)) == -1)
+      if (ret == -1 || (fd = open(hist, O_RDONLY | O_TRUNC)) == -1)
 	return (-1);
     }
-  free(hist);
+  if (ret == 0)
+    free(hist);
   return (0);
 }
 
 /* int		main(__attribute__((unused))int argc, char **argv, char **env) */
 /* { */
-/*   char		**tab; */
-/*   char	*s; */
+/*   t_shell	sh; */
 
-/*   tab = fill_history(env); */
-/*   write(1, "$> ", 3); */
-/*   while ((s = get_next_line(0))) */
-/*     { */
-/*       write(1, "$> ", 3); */
-/*       if (s[0] != 0) */
-/*   	{ */
-/*   update_history(argv + 1, &tab, env); */
-/*     	  i += 1; */
-/*     	} */
-/*       if (!strcmp(s, "history")) */
-/*         print_tab_fd(tab, 1, 1); */
-/*       free(s); */
-/*     } */
-/*   free_tab(tab); */
-/*   execl("/bin/sh", "/bin/sh", "-c", "cat /$home/.history", NULL); */
+/*   sh.env = cpy_env(env); */
+/*   fill_history(&sh); */
+/*   /\* write(1, "$> ", 3); *\/ */
+/*   /\* while ((s = get_next_line(0))) *\/ */
+/*   /\*   { *\/ */
+/*   /\*     write(1, "$> ", 3); *\/ */
+/*   /\*     if (s[0] != 0) *\/ */
+/*   /\* 	{ *\/ */
+/*   update_history(argv + 1, &sh); */
+/*     /\* 	  i += 1; *\/ */
+/*     /\* 	} *\/ */
+/*     /\*   if (!strcmp(s, "history")) *\/ */
+/*     /\*     print_tab_fd(tab, 1, 1); *\/ */
+/*     /\*   free(s); *\/ */
+/*     /\* } *\/ */
+/*   free_tab(sh.history); */
+/*   free_tab(sh.env); */
+/*   execl("/bin/sh", "/bin/sh", "-c", "cat /home/riamon_v/.42_history", NULL); */
 /*   return (0); */
 /* } */
