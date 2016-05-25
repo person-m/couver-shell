@@ -5,19 +5,20 @@
 ## Login   <person_m@epitech.eu>
 ##
 ## Started on  Wed May 18 15:34:23 2016 Melvin Personnier
-## Last update Sun May 22 15:12:59 2016 vincent riamon
+## Last update Wed May 25 16:30:05 2016 vincent riamon
 ##
 
 SRC	= get_next_line.c \
-	  fill_history.c \
+	  history_gestion.c \
 	  ../minishell1/misc.c \
 	  ../minishell1/utils.c \
+	  ../minishell1/builtin.c \
 
 OBJ	= $(SRC:.c=.o)
 
 NAME	= history
 
-CFLAGS	= -Wall -g -Wextra -W -pedantic
+CFLAGS	= -Wall -g #-Wextra -W -pedantic
 
 $(NAME): $(OBJ)
 	gcc $(OBJ) -o $(NAME)
