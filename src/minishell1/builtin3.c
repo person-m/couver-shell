@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Tue May 24 16:53:23 2016 Melvin Personnier
+** Last update Wed May 25 12:30:46 2016 vincent riamon
 */
 
 #include "my.h"
@@ -82,4 +82,16 @@ void		create_alias(t_shell *sh)
 {
   sh->alias = my_malloc(sizeof(char *) * 2);
   sh->alias[0] = NULL;
+}
+
+void		create_oldpwd(t_shell *sh)
+{
+  char		**tab;
+
+  tab = my_malloc(sizeof(char *) * 3);
+  tab[0] = "setenv";
+  tab[1] = "OLDPWD";
+  tab[2] = NULL;
+  my_setenv(tab, sh);
+  free(tab);
 }
