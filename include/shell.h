@@ -49,4 +49,6 @@ void		signal_handler(void);
 void		check_signals(t_shell *);
 void		exit_shell(t_shell *, int);
 
+char		**lexer(char *line);
+
 #endif /* !SHELL_H_ */

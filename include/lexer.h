@@ -22,6 +22,4 @@ typedef struct		s_lexer
   char			**command;
 }			t_lexer;
 
-int	init_struct(t_lexer *lexer);
-
 #endif /* !LEXER_H_ */
