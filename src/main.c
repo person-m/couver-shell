@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 12:41:48 2016 vincent riamon
+** Last update Wed May 25 14:42:11 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -18,7 +18,7 @@ void	loop_42sh(t_prompt *prompt, t_shell *sh)
   while (lol)
     {
       loop_prompt(prompt);
-
+      prompt->line[prompt->count_char] = 0;
       cmd = my_str_to_wordtab_pattern(prompt->line, " \t");
       update_history(cmd, &sh->history, sh->env);
       the_execution(cmd, sh);
@@ -27,9 +27,9 @@ void	loop_42sh(t_prompt *prompt, t_shell *sh)
 
       /* write(1, prompt->line, strlen(prompt->line)); */
 
-      update_prompt(prompt);
+       update_prompt(prompt);
+       free_tab(cmd);
     }
-  (void)sh;(void)cmd;
 }
 
 int		main(__attribute__((unused))int argc,

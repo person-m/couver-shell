@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Tue May 24 17:05:55 2016 vincent riamon
+** Last update Wed May 25 14:44:15 2016 vincent riamon
 */
 
 #include "my.h"
@@ -23,6 +23,8 @@ static char	*wortab_in_str(char **tab)
   k = 0;
   str = NULL;
   len = 0;
+  if (!tab[0])
+    return (NULL);
   while (tab[++i])
     {
       j = 0;
@@ -47,7 +49,8 @@ void		update_history(char **line, char ***tab, char **env)
   if ((fd = open(hist, O_RDWR | O_APPEND)) == -1)
     return ;
   *tab = realloc(*tab, (sizeof(char *) * (i + 2)));
-  (*tab)[i] = wortab_in_str(line);
+  if (((*tab)[i] = wortab_in_str(line)) == NULL)
+    return ;
   (*tab)[i + 1] = NULL;
   write(fd, (*tab)[i], strlen((*tab)[i]));
   write(fd, "\n", 1);
