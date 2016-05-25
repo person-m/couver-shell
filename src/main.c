@@ -1,39 +1,74 @@
 /*
-** main.c for  in /home/buffat_b/rendu/PSU/PSU_2015_tetris/src
+** main.c for  in /home/buffat_b/couver-shell
 **
-** Made by Bertrand BUFFAT
+** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon Mar  7 13:20:39 2016 Bertrand BUFFAT
-** Last update Mon May 23 22:33:06 2016 
+** Started on  Wed May 25 00:09:58 2016
+** Last update Wed May 25 22:31:07 2016 
 */
 
 #include "shell.h"
 
-void	loop_42sh(t_prompt *prompt)
+bool			check_std_input(t_shell *sh)
 {
-  int	lol = 1;
+  char	buffer[1024];
+  char	**cmd;
+  int	ret;
 
-  while (lol)
+  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
+  ret = read(0, buffer, 1024);
+  ioctl(0, TCSETS, &sh->prompt->standard_mode);
+  if (!ret)
+    return (0);
+  buffer[ret - 1] = 0;
+
+  //temporary minishell
+  cmd = my_str_to_wordtab_pattern(buffer, " \t");
+  update_history(cmd, sh);
+  the_execution(cmd, sh);
+  //end
+
+  return (1);
+}
+
+void	loop_42sh(t_shell *sh)
+{
+  char	**cmd;
+
+  while (2 + 2 == 4)
     {
-      loop_prompt(prompt);
-      write(1, "\n", 1);
-      write(1, prompt->line, strlen(prompt->line));
-      update_prompt(prompt);
+      loop_prompt(sh);
+      cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
+      update_history(cmd, sh);
+      the_execution(cmd, sh);
+      update_prompt(sh->prompt);
+      free_tab(cmd);
     }
 }
 
-int		main(void)
+int		main(__attribute__((unused))int argc,
+		     __attribute__((unused))char **argv,
+		     char **env)
 {
-  t_prompt	*prompt;
+  t_shell	sh;
 
-  if (!(prompt = init_prompt()))
+  if (!(sh.prompt = init_prompt()))
     return (0);
 
-  ioctl(0, TCSETS, &prompt->non_canon_mode);
-  loop_42sh(prompt);
-  ioctl(0, TCSETS, &prompt->standard_mode);
+  sh.env = cpy_env(env);
+  fill_history(&sh);
+  create_alias(&sh);
+  create_oldpwd(&sh);
 
-  free_prompt(prompt);
+  signal_handler();
+
+  if (!check_std_input(&sh))
+    loop_42sh(&sh);
+
+  free_prompt(sh.prompt);
+  free_tab(sh.env);
+  free_tab(sh.alias);
+  free_tab(sh.history);
   return (0);
 }

@@ -1,41 +1,42 @@
 /*
-** cursor.c for  in /home/buffat_b/42sh_tmp
+** cursor.c for  in /home/buffat_b/couver-shell/src/prompt
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon May 23 19:06:33 2016
-** Last update Mon May 23 20:43:19 2016 
+** Started on  Tue May 24 11:56:13 2016
+** Last update Wed May 25 22:12:37 2016 
 */
 
-#include "42sh.h"
+#include "shell.h"
 
 void	move_cursor(t_prompt *prompt, char *buffer)
 {
 
   //left cursor
-  if (!(strcmp("\033[D", buffer)) && prompt->count_pos > 0)
-    {
-      write(1, "\033[D", 3);
-      --prompt->count_pos;
-    }
+  if (!(strcmp(prompt->caps->left, buffer)) && prompt->count_pos > 0)
+    --prompt->count_pos;
 
   //right cursor
-  if (!(strcmp("\033[C", buffer)) && prompt->count_pos < prompt->count_char)
-    {
-      write(1, "\033[C", 3);
-      ++prompt->count_pos;
-    }
+  else if (!(strcmp(prompt->caps->right, buffer)) && prompt->count_pos < prompt->count_char)
+    ++prompt->count_pos;
+
+  else
+    return ;
+
+  aff_prompt(prompt);
 }
 
 void	move_cursor_back(t_prompt *prompt)
 {
-  int	i;
+  char	tab[16];
+  int	width;
+  int	height;
 
-  i = prompt->count_char;
-  while (i > prompt->count_pos)
-    {
-      write(1, "\033[D", 3);
-      --i;
-    }
+  width = (prompt->size_prompt + prompt->count_pos) % prompt->nbcols + 1;
+  height = prompt->start_line + (prompt->size_prompt + prompt->count_pos) / prompt->nbcols;
+
+  //get cursor pos and print it
+  fill_tab_caps(tab, height, width);
+  write(1, tab, strlen(tab));
 }

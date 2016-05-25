@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Sun May 22 18:48:30 2016 vincent riamon
+** Last update Tue May 24 16:03:23 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -25,8 +25,10 @@ char		*concat_str(char *s1, char *s2, char c)
     s3[i] = s1[i];
   s3[i++] = c;
   if (s2 != NULL)
-    while (s2[j])
-      s3[i++] = s2[j++];
+    {
+      while (s2[j])
+	s3[i++] = s2[j++];
+    }
   s3[i] = 0;
   return (s3);
 }

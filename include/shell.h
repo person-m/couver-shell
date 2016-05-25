@@ -1,11 +1,11 @@
 /*
-** shell.h for  in /home/buffat_b/42sh_tmp/include
+** shell.h for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Fri May 13 21:44:59 2016
-** Last update Mon May 23 21:05:07 2016 
+** Started on  Tue May 24 11:50:52 2016
+** Last update Wed May 25 22:32:33 2016 
 */
 
 #ifndef SHELL_H_
@@ -19,14 +19,34 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include "prompt.h"
 
-typedef struct		s_shell
+typedef struct	s_shell
 {
-  char			**env;
-  char			**alias;
-  char			**history;
-  t_prompt		*prompt;
-}			t_shell;
+  char		**env;
+  char		**alias;
+  char		**history;
+  int		ret;
+  t_prompt	*prompt;
+}		t_shell;
+
+char		**cpy_env(char **env);
+char		**my_str_to_wordtab_pattern(char *s, char *pattern);
+int		minishell1(char **tab, t_shell *sh);
+int		is_a_builtin(char *str);
+void		free_tab(char **tab);
+void		create_alias(t_shell *sh);
+void		create_oldpwd(t_shell *sh);
+void		fill_history(t_shell *sh);
+void		update_history(char **cmd, t_shell *sh);
+void		the_execution(char **cmd, t_shell *sh);
+
+void            loop_prompt(t_shell *);
+
+void		signal_handler(void);
+void		check_signals(t_shell *);
+void		exit_shell(t_shell *, int);
 
 #endif /* !SHELL_H_ */

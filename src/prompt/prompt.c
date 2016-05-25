@@ -1,90 +1,87 @@
 /*
-** prompt.c for  in /home/buffat_b/42sh_tmp
+** prompt.c for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon May 23 19:11:45 2016
-** Last update Mon May 23 22:33:36 2016 
+** Started on  Tue May 24 13:17:48 2016
+** Last update Wed May 25 22:05:18 2016 
 */
 
 #include "shell.h"
 
-void	aff_prompt(t_prompt *prompt)
-{
-  //get to the start
-  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
-
-  //erase screen
-  write(1, prompt->space, prompt->nbcols * (prompt->nblines - prompt->start_line));
-
-  //get to the start
-  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
-
-  //aff prompt
-  write(1, "Ceci est un prompt > ", 21);
-
-  //write buffer
-  write(1, prompt->line, strlen(prompt->line));
-
-  // auto complete
-  write(1, "\033[s", 3);
-  str("\n\n\tautocompletion here\n");
-  write(1, "\033[u", 3);
-
-  //get cursor back to its place
-  move_cursor_back(prompt);
-}
-
 char	get_input(t_prompt *prompt)
 {
   char	buffer[1024];
+  int	ret;
 
   //read standard input
-  buffer[read(1, buffer, 1024)] = 0;
+  ret = read(1, buffer, 1024);
+  buffer[ret] = 0;
 
-  // if nothing
-  if (buffer[0] == 0)
+  //if nothing
+  if (!ret)
     return (0);
 
   //if just one character
-  else if (buffer[1] == 0)
+  else if (!buffer[1])
     return (buffer[0]);
 
-  // if complex string
+  //if complex string
   move_cursor(prompt, buffer);
 
   return (0);
 }
 
-void	which_input(t_prompt *prompt, char input)
+void	exit_shell(t_shell *sh, int nbr)
+{
+  ioctl(0, TCSETS, &sh->prompt->standard_mode);
+  free_prompt(sh->prompt);
+  free_tab(sh->env);
+  free_tab(sh->alias);
+  free_tab(sh->history);
+  exit(nbr);
+}
+
+void	which_input(t_shell *sh, char input)
 {
 
   //if delete character
   if (input == 127)
-    delete_char(prompt);
+    delete_char(sh->prompt);
+
+  //if EOF
+  else if (input == 4)
+    exit_shell(sh, 0);
 
   //if return line
   else if (input == '\n')
     return ;
 
+  //nothing
+  else if (!input)
+    return ;
+
   //if normal character
   else
-    add_char(prompt, input);
+    add_char(sh->prompt, input);
+
 }
 
-void	loop_prompt(t_prompt *prompt)
+void	loop_prompt(t_shell *sh)
 {
   char	input;
 
+  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
   input = 0;
-  aff_prompt(prompt);
-  while (input != '\n')
+  aff_prompt(sh->prompt);
+  while ((input = get_input(sh->prompt)) != '\n')
     {
-      if ((input = get_input(prompt)))
-	{
-	  which_input(prompt, input);
-	  aff_prompt(prompt);
-	}
+      check_signals(sh);
+      which_input(sh, input);
+      aff_prompt(sh->prompt);
     }
+  clean_screen(sh->prompt);
+  sh->prompt->line[sh->prompt->count_char] = 0;
+  ioctl(0, TCSETS, &sh->prompt->standard_mode);
 }

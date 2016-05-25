@@ -1,11 +1,11 @@
 /*
-** edit_buffer.c for  in /home/buffat_b/42sh_tmp
+** edit_buffer.c for  in /home/buffat_b/couver-shell/src/prompt
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon May 23 19:04:03 2016
-** Last update Mon May 23 22:33:21 2016 
+** Started on  Tue May 24 11:56:22 2016
+** Last update Wed May 25 13:50:28 2016 
 */
 
 #include "shell.h"

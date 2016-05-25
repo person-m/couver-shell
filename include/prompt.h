@@ -1,11 +1,11 @@
 /*
-** prompt.h for  in /home/buffat_b/couver-shell/include
+** prompt.h for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon May 23 20:55:48 2016
-** Last update Mon May 23 21:05:01 2016 
+** Started on  Wed May 25 00:11:58 2016
+** Last update Wed May 25 19:42:51 2016 
 */
 
 # ifndef _PROMPT_H
@@ -15,24 +15,45 @@
 **	Structure
 */
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include <ncurses.h>
 #include <term.h>
+# undef tab
 #include <sys/ioctl.h>
 #include <termios.h>
+
+struct                  s_caps
+{
+  char			up[16];
+  char			down[16];
+  char			right[16];
+  char			left[16];
+  char			*asc;
+};
 
 struct                  s_prompt
 {
   int                   start_line;
-  char                  *start_line_str;
+  char                  start_line_str[16];
 
   char                  *line;
-  char                  *space;
-
   int                   count_char;
   int                   count_pos;
 
+  char			*prompt;
+  int			size_prompt;
+
+  char			*auto_completion;
+  int			size_completion;
+
+  char                  *final_line;
+
   int                   nbcols;
   int                   nblines;
+
+  struct s_caps		*caps;
 
   struct termios        standard_mode;
   struct termios        non_canon_mode;
@@ -40,6 +61,7 @@ struct                  s_prompt
 };
 
 typedef struct s_prompt t_prompt;
+typedef struct s_caps t_caps;
 
 /*
 **	Functions
@@ -48,20 +70,19 @@ typedef struct s_prompt t_prompt;
 void            get_non_canon(t_prompt *);
 void            get_raw_mode(t_prompt *);
 
-void            str(char *);
-char            *str_dup(char *);
-char            *str_cat(char *, char *);
-char            *int_to_str(int);
-
 int             get_actual_line(t_prompt *);
-void            free_prompt(t_prompt *);
+void		int_to_str_rec(char *, int, int);
+int		size_of_int(int);
+void		fill_tab_caps(char *, int, int);
+
 t_prompt        *init_prompt(void);
+
+void		clean_screen(t_prompt *);
 void            update_prompt(t_prompt *);
+void            free_prompt(t_prompt *);
 
 void            aff_prompt(t_prompt *);
-char            get_input(t_prompt *);
-void            which_input(t_prompt *, char);
-void            loop_prompt(t_prompt *);
+void		erase_down_lines(t_prompt *, int);
 
 void            move_cursor(t_prompt *, char *);
 void            move_cursor_back(t_prompt *);

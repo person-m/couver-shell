@@ -1,61 +1,49 @@
 /*
-** init.c for  in /home/buffat_b/42sh_tmp
+** init_prompt.c for  in /home/buffat_b/couver-shell/src/prompt
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Wed May 18 22:21:57 2016
-** Last update Mon May 23 22:33:31 2016 
+** Started on  Tue May 24 11:56:28 2016
+** Last update Wed May 25 22:26:39 2016 
 */
 
 #include "shell.h"
 
-void	free_prompt(t_prompt *prompt)
+bool	fill_caps(char *new, char *old)
 {
-  free(prompt->start_line_str);
-  free(prompt->line);
-  free(prompt->space);
-  free(prompt);
-}
-
-int	get_actual_line(t_prompt *prompt)
-{
-  char	buffer[16];
   int	i;
-  int	res;
 
-  ioctl(0, TCSETS, &prompt->raw_mode);
-  write(1, "\033[6n", 4);
-  read (0 ,buffer , sizeof(buffer));
-  ioctl(0, TCSETS, &prompt->standard_mode);
+  if (!old)
+    return (0);
   i = 0;
-  while (buffer[i] != '[')
-    ++i;
-  res = 0;
-  while (buffer[++i] != ';')
+  while (i < 4)
     {
-      res *= 10;
-      res += (buffer[i] - '0');
+      if (old[i] == 'O')
+	new[i] = '[';
+      else
+	new[i] = old[i];
+      ++i;
     }
-  return (res);
+  new[i] = 0;
+  return (1);
 }
 
-void	update_prompt(t_prompt *prompt)
+t_caps		*init_caps(void)
 {
-  //get new line : int and string
-  free(prompt->start_line_str);
-  prompt->start_line += (strlen(prompt->line) / prompt->nbcols) + 2;
-  prompt->start_line_str = str_cat(str_cat(str_dup("\033["),
-					   int_to_str(prompt->start_line)),
-				   strdup(";1H"));
-  write(1, prompt->start_line_str, strlen(prompt->start_line_str));
+  t_caps	*caps;
 
-  //initialize buffer line
-  prompt->line[0] = 0;
-
-  //initialize counters
-  prompt->count_char = 0;
-  prompt->count_pos = 0;
+  if (!(caps = malloc(sizeof(*caps))))
+    return (NULL);
+  if (!fill_caps(caps->up, tigetstr("kcuu1")))
+    return (NULL);
+  if (!fill_caps(caps->down, tigetstr("kcud1")))
+    return (NULL);
+  if (!fill_caps(caps->left, tigetstr("kcub1")))
+    return (NULL);
+  if (!fill_caps(caps->right, tigetstr("kcuf1")))
+    return (NULL);
+  return (caps);
 }
 
 t_prompt	*init_prompt(void)
@@ -71,27 +59,41 @@ t_prompt	*init_prompt(void)
   get_raw_mode(prompt);
 
   //get term info
-  setupterm(NULL, 1, (int *)0);
+  if (setupterm(NULL, 1, (int *)0))
+    return (NULL);
+
+  //get termcaps
+  if (!(prompt->caps = init_caps()))
+    return (NULL);
 
   //get start line : int and string
   prompt->start_line = get_actual_line(prompt);
-  prompt->start_line_str = str_cat(str_cat(str_dup("\033["),
-					   int_to_str(prompt->start_line)),
-				   strdup(";1H"));
+  ioctl(0, TCSETS, &prompt->standard_mode);
+  fill_tab_caps(prompt->start_line_str, prompt->start_line, 1);
 
   //get cols and lines
   prompt->nbcols = tigetnum("cols");
   prompt->nblines = tigetnum("lines");
 
+  //init prompt
+  if (!(prompt->prompt = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
+    return (NULL);
+  prompt->size_prompt = strlen("Ceci est un prompt > ");
+  memcpy(prompt->prompt, "Ceci est un prompt > ", prompt->size_prompt);
+
   //malloc buffer line
   if (!(prompt->line = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
     return (NULL);
-  prompt->line[0] = 0;
 
-  //malloc erase buffer and fill it with spaces
-  if (!(prompt->space = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
+  //malloc buffer final_line
+  if (!(prompt->final_line = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
     return (NULL);
-  memset(prompt->space, ' ', prompt->nbcols * prompt->nblines - 1);
+
+  //init auto completion
+  if (!(prompt->auto_completion = malloc(sizeof(char) * (prompt->nbcols * prompt->nblines))))
+    return (NULL);
+  prompt->size_completion = strlen("   auto_completion here");
+  memcpy(prompt->auto_completion, "   auto_completion here", prompt->size_completion);
 
   //initialize counters
   prompt->count_char = 0;
