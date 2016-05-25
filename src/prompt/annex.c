@@ -4,69 +4,69 @@
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Tue May 24 23:42:03 2016
-** Last update Tue May 24 23:42:04 2016 
+** Started on  Wed May 25 14:14:58 2016
+** Last update Wed May 25 14:23:39 2016 
 */
 
-#include "shell.h"
+#include "prompt.h"
 
-void	str(char *s)
+int     get_actual_line(t_prompt *prompt)
 {
-  write(1, s, strlen(s));
+  char  buffer[16];
+  int   i;
+  int   res;
+
+  if (ioctl(0, TCSETS, &prompt->raw_mode) == -1)
+    return (-1);
+  if (write(1, "\033[6n", 4) <= 0)
+    return (-1);
+  buffer[read(0, buffer, 15)] = 0;
+  i = 0;
+  if (buffer[0] != 27)
+    return (get_actual_line(prompt));
+  while (buffer[i] != '[')
+    ++i;
+  res = 0;
+  while (buffer[++i] != ';')
+    {
+      res *= 10;
+      res += (buffer[i] - '0');
+    }
+  return (res);
 }
 
-char	*str_dup(char *s)
+int     size_of_int(int n)
 {
-  char	*d;
+  int   i;
 
-  if (!(d = malloc(sizeof(char) * strlen(s) + 1)))
-    return (NULL);
-  return (strcpy(d, s));
+  i = 1;
+  while (n > 9)
+    {
+      ++i;
+      n /= 10;
+    }
+  return (i);
 }
 
-char	*str_cat(char *s, char *a)
-{
-  char	*d;
-  int	i;
-  int	id;
-
-  if (!(d = malloc(sizeof(char) * strlen(s) + strlen(a) + 1)))
-    return (NULL);
-  i = -1;
-  while (s[++i])
-    d[i] = s[i];
-  id = 0;
-  while (a[id])
-    d[i++] = a[id++];
-  d[i] = 0;
-  free(s);
-  free(a);
-  return (d);
-}
-
-void	int_to_str_rec(char *s, int range, int nbr)
+void    int_to_str_rec(char *s, int range, int nbr)
 {
   if (nbr > 9)
     int_to_str_rec(s, range - 1, nbr / 10);
   s[range] = nbr % 10 + '0';
 }
 
-char	*int_to_str(int nbr)
+void	fill_tab_caps(char *tab, int line, int cols)
 {
-  char	*s;
   int	i;
-  int	n;
 
-  i = 1;
-  n = nbr;
-  while (n > 9)
-    {
-      ++i;
-      n /= 10;
-    }
-  if (!(s = malloc(sizeof(char) * i + 1)))
-    return (NULL);
-  s[i] = 0;
-  int_to_str_rec(s, i - 1, nbr);
-  return (s);
+  i = -1;
+  tab[++i] = 27;
+  tab[++i] = '[';
+  i += size_of_int(line);
+  int_to_str_rec(tab, i, line);
+  tab[++i] = ';';
+  i += size_of_int(cols);
+  int_to_str_rec(tab, i, cols);
+  tab[++i] = 'H';
+  tab[++i] = 0;
 }

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 00:13:50 2016 
+** Last update Wed May 25 15:16:45 2016 
 */
 
 #include "shell.h"
@@ -17,27 +17,30 @@ void	loop_42sh(t_prompt *prompt, t_shell *sh)
 
   while (lol)
     {
+
       loop_prompt(prompt);
 
-      cmd = my_str_to_wordtab_pattern(prompt->line, " \t");
-
-      if (!is_a_builtin(cmd[0]))
+      /*
+	cmd = my_str_to_wordtab_pattern(prompt->line, " \t");
+	if (!is_a_builtin(cmd[0]))
 	fork();
+      */
 
       write(1, prompt->line, strlen(prompt->line));
-
+      write(1, "\n", 1);
       update_prompt(prompt);
+
     }
+
   (void)sh;(void)cmd;
 }
 
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
-		      __attribute__((unused))char **env)
+		     __attribute__((unused))char **env)
 {
   t_prompt	*prompt;
   t_shell	sh;
-
 
   if (!(prompt = init_prompt()))
     return (0);
@@ -45,13 +48,7 @@ int		main(__attribute__((unused))int argc,
   sh.env = cpy_env(env);
 
   ioctl(0, TCSETS, &prompt->non_canon_mode);
-
   loop_42sh(prompt, &sh);
-
-
-  ioctl(0, TCSETS, &prompt->non_canon_mode);
-  loop_42sh(prompt, &sh);
-
   ioctl(0, TCSETS, &prompt->standard_mode);
 
   free_prompt(prompt);
