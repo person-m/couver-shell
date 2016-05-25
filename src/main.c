@@ -5,50 +5,40 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 16:27:33 2016 
+** Last update Wed May 25 16:43:44 2016 
 */
 
 #include "shell.h"
 
-bool			check_std_input(t_shell *sh, t_prompt *prompt)
+bool			check_std_input(t_shell *sh)
 {
   char	**cmd;
   char	buffer[1024];
   int	ret;
 
-  //read 0
-  prompt->non_canon_mode.c_cc[VMIN] = 0;
-  ioctl(0, TCSETS, &prompt->non_canon_mode);
-
-  //read 1
-  prompt->non_canon_mode.c_cc[VMIN] = 1;
-
-  //is std_input empty
+  sh->prompt->non_canon_mode.c_cc[VMIN] = 0;
+  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
+  sh->prompt->non_canon_mode.c_cc[VMIN] = 1;
   ret = read(0, buffer, 1024);
-  ioctl(0, TCSETS, &prompt->standard_mode);
-
+  ioctl(0, TCSETS, &sh->prompt->standard_mode);
   if (!ret)
     return (0);
   buffer[ret - 1] = 0;
-
-  //call to minishell
   cmd = my_str_to_wordtab_pattern(buffer, " \t");
   update_history(cmd, &sh->history, sh->env);
   the_execution(cmd, sh);
-  //end minishell
-
   return (1);
 }
 
-void	loop_42sh(t_prompt *prompt, t_shell *sh)
+void	loop_42sh(t_shell *sh)
 {
   int	lol = 1;
   char	**cmd;
 
   while (lol)
     {
-      loop_prompt(prompt);
-      cmd = my_str_to_wordtab_pattern(prompt->line, " \t");
+      loop_prompt(sh->prompt);
+      cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
       update_history(cmd, &sh->history, sh->env);
       the_execution(cmd, sh);
 
@@ -57,7 +47,7 @@ void	loop_42sh(t_prompt *prompt, t_shell *sh)
 
       /* write(1, prompt->line, strlen(prompt->line)); */
 
-       update_prompt(prompt);
+       update_prompt(sh->prompt);
        free_tab(cmd);
     }
 }
@@ -66,10 +56,9 @@ int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
 		     char **env)
 {
-  t_prompt	*prompt;
   t_shell	sh;
 
-  if (!(prompt = init_prompt()))
+  if (!(sh.prompt = init_prompt()))
     return (0);
 
   sh.env = cpy_env(env);
@@ -77,14 +66,14 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
 
-  if (!check_std_input(&sh, prompt))
+  if (!check_std_input(&sh))
     {
-      ioctl(0, TCSETS, &prompt->non_canon_mode);
-      loop_42sh(prompt, &sh);
-      ioctl(0, TCSETS, &prompt->standard_mode);
+      ioctl(0, TCSETS, &sh.prompt->non_canon_mode);
+      loop_42sh(&sh);
+      ioctl(0, TCSETS, &sh.prompt->standard_mode);
     }
 
-  free_prompt(prompt);
+  free_prompt(sh.prompt);
   free_tab(sh.env);
   free_tab(sh.alias);
   free_tab(sh.history);
