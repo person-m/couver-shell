@@ -1,15 +1,11 @@
 /*
-** edit_buffer.c for  in /home/buffat_b/42sh_tmp
+** edit_buffer.c for  in /home/buffat_b/couver-shell/src/prompt
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
-** Started on  Mon May 23 19:04:03 2016
-<<<<<<< HEAD
-** Last update Mon May 23 22:33:21 2016 
-=======
-** Last update Mon May 23 22:30:37 2016 
->>>>>>> buffat_b
+** Started on  Tue May 24 11:56:22 2016
+** Last update Tue May 24 22:31:47 2016 
 */
 
 #include "shell.h"
@@ -27,6 +23,9 @@ void	delete_char(t_prompt *prompt)
       ++i;
     }
   prompt->line[--prompt->count_char] = 0;
+
+  //yolo
+  //  aff_prompt(prompt);
 }
 
 void	add_char(t_prompt *prompt, char input)

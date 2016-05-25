@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ## 
 ## Started on  Fri May 13 21:45:10 2016
-## Last update Tue May 24 10:59:44 2016 vincent riamon
+## Last update Tue May 24 22:32:09 2016 
 ##
 
 NAME	=	42sh
@@ -30,7 +30,7 @@ OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	=	-I./include/
 
-CC	=	gcc -Wall -Wextra -Werror
+CC	=	gcc -Wall -Wextra -Werror -pedantic
 
 
 all:	$(NAME)

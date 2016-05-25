@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Mon May 23 20:55:48 2016
-** Last update Tue May 24 11:44:36 2016 
+** Last update Tue May 24 23:50:23 2016 
 */
 
 # ifndef _PROMPT_H
@@ -26,7 +26,7 @@ struct                  s_prompt
   char                  *start_line_str;
 
   char                  *line;
-  char                  *space;
+  char                  *final_line;
 
   char			*prompt;
   int			size_prompt;
@@ -57,6 +57,7 @@ void            get_raw_mode(t_prompt *);
 void            str(char *);
 char            *str_dup(char *);
 char            *str_cat(char *, char *);
+void		int_to_str_rec(char *, int, int);
 char            *int_to_str(int);
 
 int             get_actual_line(t_prompt *);
