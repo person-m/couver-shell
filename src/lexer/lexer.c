@@ -58,7 +58,7 @@ static int	lexer_command(char *line, t_lexer *lexer)
   len = 0;
   while (!(pos + len) || line[pos + len - 1])
   {
-    len += (escape = (line[pos + len] == '\\') * !!(line[pos + len + 1]));
+    len += (escape = ((line[pos + len] == '\\') && line[pos + len + 1]));
     if (!escape && is_special(line[pos + len]))
     {
       if (push_word(lexer, line, &pos, &len) || !(++pos))

@@ -48,7 +48,7 @@ void	loop_42sh(t_shell *sh)
   while (2 + 2 == 4)
     {
       loop_prompt(sh);
-      cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
+      cmd = lexer(sh->prompt->line);
       update_history(cmd, sh);
       the_execution(cmd, sh);
       update_prompt(sh->prompt);
