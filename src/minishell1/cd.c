@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 17:50:50 2016 vincent riamon
-** Last update Tue May 24 14:38:44 2016 vincent riamon
+** Last update Thu May 26 18:00:03 2016 vincent riamon
 */
 
 #include "my.h"
@@ -19,7 +19,7 @@ static int 	        cd_error(char *str)
   else if (!S_ISDIR(s.st_mode))
     fprintf(stderr, "%s: Not a directory.\n", str);
   else
-    fprintf(stderr, "%s: Permissions denied.\n", str);
+    fprintf(stderr, "%s: Permission denied.\n", str);
   return (-1);
 }
 
