@@ -36,6 +36,7 @@ SRC	=	src/main.c \
 		src/minishell2/verifs.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
+		src/couvrc/couvrc.c \
 		src/signals.c \
 		src/lexer/lexer.c
 
