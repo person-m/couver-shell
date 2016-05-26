@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Wed May 25 22:32:14 2016 
+** Last update Thu May 26 13:28:23 2016 vincent riamon
 */
 
 #include "my.h"
@@ -64,6 +64,7 @@ void		update_history(char **line, t_shell *sh)
   if ((sh->history[i] = wortab_in_str(line)) == NULL)
     return ;
   sh->history[i + 1] = NULL;
+  sh->size_hist += 1;
   if (ret == -1 || (fd = open(hist, O_RDWR | O_APPEND)) == -1)
     return ;
   write(fd, sh->history[i], strlen(sh->history[i]));
@@ -95,6 +96,7 @@ void		fill_history(t_shell *sh)
       i++;
     }
   sh->history[tab_len(sh->history)] = NULL;
+  sh->size_hist = tab_len(sh->history);
   close(fd);
   free(hist);
 }
