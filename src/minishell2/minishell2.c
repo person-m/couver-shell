@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Tue May 24 20:35:48 2016 mohamed-laid hedia
+** Last update Wed May 25 22:50:07 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -23,9 +23,9 @@ void	my_process(char **tab, t_shell *env, t_command *s)
     {
       b = pars_param(tab, s->i);
       if (b == NULL)
-	exit(-1);
+	exit(1);
       if (minishell1(b, env) == -1)
-	exit(-1);
+	exit(1);
     }
   else
     wait(&st);
@@ -35,19 +35,22 @@ void	my_process(char **tab, t_shell *env, t_command *s)
 void	exec_command(char **tab, t_shell *env, t_command *s)
 {
   char	**b;
-  int	t;
 
   s->failed = 1;
   if (is_builtin(tab[s->i]))
     {
+      env->ret = 0;
       if ((b = pars_param(tab, s->i)) == NULL)
 	{
+	  env->ret = 1;
 	  s->failed = -1;
 	  return ;
 	}
-      t = minishell1(b, env);
-      if (t == -1)
-	s->failed = -1;
+      if (minishell1(b, env) == -1)
+	{
+	  env->ret = 1;
+	  s->failed = -1;
+	}
       else
 	s->failed = 1;
       free(b);

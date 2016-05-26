@@ -5,18 +5,18 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Wed May 25 15:21:07 2016 mohamed-laid hedia
+** Last update Wed May 25 22:55:07 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
 
-void	wait_process(t_command *s, t_pipe *p)
+int	wait_process(t_command *s, t_pipe *p)
 {
   int	*f;
   int	i;
 
   if ((f = malloc(sizeof(int) * p->i)) == NULL)
-    return ;
+    return (-1);
   i = 0;
   while (i < p->i)
     {
@@ -24,8 +24,8 @@ void	wait_process(t_command *s, t_pipe *p)
       i = i + 1;
     }
   if (dup2(0, s->save[0]) == -1)
-    return ((void)fprintf(stderr, "%s\n", strerror(errno)));
-  verif_ret_pipe(f, s, p);
+    return (fprintf(stderr, "%s\n", strerror(errno)));
+  return (verif_ret_pipe(f, s, p));
 }
 
 void	do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p)
@@ -42,10 +42,10 @@ void	do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p)
       if (dup2(p->p[p->i % 2][0], 0) == -1)
 	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if ((b = pars_param(tab, s->i)) == NULL)
-	exit(-1);
+	exit(1);
       else
 	if (minishell1(b, env) == -1)
-	  exit(-1);
+	  exit(1);
     }
   close(p->p[p->i % 2][0]);
   if (dup2(0, s->save[0]) == -1)
@@ -64,19 +64,24 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
   s->failed = 1;
   if (is_builtin(tab[s->i]))
     {
+      env->ret = 0;
       if ((b = pars_param(tab, s->i)) == NULL)
 	{
+	  env->ret = 1;
 	  s->failed = -1;
 	  return ;
 	}
       if (minishell1(b, env) == -1)
-	s->failed = -1;
+	{
+	  s->failed = -1;
+	  env->ret = 1;
+	}
       free(b);
       return ;
     }
   p->i = p->i + 1;
   do_fork(tab, env, s, p);
-  wait_process(s, p);
+  env->ret = wait_process(s, p);
 }
 
 void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
@@ -96,9 +101,9 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 	if (dup2(p->p[p->i % 2 ? 0 : 1][0], 0) == -1)
 	  return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if ((b = pars_param(tab, s->i)) == NULL)
-        exit(-1);
+        exit(1);
       f = minishell1(b, env);
-      f == -1 ? exit(-1) : exit(0);
+      f == -1 ? exit(1) : exit(0);
     }
   if (p->i != 0)
     close(p->p[p->i % 2 ? 0 : 1][0]);

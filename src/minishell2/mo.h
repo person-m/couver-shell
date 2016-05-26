@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 ** 
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Tue May 24 20:34:05 2016 mohamed-laid hedia
+** Last update Wed May 25 22:53:18 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
@@ -46,7 +46,7 @@ char		**pars_param(char **tab, int i);
 
 /* pipe.c */
 
-void		wait_process(t_command *s, t_pipe *p);
+int		wait_process(t_command *s, t_pipe *p);
 void		do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p);
 void		last_process(char **tab, t_shell *env, t_command *s, t_pipe *p);
 void		do_process(char **tab, t_shell *env, t_command *s, t_pipe *p);
@@ -62,9 +62,9 @@ int		right_redirection(char *red, char *file);
 
 /* verif_return.c */
 
-void		verif_one_sig(int st, t_command *s);
-void		verif_sig(int st, int *t, t_command *s);
-void		verif_ret_pipe(int *f, t_command *s, t_pipe *p);
+int		verif_one_sig(int st, t_command *s);
+int		verif_sig(int st, int *t, t_command *s);
+int		verif_ret_pipe(int *f, t_command *s, t_pipe *p);
 
 /* verifs.c */
 

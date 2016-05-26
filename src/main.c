@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed May 25 22:31:07 2016 
+** Last update Thu May 26 12:54:41 2016 mohamed-laid hedia
 */
 
 #include "shell.h"
@@ -53,6 +53,7 @@ int		main(__attribute__((unused))int argc,
 {
   t_shell	sh;
 
+  sh.ret = 0;
   if (!(sh.prompt = init_prompt()))
     return (0);
 
@@ -70,5 +71,5 @@ int		main(__attribute__((unused))int argc,
   free_tab(sh.env);
   free_tab(sh.alias);
   free_tab(sh.history);
-  return (0);
+  return (sh.ret);
 }
