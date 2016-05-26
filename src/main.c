@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu May 26 21:04:14 2016 vincent riamon
+** Last update Thu May 26 21:08:27 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -30,7 +30,7 @@ bool			check_std_input(t_shell *sh)
   while (instr[i])
     {
       //temporary minishell
-      cmd = lexer(sh->prompt->line);
+      cmd = lexer(instr[i]);
       update_history(cmd, sh);
       the_execution(cmd, sh);
       //end
