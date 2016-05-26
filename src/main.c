@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu May 26 15:59:33 2016 
+** Last update Thu May 26 17:22:33 2016 
 */
 
 #include "shell.h"
@@ -14,21 +14,30 @@ bool			check_std_input(t_shell *sh)
 {
   char	buffer[1024];
   char	**cmd;
+  char  **instr;
   int	ret;
+  int	i;
 
   ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
   ret = read(0, buffer, 1024);
   ioctl(0, TCSETS, &sh->prompt->standard_mode);
   if (!ret)
     return (0);
-  buffer[ret - 1] = 0;
 
-  //temporary minishell
-  cmd = my_str_to_wordtab_pattern(buffer, " \t");
-  update_history(cmd, sh);
-  the_execution(cmd, sh);
-  //end
+  buffer[ret] = 0;
+  instr = my_str_to_wordtab_pattern(buffer, "\n");
+  i = 0;
+  while (instr[i])
+    {
+      //temporary minishell
+      cmd = my_str_to_wordtab_pattern(instr[i], " \t");
+      update_history(cmd, sh);
+      the_execution(cmd, sh);
+      //end
+      ++i;
+    }
 
+  free_tab(instr);
   return (1);
 }
 

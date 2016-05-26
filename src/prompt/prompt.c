@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Thu May 26 15:58:18 2016 
+** Last update Thu May 26 17:14:11 2016 
 */
 
 #include "shell.h"
@@ -81,11 +81,59 @@ void	which_input(t_shell *sh, char input)
 
 }
 
-void	auto_completion(void)
+int	get_in_path(char **tab, char *path ,int flag)
 {
 
+  (void)tab;(void)path;(void)flag;
+  return (-1);
+}
+/*
+bool	search_substr_in_path(char **tab, int *nb_path, char **path, int flag)
+{
+
+
+  (void)tab;(void)nb_path;(void)path;(void)flag;
+  return (0);
 }
 
+
+void	auto_completion(t_shell *sh)
+{
+  char	**path;
+  char	**tab;
+  char	*tmp;
+  int	i;
+  int	nb;
+
+  //no path
+  if (!(tmp = get_var_env(sh->env, "PATH=")))
+    {
+      sh->prompt->size_completion = 0;
+      return ;
+    }
+
+  path = my_str_to_wordtab_pattern(tmp, ":");
+
+  if (!(tab = malloc(sizeof(char *) * 2)))
+    return ;
+
+  i = 0;
+  nb = 0;
+  while (path[i])
+    {
+      if (!search_substr_in_path(tab, &nb, path, 2))
+	{
+	  free_tab(path);
+	  sh->prompt->size_completion = 0;
+	  return ;
+	}
+      ++i;
+    }
+  if (nb_path
+  sh->prompt->size_completion = strlen(tab[0]);
+  memcpy(sh->prompt->auto_completion, tab[0], strlen(tab[0]));
+}
+*/
 void	loop_prompt(t_shell *sh)
 {
   char	input;
@@ -97,7 +145,7 @@ void	loop_prompt(t_shell *sh)
     {
       check_signals(sh);
       which_input(sh, input);
-      auto_completion();
+      //      auto_completion(sh);
       aff_prompt(sh->prompt);
     }
   clean_screen(sh->prompt);
