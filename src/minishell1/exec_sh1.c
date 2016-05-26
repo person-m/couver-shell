@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Tue May 24 14:38:52 2016 vincent riamon
+** Last update Fri May 27 00:01:25 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -25,7 +25,7 @@ static int	test_path(char **tab, char **env)
   int		a;
 
   if ((path_in_str = get_var_env(env, "PATH=")) == NULL)
-    return (cmd_not_found(tab));
+    path_in_str = strdup("/bin");
   path_in_array = my_str_to_wordtab_pattern(path_in_str, ":");
   i = -1;
   while (path_in_array[++i])

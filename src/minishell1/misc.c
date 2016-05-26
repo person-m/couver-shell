@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Tue May 24 16:03:23 2016 Melvin Personnier
+** Last update Thu May 26 14:42:44 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -19,6 +19,8 @@ char		*concat_str(char *s1, char *s2, char c)
 
   i = -1;
   j = 0;
+  if (!s1)
+    return (NULL);
   len = ((s2 != NULL) ? strlen(s2) : 0);
   s3 = my_malloc(sizeof(char) * ((strlen(s1) + len) + 2));
   while (s1[++i])

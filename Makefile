@@ -1,11 +1,11 @@
 ##
 ## Makefile for  in /home/buffat_b/couver-shell
-## 
-## Made by 
+##
+## Made by
 ## Login   <buffat_b@epitech.net>
-## 
-## Started on  Wed May 25 00:12:22 2016 
-## Last update Wed May 25 23:29:14 2016 
+##
+## Started on  Wed May 25 00:12:22 2016
+## Last update Thu May 26 23:48:46 2016 Melvin Personnier
 ##
 
 NAME	=	42sh
@@ -36,6 +36,7 @@ SRC	=	src/main.c \
 		src/minishell2/verifs.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
+		src/couvrc/couvrc.c \
 		src/signals.c \
 		src/lexer/lexer.c
 

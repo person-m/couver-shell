@@ -61,6 +61,7 @@ int		main(__attribute__((unused))int argc,
 		     char **env)
 {
   t_shell	sh;
+  /*char		*couv_rc;*/
 
   sh.ret = 0;
   if (!(sh.prompt = init_prompt(env)))
@@ -70,6 +71,13 @@ int		main(__attribute__((unused))int argc,
   fill_history(&sh);
   create_alias(&sh);
   create_oldpwd(&sh);
+
+  /*if ((couv_rc = couvrc(env)))
+    {
+      printf("%s\n", couv_rc);
+      lexer(couv_rc);
+    }
+  free(couv_rc); */
 
   signal_handler();
 
