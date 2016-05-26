@@ -43,7 +43,7 @@ OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	=	-I./include/
 
-CC	=	gcc -Wall -Wextra -Werror
+CC	=	cc -Wall -Wextra -Werror -g
 
 
 all:	$(NAME)
