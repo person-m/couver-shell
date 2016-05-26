@@ -5,50 +5,31 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Wed May 25 22:26:39 2016 
+** Last update Thu May 26 13:49:53 2016 
 */
 
 #include "shell.h"
 
-bool	fill_caps(char *new, char *old)
-{
-  int	i;
-
-  if (!old)
-    return (0);
-  i = 0;
-  while (i < 4)
-    {
-      if (old[i] == 'O')
-	new[i] = '[';
-      else
-	new[i] = old[i];
-      ++i;
-    }
-  new[i] = 0;
-  return (1);
-}
-
 t_caps		*init_caps(void)
 {
   t_caps	*caps;
+  char		*smkx;
 
-  if (!(caps = malloc(sizeof(*caps))))
+  if (!(caps = malloc(sizeof(*caps)))
+      || !(caps->up = tigetstr("kcuu1"))
+      || !(caps->down = tigetstr("kcud1"))
+      || !(caps->left = tigetstr("kcub1"))
+      || !(caps->right = tigetstr("kcuf1"))
+      || !(smkx = tigetstr("smkx")))
     return (NULL);
-  if (!fill_caps(caps->up, tigetstr("kcuu1")))
-    return (NULL);
-  if (!fill_caps(caps->down, tigetstr("kcud1")))
-    return (NULL);
-  if (!fill_caps(caps->left, tigetstr("kcub1")))
-    return (NULL);
-  if (!fill_caps(caps->right, tigetstr("kcuf1")))
-    return (NULL);
+  write(1, smkx, strlen(smkx));
   return (caps);
 }
 
-t_prompt	*init_prompt(void)
+t_prompt	*init_prompt(char **env)
 {
   t_prompt	*prompt;
+  char		*term;
 
   if (!(prompt = malloc(sizeof(*prompt))))
     return (NULL);
@@ -58,9 +39,11 @@ t_prompt	*init_prompt(void)
   get_non_canon(prompt);
   get_raw_mode(prompt);
 
-  //get term info
-  if (setupterm(NULL, 1, (int *)0))
-    return (NULL);
+  //set term
+  if ((term = get_var_env(env, "TERM=")))
+    setupterm(term, 1, (int *)0);
+  else
+    setupterm("xterm", 1, (int *)0);
 
   //get termcaps
   if (!(prompt->caps = init_caps()))

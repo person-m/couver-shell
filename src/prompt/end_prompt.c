@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:25:06 2016
-** Last update Wed May 25 19:39:36 2016 
+** Last update Wed May 25 23:25:07 2016 
 */
 
 #include "prompt.h"
@@ -31,8 +31,6 @@ void	update_prompt(t_prompt *prompt)
   prompt->count_char = 0;
   prompt->count_pos = 0;
 
-  //erase buffer
-  memset(prompt->final_line, ' ', prompt->nbcols * prompt->nblines - 1);
 }
 
 void	clean_screen(t_prompt *prompt)

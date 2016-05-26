@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Wed May 25 19:42:51 2016 
+** Last update Thu May 26 13:50:36 2016 
 */
 
 # ifndef _PROMPT_H
@@ -26,10 +26,10 @@
 
 struct                  s_caps
 {
-  char			up[16];
-  char			down[16];
-  char			right[16];
-  char			left[16];
+  char			*up;
+  char			*down;
+  char			*right;
+  char			*left;
   char			*asc;
 };
 
@@ -75,7 +75,7 @@ void		int_to_str_rec(char *, int, int);
 int		size_of_int(int);
 void		fill_tab_caps(char *, int, int);
 
-t_prompt        *init_prompt(void);
+t_prompt        *init_prompt(char **env);
 
 void		clean_screen(t_prompt *);
 void            update_prompt(t_prompt *);

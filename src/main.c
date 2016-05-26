@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu May 26 12:54:41 2016 mohamed-laid hedia
+** Last update Thu May 26 15:59:33 2016 
 */
 
 #include "shell.h"
@@ -39,7 +39,7 @@ void	loop_42sh(t_shell *sh)
   while (2 + 2 == 4)
     {
       loop_prompt(sh);
-      cmd = lexer(sh->prompt->line);
+      cmd = my_str_to_wordtab_pattern(sh->prompt->line, " \t");
       update_history(cmd, sh);
       the_execution(cmd, sh);
       update_prompt(sh->prompt);
@@ -54,7 +54,7 @@ int		main(__attribute__((unused))int argc,
   t_shell	sh;
 
   sh.ret = 0;
-  if (!(sh.prompt = init_prompt()))
+  if (!(sh.prompt = init_prompt(env)))
     return (0);
 
   sh.env = cpy_env(env);
