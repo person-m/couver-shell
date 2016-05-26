@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Thu May 26 23:48:46 2016 Melvin Personnier
+## Last update Fri May 27 00:29:12 2016 mohamed-laid hedia
 ##
 
 NAME	=	42sh
@@ -36,7 +36,6 @@ SRC	=	src/main.c \
 		src/minishell2/verifs.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
-		src/couvrc/couvrc.c \
 		src/signals.c \
 		src/lexer/lexer.c
 

@@ -1,11 +1,11 @@
 /*
 ** minishell2.c for 42sh in /home/hedia_m/couver-shell/minishell2
-** 
+**
 ** Made by mohamed-laid hedia
 ** Login   <hedia_m@epitech.net>
-** 
+**
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Wed May 25 22:50:07 2016 mohamed-laid hedia
+** Last update Fri May 27 00:11:07 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -29,7 +29,7 @@ void	my_process(char **tab, t_shell *env, t_command *s)
     }
   else
     wait(&st);
-  verif_one_sig(st, s);
+  env->ret = verif_one_sig(st, s);
 }
 
 void	exec_command(char **tab, t_shell *env, t_command *s)
@@ -54,6 +54,8 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
       else
 	s->failed = 1;
       free(b);
+      dup2(s->save[1], 1);
+      dup2(s->save[1], 0);
     }
   else
     my_process(tab, env, s);
@@ -97,12 +99,14 @@ void		the_execution(char **tab, t_shell *env)
 	break ;
       if (next_is_pipe(tab, s.i))
 	pipe_execution(tab, env, &s);
-      else if (!strcmp(";", tab[s.i]))
+      else if (!strcmp(";", tab[s.i]) || !strcmp("&", tab[s.i]))
 	{
 	  s.failed = 1;
 	  s.i++;
 	}
       else
 	exec_command(tab, env, &s);
+      dup2(s.save[0], 0);
+      dup2(s.save[1], 1);
     }
 }

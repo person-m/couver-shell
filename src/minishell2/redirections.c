@@ -1,11 +1,11 @@
 /*
 ** redirections.c for 42sh in /home/hedia_m/couver-shell/minishell2
-** 
+**
 ** Made by mohamed-laid hedia
 ** Login   <hedia_m@epitech.net>
-** 
+**
 ** Started on  Sun May 22 18:26:56 2016 mohamed-laid hedia
-** Last update Tue May 24 13:47:41 2016 mohamed-laid hedia
+** Last update Fri May 27 00:21:30 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -100,7 +100,7 @@ int	right_redirection(char *red, char *file)
 
   if (!strcmp(red, ">"))
     {
-      if ((fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 00644)) == -1)
+      if ((fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644)) == -1)
 	{
 	  fprintf(stderr, "%s\n", strerror(errno));
 	  return (-1);

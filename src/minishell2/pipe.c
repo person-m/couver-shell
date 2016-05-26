@@ -1,11 +1,11 @@
 /*
 ** pipe.c for 42sh in /home/hedia_m/couver-shell
-** 
+**
 ** Made by mohamed-laid hedia
 ** Login   <hedia_m@epitech.net>
-** 
+**
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Wed May 25 22:55:07 2016 mohamed-laid hedia
+** Last update Fri May 27 00:09:08 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -37,7 +37,7 @@ void	do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p)
     return ;
   else if (f == 0)
     {
-      if (dup2(1, s->save[1]) == -1)
+      if (dup2(s->save[1], 1) == -1)
 	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if (dup2(p->p[p->i % 2][0], 0) == -1)
 	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
@@ -48,9 +48,9 @@ void	do_fork(char **tab, t_shell *env, t_command *s, t_pipe *p)
 	  exit(1);
     }
   close(p->p[p->i % 2][0]);
-  if (dup2(0, s->save[0]) == -1)
+  if (dup2(s->save[0], 0) == -1)
     return ((void)fprintf(stderr, "%s\n", strerror(errno)));
-  if (dup2(1, s->save[1]) == -1)
+  if (dup2(s->save[1], 1) == -1)
     return ((void)fprintf(stderr, "%s\n", strerror(errno)));
 
 }
@@ -59,8 +59,6 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 {
   char	**b;
 
-  if (dup2(1, s->save[1]) == -1)
-    return ((void)fprintf(stderr, "%s\n", strerror(errno)));
   s->failed = 1;
   if (is_builtin(tab[s->i]))
     {
