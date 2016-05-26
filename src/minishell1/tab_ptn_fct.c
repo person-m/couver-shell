@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Wed May 25 10:45:39 2016 
+** Last update Thu May 26 18:13:56 2016 vincent riamon
 */
 
 #include "my.h"
@@ -17,9 +17,8 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[2] = "exit";
   builtins_cmp[3] = "setenv";
   builtins_cmp[4] = "unsetenv";
-  builtins_cmp[5] = "env";
-  builtins_cmp[6] = "alias";
-  builtins_cmp[7] = "history";
+  builtins_cmp[5] = "alias";
+  builtins_cmp[6] = "history";
 }
 
 static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
@@ -29,15 +28,14 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[2] = &my_exit;
   builtins[3] = &my_setenv;
   builtins[4] = &my_unsetenv;
-  builtins[5] = &my_env;
-  //  builtins[6] = &my_alias;
-  builtins[7] = &cmd_history;
+  builtins[5] = &my_alias;
+  builtins[6] = &cmd_history;
 }
 
 static int     builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[8])(char **tab, t_shell *sh);
-  char	*builtins_cmp[8];
+  int	(*builtins[7])(char **tab, t_shell *sh);
+  char	*builtins_cmp[7];
   int	i;
   int	is_builtin;
 
@@ -45,7 +43,7 @@ static int     builtins(char **tab, t_shell *sh)
   is_builtin = 1;
   init_builtins_cmp(builtins_cmp);
   init_builtins(builtins);
-  while (++i < 8)
+  while (++i < 7)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
 	is_builtin = builtins[i](tab, sh);

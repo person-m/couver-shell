@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Wed May 25 18:06:46 2016 
+** Last update Thu May 26 18:14:15 2016 vincent riamon
 */
 
 #include "my.h"
@@ -40,14 +40,5 @@ int		my_exit(char **tab, __attribute__((unused))t_shell *sh)
   nb = (!tab[1]) ? 0 : my_getnbr(tab[1]);
   printf("exit\n");
   exit(nb);
-  return (0);
-}
-
-int		is_a_builtin(char *str)
-{
-  if (!strcmp(str, "setenv") || !strcmp(str, "unsetenv")
-      || !strcmp(str, "exit") || !strcmp(str, "echo")
-      || !strcmp(str, "cd") || !strcmp(str, "env"))
-    return (1);
   return (0);
 }
