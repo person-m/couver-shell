@@ -38,7 +38,8 @@ SRC	=	src/main.c \
 		src/history/get_next_line.c \
 		src/couvrc/couvrc.c \
 		src/signals.c \
-		src/lexer/lexer.c
+		src/lexer/lexer.c \
+		src/parser/check_command.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -49,8 +49,9 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line);
+      if (!check_command(cmd))
+	the_execution(cmd, sh);
       update_history(cmd, sh);
-      the_execution(cmd, sh);
       update_prompt(sh->prompt);
       free_tab(cmd);
     }

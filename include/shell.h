@@ -54,5 +54,6 @@ void		check_signals(t_shell *);
 void		exit_shell(t_shell *, int);
 
 char		**lexer(char *line);
+int		check_command(char **command);
 
 #endif /* !SHELL_H_ */
