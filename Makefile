@@ -37,7 +37,8 @@ SRC	=	src/main.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
 		src/signals.c \
-		src/lexer/lexer.c
+		src/lexer/lexer.c \
+		src/parser/check_command.c
 
 OBJ	=	$(SRC:.c=.o)
 
