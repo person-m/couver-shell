@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Fri May 27 13:59:33 2016 vincent riamon
+** Last update Fri May 27 19:44:46 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -25,6 +25,7 @@ bool			check_std_input(t_shell *sh)
     return (0);
 
   buffer[ret] = 0;
+  epur_str(buffer);
   instr = my_str_to_wordtab_pattern(buffer, "\n");
   i = 0;
   while (instr[i])

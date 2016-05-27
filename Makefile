@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Fri May 27 00:29:12 2016 mohamed-laid hedia
+## Last update Fri May 27 19:41:16 2016 vincent riamon
 ##
 
 NAME	=	42sh
@@ -39,7 +39,8 @@ SRC	=	src/main.c \
 		src/couvrc/couvrc.c \
 		src/signals.c \
 		src/lexer/lexer.c \
-		src/parser/check_command.c
+		src/parser/check_command.c \
+		str_to_wordtab.c
 
 OBJ	=	$(SRC:.c=.o)
 
