@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Fri May 27 19:48:44 2016 vincent riamon
+** Last update Fri May 27 22:08:47 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -62,6 +62,8 @@ int		main(__attribute__((unused))int argc,
 		     char **env)
 {
   t_shell	sh;
+  char		*s;
+  char		**cmd;
   /*char		*couv_rc;*/
 
   sh.ret = 0;
@@ -73,6 +75,16 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
 
+  write(1, "$> ", 3);
+  while ((s = get_next_line(0)))
+    {
+      cmd = lexer(s);
+      if (!check_command(cmd))
+	the_execution(cmd, &sh);
+      write(1, "$> ", 3);
+      free_tab(cmd);
+      free(s);
+    }
   /*if ((couv_rc = couvrc(env)))
     {
       printf("%s\n", couv_rc);
@@ -82,8 +94,8 @@ int		main(__attribute__((unused))int argc,
 
   signal_handler();
 
-  if (!check_std_input(&sh))
-    loop_42sh(&sh);
+  /* if (!check_std_input(&sh)) */
+  /*   loop_42sh(&sh); */
 
   free_prompt(sh.prompt);
   free_tab(sh.env);

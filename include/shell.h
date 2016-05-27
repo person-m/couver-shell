@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Thu May 26 15:59:44 2016
+** Last update Fri May 27 21:43:18 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -55,5 +55,7 @@ void		exit_shell(t_shell *, int);
 
 char		**lexer(char *line);
 int		check_command(char **command);
+
+char		*get_next_line(const int fd);
 
 #endif /* !SHELL_H_ */

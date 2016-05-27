@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Wed May 25 22:06:26 2016 vincent riamon
+** Last update Fri May 27 23:03:00 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -79,7 +79,10 @@ void		replace_exclam_dot(char ***cmd, t_shell *sh)
 	{
 	  if ((*cmd)[i][j] == '!')
 	    {
-	      tmp = get_var_history(sh->history, (*cmd)[i] + j + 1);
+	      if ((*cmd)[i][j + 1] == '!')
+		tmp = sh->history(sh->size_hist - 1);
+	      else
+		tmp = get_var_history(sh->history, (*cmd)[i] + j + 1);
 	      if (tmp != NULL)
 		{
 		  free((*cmd)[i]);
