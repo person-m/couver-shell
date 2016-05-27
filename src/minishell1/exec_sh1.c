@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Fri May 27 16:32:00 2016 Melvin Personnier
+** Last update Fri May 27 16:28:23 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -69,7 +69,7 @@ static int	instant_exec(char **tab, char **env)
 
 int		exec_sh1(char **tab, char **env)
 {
-  if (tab[0][0] == '.' || tab[0][0] == '/')
+  if (tab[0][0] == '.' || tab[0][0] == '/' || slash_in_str(tab[0]) == 1)
     return (instant_exec(tab, env));
   return (test_path(tab, env));
 }
