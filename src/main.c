@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu May 26 21:08:27 2016 vincent riamon
+** Last update Fri May 27 13:59:33 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -49,8 +49,9 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line);
+      if (!check_command(cmd))
+	the_execution(cmd, sh);
       update_history(cmd, sh);
-      the_execution(cmd, sh);
       update_prompt(sh->prompt);
       free_tab(cmd);
     }
