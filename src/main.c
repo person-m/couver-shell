@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu May 26 17:22:33 2016 
+** Last update Fri May 27 13:59:33 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -30,7 +30,7 @@ bool			check_std_input(t_shell *sh)
   while (instr[i])
     {
       //temporary minishell
-      cmd = my_str_to_wordtab_pattern(instr[i], " \t");
+      cmd = lexer(instr[i]);
       update_history(cmd, sh);
       the_execution(cmd, sh);
       //end
@@ -62,6 +62,7 @@ int		main(__attribute__((unused))int argc,
 		     char **env)
 {
   t_shell	sh;
+  /*char		*couv_rc;*/
 
   sh.ret = 0;
   if (!(sh.prompt = init_prompt(env)))
@@ -71,6 +72,13 @@ int		main(__attribute__((unused))int argc,
   fill_history(&sh);
   create_alias(&sh);
   create_oldpwd(&sh);
+
+  /*if ((couv_rc = couvrc(env)))
+    {
+      printf("%s\n", couv_rc);
+      lexer(couv_rc);
+    }
+  free(couv_rc); */
 
   signal_handler();
 

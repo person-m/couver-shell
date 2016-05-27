@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Thu May 26 15:59:44 2016 
+** Last update Thu May 26 15:59:44 2016
 */
 
 #ifndef SHELL_H_
@@ -42,6 +42,7 @@ void		create_alias(t_shell *sh);
 void		create_oldpwd(t_shell *sh);
 void		fill_history(t_shell *sh);
 void		update_history(char **cmd, t_shell *sh);
+char		*couvrc(char **env);
 void		the_execution(char **cmd, t_shell *sh);
 
 char		*get_var_env(char **, char *);
