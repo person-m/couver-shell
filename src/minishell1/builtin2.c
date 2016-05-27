@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Thu May 26 20:55:10 2016 vincent riamon
+** Last update Fri May 27 13:45:49 2016 vincent riamon
 */
 
 #include "my.h"
@@ -19,12 +19,12 @@ int		my_echo(char **tab, __attribute__((unused))t_shell *sh)
     i += 1;
   while (tab[++i])
     {
-      printf("%s", tab[i]);
+      write(1, tab[i], strlen(tab[i]));
       if (tab[i + 1])
-        printf(" ");
+        write(1, " ", 1);
     }
   if ((tab[1] && strcmp(tab[1], "-n")) || !tab[1])
-    printf("\n");
+    write(1, "\n", 1);
   return (0);
 }
 
