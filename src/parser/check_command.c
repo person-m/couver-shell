@@ -107,11 +107,13 @@ static int	check_null_command(char **command)
     {
       if (!exec)
 	return (fprintf(stderr, "Invalid null command.\n") || 1);
-      exec = 0;
+      if (*command)
+	exec = 0;
     }
     else
       exec = 1;
-    command++;
+    if (*command)
+      command++;
   }
   return ((exec) ? 0 : (fprintf(stderr, "Invalid null command.\n") || 1));
 }
