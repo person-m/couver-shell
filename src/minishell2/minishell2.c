@@ -5,14 +5,13 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Fri May 27 00:11:07 2016 mohamed-laid hedia
+** Last update Fri May 27 16:41:49 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
 
-void	my_process(char **tab, t_shell *env, t_command *s)
+void	my_process(t_shell *env, t_command *s, char **b)
 {
-  char	**b;
   int	f;
   int	st;
 
@@ -21,9 +20,6 @@ void	my_process(char **tab, t_shell *env, t_command *s)
     return ;
   else if (f == 0)
     {
-      b = pars_param(tab, s->i);
-      if (b == NULL)
-	exit(1);
       if (minishell1(b, env) == -1)
 	exit(1);
     }
@@ -37,28 +33,24 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
   char	**b;
 
   s->failed = 1;
-  if (is_builtin(tab[s->i]))
+  if ((b = pars_param(tab, s->i)) == NULL)
+    {
+      env->ret = 1;
+      s->failed = -1;
+    }
+  else if (is_builtin(b[0]))
     {
       env->ret = 0;
-      if ((b = pars_param(tab, s->i)) == NULL)
-	{
-	  env->ret = 1;
-	  s->failed = -1;
-	  return ;
-	}
       if (minishell1(b, env) == -1)
 	{
 	  env->ret = 1;
 	  s->failed = -1;
 	}
-      else
-	s->failed = 1;
-      free(b);
-      dup2(s->save[1], 1);
-      dup2(s->save[1], 0);
     }
   else
-    my_process(tab, env, s);
+    my_process(env, s, b);
+  if (b)
+    free(b);
   s->i = s->i + length_param(tab, s->i);
 }
 

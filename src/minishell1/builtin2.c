@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Fri May 27 13:45:49 2016 vincent riamon
+** Last update Fri May 27 15:00:30 2016 vincent riamon
 */
 
 #include "my.h"
@@ -32,7 +32,7 @@ int		my_exit(char **tab, __attribute__((unused))t_shell *sh)
 {
   int		nb;
 
-  if (tab[2] != NULL || (tab[1] && !my_getnbr(tab[1])))
+  if ((tab[1] && tab[2] != NULL) || (tab[1] && !my_getnbr(tab[1])))
     {
       fprintf(stderr, "exit: Expression syntax.\n");
       return (-1);

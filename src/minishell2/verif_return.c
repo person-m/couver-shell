@@ -1,11 +1,11 @@
 /*
 ** verif_return.c for 42sh in /home/hedia_m/couver-shell/minishell2
-** 
+**
 ** Made by mohamed-laid hedia
 ** Login   <hedia_m@epitech.net>
-** 
+**
 ** Started on  Mon May 23 11:00:07 2016 mohamed-laid hedia
-** Last update Wed May 25 22:55:47 2016 mohamed-laid hedia
+** Last update Fri May 27 15:57:27 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -22,7 +22,7 @@ int	verif_one_sig(int st, t_command *s)
       if (WCOREDUMP(st))
 	fprintf(stderr, "%s", " (coredumped) ");
       fprintf(stderr, "%c", '\n');
-      return (WTERMSIG(st));
+      return (WTERMSIG(st) + 128);
     }
   if (WIFEXITED(st) && WEXITSTATUS(st) != 0)
     s->failed = -1;
@@ -48,7 +48,7 @@ int	verif_sig(int st, int *t, t_command *s)
       }
       if (WCOREDUMP(st))
 	fprintf(stderr, "%s", " (coredumped) ");
-      return (WTERMSIG(st));
+      return (128 + WTERMSIG(st));
     }
   return (0);
 }
@@ -64,8 +64,10 @@ int	verif_ret_pipe(int *f, t_command *s, t_pipe *p)
   while (i < p->i)
     {
       ret = verif_sig(f[i], &t, s);
-      if (WIFEXITED(f[i]) && (ret = WEXITSTATUS(f[i])) != 0)
+      if (WIFEXITED(f[i]) && WEXITSTATUS(f[i]) != 0)
 	s->failed = -1;
+      if (WIFEXITED(f[i]))
+	ret = WEXITSTATUS(f[i]);
       i = i + 1;
     }
   if (t != 1)

@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Fri May 27 00:01:25 2016 Melvin Personnier
+** Last update Fri May 27 16:28:23 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -13,6 +13,12 @@
 static int      cmd_not_found(char **tab)
 {
   fprintf(stderr, "%s: Command not found.\n", tab[0]);
+  return (-1);
+}
+
+static int	perm_denied(char **tab)
+{
+  fprintf(stderr, "%s: Permission denied.\n", tab[0]);
   return (-1);
 }
 
@@ -49,13 +55,21 @@ static int	instant_exec(char **tab, char **env)
 
   a = execve(tab[0], tab, env);
   if (a == -1)
-    fprintf(stderr, "%s: Command not found.\n", tab[0]);
+    {
+      if (tab[0][0] == '.')
+	{
+	  if ((strlen(tab[0]) > 2 && access(tab[0] + 2, X_OK) == -1 &&
+	      access(tab[0] + 2, F_OK) != -1) || strlen(tab[0]) <= 2)
+	    return (perm_denied(tab));
+	}
+      fprintf(stderr, "%s: Command not found.\n", tab[0]);
+    }
   return (a);
 }
 
 int		exec_sh1(char **tab, char **env)
 {
-  if (tab[0][0] == '.' || tab[0][0] == '/')
+  if (tab[0][0] == '.' || tab[0][0] == '/' || slash_in_str(tab[0]) == 1)
     return (instant_exec(tab, env));
   return (test_path(tab, env));
 }

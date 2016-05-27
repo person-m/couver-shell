@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed Jan  6 08:50:21 2016 vincent riamon
-** Last update Sun May 22 13:45:00 2016 vincent riamon
+** Last update Fri May 27 14:16:28 2016 vincent riamon
 */
 
 #include "my.h"
@@ -66,12 +66,11 @@ char		*get_next_line(const int fd)
   static int	is_0 = 1;
   static int    i = 0;
 
-  if (fd < 0)
-    return (NULL);
   if (!(buff[lenstr(buff, '\0') - lect]))
     {
       if ((lect = read(fd, buff, READ_SIZE)) <= 0)
-	return ((buff[lenstr(buff, '\0') - lect - 1] != 10 && is_0--) ? my_line : NULL);
+	return ((buff[lenstr(buff, '\0') - lect - 1] != 10 && is_0--) ?
+		my_line : NULL);
       buff[lect] = '\0';
     }
   if (gnl2(&i, &my_line, &lect, 0) == NULL)

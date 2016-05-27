@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Thu May 26 14:42:44 2016 Melvin Personnier
+** Last update Fri May 27 16:27:25 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -67,4 +67,17 @@ void	        aff_tab(char **tab)
   i = -1;
   while (tab[++i])
     printf("%s\n", tab[i]);
+}
+
+int		slash_in_str(char *str)
+{
+  int	i;
+
+  i = -1;
+  while (str[++i])
+    {
+      if (str[i] == '/')
+	return (1);
+    }
+  return (0);
 }
