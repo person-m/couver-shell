@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat May 28 19:11:56 2016 vincent riamon
+** Last update Sat May 28 19:14:41 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -79,11 +79,9 @@ int		main(__attribute__((unused))int argc,
   while ((s = get_next_line(0)))
     {
       cmd = lexer(s);
-      replace_exclam_dot(&cmd, &sh);
-      aff_tab(cmd);
       update_history(cmd, &sh);
-       /* if (!check_command(cmd)) */
-       /* 	the_execution(cmd, &sh); */
+       if (!check_command(cmd))
+       	the_execution(cmd, &sh);
       write(1, "$> ", 3);
       free_tab(cmd);
       free(s);
