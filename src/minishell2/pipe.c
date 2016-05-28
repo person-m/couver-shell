@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sat May 28 14:42:01 2016 mohamed-laid hedia
+** Last update Sat May 28 20:31:58 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -26,7 +26,7 @@ int	wait_process(t_command *s, t_pipe *p, int ret)
   return (verif_ret_pipe(f, s, p, ret));
 }
 
-void	do_fork(char **b, t_shell *env, t_command *s, t_pipe *p)
+void	do_fork(char **b, t_shell *env, t_pipe *p)
 {
   int	f;
 
@@ -35,8 +35,6 @@ void	do_fork(char **b, t_shell *env, t_command *s, t_pipe *p)
   else if (f == 0)
     {
       close(p->p[p->i % 2][1]);
-      if (dup2(1, s->save[1]) == -1)
-	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if (dup2(p->p[p->i % 2][0], 0) == -1)
 	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if (minishell1(b, env) == -1)
@@ -45,8 +43,6 @@ void	do_fork(char **b, t_shell *env, t_command *s, t_pipe *p)
 	  exit(EXIT_FAILURE);
 	}
     }
-  if (dup2(1, s->save[1]) == -1)
-    return ((void)fprintf(stderr, "%s\n", strerror(errno)));
   if (dup2(p->p[p->i % 2][0], 0) == -1)
     return ((void)fprintf(stderr, "%s\n", strerror(errno)));
 }
@@ -73,7 +69,7 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
   else
     {
       p->i = p->i + 1;
-      do_fork(b, env, s, p);
+      do_fork(b, env, p);
       free(b);
     }
   close(p->p[p->i % 2][0]);
@@ -90,19 +86,17 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
     return ;
   else if (t == 0)
     {
+      if ((b = pars_param(tab, s->i)) == NULL)
+	exit(EXIT_FAILURE);
       close(p->p[p->i % 2][0]);
       if (dup2(p->p[p->i % 2][1], 1) == -1)
-        return ((void)fprintf(stderr, "%s\n", strerror(errno)));
+	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if (p->i != 0)
 	if (dup2(p->p[p->i % 2 ? 0 : 1][0], 0) == -1)
 	  return ((void)fprintf(stderr, "%s\n", strerror(errno)));
-      if ((b = pars_param(tab, s->i)) == NULL)
-        exit(EXIT_FAILURE);
       f = minishell1(b, env);
       f == -1 ? exit(EXIT_FAILURE) : exit(EXIT_SUCCESS);
     }
-  if (p->i != 0)
-    close(p->p[p->i % 2 ? 0 : 1][0]);
   close(p->p[p->i % 2][1]);
 }
 
@@ -122,5 +116,7 @@ void		pipe_execution(char **tab, t_shell *env, t_command *s)
     }
   s->failed = 1;
   last_process(tab, env, s, &p);
+  dup2(s->save[1], 1);
+  dup2(s->save[0], 0);
   s->i = s->i + length_param(tab, s->i);
 }

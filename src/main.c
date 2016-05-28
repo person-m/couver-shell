@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat May 28 19:14:41 2016 vincent riamon
+** Last update Sat May 28 21:50:01 2016 mohamed-laid hedia
 */
 
 #include "shell.h"
@@ -57,7 +57,7 @@ void	loop_42sh(t_shell *sh)
     }
 }
 
-void	is_alias(char **s, t_shell sh)
+/*void	is_alias(char **s, t_shell sh)
 {
   int	i;
   int	a;
@@ -72,7 +72,7 @@ void	is_alias(char **s, t_shell sh)
 	  *s = strdup(sh.alias[i] + a + 1);
 	}
   }
-}
+}*/
 
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
@@ -83,9 +83,9 @@ int		main(__attribute__((unused))int argc,
   char		**cmd;
   /*char		*couv_rc;*/
 
-  sh.ret = 0;
+  /*sh.ret = 0;
   if (!(sh.prompt = init_prompt(env)))
-    return (0);
+    return (0);*/
 
   sh.env = cpy_env(env);
   fill_history(&sh);
@@ -115,7 +115,7 @@ int		main(__attribute__((unused))int argc,
   /* if (!check_std_input(&sh)) */
   /*   loop_42sh(&sh); */
 
-  free_prompt(sh.prompt);
+  /*free_prompt(sh.prompt);*/
   free_tab(sh.env);
   free_tab(sh.alias);
   free_tab(sh.history);
