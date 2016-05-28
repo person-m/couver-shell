@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Mon May 23 11:00:07 2016 mohamed-laid hedia
-** Last update Sat May 28 14:08:01 2016 mohamed-laid hedia
+** Last update Sat May 28 14:37:03 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -64,7 +64,7 @@ int	verif_ret_pipe(int *f, t_command *s, t_pipe *p, int ret)
 
   i = 0;
   t = 1;
-  while (i <= p->i)
+  while (i < p->i)
     {
       aux = verif_sig(f[i], &t, s);
       if (aux)

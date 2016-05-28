@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sat May 28 14:06:58 2016 mohamed-laid hedia
+** Last update Sat May 28 14:42:01 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -15,10 +15,10 @@ int	wait_process(t_command *s, t_pipe *p, int ret)
   int	*f;
   int	i;
 
-  if ((f = malloc(sizeof(int) * p->i)) == NULL)
+  if ((f = malloc(sizeof(int) * (p->i + 1))) == NULL)
     return (-1);
   i = 0;
-  while (i <= p->i)
+  while (i < p->i)
     {
       wait(&f[i]);
       i = i + 1;
@@ -77,7 +77,7 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       free(b);
     }
   close(p->p[p->i % 2][0]);
-  env->ret = wait_process(s, p, env->ret);
+  env->ret = wait_process(s, p, 0);
 }
 
 void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)

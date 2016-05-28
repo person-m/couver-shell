@@ -5,27 +5,22 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Fri May 27 19:22:51 2016 vincent riamon
+** Last update Sat May 28 14:48:17 2016 mohamed-laid hedia
 */
 
 #include "my.h"
 
-int	my_env(__attribute__((unused))char **tab, t_shell *sh)
+int	my_env(t_shell *sh)
 {
   aff_tab(sh->env);
   return (0);
 }
 
-static int	exit_setenv(char **tab, t_shell *sh)
+static int	exit_setenv(char **tab)
 {
   if (tab_len(tab) > 3)
     {
       fprintf(stderr, "setenv: Too many arguments.\n");
-      return (0);
-    }
-  if (!tab[1])
-    {
-      aff_tab(sh->env);
       return (0);
     }
   return (1);
@@ -38,9 +33,11 @@ int		my_setenv(char **tab, t_shell *sh)
 
   i = -1;
   bol = 0;
-  if (!exit_setenv(tab, sh))
+  if (!exit_setenv(tab))
     return (-1);
-  while (sh->env[++i])
+  if (!tab[1])
+    return (my_env(sh));
+   while (sh->env[++i])
     {
       if (!strncmp(sh->env[i], tab[1], strlen(tab[1])))
 	{
