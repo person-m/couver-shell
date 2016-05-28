@@ -57,6 +57,23 @@ void	loop_42sh(t_shell *sh)
     }
 }
 
+void	is_alias(char **s, t_shell sh)
+{
+  int	i;
+  int	a;
+
+  i = -1;
+  a = strlen(*s);
+  while (sh.alias[++i])
+    {
+      if (!strncmp(*s, sh.alias[i], a))
+	{
+	  free(*s);
+	  *s = strdup(sh.alias[i] + a + 1);
+	}
+  }
+}
+
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
 		     char **env)

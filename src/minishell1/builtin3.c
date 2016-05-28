@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Wed May 25 18:07:23 2016 Melvin Personnier
+** Last update Sat May 28 17:40:37 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -94,4 +94,21 @@ void		create_oldpwd(t_shell *sh)
   tab[2] = NULL;
   my_setenv(tab, sh);
   free(tab);
+}
+
+void	is_alias(char **s, t_shell sh)
+{
+  int	i;
+  int	a;
+
+  i = -1;
+  a = strlen(*s);
+  while (sh.alias[++i])
+    {
+      if (!strncmp(*s, sh.alias[i], a))
+	{
+	  free(*s);
+	  *s = strdup(sh.alias[i] + a + 1);
+	}
+    }
 }
