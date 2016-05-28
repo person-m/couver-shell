@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Sat May 28 15:12:32 2016 vincent riamon
+** Last update Sat May 28 15:13:56 2016 vincent riamon
 */
 
 #ifndef	MY_H_

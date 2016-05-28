@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Sat May 28 15:12:12 2016 vincent riamon
+** Last update Sat May 28 15:14:28 2016 vincent riamon
 */
 
 #include "my.h"
@@ -16,7 +16,7 @@ int	my_env(t_shell *sh)
   return (0);
 }
 
-static int	exit_setenv(char **tab, t_shell *sh)
+static int	exit_setenv(char **tab)
 {
   if (tab_len(tab) > 3)
     {
@@ -33,7 +33,7 @@ int		my_setenv(char **tab, t_shell *sh)
 
   i = -1;
   bol = 0;
-  if (!exit_setenv(tab, sh))
+  if (!exit_setenv(tab))
     return (-1);
   if (!tab[1])
     return (my_env(sh));

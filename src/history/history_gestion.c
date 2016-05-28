@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Fri May 27 14:55:52 2016 Melvin Personnier
+** Last update Sat May 28 18:04:51 2016 vincent riamon
 */
 
 #include "my.h"
@@ -24,7 +24,7 @@ static int	create_history_file(char **hist, t_shell *sh)
   return (0);
 }
 
-static char	*wortab_in_str(char **tab)
+char	*wordtab_in_str(char **tab, int mode)
 {
   char		*str;
   int		i;
@@ -46,6 +46,8 @@ static char	*wortab_in_str(char **tab)
       while (tab[i][j])
 	str[k++] = tab[i][j++];
       str[k++] = ' ';
+      if (mode == 1)
+	free(tab[i]);
     }
   str[k - 1] = 0;
   return (str);
@@ -61,7 +63,7 @@ void		update_history(char **line, t_shell *sh)
   i = tab_len(sh->history);
   ret = create_history_file(&hist, sh);
   sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
-  if ((sh->history[i] = wortab_in_str(line)) == NULL)
+  if ((sh->history[i] = wordtab_in_str(line, 0)) == NULL)
     return ;
   sh->history[i + 1] = NULL;
   sh->size_hist += 1;

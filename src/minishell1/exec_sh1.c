@@ -5,14 +5,14 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Fri May 27 23:53:52 2016 mohamed-laid hedia
+** Last update Sat May 28 14:19:42 2016 Melvin Personnier
 */
 
 #include "my.h"
 
 static int      cmd_not_found(char **tab)
 {
-  fprintf(stderr, "%s: Command not found.2\n", tab[0]);
+  fprintf(stderr, "%s: Command not found.\n", tab[0]);
   return (-1);
 }
 
