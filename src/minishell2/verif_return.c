@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Mon May 23 11:00:07 2016 mohamed-laid hedia
-** Last update Fri May 27 15:57:27 2016 mohamed-laid hedia
+** Last update Sat May 28 14:08:01 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -47,30 +47,36 @@ int	verif_sig(int st, int *t, t_command *s)
 	*t = 2;
       }
       if (WCOREDUMP(st))
-	fprintf(stderr, "%s", " (coredumped) ");
+	{
+	  fprintf(stderr, "%s", " (coredumped) ");
+	  *t = 2;
+	}
       return (128 + WTERMSIG(st));
     }
   return (0);
 }
 
-int	verif_ret_pipe(int *f, t_command *s, t_pipe *p)
+int	verif_ret_pipe(int *f, t_command *s, t_pipe *p, int ret)
 {
   int	i;
   int	t;
-  int	ret;
+  int aux;
 
   i = 0;
   t = 1;
-  while (i < p->i)
+  while (i <= p->i)
     {
-      ret = verif_sig(f[i], &t, s);
-      if (WIFEXITED(f[i]) && WEXITSTATUS(f[i]) != 0)
-	s->failed = -1;
-      if (WIFEXITED(f[i]))
-	ret = WEXITSTATUS(f[i]);
+      aux = verif_sig(f[i], &t, s);
+      if (aux)
+	ret = aux;
+      if (WIFEXITED(f[i]) && WEXITSTATUS(f[i]) != EXIT_SUCCESS)
+	{
+	  s->failed = -1;
+	  ret = WEXITSTATUS(f[i]);
+	}
       i = i + 1;
     }
-  if (t != 1)
+  if (t == 2)
     fprintf(stderr, "%c", '\n');
   free(f);
   return (ret);
