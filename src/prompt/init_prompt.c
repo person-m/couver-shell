@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Sun May 29 03:25:19 2016 
+** Last update Sun May 29 15:55:53 2016 
 */
 
 #include "shell.h"
@@ -17,6 +17,19 @@ void	free_prompt(t_prompt *prompt)
   free(prompt->auto_completion);
   free(prompt->caps);
   free(prompt);
+}
+
+char	*sdup(char *s)
+{
+  char	*d;
+  int	size;
+
+  size = strlen(s);
+  if (!(d = malloc(sizeof(char) * size + 1)))
+    return (NULL);
+  memcpy(d, s, size);
+  d[size] = 0;
+  return (d);
 }
 
 t_caps		*init_caps(void)
@@ -34,12 +47,11 @@ t_caps		*init_caps(void)
       || !(caps->clear = tigetstr("clear"))
       || !(smkx = tigetstr("smkx")))
     return (NULL);
-  if (!(tmp = strdup("a,a:b,b:c,c:d,d:e,e:f,f:g,g:h,h:i,i:j,j:k,k:l,l:m,m:")))
+  if (!(tmp = sdup("a,a:b,b:c,c:d,d:e,e:f,f:g,g:h,h:i,i:j,j:k,k:l,l:m,m:"))
+      || !(tmp2 = sdup("n,n:o,o:p,p:q,q:r,r:s,s:t,t:u,u:v,v:w,w:x,x:y,y:z,z"))
+      || !(caps->ascii = malloc(sizeof(char) * strlen(tmp) + strlen(tmp2) + 1)))
     return (NULL);
-  if (!(tmp2 = strdup("n,n:o,o:p,p:q,q:r,r:s,s:t,t:u,u:v,v:w,w:x,x:y,y:z,z")))
-    return (NULL);
-  if (!(caps->ascii = strcat(tmp, tmp2)))
-    return (NULL);
+  strconcat(tmp, tmp2, caps->ascii);
   write(1, smkx, strlen(smkx));
   return (caps);
 }

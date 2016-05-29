@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sun May 29 04:13:57 2016 
+** Last update Sun May 29 15:53:53 2016 
 */
 
 #ifndef SHELL_H_
@@ -73,5 +73,7 @@ char		*get_range_ascii(char *ascii, char input);
 void		signal_handler(void);
 void		check_signals(t_shell *);
 void		exit_shell(t_shell *);
+
+void		strconcat(const char *, const char *, char *);
 
 #endif /* !SHELL_H_ */
