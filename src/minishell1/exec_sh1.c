@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Sat May 28 14:19:42 2016 Melvin Personnier
+** Last update Sun May 29 15:34:55 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -59,7 +59,8 @@ static int	instant_exec(char **tab, char **env)
       if (tab[0][0] == '.')
 	{
 	  if ((strlen(tab[0]) > 2 && access(tab[0] + 2, X_OK) == -1 &&
-	      access(tab[0] + 2, F_OK) != -1) || strlen(tab[0]) <= 2)
+	      access(tab[0] + 2, F_OK) != -1) || strlen(tab[0]) <= 2 ||
+	      opendir(tab[0] + 2) != NULL)
 	    return (perm_denied(tab));
 	}
       fprintf(stderr, "%s: Command not found.\n", tab[0]);
