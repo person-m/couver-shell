@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Thu May 26 13:50:36 2016 
+** Last update Sat May 28 23:07:01 2016 
 */
 
 # ifndef _PROMPT_H
@@ -23,20 +23,24 @@
 # undef tab
 # include <sys/ioctl.h>
 # include <termios.h>
+# include <dirent.h>
 
+#ifdef __APPLE__
 # define TCGETS 0x540d
 # define TCSETS 0x540e
+#endif /* __APPLE__ */
 
-struct                  s_caps
+typedef struct		s_caps
 {
   char			*up;
   char			*down;
   char			*right;
   char			*left;
-  char			*asc;
-};
+  char			*clear;
+  char			*ascii;
+}			t_caps;
 
-struct                  s_prompt
+typedef struct		s_prompt
 {
   int                   start_line;
   char                  start_line_str[16];
@@ -50,8 +54,7 @@ struct                  s_prompt
 
   char			*auto_completion;
   int			size_completion;
-
-  char                  *final_line;
+  int			offset;
 
   int                   nbcols;
   int                   nblines;
@@ -61,10 +64,14 @@ struct                  s_prompt
   struct termios        standard_mode;
   struct termios        non_canon_mode;
   struct termios        raw_mode;
-};
+}			t_prompt;
 
-typedef struct s_prompt t_prompt;
-typedef struct s_caps t_caps;
+typedef struct		s_list
+{
+  int			size;
+  char			*name;
+  struct s_list		*next;
+}			t_list;
 
 /*
 **	Functions
@@ -82,6 +89,7 @@ t_prompt        *init_prompt(char **env);
 
 void		clean_screen(t_prompt *);
 void            update_prompt(t_prompt *);
+void            update_local_prompt(t_prompt *);
 void            free_prompt(t_prompt *);
 
 void            aff_prompt(t_prompt *);
@@ -90,7 +98,23 @@ void		erase_down_lines(t_prompt *, int);
 void            move_cursor(t_prompt *, char *);
 void            move_cursor_back(t_prompt *);
 
-void            delete_char(t_prompt *);
+//void            delete_char(t_prompt *);
 void            add_char(t_prompt *, char);
+
+void		bltin_completion(t_prompt *, char **env);
+bool		ask_print_commands(int);
+
+int		count_commands(t_prompt *, char **env);
+void		print_commands(t_prompt *, char **env, int count);
+
+void		put_nbr(int);
+int		get_offset(char *line, int pos, int *ret);
+int		get_offset_directory(char *line, int pos);
+void		get_path_from_line(t_prompt *, int offset_dir, char *path);
+
+void		put_in_list(t_list **, char *);
+int		get_row_list(t_list **, int);
+void		print_dat_list(t_prompt *, t_list *, int);
+void		free_list(t_list **);
 
 # endif

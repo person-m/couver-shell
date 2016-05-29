@@ -5,16 +5,16 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:14:58 2016
-** Last update Wed May 25 14:23:39 2016 
+** Last update Sun May 29 02:56:52 2016 
 */
 
 #include "prompt.h"
 
-int     get_actual_line(t_prompt *prompt)
+int	get_actual_line(t_prompt *prompt)
 {
-  char  buffer[16];
-  int   i;
-  int   res;
+  char	buffer[16];
+  int	i;
+  int	res;
 
   if (ioctl(0, TCSETS, &prompt->raw_mode) == -1)
     return (-1);
@@ -35,9 +35,9 @@ int     get_actual_line(t_prompt *prompt)
   return (res);
 }
 
-int     size_of_int(int n)
+int	size_of_int(int n)
 {
-  int   i;
+  int	i;
 
   i = 1;
   while (n > 9)
@@ -48,7 +48,7 @@ int     size_of_int(int n)
   return (i);
 }
 
-void    int_to_str_rec(char *s, int range, int nbr)
+void	int_to_str_rec(char *s, int range, int nbr)
 {
   if (nbr > 9)
     int_to_str_rec(s, range - 1, nbr / 10);
