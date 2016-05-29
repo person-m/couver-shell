@@ -41,6 +41,7 @@ static int		basic_cd(char ***env, int mode)
   char		*path;
   char		pwd[2000];
 
+  path = NULL;
   if (mode == 1)
     path = get_var_env(*env, "HOME=");
   else if (mode == 2)

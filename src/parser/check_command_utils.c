@@ -8,34 +8,11 @@
 ** Last update Fri May 27 14:16:32 2016 Vincent COUVERCHEL
 */
 
-static int	is_end_of_command(char *str)
+static void	go_to_match_arg(char ***command)
 {
-  return (!strcmp(str, "||")
-	  || !strcmp(str, "&&")
-	  || !strcmp(str, "|")
-	  || !strcmp(str, ";")
-	  || !strcmp(str, "(")
-	  || !strcmp(str, ")"));
-}
+  char		*str;
 
-static int	is_separator(char *str)
-{
-  return (!strcmp(str, "||")
-	  || !strcmp(str, "&&")
-	  || !strcmp(str, ";")
-	  || !strcmp(str, "(")
-	  || !strcmp(str, ")"));
-}
-
-static int	is_quote(char *str)
-{
-  return (!strcmp(str, "\"")
-	  || !strcmp(str, "'")
-	  || !strcmp(str, "`"));
-}
-
-static void	go_to_match_arg(char ***command, char *str)
-{
+  str = **command;
   if (is_quote(str))
   {
     while (**command && strcmp(**command, str))
@@ -49,30 +26,53 @@ static void	go_to_match_arg(char ***command, char *str)
     (*command)++;
 }
 
+static int	check_quote(char **command, char **quote,
+			    char ***max, char ***min)
+{
+  int		i;
+
+  i = 0;
+  while (i < 3)
+  {
+    if (!strcmp(*command, quote[i]))
+    {
+      command++;
+      while (*command && strcmp(*command, quote[i]) && command != *min)
+	command++;
+      if ((!(*command) || (command == *min && strcmp(*command, quote[i])))
+	  && (max && i == 2))
+	return (fprintf(stderr, "Unmatched %s.\n", quote[i]) || 1);
+      *max = (!(*max) && *command) ? command : *max;
+      *min = command - 1;
+      break;
+    }
+    i++;
+  }
+  return (0);
+}
+
 static int	check_match(char **command)
 {
   char		*quote[3];
-  int		i;
-  
+  char		**max;
+  char		**min;
+
   quote[0] = "\"";
   quote[1] = "'";
   quote[2] = "`";
+  max = NULL;
+  min = NULL;
   while (*command)
   {
-    i = 0;
-    while (i < 3)
+    if (check_quote(command, quote, &max, &min))
+      return (1);
+    if (max && command == min)
     {
-      if (!strcmp(*command, quote[i]))
-      {
-	command++;
-	while (*command && strcmp(*command, quote[i]))
-	  command++;
-	if (!(*command))
-	  return (fprintf(stderr, "Unmatched %s.\n", quote[i]) || 1);
-      }
-      i++;
+      command = max;
+      max = NULL;
+      min = NULL;
     }
-    command++;
+    command += !!(*command);
   }
   return (0);
 }

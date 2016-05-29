@@ -15,14 +15,17 @@
 **	Structure
 */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ncurses.h>
-#include <term.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <ncurses.h>
+# include <term.h>
 # undef tab
-#include <sys/ioctl.h>
-#include <termios.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+
+# define TCGETS 0x540d
+# define TCSETS 0x540e
 
 struct                  s_caps
 {

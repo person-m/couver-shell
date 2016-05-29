@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "parser.h"
 #include "check_command_utils.c"
 
 static int	check_muli_redirections(char **command)
@@ -101,7 +102,7 @@ static int	check_null_command(char **command)
     {
       command++;
       if (*command)
-	go_to_match_arg(&command, *command);
+	go_to_match_arg(&command);
     }
     if (!(*command) || is_end_of_command(*command))
     {
@@ -120,6 +121,8 @@ static int	check_null_command(char **command)
 
 int	check_command(char **command)
 {
+  if (!(*command))
+    return (0);
   return (check_match(command)
 	  || check_redirection(command)
 	  || check_redirect_name(command)

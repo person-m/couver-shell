@@ -32,7 +32,8 @@ bool			check_std_input(t_shell *sh)
       //temporary minishell
       cmd = lexer(instr[i]);
       update_history(cmd, sh);
-      the_execution(cmd, sh);
+      if (!check_command(cmd) && !globbing(&cmd))
+	the_execution(cmd, sh);
       //end
       ++i;
     }
@@ -49,7 +50,7 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line);
-      if (!check_command(cmd))
+      if (!check_command(cmd) && !globbing(&cmd))
 	the_execution(cmd, sh);
       update_history(cmd, sh);
       update_prompt(sh->prompt);

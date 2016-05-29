@@ -33,14 +33,6 @@ int	is_sep_param(char *str)
   return (1);
 }
 
-int	is_redirection(char *str)
-{
-  if (strcmp(str, ">>") && strcmp(str, ">") && strcmp(str, "<") &&
-      strcmp(str, "<<"))
-    return (0);
-  return (1);
-}
-
 int	is_builtin(char *str)
 {
   if (strcmp(str, "cd") && strcmp(str, "echo") && strcmp(str, "exit") &&
