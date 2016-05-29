@@ -5,24 +5,24 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:22 2016
-** Last update Wed May 25 13:50:28 2016 
+** Last update Sat May 28 23:06:30 2016 
 */
 
 #include "shell.h"
 
-void	delete_char(t_prompt *prompt)
+void	delete_char(t_shell *sh)
 {
   int	i;
 
-  if (!prompt->count_char || !prompt->count_pos)
+  if (!sh->prompt->count_char || !sh->prompt->count_pos)
     return ;
-  i = --prompt->count_pos;
-  while (prompt->line[i])
+  i = --sh->prompt->count_pos;
+  while (sh->prompt->line[i])
     {
-      prompt->line[i] = prompt->line[i + 1];
+      sh->prompt->line[i] = sh->prompt->line[i + 1];
       ++i;
     }
-  prompt->line[--prompt->count_char] = 0;
+  sh->prompt->line[--sh->prompt->count_char] = 0;
 }
 
 void	add_char(t_prompt *prompt, char input)

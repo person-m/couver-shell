@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:05:49 2016
-** Last update Wed May 25 19:39:30 2016 
+** Last update Fri May 27 17:31:05 2016 
 */
 
 #include "shell.h"
@@ -33,18 +33,25 @@ void	is_out_of_screen(t_prompt *prompt, int nb_lines_buffer)
 
 void	aff_total_line(t_prompt *prompt)
 {
+
   //put prompt
-  memcpy(prompt->final_line, prompt->prompt, prompt->size_prompt);
+  write(1, "\033[31m", strlen("\033[31m"));
+  write(1, prompt->prompt, prompt->size_prompt);
+  write(1, "\033[0m", strlen("\033[0m"));
 
   //put line
-  memcpy(prompt->final_line + prompt->size_prompt, prompt->line, prompt->count_char);
+  write(1, prompt->line, prompt->count_char);
+
+  //search auto compet
+  if (!prompt->size_completion)
+    return ;
 
   //put auto_completion
-  memcpy(prompt->final_line + prompt->size_prompt + prompt->count_char,
-	 prompt->auto_completion, prompt->size_completion);
+  write(1, "\033[30;1m", strlen("\033[30;1m"));
+  write(1, prompt->auto_completion + (prompt->count_char - prompt->offset),
+	prompt->size_completion - (prompt->count_char - prompt->offset));
+  write(1, "\033[0m", strlen("\033[0m"));
 
-  //aff total buffer
-  write(1, prompt->final_line, prompt->size_prompt + prompt->count_char + prompt->size_completion);
 }
 
 void	aff_prompt(t_prompt *prompt)

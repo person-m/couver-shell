@@ -3,9 +3,9 @@
 ##
 ## Made by
 ## Login   <buffat_b@epitech.net>
-##
-## Started on  Wed May 25 00:12:22 2016
-## Last update Fri May 27 19:48:31 2016 vincent riamon
+## 
+## Started on  Wed May 25 00:12:22 2016 
+## Last update Sun May 29 04:15:11 2016 
 ##
 
 NAME	=	42sh
@@ -14,11 +14,17 @@ SRC	=	src/main.c \
 		src/prompt/prompt.c \
 		src/prompt/init_prompt.c \
 		src/prompt/aff_prompt.c \
-		src/prompt/end_prompt.c \
-		src/prompt/cursor.c \
-		src/prompt/edit_buffer.c \
-		src/prompt/set_term.c \
-		src/prompt/annex.c \
+		src/prompt/manage_prompt.c \
+		src/prompt/fct_prompt/cursor.c \
+		src/prompt/fct_prompt/edit_buffer.c \
+		src/prompt/fct_prompt/set_term.c \
+		src/prompt/fct_prompt/get_cursor_pos.c \
+		src/prompt/fct_prompt/fct_prompt.c \
+		src/prompt/auto_completion/auto_complet.c \
+		src/prompt/auto_completion/bltin_completion.c \
+		src/prompt/auto_completion/bltin_completion_command.c \
+		src/prompt/auto_completion/fct_completions.c \
+		src/prompt/auto_completion/list_completion.c \
 		src/minishell1/misc.c \
 		src/minishell1/builtin.c \
 		src/minishell1/builtin2.c \
@@ -37,9 +43,10 @@ SRC	=	src/main.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
 		src/couvrc/couvrc.c \
-		src/signals.c \
 		src/lexer/lexer.c \
 		src/parser/check_command.c \
+		src/annex_main/get_std_input.c \
+		src/annex_main/signals.c \
 
 OBJ	=	$(SRC:.c=.o)
 

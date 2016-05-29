@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat May 28 19:11:41 2016 vincent riamon
+** Last update Sun May 29 04:13:57 2016 
 */
 
 #ifndef SHELL_H_
@@ -33,6 +33,8 @@ typedef struct	s_shell
   t_prompt	*prompt;
 }		t_shell;
 
+void		get_std_input(t_shell *sh);
+
 char		**cpy_env(char **env);
 char		**my_str_to_wordtab_pattern(char *s, char *pattern);
 int		minishell1(char **tab, t_shell *sh);
@@ -53,18 +55,23 @@ char		*wordtab_in_str(char **tab, int mode);
 char		*error_history(char *var, int mode);
 
 void		replace_var_env(char ***cmd, t_shell *sh);
-
 char		*get_var_env(char **, char *);
-
-void            loop_prompt(t_shell *);
-
-void		signal_handler(void);
-void		check_signals(t_shell *);
-void		exit_shell(t_shell *, int);
 
 char		**lexer(char *line);
 int		check_command(char **command);
 
 char		*get_next_line(const int fd);
+char		*get_next_line(const int );
+
+void		check_auto_compet(t_shell *);
+void		auto_completion(t_shell *);
+void		completion(t_shell *);
+
+void            loop_prompt(t_shell *);
+char		*get_range_ascii(char *ascii, char input);
+
+void		signal_handler(void);
+void		check_signals(t_shell *);
+void		exit_shell(t_shell *);
 
 #endif /* !SHELL_H_ */

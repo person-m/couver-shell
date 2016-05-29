@@ -5,47 +5,16 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat May 28 21:50:01 2016 mohamed-laid hedia
+** Last update Sun May 29 04:18:30 2016 
 */
 
 #include "shell.h"
-
-bool			check_std_input(t_shell *sh)
-{
-  char	buffer[1024];
-  char	**cmd;
-  char  **instr;
-  int	ret;
-  int	i;
-
-  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
-  ret = read(0, buffer, 1024);
-  ioctl(0, TCSETS, &sh->prompt->standard_mode);
-  if (!ret)
-    return (0);
-
-  buffer[ret] = 0;
-  instr = my_str_to_wordtab_pattern(buffer, "\n");
-  i = 0;
-  while (instr[i])
-    {
-      //temporary minishell
-      cmd = lexer(instr[i]);
-      update_history(cmd, sh);
-      the_execution(cmd, sh);
-      //end
-      ++i;
-    }
-
-  free_tab(instr);
-  return (1);
-}
 
 void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
 
-  while (2 + 2 == 4)
+  while (1)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line);
@@ -74,24 +43,24 @@ void	loop_42sh(t_shell *sh)
   }
 }*/
 
+void	free_shell(t_shell sh)
+{
+  free_tab(sh.env);
+  free_tab(sh.alias);
+  free_tab(sh.history);
+}
+
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
 		     char **env)
 {
   t_shell	sh;
-  char		*s;
-  char		**cmd;
+
   /*char		*couv_rc;*/
 
-  /*sh.ret = 0;
-  if (!(sh.prompt = init_prompt(env)))
-    return (0);*/
-
-  sh.env = cpy_env(env);
-  fill_history(&sh);
-  create_alias(&sh);
-  create_oldpwd(&sh);
-
+  /*
+  char		*s;
+  char		**cmd;
   write(1, "$> ", 3);
   while ((s = get_next_line(0)))
     {
@@ -103,6 +72,8 @@ int		main(__attribute__((unused))int argc,
       free_tab(cmd);
       free(s);
     }
+  */
+
   /*if ((couv_rc = couvrc(env)))
     {
       printf("%s\n", couv_rc);
@@ -110,14 +81,22 @@ int		main(__attribute__((unused))int argc,
     }
   free(couv_rc); */
 
+  sh.ret = 0;
+  sh.env = cpy_env(env);
+  fill_history(&sh);
+  create_alias(&sh);
+  create_oldpwd(&sh);
+  if (!isatty(0))
+    {
+      get_std_input(&sh);
+      free_shell(sh);
+      return (sh.ret);
+    }
+  if (!(sh.prompt = init_prompt(env)))
+    return (0);
   signal_handler();
-
-  /* if (!check_std_input(&sh)) */
-  /*   loop_42sh(&sh); */
-
-  /*free_prompt(sh.prompt);*/
-  free_tab(sh.env);
-  free_tab(sh.alias);
-  free_tab(sh.history);
+  loop_42sh(&sh);
+  free_prompt(sh.prompt);
+  free_shell(sh);
   return (sh.ret);
 }
