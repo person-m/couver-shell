@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Sat May 28 18:04:51 2016 vincent riamon
+** Last update Mon May 30 17:45:30 2016 vincent riamon
 */
 
 #include "my.h"
@@ -53,7 +53,7 @@ char	*wordtab_in_str(char **tab, int mode)
   return (str);
 }
 
-void		update_history(char **line, t_shell *sh)
+void		update_history(t_shell *sh)
 {
   int		fd;
   int		i;
@@ -63,8 +63,7 @@ void		update_history(char **line, t_shell *sh)
   i = tab_len(sh->history);
   ret = create_history_file(&hist, sh);
   sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
-  if ((sh->history[i] = wordtab_in_str(line, 0)) == NULL)
-    return ;
+  sh->history[i] = strdup(sh->prompt->line);
   sh->history[i + 1] = NULL;
   sh->size_hist += 1;
   if (ret == -1 || (fd = open(hist, O_RDWR | O_APPEND)) == -1)

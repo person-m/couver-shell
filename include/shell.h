@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sun May 29 15:53:53 2016 
+** Last update Mon May 30 17:46:59 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -49,12 +49,12 @@ char		*couvrc(char **env);
 void		the_execution(char **cmd, t_shell *sh);
 
 void		fill_history(t_shell *sh);
-void		update_history(char **cmd, t_shell *sh);
-void		replace_exclam_dot(char ***cmd, t_shell *sh);
+void		update_history(t_shell *sh);
 char		*wordtab_in_str(char **tab, int mode);
 char		*error_history(char *var, int mode);
 
-void		replace_var_env(char ***cmd, t_shell *sh);
+int		replace_var_env(char ***cmd, t_shell *sh);
+int		replace_exclam_dot(char ***cmd, t_shell *sh);
 char		*get_var_env(char **, char *);
 
 char		**lexer(char *line);
