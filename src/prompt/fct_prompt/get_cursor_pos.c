@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:14:58 2016
-** Last update Mon May 30 16:51:09 2016 Bertrand Buffat
+** Last update Mon May 30 22:20:31 2016 Bertrand Buffat
 */
 
 #include "prompt.h"
@@ -16,32 +16,26 @@ void	get_actual_line(t_prompt *prompt)
   int	i;
 
   tcsetattr(0, 0, &prompt->raw_mode);
-
   if (write(1, "\033[6n", 4) <= 0)
     return ;
-
   buffer[read(0, buffer, 15)] = 0;
-
   i = 0;
   if (buffer[0] != 27)
     return (get_actual_line(prompt));
   while (buffer[i] != '[')
     ++i;
-
   prompt->start_line = 0;
   while (buffer[++i] != ';')
     {
       prompt->start_line *= 10;
       prompt->start_line += (buffer[i] - '0');
     }
-
   prompt->start_col = 0;
   while (buffer[++i] != 'R')
     {
       prompt->start_col *= 10;
       prompt->start_col += (buffer[i] - '0');
     }
-
 }
 
 int	size_of_int(int n)

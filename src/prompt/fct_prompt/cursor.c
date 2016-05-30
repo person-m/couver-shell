@@ -5,26 +5,62 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:13 2016
-** Last update Mon May 30 18:02:18 2016 Bertrand Buffat
+** Last update Mon May 30 22:20:09 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
+void	save_current_line(t_prompt *prompt)
+{
+  if (prompt->tmp_history != NULL)
+    free(prompt->tmp_history);
+  if (!(prompt->tmp_history = malloc(sizeof(char) * prompt->count_char + 1)))
+    return ;
+  memcpy(prompt->tmp_history, prompt->line, prompt->count_char);
+  prompt->tmp_history[prompt->count_char] = 0;
+}
 
-/* void	save_current_line(t_prompt *prompt) */
-/* { */
+void	move_history_up(t_prompt *prompt, char **history)
+{
+  if (prompt->curr_history == dlen(history))
+    save_current_line(prompt);
+  clear_line(prompt);
+  --prompt->curr_history;
+  while (prompt->count_char > 0 
+	 && !strncmp(prompt->line, history[prompt->curr_history], prompt->count_char)
+  	 && prompt->curr_history >= 0)
+    --prompt->curr_history;
+  memcpy(prompt->line, history[prompt->curr_history], strlen(history[prompt->curr_history]));
+  prompt->count_char = strlen(history[prompt->curr_history]);
+  prompt->count_pos = prompt->count_char;
+}
 
-/*   if (prompt->tmp_history != NULL) */
-/*     free(prompt->tmp_history); */
+void	move_history_down(t_prompt *prompt, char **history)
+{
+  int	max_hist;
 
-/*   if (prompt->tmp_history = malloc(sizeof(char) * prompt->count_char)) */
-/*     return ; */
-
-/* } */
+  max_hist = dlen(history);
+  clear_line(prompt);
+  ++prompt->curr_history;
+  while (prompt->curr_history < max_hist
+	 && prompt->count_char > 0
+	 && !strncmp(prompt->line, history[prompt->curr_history], prompt->count_char))
+    ++prompt->curr_history;
+  if (prompt->curr_history == dlen(history))
+    {
+      memcpy(prompt->line, prompt->tmp_history, strlen(prompt->tmp_history));
+      prompt->count_char = strlen(prompt->tmp_history);
+    }
+  else
+    {
+      memcpy(prompt->line, history[prompt->curr_history], strlen(history[prompt->curr_history]));
+      prompt->count_char = strlen(history[prompt->curr_history]);      
+    }
+  prompt->count_pos = prompt->count_char;
+}
 
 void	move_cursor(t_prompt *prompt, char *buffer, char **history)
 {
-
 
   if (!(strcmp(prompt->caps->left, buffer)) && prompt->count_pos > 0)
     --prompt->count_pos;
@@ -33,17 +69,17 @@ void	move_cursor(t_prompt *prompt, char *buffer, char **history)
 	   && prompt->count_pos < prompt->count_char)
     ++prompt->count_pos;
 
-  /* else if (!(strcmp(prompt->caps->up, buffer)) */
-  /* 	   && prompt->curr_history > 0) */
-  /*   { */
-  /*     if (prompt->curr_history == dlen(history) */
-  /* 	  save_current_line(prompt); */
-            
-  /*   } */
+  else if (!(strcmp(prompt->caps->up, buffer))
+  	   && prompt->curr_history > 0)
+    move_history_up(prompt, history);
+
+  else if (!(strcmp(prompt->caps->down, buffer))
+  	   && prompt->curr_history < dlen(history))
+    move_history_down(prompt, history);
 
   else
     return ;
-  (void)history;
+
   aff_prompt(prompt);
 }
 
@@ -57,7 +93,6 @@ void	move_cursor_back(t_prompt *prompt)
   total_count =
   prompt->size_prompt + prompt->count_pos + (prompt->start_col - 1) +
   size_of_int(prompt->nbr) + size_of_int(prompt-> count_char) + 4;
-
   width = total_count % prompt->nbcols + 1;
   height = prompt->start_line + total_count / prompt->nbcols;
   fill_tab_caps(tab, height, width);

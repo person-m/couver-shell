@@ -5,12 +5,12 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 04:12:22 2016
-** Last update Mon May 30 17:49:18 2016 vincent riamon
+** Last update Mon May 30 22:25:12 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
-char	*one_function_get_line(char *old_line, int turn, int old_size)
+char	*one_function_get_line(char *old_line, int turn, int old_size, int counter)
 {
   char	buffer[1024];
   char	*line;
@@ -23,13 +23,13 @@ char	*one_function_get_line(char *old_line, int turn, int old_size)
       memcpy(line, old_line, old_size);
       free(old_line);
     }
-  if (!(new_size = read(0, buffer, 1024)))
+  if (!(new_size = read(0, buffer, 1024)) || counter > 128)
     {
       line[old_size] = 0;
       return (line);
     }
   memcpy(line + old_size, buffer, new_size);
-  return (one_function_get_line(line, ++turn, new_size + old_size));
+  return (one_function_get_line(line, ++turn, new_size + old_size, ++counter));
 }
 
 void	get_std_input(t_shell *sh)
@@ -39,7 +39,7 @@ void	get_std_input(t_shell *sh)
   char	*line;
   int	i;
 
-  if (!(line = one_function_get_line(NULL, 1, 0))
+  if (!(line = one_function_get_line(NULL, 1, 0, 0))
       || !(instr = my_str_to_wordtab_pattern(line, "\n")))
     return ;
   i = -1;
