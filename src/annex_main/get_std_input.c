@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 04:12:22 2016
-** Last update Sun May 29 04:20:21 2016 
+** Last update Mon May 30 17:49:18 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -47,7 +47,7 @@ void	get_std_input(t_shell *sh)
     {
       //temporary minishell
       cmd = lexer(instr[i]);
-      update_history(cmd, sh);
+      update_history(sh);
       if (!check_command(cmd))
 	the_execution(cmd, sh);
       //end

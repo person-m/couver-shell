@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Mon May 30 17:51:34 2016 vincent riamon
+** Last update Mon May 30 18:21:53 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -97,7 +97,7 @@ int		main(__attribute__((unused))int argc,
       free_shell(sh);
       return (sh.ret);
     }
-  if (!(sh.prompt = init_prompt(env)))
+  if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
   signal_handler();
   loop_42sh(&sh);

@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ## 
 ## Started on  Wed May 25 00:12:22 2016 
-## Last update Sun May 29 04:15:11 2016 
+## Last update Mon May 30 17:01:29 2016 vincent riamon
 ##
 
 NAME	=	42sh
@@ -46,6 +46,8 @@ SRC	=	src/main.c \
 		src/lexer/lexer.c \
 		src/parser/check_command.c \
 		src/parser/check_identity.c \
+		src/parser/replace_exclam.c \
+		src/parser/replace_dollar.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c

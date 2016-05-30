@@ -5,21 +5,38 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 02:37:42 2016
-** Last update Sun May 29 02:55:54 2016 
+** Last update Mon May 30 16:49:46 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
 void	exit_shell(t_shell *sh)
 {
-  clean_screen(sh->prompt);
-  ioctl(0, TCSETS, &sh->prompt->standard_mode);
-  write(1, "exit\n", 5);
+  //  ioctl(0, TCSETS, &sh->prompt->standard_mode);
+  tcsetattr(0, 0, &sh->prompt->standard_mode);
+  write(1, "^D\nexit\n", 8);
   free_prompt(sh->prompt);
   free_tab(sh->env);
   free_tab(sh->alias);
   free_tab(sh->history);
   exit(sh->ret);
+}
+
+char	*stradd(char *str, char *add)
+{
+  char	*ptr;
+  int	size;
+  int	size2;
+
+  size = strlen(str);
+  size2 = strlen(add);
+  if (!(ptr = malloc(sizeof(char) * size + size2 + 1)))
+    return (NULL);
+  memcpy(ptr, str, size);
+  memcpy(ptr + size, add, size2);
+  ptr[size + size2] = 0;
+  free(str);
+  return (ptr);
 }
 
 void	check_auto_compet(t_shell *sh)

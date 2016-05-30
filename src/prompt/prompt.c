@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Sun May 29 03:26:10 2016 
+** Last update Mon May 30 17:27:12 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -16,7 +16,7 @@ int	next_range(char *ptr, char tok)
   char	*s;
 
   s = ptr;
-  while (*ptr != '\0' && *ptr != tok)
+  while (*ptr && *ptr != tok)
     ++ptr;
   return (ptr - s);
 }
@@ -33,7 +33,7 @@ char	*get_range_ascii(char *ascii, char input)
   return (ascii + next_range(ascii, ',') + 1);
 }
 
-char	get_input(t_prompt *prompt)
+char	get_input(t_prompt *prompt, char **history)
 {
   char	buffer[1024];
   int	ret;
@@ -46,7 +46,7 @@ char	get_input(t_prompt *prompt)
   else if (!buffer[1])
     return (buffer[0]);
 
-  move_cursor(prompt, buffer);
+  move_cursor(prompt, buffer, history);
 
   return (0);
 }
@@ -78,9 +78,10 @@ void	loop_prompt(t_shell *sh)
 {
   char	input;
 
-  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
+  tcsetattr(0, 0, &sh->prompt->non_canon_mode);
+  //  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
   aff_prompt(sh->prompt);
-  while ((input = get_input(sh->prompt)) != '\n')
+  while ((input = get_input(sh->prompt, sh->history)) != '\n')
     {
       check_signals(sh);
       if (input)
@@ -91,6 +92,9 @@ void	loop_prompt(t_shell *sh)
 	}
     }
   clean_screen(sh->prompt);
+  if (!sh->prompt->count_char)
+    --sh->prompt->nbr;
   sh->prompt->line[sh->prompt->count_char] = 0;
-  ioctl(0, TCSETS, &sh->prompt->standard_mode);
+  tcsetattr(0, 0, &sh->prompt->standard_mode);
+  //  ioctl(0, TCSETS, &sh->prompt->standard_mode);
 }
