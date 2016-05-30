@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Sun May 29 15:34:55 2016 Melvin Personnier
+** Last update Mon May 30 20:22:02 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -63,6 +63,8 @@ static int	instant_exec(char **tab, char **env)
 	      opendir(tab[0] + 2) != NULL)
 	    return (perm_denied(tab));
 	}
+      if (tab[0][0] == '/' && opendir(tab[0]) != NULL)
+	return (perm_denied(tab));
       fprintf(stderr, "%s: Command not found.\n", tab[0]);
     }
   return (a);
