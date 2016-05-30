@@ -36,7 +36,7 @@ bool	rebind_format(char **cmd)
   return (1);
 }
 
-void		rebind(char **cmd, t_shell *sh)
+int		rebind(char **cmd, t_shell *sh)
 {
   t_caps	*caps;
   char		*str;
@@ -48,13 +48,11 @@ void		rebind(char **cmd, t_shell *sh)
   caps = sh->prompt->caps;
   if (!rebind_format(cmd)
       || !(ptr = get_range_ascii(caps->ascii, cmd[1][0])))
-    return ;
+    return (-1);
   size = strlen(caps->ascii);
   size2 = strlen(cmd[2]);
   range = ptr - caps->ascii;
-  if (!(str =
-	malloc(sizeof(char) * (size + size2 + 1))))
-    return ;
+  str = my_malloc(sizeof(char) * (size + size2 + 1));
   memcpy(str, caps->ascii, range);
   memcpy(str + range, cmd[2], size2);
   while (*ptr && *ptr != ':')
@@ -63,4 +61,5 @@ void		rebind(char **cmd, t_shell *sh)
   str[size + size2] = 0;
   free(caps->ascii);
   caps->ascii = str;
+  return (0);
 }
