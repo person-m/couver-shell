@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 04:12:22 2016
-** Last update Mon May 30 22:25:12 2016 Bertrand Buffat
+** Last update Mon May 30 23:18:15 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -38,6 +38,8 @@ void	get_std_input(t_shell *sh)
   char	**instr;
   char	*line;
   int	i;
+  int	ret;
+  int	ret2;
 
   if (!(line = one_function_get_line(NULL, 1, 0, 0))
       || !(instr = my_str_to_wordtab_pattern(line, "\n")))
@@ -47,8 +49,10 @@ void	get_std_input(t_shell *sh)
     {
       //temporary minishell
       cmd = lexer(instr[i]);
+      ret = replace_var_env(&cmd, sh);
+      ret2 = replace_exclam_dot(&cmd, sh);
       update_history(sh);
-      if (!check_command(cmd))
+      if ((ret == 1 && ret2 == 1) && !check_command(cmd))
 	the_execution(cmd, sh);
       //end
     }
