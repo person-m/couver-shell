@@ -20,6 +20,7 @@ SRC	=	src/main.c \
 		src/prompt/fct_prompt/set_term.c \
 		src/prompt/fct_prompt/get_cursor_pos.c \
 		src/prompt/fct_prompt/fct_prompt.c \
+		src/prompt/fct_prompt/bltin_rebind.c \
 		src/prompt/auto_completion/auto_complet.c \
 		src/prompt/auto_completion/bltin_completion.c \
 		src/prompt/auto_completion/bltin_completion_command.c \
@@ -29,6 +30,7 @@ SRC	=	src/main.c \
 		src/minishell1/builtin.c \
 		src/minishell1/builtin2.c \
 		src/minishell1/builtin3.c \
+		src/minishell1/builtin4.c \
 		src/minishell1/utils.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \

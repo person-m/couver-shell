@@ -69,7 +69,7 @@ char		*get_next_line(const int);
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);
 void		completion(t_shell *);
-void		rebind(char **cmd, t_shell *sh);
+int		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);
 char		*get_range_ascii(char *ascii, char input);
