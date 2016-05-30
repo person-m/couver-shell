@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Mon May 30 22:12:53 2016 vincent riamon
+** Last update Mon May 30 22:41:17 2016 vincent riamon
 */
 
 #include "my.h"
@@ -62,6 +62,13 @@ void		update_history(t_shell *sh)
 
   i = tab_len(sh->history);
   ret = create_history_file(&hist, sh);
+  if (sh->prompt->line[0] == 0)
+    return ;
+  while (sh->prompt->line[i])
+    if (sh->prompt->line[i] == ' ' || sh->prompt->line[i] == '\t')
+	i = i + 1;
+    else
+      return ;
   sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
   sh->history[i] = strdup(sh->prompt->line);
   sh->history[i + 1] = NULL;
