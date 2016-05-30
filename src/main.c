@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Mon May 30 19:20:10 2016 vincent riamon
+** Last update Mon May 30 21:19:34 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -22,10 +22,10 @@ void	loop_42sh(t_shell *sh)
       cmd = lexer(sh->prompt->line);
       ret = replace_var_env(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
+      update_history(sh);
       if ((ret == 1 && ret2 == 1) &&
 	  !check_command(cmd) && !globbing(&cmd))
       	the_execution(cmd, sh);
-      update_history(sh);
       update_prompt(sh->prompt);
       free_tab(cmd);
     }
