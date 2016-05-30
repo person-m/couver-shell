@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Mon May 30 19:27:21 2016 vincent riamon
+** Last update Mon May 30 19:54:37 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -24,7 +24,7 @@ static char	**get_var_history(char **hist, char *var)
       while (--i >= 0)
 	if (!strncmp(hist[i], var, strlen(var)))
 	  return (lexer(hist[i]));
-      return (error_history(var, 0));
+      return (error_history(var));
     }
   if (nb > tab_len(hist) || tab_len(hist) + nb <= 0)
     {
@@ -40,7 +40,7 @@ static int	return_error(int i, char **tab, char **hist, int nb)
 {
   if (i <= 0)
     {
-      error_history(tab[0], 0);
+      error_history(tab[0]);
       return (0);
     }
   if (nb > tab_len(hist) || tab_len(hist) + nb <= 0)
@@ -60,8 +60,8 @@ static char	*search_wich_case(char *var, char **tab, int arg)
   if (arg == 0 && strcmp(tab[1], "0"))
     return (!strcmp(tab[1], "*") ? wordtab_in_str(tmp + 1, 1):
 	    !strcmp(tab[1], "$") ? tmp[tab_len(tmp) - 1] :
-	    !strcmp(tab[1], "^") ? tmp[1] : *(error_history(NULL, 1)));
-  return (arg < tab_len(tmp) ? tmp[arg] : *(error_history(NULL, 1)));
+	    !strcmp(tab[1], "^") ? tmp[1] : error_history2());
+  return (arg < tab_len(tmp) ? tmp[arg] : error_history2());
 }
 
 static char	**get_var_history2(char **hist, char **tab)
@@ -69,13 +69,18 @@ static char	**get_var_history2(char **hist, char **tab)
   int		i;
   int		nb;
   int		arg;
+  char		*ret;
 
   i = tab_len(hist);
   nb = atoi(tab[0]);
   arg = atoi(tab[1]);
   while (--i > 0 && nb == 0)
     if (!strncmp(hist[i], tab[0], strlen(tab[0])))
-      return (lexer(search_wich_case(hist[i], tab, arg)));
+      {
+	if ((ret = search_wich_case(hist[i], tab, arg)) == NULL)
+	  return (NULL);
+	return (lexer(ret));
+      }
   if (!return_error(i, tab, hist, nb))
     return (NULL);
   return (lexer(search_wich_case((nb < 0
