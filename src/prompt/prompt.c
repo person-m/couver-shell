@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Mon May 30 22:24:37 2016 Bertrand Buffat
+** Last update Mon May 30 23:15:00 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -79,7 +79,6 @@ void	loop_prompt(t_shell *sh)
   char	input;
 
   tcsetattr(0, 0, &sh->prompt->non_canon_mode);
-  sh->prompt->history = sh->history;
   aff_prompt(sh->prompt);
   while ((input = get_input(sh->prompt)) != '\n')
     {

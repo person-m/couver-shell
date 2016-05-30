@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 20:34:02 2016
-** Last update Mon May 30 22:33:42 2016 Bertrand Buffat
+** Last update Mon May 30 22:46:54 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -24,11 +24,11 @@ bool	is_alpha(char *s)
 
 bool	rebind_format(char **cmd)
 {
-  if (cmd[1][1]
-      && write(2, "Rebind requires char type as first argument\n", 44))
+  if ((!cmd[1] || !cmd[2])
+      && write(2, "Rebind command needs two valid arguments\n", 41))
     return (0);
-  else if ((!cmd[1] || !cmd[2])
-	   && write(2, "Rebind command needs two valid arguments\n", 41))
+  else if (cmd[1][1]
+	   && write(2, "Rebind requires char type as first argument\n", 44))
     return (0);
   else if ((!is_alpha(cmd[1]) || !is_alpha(cmd[2]))
 	   && write(2, "Rebind only works for alphabetical characters\n", 46))

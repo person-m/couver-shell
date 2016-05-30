@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Mon May 30 22:24:40 2016 Bertrand Buffat
+** Last update Mon May 30 23:17:44 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -26,6 +26,7 @@ void	loop_42sh(t_shell *sh)
       if ((ret == 1 && ret2 == 1) &&
 	  !check_command(cmd) && !globbing(&cmd))
       	the_execution(cmd, sh);
+      sh->prompt->history = sh->history;
       update_prompt(sh->prompt);
       free_tab(cmd);
     }
