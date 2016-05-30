@@ -25,6 +25,9 @@ int	init_struct(t_lexer *lexer)
   lexer->separators[12] = "'";
   lexer->separators[13] = "`";
   lexer->separators[14] = NULL;
+  lexer->pos = 0;
+  lexer->len = 0;
+  lexer->quote = 0;
   if (!(lexer->command = malloc(sizeof(char *))))
     return (1);
   *lexer->command = NULL;

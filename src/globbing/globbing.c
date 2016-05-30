@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "globbing_utils.c"
 
-static char	**insert_tab_in_tab(char **dest, char **src, int pos, int len)
+char		**insert_tab_in_tab(char **dest, char **src, int pos, int len)
 {
   char		**new;
 

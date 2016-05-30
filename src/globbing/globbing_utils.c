@@ -15,6 +15,7 @@ static int	get_next_match_arg(char **command, int i)
   str = command[i];
   if (is_quote(str))
   {
+    i++;
     while (command[i] && strcmp(command[i], str))
       i++;
     i += !!(command[i]);

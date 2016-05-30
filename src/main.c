@@ -10,11 +10,17 @@
 
 #include "shell.h"
 
+
+void	do_the_thing(t_shell *sh, char ***cmd)
+{
+  if (!check_command(*cmd) && !globbing(cmd) && !backquote(cmd, sh))
+    the_execution(*cmd, sh);
+}
+
 void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
   int	ret;
-  /* int	ret2; */
 
   while (1)
     {
@@ -22,9 +28,8 @@ void	loop_42sh(t_shell *sh)
       cmd = lexer(sh->prompt->line);
       ret = replace_var_env(&cmd, sh);
       /* ret2 = replace_exclam_dot(&cmd, sh); */
-      if ((ret == 1 /* && ret2 == 1 */) &&
-	  !check_command(cmd) && !globbing(&cmd))
-      	the_execution(cmd, sh);
+      if (ret == 1 /* && ret2 == 1 */)
+	do_the_thing(sh, &cmd);
       update_history(sh);
       update_prompt(sh->prompt);
       free_tab(cmd);

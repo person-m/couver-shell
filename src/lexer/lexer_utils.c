@@ -37,7 +37,12 @@ static void	del_backslash(char *str)
 
 static int		is_special(char c)
 {
-  return (!c || c == '\t' || c == ' ');
+  return (!c || c == '\t' || c == ' ' || c == '\n');
+}
+
+static int	is_quote(char *line)
+{
+  return (!strncmp(line, "\"", 1) || !strncmp(line, "'", 1));
 }
 
 static int	is_separator(t_lexer *lexer, char *line)

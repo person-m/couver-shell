@@ -8,7 +8,7 @@
 ** Last update Mon May 30 17:38:12 2016 Bertrand Buffat
 */
 
-# ifndef _PROMPT_H
+#ifndef _PROMPT_H
 # define _PROMPT_H
 
 /*
@@ -21,9 +21,9 @@
 #include <ncurses.h>
 #include <term.h>
 # undef tab
-#include <sys/ioctl.h>
-#include <termios.h>
-#include <dirent.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <dirent.h>
 
 typedef struct		s_caps
 {
@@ -120,4 +120,4 @@ int		get_row_list(t_list **, int);
 void		print_dat_list(t_prompt *, t_list *, int);
 void		free_list(t_list **);
 
-# endif
+#endif

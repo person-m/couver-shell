@@ -50,7 +50,8 @@ SRC	=	src/main.c \
 		src/parser/replace_dollar.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
-		src/annex_main/signals.c
+		src/annex_main/signals.c \
+		src/backquote/backquote.c
 
 OBJ	=	$(SRC:.c=.o)
 

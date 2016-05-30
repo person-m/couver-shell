@@ -49,29 +49,29 @@ static int	push_separator(t_lexer *lexer, char *line, int *pos, int len)
 
 static int	lexer_command(char *line, t_lexer *lexer)
 {
-  int		pos;
-  int		len;
-  int		ret_len;
-  int		escape;
-
-  pos = 0;
-  len = 0;
-  while (!(pos + len) || line[pos + len - 1])
+  while (!(lexer->pos + lexer->len) || line[lexer->pos + lexer->len - 1])
   {
-    len += (escape = ((line[pos + len] == '\\') && line[pos + len + 1]));
-    if (!escape && is_special(line[pos + len]))
+    lexer->len += (lexer->escape = ((line[lexer->pos + lexer->len] == '\\')
+				    && line[lexer->pos + lexer->len + 1]));
+    if (!lexer->quote && !lexer->escape
+	&& is_special(line[lexer->pos + lexer->len]))
     {
-      if (push_word(lexer, line, &pos, &len) || !(++pos))
+      if (push_word(lexer, line, &lexer->pos, &lexer->len) || !(++lexer->pos))
 	return (1);
     }
-    else if (!escape && (ret_len = is_separator(lexer, line + pos + len)))
+    else if (!lexer->escape
+	     && (lexer->ret_len =
+		 is_separator(lexer, line + lexer->pos + lexer->len)))
     {
-      if (push_word(lexer, line, &pos, &len)
-	  || push_separator(lexer, line, &pos, ret_len) || (len = 0))
+      if (is_quote(line + lexer->pos + lexer->len))
+	lexer->quote = !lexer->quote;
+      if (push_word(lexer, line, &lexer->pos, &lexer->len)
+	  || push_separator(lexer, line, &lexer->pos, lexer->ret_len)
+	  || (lexer->len = 0))
 	return (1);
     }
     else
-      len++;
+      lexer->len++;
   }
   return (0);
 }
