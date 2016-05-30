@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ## 
 ## Started on  Wed May 25 00:12:22 2016 
-## Last update Mon May 30 17:01:29 2016 vincent riamon
+## Last update Mon May 30 22:33:08 2016 Bertrand Buffat
 ##
 
 NAME	=	42sh
@@ -20,6 +20,7 @@ SRC	=	src/main.c \
 		src/prompt/fct_prompt/set_term.c \
 		src/prompt/fct_prompt/get_cursor_pos.c \
 		src/prompt/fct_prompt/fct_prompt.c \
+		src/prompt/fct_prompt/bltin_rebind.c \
 		src/prompt/auto_completion/auto_complet.c \
 		src/prompt/auto_completion/bltin_completion.c \
 		src/prompt/auto_completion/bltin_completion_command.c \

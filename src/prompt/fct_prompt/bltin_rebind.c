@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 20:34:02 2016
-** Last update Sun May 29 20:36:59 2016 
+** Last update Mon May 30 22:33:42 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -36,17 +36,18 @@ bool	rebind_format(char **cmd)
   return (1);
 }
 
-void	rebind(char **cmd, t_caps *caps)
+void		rebind(char **cmd, t_shell *sh)
 {
-  char	*str;
-  char	*ptr;
-  int	size;
-  int	size2;
-  int	range;
+  t_caps	*caps;
+  char		*str;
+  char		*ptr;
+  int		size;
+  int		size2;
+  int		range;
 
-  if (!rebind_format(cmd))
-    return ;
-  if (!(ptr = get_range_ascii(caps->ascii, cmd[1][0])))
+  caps = sh->prompt->caps;
+  if (!rebind_format(cmd)
+      || !(ptr = get_range_ascii(caps->ascii, cmd[1][0])))
     return ;
   size = strlen(caps->ascii);
   size2 = strlen(cmd[2]);

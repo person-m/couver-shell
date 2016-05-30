@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Mon May 30 19:48:37 2016 vincent riamon
+** Last update Mon May 30 22:28:29 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -69,6 +69,7 @@ char		*get_next_line(const int);
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);
 void		completion(t_shell *);
+void		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);
 char		*get_range_ascii(char *ascii, char input);
