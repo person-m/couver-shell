@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sat May 28 20:31:58 2016 mohamed-laid hedia
+** Last update Mon May 30 21:35:57 2016 Melvin Personnier
 */
 
 #include "mo.h"
@@ -97,6 +97,8 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       f = minishell1(b, env);
       f == -1 ? exit(EXIT_FAILURE) : exit(EXIT_SUCCESS);
     }
+    if (p->i != 0)
+      close(p->p[p->i % 2 ? 0 : 1][0]);
   close(p->p[p->i % 2][1]);
 }
 
