@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Sat May 28 18:51:03 2016 mohamed-laid hedia
+** Last update Mon May 30 20:28:09 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -82,6 +82,7 @@ void		the_execution(char **tab, t_shell *env)
 
   s.i = 0;
   s.failed = 1;
+  check_inhibitors(tab);
   if ((s.save[0] = dup(0)) == -1 || (s.save[1] = dup(1)) == -1)
     return ((void)fprintf(stderr, "%s\n", strerror(errno)));
   while (tab[s.i] != 0)
