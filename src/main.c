@@ -5,42 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun May 29 04:18:30 2016 
+** Last update Mon May 30 18:16:38 2016 Bertrand Buffat
 */
 
 #include "shell.h"
-
-bool			check_std_input(t_shell *sh)
-{
-  char	buffer[1024];
-  char	**cmd;
-  char  **instr;
-  int	ret;
-  int	i;
-
-  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
-  ret = read(0, buffer, 1024);
-  ioctl(0, TCSETS, &sh->prompt->standard_mode);
-  if (!ret)
-    return (0);
-
-  buffer[ret] = 0;
-  instr = my_str_to_wordtab_pattern(buffer, "\n");
-  i = 0;
-  while (instr[i])
-    {
-      //temporary minishell
-      cmd = lexer(instr[i]);
-      update_history(cmd, sh);
-      if (!check_command(cmd) && !globbing(&cmd))
-	the_execution(cmd, sh);
-      //end
-      ++i;
-    }
-
-  free_tab(instr);
-  return (1);
-}
 
 void	loop_42sh(t_shell *sh)
 {
@@ -124,7 +92,7 @@ int		main(__attribute__((unused))int argc,
       free_shell(sh);
       return (sh.ret);
     }
-  if (!(sh.prompt = init_prompt(env)))
+  if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
   signal_handler();
   loop_42sh(&sh);

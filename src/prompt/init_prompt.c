@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Sun May 29 15:55:53 2016 
+** Last update Mon May 30 18:02:45 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -15,31 +15,16 @@ void	free_prompt(t_prompt *prompt)
   free(prompt->line);
   free(prompt->prompt);
   free(prompt->auto_completion);
-  free(prompt->caps);
+  free(prompt->caps->ascii);
   free(prompt);
-}
-
-char	*sdup(char *s)
-{
-  char	*d;
-  int	size;
-
-  size = strlen(s);
-  if (!(d = malloc(sizeof(char) * size + 1)))
-    return (NULL);
-  memcpy(d, s, size);
-  d[size] = 0;
-  return (d);
 }
 
 t_caps		*init_caps(void)
 {
   t_caps	*caps;
   char		*smkx;
-  char		*tmp;
-  char		*tmp2;
 
-  if (!(caps = malloc(sizeof(*caps)))
+ if (!(caps = malloc(sizeof(*caps)))
       || !(caps->up = tigetstr("kcuu1"))
       || !(caps->down = tigetstr("kcud1"))
       || !(caps->left = tigetstr("kcub1"))
@@ -47,19 +32,39 @@ t_caps		*init_caps(void)
       || !(caps->clear = tigetstr("clear"))
       || !(smkx = tigetstr("smkx")))
     return (NULL);
-  if (!(tmp = sdup("a,a:b,b:c,c:d,d:e,e:f,f:g,g:h,h:i,i:j,j:k,k:l,l:m,m:"))
-      || !(tmp2 = sdup("n,n:o,o:p,p:q,q:r,r:s,s:t,t:u,u:v,v:w,w:x,x:y,y:z,z"))
-      || !(caps->ascii = malloc(sizeof(char) * strlen(tmp) + strlen(tmp2) + 1)))
+  if (!(caps->ascii =
+	strdup("a,a:b,b:c,c:d,d:e,e:f,f:g,g:h,h:i,i:j,j:k,k:l,l:m,m:"))
+      || !(caps->ascii =
+	   stradd(caps->ascii,
+		  "n,n:o,o:p,p:q,q:r,r:s,s:t,t:u,u:v,v:w,w:x,x:y,y:z,z:"))
+      || !(caps->ascii =
+	   stradd(caps->ascii,
+		  "A,A:B,B:C,C:D,D:E,E:F,F:G,G:H,H:I,I:J,J:K,K:L,L:M,M:"))
+      || !(caps->ascii =
+	   stradd(caps->ascii,
+		  "N,N:O,O:P,P:Q,Q:R,R:S,S:T,T:U,U:V,V:W,W:X,X:Y,Y:Z,Z")))
     return (NULL);
-  strconcat(tmp, tmp2, caps->ascii);
   write(1, smkx, strlen(smkx));
   return (caps);
 }
 
-void		init_prompt_line(t_prompt *prompt)
+void		init_prompt_line(t_prompt *prompt, char **env)
 {
-  prompt->size_prompt = strlen("Ceci est un prompt > ");
-  memcpy(prompt->prompt, "Ceci est un prompt > ", prompt->size_prompt);
+  char	*name;
+
+  if (!(name = get_var_env(env, "USER=")))
+    {
+      prompt->size_prompt = 13;
+      memcpy(prompt->prompt, "User unknown ", prompt->size_prompt);
+    }
+  else
+    {
+      prompt->size_prompt = strlen(name);
+      memcpy(prompt->prompt, name, prompt->size_prompt);
+      memcpy(prompt->prompt + prompt->size_prompt, " ", 1);
+      ++prompt->size_prompt;
+    }
+  prompt->nbr = -1;
 }
 
 void		set_info_term(t_prompt *prompt, char **env)
@@ -71,12 +76,23 @@ void		set_info_term(t_prompt *prompt, char **env)
   else
     setupterm("xterm", 1, (int *)0);
 
-  ioctl(0, TCGETS, &prompt->standard_mode);
+  //ioctl(0, TCGETS, &prompt->standard_mode);
+
+  tcgetattr(0, &prompt->standard_mode);
   get_non_canon(prompt);
   get_raw_mode(prompt);
 }
 
-t_prompt	*init_prompt(char **env)
+int	dlen(char **s)
+{
+  int	i;
+
+  i = -1;
+  while (s[++i]);
+  return (i);
+}
+
+t_prompt	*init_prompt(char **env, char **history)
 {
   t_prompt	*prompt;
   int		size;
@@ -97,7 +113,10 @@ t_prompt	*init_prompt(char **env)
       || (!(prompt->auto_completion = malloc(sizeof(char) * size))))
     return (NULL);
 
-  init_prompt_line(prompt);
+  init_prompt_line(prompt, env);
+  prompt->curr_history = dlen(history);
+  prompt->tmp_history = NULL;
+
   update_prompt(prompt);
 
   return (prompt);
