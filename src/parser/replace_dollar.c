@@ -5,12 +5,12 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sat May 28 19:06:18 2016 vincent riamon
-** Last update Mon May 30 17:29:53 2016 vincent riamon
+** Last update Mon May 30 19:05:55 2016 vincent riamon
 */
 
 #include "shell.h"
 
-char		*error_history(char *var, int mode)
+char		**error_history(char *var, int mode)
 {
   if (mode == 0)
     fprintf(stderr, "%s: Event not found.\n", var);

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Mon May 30 17:46:59 2016 vincent riamon
+** Last update Mon May 30 19:18:12 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -51,17 +51,19 @@ void		the_execution(char **cmd, t_shell *sh);
 void		fill_history(t_shell *sh);
 void		update_history(t_shell *sh);
 char		*wordtab_in_str(char **tab, int mode);
-char		*error_history(char *var, int mode);
+char		**error_history(char *var, int mode);
 
 int		replace_var_env(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
+char		**insert_tab_in_tab(char **dest, char **src,
+				     int pos, int len);
 char		*get_var_env(char **, char *);
 
 char		**lexer(char *line);
 int		check_command(char **command);
 
 char		*get_next_line(const int fd);
-char		*get_next_line(const int );
+char		*get_next_line(const int);
 
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);

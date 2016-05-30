@@ -5,12 +5,12 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Sat May 28 19:07:58 2016 vincent riamon
+** Last update Mon May 30 19:27:21 2016 vincent riamon
 */
 
 #include "shell.h"
 
-static char	*get_var_history(char **hist, char *var)
+static char	**get_var_history(char **hist, char *var)
 {
   int		nb;
   int		i;
@@ -18,12 +18,12 @@ static char	*get_var_history(char **hist, char *var)
   i = tab_len(hist);
   nb = atoi(var);
   if (var[0] == '!')
-    return (hist[i - 1]);
+    return (lexer(hist[i - 1]));
   if (nb == 0)
     {
       while (--i >= 0)
 	if (!strncmp(hist[i], var, strlen(var)))
-	  return (hist[i]);
+	  return (lexer(hist[i]));
       return (error_history(var, 0));
     }
   if (nb > tab_len(hist) || tab_len(hist) + nb <= 0)
@@ -32,7 +32,8 @@ static char	*get_var_history(char **hist, char *var)
 	      (nb > tab_len(hist) ? nb : tab_len(hist) + nb));
       return (NULL);
     }
-  return ((nb < 0) ? hist[i + nb + 1] : hist[nb - 1]);
+  return ((nb < 0) ? lexer(hist[i + nb + 1])
+	  : lexer(hist[nb - 1]));
 }
 
 static int	return_error(int i, char **tab, char **hist, int nb)
@@ -59,11 +60,11 @@ static char	*search_wich_case(char *var, char **tab, int arg)
   if (arg == 0 && strcmp(tab[1], "0"))
     return (!strcmp(tab[1], "*") ? wordtab_in_str(tmp + 1, 1):
 	    !strcmp(tab[1], "$") ? tmp[tab_len(tmp) - 1] :
-	    !strcmp(tab[1], "^") ? tmp[1] : error_history(NULL, 1));
-  return (arg < tab_len(tmp) ? tmp[arg] : error_history(NULL, 1));
+	    !strcmp(tab[1], "^") ? tmp[1] : *(error_history(NULL, 1)));
+  return (arg < tab_len(tmp) ? tmp[arg] : *(error_history(NULL, 1)));
 }
 
-static char	*get_var_history2(char **hist, char **tab)
+static char	**get_var_history2(char **hist, char **tab)
 {
   int		i;
   int		nb;
@@ -74,37 +75,35 @@ static char	*get_var_history2(char **hist, char **tab)
   arg = atoi(tab[1]);
   while (--i > 0 && nb == 0)
     if (!strncmp(hist[i], tab[0], strlen(tab[0])))
-      return (search_wich_case(hist[i], tab, arg));
+      return (lexer(search_wich_case(hist[i], tab, arg)));
   if (!return_error(i, tab, hist, nb))
     return (NULL);
-  return (search_wich_case((nb < 0 ? hist[i + nb + 1] : hist[nb - 1]),
-			   tab, arg));
+  return (lexer(search_wich_case((nb < 0
+      ? hist[i + nb + 1] : hist[nb - 1]), tab, arg)));
 }
 
-void		replace_exclam_dot(char ***cmd, t_shell *sh)
+int		replace_exclam_dot(char ***cmd, t_shell *sh)
 {
   int		i;
   int		j;
   char		**tmp;
-  char		*my_line;
+  char		**my_line;
 
   i = -1;
   while ((*cmd)[++i] && (j = -1))
     while ((*cmd)[i][++j])
-      {
-	if ((*cmd)[i][j] == '!')
-	  {
-	    tmp = my_str_to_wordtab_pattern((*cmd)[i] + j + 1, ":");
-	    my_line = (tab_len(tmp) == 1 ?
-		       get_var_history(sh->history, (*cmd)[i] + j + 1) :
-		       get_var_history2(sh->history, tmp));
+      if ((*cmd)[i][j] == '!')
+	{
+	  tmp = my_str_to_wordtab_pattern((*cmd)[i] + j + 1, ":");
+	  my_line = (tab_len(tmp) == 1 ?
+		     get_var_history(sh->history, (*cmd)[i] + j + 1) :
+		     get_var_history2(sh->history, tmp));
 	    if (my_line != NULL)
-	      {
-		free((*cmd)[i]);
-		(*cmd)[i] = strdup(my_line);
-	      }
+	      (*cmd) = insert_tab_in_tab((*cmd), my_line, i, 1);
 	    free_tab(tmp);
+	    if (!my_line)
+	      return (0);
 	    break ;
-	  }
-      }
+	}
+  return (1);
 }

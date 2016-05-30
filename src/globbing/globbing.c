@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Sat May 28 16:10:09 2016 Vincent COUVERCHEL
-** Last update Sat May 28 16:10:09 2016 Vincent COUVERCHEL
+** Last update Mon May 30 18:53:06 2016 vincent riamon
 */
 
 #include <stdlib.h>
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "globbing_utils.c"
 
-static char	**insert_tab_in_tab(char **dest, char **src, int pos, int len)
+char		**insert_tab_in_tab(char **dest, char **src, int pos, int len)
 {
   char		**new;
 
