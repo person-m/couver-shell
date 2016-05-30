@@ -1,11 +1,11 @@
 /*
 ** verifs.c for 42sh in /home/hedia_m/couver-shell/minishell2
-** 
+**
 ** Made by mohamed-laid hedia
 ** Login   <hedia_m@epitech.net>
-** 
+**
 ** Started on  Fri May 20 21:39:14 2016 mohamed-laid hedia
-** Last update Thu May 26 18:13:34 2016 vincent riamon
+** Last update Mon May 30 23:02:08 2016 Melvin Personnier
 */
 
 #include "mo.h"
@@ -37,7 +37,8 @@ int	is_builtin(char *str)
 {
   if (strcmp(str, "cd") && strcmp(str, "echo") && strcmp(str, "exit") &&
       strcmp(str, "setenv") && strcmp(str, "unsetenv")
-      && strcmp(str, "alias") && strcmp(str, "history"))
+      && strcmp(str, "alias") && strcmp(str, "history") &&
+      strcmp(str, "set") && strcmp(str, "bind"))
     return (0);
   return (1);
 }

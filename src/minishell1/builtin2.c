@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Fri May 27 15:00:30 2016 vincent riamon
+** Last update Mon May 30 21:16:00 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -41,4 +41,16 @@ int		my_exit(char **tab, __attribute__((unused))t_shell *sh)
   printf("exit\n");
   exit(nb);
   return (0);
+}
+
+void		create_oldpwd(t_shell *sh)
+{
+  char		**tab;
+
+  tab = my_malloc(sizeof(char *) * 3);
+  tab[0] = "setenv";
+  tab[1] = "OLDPWD";
+  tab[2] = NULL;
+  my_setenv(tab, sh);
+  free(tab);
 }

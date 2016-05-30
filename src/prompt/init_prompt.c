@@ -5,13 +5,15 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Mon May 30 18:02:45 2016 Bertrand Buffat
+** Last update Mon May 30 23:09:48 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
 void	free_prompt(t_prompt *prompt)
 {
+  if (prompt->tmp_history)
+    free(prompt->tmp_history);
   free(prompt->line);
   free(prompt->prompt);
   free(prompt->auto_completion);
@@ -64,7 +66,7 @@ void		init_prompt_line(t_prompt *prompt, char **env)
       memcpy(prompt->prompt + prompt->size_prompt, " ", 1);
       ++prompt->size_prompt;
     }
-  prompt->nbr = -1;
+  prompt->nbr = 0;
 }
 
 void		set_info_term(t_prompt *prompt, char **env)
@@ -114,8 +116,8 @@ t_prompt	*init_prompt(char **env, char **history)
     return (NULL);
 
   init_prompt_line(prompt, env);
-  prompt->curr_history = dlen(history);
   prompt->tmp_history = NULL;
+  prompt->history = history;
 
   update_prompt(prompt);
 

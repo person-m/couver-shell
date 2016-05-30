@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Mon May 30 18:21:53 2016 vincent riamon
+** Last update Mon May 30 23:17:44 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -21,37 +21,22 @@ void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
   int	ret;
+  int	ret2;
 
   while (1)
-    {
-      loop_prompt(sh);
-      cmd = lexer(sh->prompt->line);
-      ret = replace_var_env(&cmd, sh);
-      /* ret2 = replace_exclam_dot(&cmd, sh); */
-      if (ret == 1 /* && ret2 == 1 */)
-	do_the_thing(sh, &cmd);
-      update_history(sh);
-      update_prompt(sh->prompt);
-      free_tab(cmd);
-    }
-}
-
-/*void	is_alias(char **s, t_shell sh)
-{
-  int	i;
-  int	a;
-
-  i = -1;
-  a = strlen(*s);
-  while (sh.alias[++i])
-    {
-      if (!strncmp(*s, sh.alias[i], a))
-	{
-	  free(*s);
-	  *s = strdup(sh.alias[i] + a + 1);
-	}
+  {
+    loop_prompt(sh);
+    cmd = lexer(sh->prompt->line);
+    ret = replace_var_env(&cmd, sh);
+    ret2 = replace_exclam_dot(&cmd, sh);
+    update_history(sh);
+    if (ret == 1 && ret2 == 1)
+      do_the_thing(sh, &cmd);
+    sh->prompt->history = sh->history;
+    update_prompt(sh->prompt);
+    free_tab(cmd);
   }
-}*/
+}
 
 void	free_shell(t_shell sh)
 {

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Mon May 30 17:38:12 2016 Bertrand Buffat
+** Last update Mon May 30 19:21:54 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -90,6 +90,7 @@ void		fill_tab_caps(char *, int, int);
 t_prompt        *init_prompt(char **env, char **hist);
 
 void		clean_screen(t_prompt *);
+void		clear_line(t_prompt *);
 void            update_prompt(t_prompt *);
 void            update_local_prompt(t_prompt *);
 void            free_prompt(t_prompt *);
@@ -111,6 +112,7 @@ int		count_commands(t_prompt *, char **env);
 void		print_commands(t_prompt *, char **env, int count);
 
 void		put_nbr(int);
+int		dlen(char **);
 int		get_offset(char *line, int pos, int *ret);
 int		get_offset_directory(char *line, int pos);
 void		get_path_from_line(t_prompt *, int offset_dir, char *path);

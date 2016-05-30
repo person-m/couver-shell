@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Sat May 28 19:31:12 2016 mohamed-laid hedia
+** Last update Mon May 30 20:31:17 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
@@ -76,5 +76,13 @@ int		is_builtin(char *str);
 /* get_line */
 
 char		*get_next_line(const int fd);
+
+/* inhibitors.c */
+
+void	check_inhibitors(char **tab);
+char	**delete_inhibitors(char **tab);
+void	add_to_str(char **tab, int i);
+
+
 
 #endif  /* !MO_H_ */
