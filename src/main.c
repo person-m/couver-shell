@@ -5,54 +5,27 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun May 29 04:18:30 2016 
+** Last update Mon May 30 17:51:34 2016 vincent riamon
 */
 
 #include "shell.h"
 
-bool			check_std_input(t_shell *sh)
-{
-  char	buffer[1024];
-  char	**cmd;
-  char  **instr;
-  int	ret;
-  int	i;
-
-  ioctl(0, TCSETS, &sh->prompt->non_canon_mode);
-  ret = read(0, buffer, 1024);
-  ioctl(0, TCSETS, &sh->prompt->standard_mode);
-  if (!ret)
-    return (0);
-
-  buffer[ret] = 0;
-  instr = my_str_to_wordtab_pattern(buffer, "\n");
-  i = 0;
-  while (instr[i])
-    {
-      //temporary minishell
-      cmd = lexer(instr[i]);
-      update_history(cmd, sh);
-      if (!check_command(cmd) && !globbing(&cmd))
-	the_execution(cmd, sh);
-      //end
-      ++i;
-    }
-
-  free_tab(instr);
-  return (1);
-}
-
 void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
+  int	ret;
+  /* int	ret2; */
 
   while (1)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line);
-      if (!check_command(cmd) && !globbing(&cmd))
-	the_execution(cmd, sh);
-      update_history(cmd, sh);
+      ret = replace_var_env(&cmd, sh);
+      /* ret2 = replace_exclam_dot(&cmd, sh); */
+      if ((ret == 1 /* && ret2 == 1 */) &&
+	  !check_command(cmd) && !globbing(&cmd))
+      	the_execution(cmd, sh);
+      update_history(sh);
       update_prompt(sh->prompt);
       free_tab(cmd);
     }
