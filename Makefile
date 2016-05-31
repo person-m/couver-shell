@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Mon May 30 17:01:29 2016 vincent riamon
+## Last update Tue May 31 21:05:54 2016 Bertrand Buffat
 ##
 
 NAME	=	42sh
@@ -77,4 +77,3 @@ fclean:	clean
 re:	fclean	all
 
 aa:	all	clean
-	`clean`

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:25:06 2016
-** Last update Tue May 31 13:41:17 2016 Bertrand Buffat
+** Last update Tue May 31 16:40:10 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -33,7 +33,7 @@ void	update_prompt(t_prompt *prompt)
 
 void	fct_clear(t_shell *sh)
 {
-  write(1, sh->prompt->caps->clear , strlen(sh->prompt->caps->clear));
+  write(1, sh->prompt->caps->clear, strlen(sh->prompt->caps->clear));
   fill_tab_caps(sh->prompt->start_line_str, 0, 0);
   write(1, sh->prompt->start_line_str, strlen(sh->prompt->start_line_str));
   update_local_prompt(sh->prompt);
