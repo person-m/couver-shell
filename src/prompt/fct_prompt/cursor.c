@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:13 2016
-** Last update Tue May 31 13:47:51 2016 Bertrand Buffat
+** Last update Tue May 31 14:40:07 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -27,9 +27,9 @@ void	move_history_up(t_prompt *prompt, char **history)
   clear_line(prompt);
   --prompt->curr_history;
   while (prompt->count_char > 0
+  	 && prompt->curr_history > 0
 	 && !strncmp(prompt->line,
-		     history[prompt->curr_history], prompt->count_char)
-  	 && prompt->curr_history >= 0)
+		     history[prompt->curr_history], prompt->count_char))
     --prompt->curr_history;
   memcpy(prompt->line, history[prompt->curr_history],
   strlen(history[prompt->curr_history]));

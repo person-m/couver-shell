@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Mon May 30 20:28:09 2016 mohamed-laid hedia
+** Last update Tue May 31 22:17:26 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -99,7 +99,9 @@ void		the_execution(char **tab, t_shell *env)
 	}
       else
 	exec_command(tab, env, &s);
-      dup2(s.save[0], 0);
       dup2(s.save[1], 1);
+      dup2(s.save[0], 0);
     }
+  close(s.save[0]);
+  close(s.save[1]);
 }

@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Tue May 31 19:02:19 2016 Melvin Personnier
+** Last update Tue May 31 19:22:56 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -28,6 +28,53 @@ static int	print_set(t_shell *sh)
     printf("\n");
   while (sh->set[++i])
     printf("%s\n", sh->set[i]);
+  return (0);
+}
+
+static int	is_already_in_set(char **my_set, char *str)
+{
+  int    	i;
+  char		*str2;
+
+  i = 0;
+  str2 = my_malloc(sizeof(char) * (strlen(str) + 2));
+  str2 = strcpy(str2, str);
+  str2[strlen(str)] = '\t';
+  str2[strlen(str) + 1] = 0;
+  while (my_set[i])
+    {
+      if (!(strncmp(my_set[i], str2, strlen(str2))))
+	{
+	  free(str2);
+	  return (i);
+	}
+      i++;
+    }
+  free(str2);
+  return (i);
+}
+
+int	my_unset(char **tab, t_shell *sh)
+{
+  int		i;
+  int		j;
+
+  j = 0;
+  if (!tab[1])
+    {
+      fprintf(stderr, "unset: Too few arguments.\n");
+      return (-1);
+    }
+  while (tab[++j])
+    {
+      i = is_already_in_set(sh->set, tab[j]);
+      while (sh->set[i] && sh->set[i + 1])
+	{
+	  sh->set[i] = sh->set[i + 1];
+	  i = i + 1;
+	}
+      sh->set[i] = NULL;
+    }
   return (0);
 }
 

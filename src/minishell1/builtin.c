@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Tue May 31 16:42:39 2016 vincent riamon
+** Last update Tue May 31 19:41:22 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -45,7 +45,8 @@ int		my_setenv(char **tab, t_shell *sh)
     return (my_env(sh));
   while (sh->env[++i])
     {
-      if (!strncmp(sh->env[i], tab[1], strlen(tab[1])))
+      if (!strncmp(sh->env[i], tab[1], strlen(tab[1]))
+	  && sh->env[i][strlen(tab[1])] == '=')
 	{
 	  free(sh->env[i]);
 	  sh->env[i] = concat_str(tab[1], tab[2], '=');
