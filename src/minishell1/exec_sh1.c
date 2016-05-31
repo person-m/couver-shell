@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Tue May 31 16:29:56 2016 Melvin Personnier
+** Last update Tue May 31 21:18:12 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -65,7 +65,10 @@ static int	instant_exec(char **tab, char **env)
 	}
       if (tab[0][0] == '/' && opendir(tab[0]) != NULL)
 	return (perm_denied(tab));
-      fprintf(stderr, "%s: Command not found.\n", tab[0]);
+      if (errno == 20)
+	fprintf(stderr, "%s: Exec format error. Binary file not executable.\n", tab[0]);
+      else
+	fprintf(stderr, "%s: Command not found.\n", tab[0]);
     }
   return (a);
 }
