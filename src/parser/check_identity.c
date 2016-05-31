@@ -9,6 +9,7 @@
 */
 
 #include <string.h>
+#include <stdlib.h>
 
 int	is_end_of_command(char *str)
 {
@@ -42,4 +43,25 @@ int	is_redirection(char *str)
 	  || !strcmp(str, "<<")
 	  || !strcmp(str, ">")
 	  || !strcmp(str, ">>"));
+}
+
+int		del_quote(char **command)
+{
+  int		i;
+  int		j;
+
+  i = 0;
+  j = 0;
+  while (command[j])
+  {
+    if (!strcmp(command[j], "\"")
+	|| !strcmp(command[j], "'"))
+      j++;
+    else
+      command[i++] = command[j++];
+  }
+  command[i++] = NULL;
+  while (i < j - 1)
+    free(command[i++]);
+  return (0);
 }

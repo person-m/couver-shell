@@ -18,12 +18,12 @@ static char	**get_var_history(char **hist, char *var)
   i = tab_len(hist);
   nb = my_getnbr(var);
   if (var[0] == '!')
-    return (lexer(hist[i - 1]));
+    return (lexer(hist[i - 1], 0));
   if (nb == 0)
     {
       while (--i >= 0)
 	if (!strncmp(hist[i], var, strlen(var)))
-	  return (lexer(hist[i]));
+	  return (lexer(hist[i], 0));
       return (error_history(var));
     }
   if (nb > tab_len(hist) || tab_len(hist) + nb <= 0)
@@ -32,8 +32,8 @@ static char	**get_var_history(char **hist, char *var)
 	      (nb > tab_len(hist) ? nb : tab_len(hist) + nb));
       return (NULL);
     }
-  return ((nb < 0) ? lexer(hist[i + nb + 1])
-	  : lexer(hist[nb - 1]));
+  return ((nb < 0) ? lexer(hist[i + nb + 1], 0)
+	  : lexer(hist[nb - 1], 0));
 }
 
 static int	return_error(int i, char **tab, char **hist, int nb)
@@ -79,12 +79,12 @@ static char	**get_var_history2(char **hist, char **tab)
       {
 	if ((ret = search_wich_case(hist[i], tab, arg)) == NULL)
 	  return (NULL);
-	return (lexer(ret));
+	return (lexer(ret, 0));
       }
   if (!return_error(i, tab, hist, nb))
     return (NULL);
   return (lexer(search_wich_case((nb < 0
-      ? hist[i + nb + 1] : hist[nb - 1]), tab, arg)));
+      ? hist[i + nb + 1] : hist[nb - 1]), tab, arg), 0));
 }
 
 int		replace_exclam_dot(char ***cmd, t_shell *sh)

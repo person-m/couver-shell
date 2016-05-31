@@ -13,7 +13,8 @@
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
-  if (!check_command(*cmd) && !globbing(cmd) && !backquote(cmd, sh))
+  if (!check_command(*cmd) && !globbing(cmd)
+      && !backquote(cmd, sh) && !del_quote(*cmd))
     the_execution(*cmd, sh);
 }
 
@@ -26,7 +27,7 @@ void	loop_42sh(t_shell *sh)
   while (1)
     {
       loop_prompt(sh);
-      cmd = lexer(sh->prompt->line);
+      cmd = lexer(sh->prompt->line, 0);
       ret = replace_var_env(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
       update_history(sh->prompt->line, sh);

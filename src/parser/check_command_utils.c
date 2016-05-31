@@ -39,8 +39,7 @@ static int	check_quote(char **command, char **quote,
       command++;
       while (*command && strcmp(*command, quote[i]) && command != *min)
 	command++;
-      if ((!(*command) || (command == *min && strcmp(*command, quote[i])))
-	  && (max && i == 2))
+      if ((!(*command) || (command == *min && strcmp(*command, quote[i]))))
 	return (fprintf(stderr, "Unmatched %s.\n", quote[i]) || 1);
       *max = (!(*max) && *command) ? command : *max;
       *min = command - 1;

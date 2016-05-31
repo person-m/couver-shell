@@ -62,9 +62,6 @@ char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
 char		*get_var_env(char **, char *);
 
-char		**lexer(char *line);
-int		check_command(char **command);
-
 char		*get_next_line(const int fd);
 char		*get_next_line(const int);
 
@@ -81,10 +78,11 @@ void		check_signals(t_shell *);
 void		exit_shell(t_shell *);
 
 void		do_the_thing(t_shell *sh, char ***cmd);
-char		**lexer(char *line);
+char		**lexer(char *line, int flag);
 int		check_command(char **command);
 int		globbing(char ***command);
 int		backquote(char ***command, t_shell *sh);
+int		del_quote(char **command);
 
 void		strconcat(const char *, const char *, char *);
 int		my_getnbr(const char *str);

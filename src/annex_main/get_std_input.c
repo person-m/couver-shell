@@ -50,7 +50,7 @@ void	get_std_input(t_shell *sh)
   i = -1;
   while (instr[++i])
     {
-      cmd = lexer(instr[i]);
+      cmd = lexer(instr[i], 0);
       ret2 = replace_exclam_dot(&cmd, sh);
       ret = replace_var_env(&cmd, sh);
       update_history(instr[i], sh);

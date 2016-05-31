@@ -82,7 +82,7 @@ void		the_execution(char **tab, t_shell *env)
 
   s.i = 0;
   s.failed = 1;
-  check_inhibitors(tab);
+//  check_inhibitors(tab);
   if ((s.save[0] = dup(0)) == -1 || (s.save[1] = dup(1)) == -1)
     return ((void)fprintf(stderr, "%s\n", strerror(errno)));
   while (tab[s.i] != 0)

@@ -8,65 +8,20 @@
 ** Last update Fri May 27 16:42:28 2016 Vincent COUVERCHEL
 */
 
+#define BUF_SIZE 1024
+
 #include "shell.h"
 #include "backquote_utils.c"
 
-#define BUF_SIZE 1024
-
-static int	get_match_quote(char **command, int i)
-{
-  if (!strcmp(command[i], "`"))
-  {
-    i++;
-    while (command[i] && strcmp(command[i], "`"))
-      i++;
-  }
-  else
-    i++;
-  return (i);
-}
-
-static char	*father_action(int fd[2], int *size)
-{
-  int		ret;
-  char		buf[BUF_SIZE + 1];
-  char		*new_line;
-
-  new_line = NULL;
-  close(fd[1]);
-  while ((ret = read(fd[0], buf, BUF_SIZE)) > 0)
-  {
-    if (!(new_line = realloc(new_line, *size + ret + 1)))
-      return (NULL);
-    memcpy(new_line + *size, buf, ret);
-    new_line[*size + ret] = 0;
-    *size += ret;
-  }
-  close(fd[0]);
-  wait(NULL);
-  return (new_line);
-}
-
-static void	son_action(int fd[2], t_shell *sh, char ***command)
-{
-  close(fd[0]);
-  dup2(fd[1], 1);
-  do_the_thing(sh, command);
-  close(fd[1]);
-  exit(0);
-}
-
-static char	**exec_backquote(char ***command, t_shell *sh)
+static char	*exec_in_q(char ***command, t_shell *sh)
 {
   int		fd[2];
   int		size;
   char		*new_line;
-  char		**new_command;
   int		ret_fork;
 
   size = 0;
   new_line = NULL;
-  new_command = NULL;
   pipe(fd);
   if ((ret_fork = fork()) == -1)
     return (NULL);
@@ -74,32 +29,69 @@ static char	**exec_backquote(char ***command, t_shell *sh)
     son_action(fd, sh, command);
   else
     new_line = father_action(fd, &size);
-  if (new_line)
-    new_command = lexer(new_line);
-  free(new_line);
-  return (new_command);
+  return (new_line);
+}
+
+static	void	wordtabncpy(char **dest, char **src, int n)
+{
+  int		i;
+
+  i = 0;
+  while (i < n && src[i])
+  {
+    dest[i] = strdup(src[i]);
+    i++;
+  }
+  dest[i] = NULL;
+}
+
+static char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
+{
+  char		**new;
+
+  if (!(new = malloc(sizeof(char *) * (tab_len(dest) - len + 2))))
+    return (NULL);
+  wordtabncpy(new, dest, pos);
+  new[pos] = src;
+  wordtabncpy(new + pos + 1,
+	      dest + pos + len, tab_len(dest + pos + len));
+  free_tab(dest);
+  return (new);
+}
+
+static void	init_backquote(int q[2], char ***new_command, int *i)
+{
+  q[0] = 0;
+  q[1] = 0;
+  *new_command = NULL;
+  *i = -1;
 }
 
 int	backquote(char ***command, t_shell *sh)
 {
   int	i;
   int	j;
-  char	**new_command;
+  char	**new_command = NULL;
   char	**sub_command;
+  char	*new_line;
+  int	q[2];
 
-  i = 0;
-  while ((*command)[i])
+  init_backquote(q, &new_command, &i);
+  while ((*command)[++i])
   {
+    q[0] = strcmp((*command)[i], "\"") ? q[0] : !q[0];
+    q[1] = strcmp((*command)[i], "'") ? q[1] : !q[1];
     if (!strcmp((*command)[i], "`"))
     {
       j = get_match_quote(*command, i);
       sub_command = get_sub_tab(*command, i + 1, j - i - 1);
-      if ((new_command = exec_backquote(&sub_command, sh)))
+      if (!q[0] && !q[1] && (new_command = exec_backquote(&sub_command, sh)))
 	*command = insert_tab_in_tab(*command, new_command, i, j - i + 1);
+      else if ((q[0] || q[1]) && (new_line = exec_in_q(&sub_command, sh)))
+	*command = insert_str_in_tab(*command, new_line, i, j - i + 1);
       free_tab(new_command);
       free_tab(sub_command);
     }
-    i++;
   }
   return (0);
 }

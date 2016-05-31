@@ -22,15 +22,23 @@ static void	del_backslash(char *str)
 {
   int		i;
   int		j;
+  int		boolean;
 
+  boolean = 0;
   i = 0;
   j = 0;
   while (str[j])
   {
-    if (str[j] != '\\')
-      str[i++] = str[j++];
-    else
+    if (str[j] == '\\' && !boolean)
+    {
+      boolean = 1;
       j++;
+    }
+    else
+    {
+      str[i++] = str[j++];
+      boolean = 0;
+    }
   }
   str[i] = 0;
 }
@@ -40,9 +48,9 @@ static int		is_special(char c)
   return (!c || c == '\t' || c == ' ' || c == '\n');
 }
 
-static int	is_quote(char *line)
+static int	is_quote(char c, int q[2])
 {
-  return (!strncmp(line, "\"", 1) || !strncmp(line, "'", 1));
+  return ((c == '\'' && q[1]) || (c == '\"' && q[0]));
 }
 
 static int	is_separator(t_lexer *lexer, char *line)
