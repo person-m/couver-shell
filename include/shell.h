@@ -69,7 +69,7 @@ char		*get_next_line(const int);
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);
 void		completion(t_shell *);
-void		rebind(char **cmd, t_shell *sh);
+int		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);
 char		*get_range_ascii(char *ascii, char input);
@@ -78,9 +78,11 @@ void		signal_handler(void);
 void		check_signals(t_shell *);
 void		exit_shell(t_shell *);
 
+void		do_the_thing(t_shell *sh, char ***cmd);
 char		**lexer(char *line);
 int		check_command(char **command);
 int		globbing(char ***command);
+int		backquote(char ***command, t_shell *sh);
 
 void		strconcat(const char *, const char *, char *);
 int		my_getnbr(const char *str);

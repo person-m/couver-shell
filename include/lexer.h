@@ -20,6 +20,11 @@ typedef struct		s_lexer
 {
   char			*separators[15];
   char			**command;
+  int			pos;
+  int			len;
+  int			ret_len;
+  int			escape;
+  int			quote;
 }			t_lexer;
 
 #endif /* !LEXER_H_ */
