@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Tue May 31 17:07:24 2016 Melvin Personnier
+** Last update Tue May 31 18:55:08 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -55,11 +55,9 @@ char	*wordtab_in_str(char **tab, int mode)
 
 int	        is_empty_line(char *str)
 {
-        write(1, "cc\n", 3);
   int		i;
 
   i = 0;
-write(1, "cc\n", 3);
   if (str[0] == 0)
     return (1);
   while (str[i])

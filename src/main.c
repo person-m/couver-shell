@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Tue May 31 17:32:11 2016 vincent riamon
+** Last update Tue May 31 17:01:00 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -27,8 +27,8 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line);
-      ret2 = replace_exclam_dot(&cmd, sh);
       ret = replace_var_env(&cmd, sh);
+      ret2 = replace_exclam_dot(&cmd, sh);
       update_history(sh->prompt->line, sh);
       if (ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);
@@ -85,9 +85,7 @@ int		main(__attribute__((unused))int argc,
   create_set(&sh);
   if (!isatty(0))
     {
-      write(1, "aa\n", 3);
       get_std_input(&sh);
-      write(1, "aa\n", 3);
       free_shell(sh);
       return (sh.ret);
     }

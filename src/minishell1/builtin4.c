@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Tue May 31 17:06:39 2016 Melvin Personnier
+** Last update Tue May 31 19:02:19 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -21,9 +21,13 @@ static int	print_set(t_shell *sh)
   int		i;
 
   i = -1;
-  printf("_\t%s\n\n", sh->prompt->line);
+  write(1, "_\t", 2);
+  if (tab_len(sh->history) > 1)
+    printf("%s\n\n", sh->history[sh->size_hist - 2]);
+  else
+    printf("\n");
   while (sh->set[++i])
-    printf("%s\n", sh->set[0]);
+    printf("%s\n", sh->set[i]);
   return (0);
 }
 
@@ -38,14 +42,14 @@ int		cmd_set(char **tab, t_shell *sh)
     return (print_set(sh));
   while (sh->set[++i])
     {
-      if (!strncmp(sh->set[i], tab[1], strlen(tab[1])))
+      if (!strncmp(sh->set[i], tab[1], strlen(tab[1])) &&
+	  sh->set[i][strlen(tab[1])] == '\t')
 	{
 	  free(sh->set[i]);
-	  sh->set[i] = concat_str(tab[1], tab[2], '=');
+	  sh->set[i] = concat_str(tab[1], tab[2], '\t');
 	  bol = 1;
 	}
     }
-  write(1, "a", 1);
   if (!bol)
     {
       sh->set = realloc(sh->set, ((tab_len(sh->set) + 2) * sizeof(char *)));
