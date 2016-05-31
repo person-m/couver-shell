@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Mon May 30 19:54:37 2016 vincent riamon
+** Last update Tue May 31 13:06:48 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -16,7 +16,7 @@ static char	**get_var_history(char **hist, char *var)
   int		i;
 
   i = tab_len(hist);
-  nb = atoi(var);
+  nb = my_getnbr(var);
   if (var[0] == '!')
     return (lexer(hist[i - 1]));
   if (nb == 0)
@@ -72,8 +72,8 @@ static char	**get_var_history2(char **hist, char **tab)
   char		*ret;
 
   i = tab_len(hist);
-  nb = atoi(tab[0]);
-  arg = atoi(tab[1]);
+  nb = my_getnbr(tab[0]);
+  arg = my_getnbr(tab[1]);
   while (--i > 0 && nb == 0)
     if (!strncmp(hist[i], tab[0], strlen(tab[0])))
       {

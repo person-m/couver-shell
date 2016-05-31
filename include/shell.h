@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Mon May 30 22:28:29 2016 Bertrand Buffat
+** Last update Tue May 31 13:07:28 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -83,5 +83,6 @@ int		check_command(char **command);
 int		globbing(char ***command);
 
 void		strconcat(const char *, const char *, char *);
+int		my_getnbr(const char *str);
 
 #endif /* !SHELL_H_ */
