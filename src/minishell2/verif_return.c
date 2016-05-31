@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Mon May 23 11:00:07 2016 mohamed-laid hedia
-** Last update Sat May 28 14:37:03 2016 mohamed-laid hedia
+** Last update Tue May 31 21:05:32 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -20,7 +20,7 @@ int	verif_one_sig(int st, t_command *s)
       else if (WTERMSIG(st) == SIGFPE)
 	fprintf(stderr, "%s", "Floating exception");
       if (WCOREDUMP(st))
-	fprintf(stderr, "%s", " (coredumped) ");
+	fprintf(stderr, "%s", " (core dumped) ");
       fprintf(stderr, "%c", '\n');
       return (WTERMSIG(st) + 128);
     }
@@ -48,7 +48,7 @@ int	verif_sig(int st, int *t, t_command *s)
       }
       if (WCOREDUMP(st))
 	{
-	  fprintf(stderr, "%s", " (coredumped) ");
+	  fprintf(stderr, "%s", " (core dumped)");
 	  *t = 2;
 	}
       return (128 + WTERMSIG(st));

@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 18:26:56 2016 mohamed-laid hedia
-** Last update Fri May 27 16:06:10 2016 mohamed-laid hedia
+** Last update Tue May 31 21:25:25 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -79,7 +79,7 @@ int	double_right_redirection(char *red, char *file)
     {
       if ((fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 00644)) == -1)
         {
-          fprintf(stderr, "%s\n", strerror(errno));
+          fprintf(stderr, "%s: %s.\n", file, strerror(errno));
           return (-1);
         }
       else
@@ -102,7 +102,7 @@ int	right_redirection(char *red, char *file)
     {
       if ((fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644)) == -1)
 	{
-	  fprintf(stderr, "%s\n", strerror(errno));
+	  fprintf(stderr, "%s: %s.\n", file, strerror(errno));
 	  return (-1);
 	}
       else

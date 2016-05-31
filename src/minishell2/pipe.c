@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Tue May 31 19:35:11 2016 mohamed-laid hedia
+** Last update Tue May 31 23:21:31 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -36,7 +36,7 @@ void	do_fork(char **b, t_shell *env, t_pipe *p)
     {
       close(p->p[p->i % 2][1]);
       if (dup2(p->p[p->i % 2][0], 0) == -1)
-	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
+	return ((void)fprintf(stderr, "%sddd\n", strerror(errno)));
       if (minishell1(b, env) == -1)
 	{
 	  close(p->p[p->i % 2][0]);
@@ -57,6 +57,7 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
     }
   else if (is_builtin(b[0]))
     {
+      dup2(p->p[p->i % 2][0], 0);
       if (minishell1(b, env) == -1)
 	{
 	  s->failed = -1;
@@ -69,8 +70,8 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       p->i = p->i + 1;
       do_fork(b, env, p);
       free(b);
-      close(p->p[p->i % 2][0]);
     }
+  close(p->p[p->i % 2][0]);
   env->ret = wait_process(s, p, 0);
 }
 
@@ -87,7 +88,6 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
     {
       if ((b = pars_param(tab, s->i)) == NULL)
 	exit(EXIT_FAILURE);
-      close(p->p[p->i % 2][0]);
       if (dup2(p->p[p->i % 2][1], 1) == -1)
 	return ((void)fprintf(stderr, "%s\n", strerror(errno)));
       if (p->i != 0)
@@ -96,7 +96,7 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       f = minishell1(b, env);
       f == -1 ? exit(EXIT_FAILURE) : exit(EXIT_SUCCESS);
     }
-  if (p->i != 0 && f == -1)
+  if (p->i)
     close(p->p[p->i % 2 ? 0 : 1][0]);
   close(p->p[p->i % 2][1]);
 }
@@ -110,7 +110,7 @@ void		pipe_execution(char **tab, t_shell *env, t_command *s)
   while (next_is_pipe(tab, s->i))
     {
       if (pipe(p.p[p.i % 2]) == -1)
-        return ((void)fprintf(stderr, "%s\n", strerror(errno)));
+        return ((void)fprintf(stderr, "%spp\n", strerror(errno)));
       do_process(tab, env, s, &p);
       p.i = p.i + 1;
       s->i = s->i + length_param(tab, s->i);
