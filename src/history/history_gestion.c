@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Mon May 30 22:50:47 2016 vincent riamon
+** Last update Tue May 31 17:00:17 2016 vincent riamon
 */
 
 #include "my.h"
@@ -70,7 +70,7 @@ int	        is_empty_line(char *str)
   return (1);
 }
 
-void		update_history(t_shell *sh)
+void		update_history(char *line, t_shell *sh)
 {
   int		fd;
   int		i;
@@ -79,10 +79,10 @@ void		update_history(t_shell *sh)
 
   i = tab_len(sh->history);
   ret = create_history_file(&hist, sh);
-  if (is_empty_line(sh->prompt->line))
+  if (is_empty_line(line))
     return ;
   sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
-  sh->history[i] = strdup(sh->prompt->line);
+  sh->history[i] = strdup(line);
   sh->history[i + 1] = NULL;
   sh->size_hist += 1;
   if (ret == -1 || (fd = open(hist, O_RDWR | O_APPEND)) == -1)
