@@ -5,10 +5,27 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Mon May 30 23:29:24 2016 Melvin Personnier
+** Last update Tue May 31 16:12:07 2016 vincent riamon
 */
 
 #include "my.h"
+
+int		is_alphanum(char *str)
+{
+  int		i;
+
+  i = 0;
+  while (str[i])
+    {
+      if ((str[i] >= '0' && str[i] <= '9')
+	  || (str[i] >= 'a' && str[i] <= 'z')
+	  || (str[i] >= 'A' && str[i] <= 'Z'))
+	i = i + 1;
+      else
+	return (0);
+    }
+  return (1);
+}
 
 static void	print_set(char **tab)
 {

@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Tue May 31 13:06:48 2016 vincent riamon
+** Last update Tue May 31 16:39:47 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -97,7 +97,7 @@ int		replace_exclam_dot(char ***cmd, t_shell *sh)
   i = -1;
   while ((*cmd)[++i] && (j = -1))
     while ((*cmd)[i][++j])
-      if ((*cmd)[i][j] == '!')
+      if ((*cmd)[i][j] == '!' && (*cmd)[i][j + 1])
 	{
 	  tmp = my_str_to_wordtab_pattern((*cmd)[i] + j + 1, ":");
 	  my_line = (tab_len(tmp) == 1 ?

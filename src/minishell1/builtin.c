@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Sat May 28 15:14:28 2016 vincent riamon
+** Last update Tue May 31 16:42:39 2016 vincent riamon
 */
 
 #include "my.h"
@@ -21,6 +21,12 @@ static int	exit_setenv(char **tab)
   if (tab_len(tab) > 3)
     {
       fprintf(stderr, "setenv: Too many arguments.\n");
+      return (0);
+    }
+  if ((tab[1] && !is_alphanum(tab[1])))
+    {
+      fprintf(stderr, "setenv: Variable name must"
+	      " contain alphanumeric characters.\n");
       return (0);
     }
   return (1);
