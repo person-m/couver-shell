@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Mon May 30 23:09:48 2016 Bertrand Buffat
+** Last update Tue May 31 13:45:00 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -26,7 +26,7 @@ t_caps		*init_caps(void)
   t_caps	*caps;
   char		*smkx;
 
- if (!(caps = malloc(sizeof(*caps)))
+  if (!(caps = malloc(sizeof(*caps)))
       || !(caps->up = tigetstr("kcuu1"))
       || !(caps->down = tigetstr("kcud1"))
       || !(caps->left = tigetstr("kcub1"))
@@ -50,7 +50,7 @@ t_caps		*init_caps(void)
   return (caps);
 }
 
-void		init_prompt_line(t_prompt *prompt, char **env)
+void	init_prompt_line(t_prompt *prompt, char **env)
 {
   char	*name;
 
@@ -69,29 +69,17 @@ void		init_prompt_line(t_prompt *prompt, char **env)
   prompt->nbr = 0;
 }
 
-void		set_info_term(t_prompt *prompt, char **env)
+void	set_info_term(t_prompt *prompt, char **env)
 {
-  char		*term;
+  char	*term;
 
   if ((term = get_var_env(env, "TERM=")))
     setupterm(term, 1, (int *)0);
   else
     setupterm("xterm", 1, (int *)0);
-
-  //ioctl(0, TCGETS, &prompt->standard_mode);
-
   tcgetattr(0, &prompt->standard_mode);
   get_non_canon(prompt);
   get_raw_mode(prompt);
-}
-
-int	dlen(char **s)
-{
-  int	i;
-
-  i = -1;
-  while (s[++i]);
-  return (i);
 }
 
 t_prompt	*init_prompt(char **env, char **history)
@@ -101,25 +89,21 @@ t_prompt	*init_prompt(char **env, char **history)
 
   if (!(prompt = malloc(sizeof(*prompt))))
     return (NULL);
-
   set_info_term(prompt, env);
-
   if (!(prompt->caps = init_caps()))
     return (NULL);
   prompt->nbcols = tigetnum("cols");
   prompt->nblines = tigetnum("lines");
-
   size = prompt->nbcols * prompt->nblines;
   if (!(prompt->prompt = malloc(sizeof(char) * size))
       || (!(prompt->line = malloc(sizeof(char) * size)))
       || (!(prompt->auto_completion = malloc(sizeof(char) * size))))
     return (NULL);
-
   init_prompt_line(prompt, env);
   prompt->tmp_history = NULL;
   prompt->history = history;
-
+  prompt->env = env;
+  get_pwd_prompt(prompt);
   update_prompt(prompt);
-
   return (prompt);
 }

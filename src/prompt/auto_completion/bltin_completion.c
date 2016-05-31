@@ -5,14 +5,14 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 18:58:33 2016
-** Last update Sun May 29 13:40:47 2016 
+** Last update Tue May 31 13:50:16 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
-void            print_substr_in_directory(t_prompt *prompt, DIR *dir)
+void		print_substr_in_directory(t_prompt *prompt, DIR *dir)
 {
-  struct dirent *entry;
+  struct dirent	*entry;
 
   clean_screen(prompt);
   while ((entry = readdir(dir)))
@@ -28,13 +28,14 @@ void            print_substr_in_directory(t_prompt *prompt, DIR *dir)
   update_local_prompt(prompt);
 }
 
-void    print_files(t_prompt *prompt)
+void	print_files(t_prompt *prompt)
 {
-  DIR   *dir;
-  char  path[1024];
+  DIR	*dir;
+  char	path[1024];
   int	offset_dir;
 
-  if ((offset_dir = get_offset_directory(prompt->line, prompt->count_char)) != -1)
+  if ((offset_dir =
+       get_offset_directory(prompt->line, prompt->count_char)) != -1)
     get_path_from_line(prompt, offset_dir, path);
   else if (!getcwd(path, 1024))
     return ;
@@ -44,19 +45,17 @@ void    print_files(t_prompt *prompt)
   closedir(dir);
 }
 
-void    bltin_completion(t_prompt *prompt, char **env)
+void	 bltin_completion(t_prompt *prompt, char **env)
 {
-  int   count;
-  int   ret;
+  int	count;
+  int	ret;
 
-  //nothing to complete
-  if ((prompt->offset = get_offset(prompt->line, prompt->count_char, &ret)) == -1)
+  if ((prompt->offset =
+       get_offset(prompt->line, prompt->count_char, &ret)) == -1)
     return ;
-  //commands
   if (ret == 0
       && (count = count_commands(prompt, env)))
     print_commands(prompt, env, count);
-  //files
   else
     print_files(prompt);
 }

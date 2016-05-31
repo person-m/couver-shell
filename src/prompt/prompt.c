@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Mon May 30 23:15:00 2016 Bertrand Buffat
+** Last update Tue May 31 13:09:43 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -48,7 +48,7 @@ char	get_input(t_prompt *prompt)
 
   move_cursor(prompt, buffer, prompt->history);
 
-  return (0);
+  return (1);
 }
 
 void	which_input(t_shell *sh, char input)

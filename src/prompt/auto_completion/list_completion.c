@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 19:04:13 2016
-** Last update Sat May 28 22:25:41 2016 
+** Last update Tue May 31 13:51:53 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -81,4 +81,5 @@ void	print_dat_list(t_prompt *prompt, t_list *list, int count)
 	write(1, "\n", 1);
       list = list->next;
     }
+  write(1, "\n", 1);
 }

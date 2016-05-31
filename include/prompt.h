@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Mon May 30 19:21:54 2016 Bertrand Buffat
+** Last update Tue May 31 12:59:21 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -48,12 +48,17 @@ typedef struct		s_prompt
   char			*prompt;
   int			size_prompt;
 
+  char			*pwd;
+  int			size_pwd;
+
   char			*auto_completion;
   int			size_completion;
   int			offset;
 
   int                   nbcols;
   int                   nblines;
+
+  char			**env;
 
   char			**history;
   char			*tmp_history;
@@ -96,6 +101,7 @@ void            update_local_prompt(t_prompt *);
 void            free_prompt(t_prompt *);
 
 void		aff_line_prompt(t_prompt *);
+
 void            aff_prompt(t_prompt *);
 void		erase_down_lines(t_prompt *, int);
 
@@ -111,6 +117,7 @@ bool		ask_print_commands(int);
 int		count_commands(t_prompt *, char **env);
 void		print_commands(t_prompt *, char **env, int count);
 
+void		get_pwd_prompt(t_prompt *);
 void		put_nbr(int);
 int		dlen(char **);
 int		get_offset(char *line, int pos, int *ret);

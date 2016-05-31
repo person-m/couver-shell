@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:25:06 2016
-** Last update Mon May 30 21:57:35 2016 Bertrand Buffat
+** Last update Tue May 31 13:41:17 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -19,6 +19,7 @@ void	update_local_prompt(t_prompt *prompt)
 
 void	update_prompt(t_prompt *prompt)
 {
+  get_pwd_prompt(prompt);
   get_actual_line(prompt);
   tcsetattr(0, 0, &prompt->non_canon_mode);
   fill_tab_caps(prompt->start_line_str, prompt->start_line, prompt->start_col);
@@ -43,9 +44,9 @@ void	clear_line(t_prompt *prompt)
   int	nb_lines_buffer;
   int	total_count;
 
-  total_count =
+  total_count = prompt->size_pwd +
   prompt->size_prompt + prompt->count_pos + prompt->count_char +
-    size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 4;
+  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 5;
   nb_lines_buffer = total_count / prompt->nbcols;
   erase_down_lines(prompt, nb_lines_buffer + 1);
 }
@@ -53,11 +54,11 @@ void	clear_line(t_prompt *prompt)
 void	clean_screen(t_prompt *prompt)
 {
   int	nb_lines_buffer;
-  int   total_count;
+  int	total_count;
 
-  total_count =
+  total_count = prompt->size_pwd +
   prompt->size_prompt + prompt->count_pos +
-  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 4;
+  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 5;
   nb_lines_buffer = total_count / prompt->nbcols;
   erase_down_lines(prompt, nb_lines_buffer);
   aff_line_prompt(prompt);

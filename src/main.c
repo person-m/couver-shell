@@ -1,11 +1,11 @@
-/*
+ /*
 ** main.c for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Mon May 30 23:17:44 2016 Bertrand Buffat
+** Last update Tue May 31 13:59:16 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -24,18 +24,19 @@ void	loop_42sh(t_shell *sh)
   int	ret2;
 
   while (1)
-  {
-    loop_prompt(sh);
-    cmd = lexer(sh->prompt->line);
-    ret = replace_var_env(&cmd, sh);
-    ret2 = replace_exclam_dot(&cmd, sh);
-    update_history(sh);
-    if (ret == 1 && ret2 == 1)
-      do_the_thing(sh, &cmd);
-    sh->prompt->history = sh->history;
-    update_prompt(sh->prompt);
-    free_tab(cmd);
-  }
+    {
+      loop_prompt(sh);
+      cmd = lexer(sh->prompt->line);
+      ret = replace_var_env(&cmd, sh);
+      ret2 = replace_exclam_dot(&cmd, sh);
+      update_history(sh);
+      if (ret == 1 && ret2 == 1)
+	do_the_thing(sh, &cmd);
+      sh->prompt->history = sh->history;
+      sh->prompt->env = sh->env;
+      update_prompt(sh->prompt);
+      free_tab(cmd);
+    }
 }
 
 void	free_shell(t_shell sh)
@@ -89,6 +90,8 @@ int		main(__attribute__((unused))int argc,
     }
   if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
+
+
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);

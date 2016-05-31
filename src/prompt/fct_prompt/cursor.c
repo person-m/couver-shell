@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:13 2016
-** Last update Mon May 30 22:20:09 2016 Bertrand Buffat
+** Last update Tue May 31 13:47:51 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -26,11 +26,13 @@ void	move_history_up(t_prompt *prompt, char **history)
     save_current_line(prompt);
   clear_line(prompt);
   --prompt->curr_history;
-  while (prompt->count_char > 0 
-	 && !strncmp(prompt->line, history[prompt->curr_history], prompt->count_char)
+  while (prompt->count_char > 0
+	 && !strncmp(prompt->line,
+		     history[prompt->curr_history], prompt->count_char)
   	 && prompt->curr_history >= 0)
     --prompt->curr_history;
-  memcpy(prompt->line, history[prompt->curr_history], strlen(history[prompt->curr_history]));
+  memcpy(prompt->line, history[prompt->curr_history],
+  strlen(history[prompt->curr_history]));
   prompt->count_char = strlen(history[prompt->curr_history]);
   prompt->count_pos = prompt->count_char;
 }
@@ -44,7 +46,8 @@ void	move_history_down(t_prompt *prompt, char **history)
   ++prompt->curr_history;
   while (prompt->curr_history < max_hist
 	 && prompt->count_char > 0
-	 && !strncmp(prompt->line, history[prompt->curr_history], prompt->count_char))
+	 && !strncmp(prompt->line,
+		     history[prompt->curr_history], prompt->count_char))
     ++prompt->curr_history;
   if (prompt->curr_history == dlen(history))
     {
@@ -53,8 +56,9 @@ void	move_history_down(t_prompt *prompt, char **history)
     }
   else
     {
-      memcpy(prompt->line, history[prompt->curr_history], strlen(history[prompt->curr_history]));
-      prompt->count_char = strlen(history[prompt->curr_history]);      
+      memcpy(prompt->line, history[prompt->curr_history],
+      strlen(history[prompt->curr_history]));
+      prompt->count_char = strlen(history[prompt->curr_history]);
     }
   prompt->count_pos = prompt->count_char;
 }
@@ -79,8 +83,6 @@ void	move_cursor(t_prompt *prompt, char *buffer, char **history)
 
   else
     return ;
-
-  aff_prompt(prompt);
 }
 
 void	move_cursor_back(t_prompt *prompt)
@@ -90,9 +92,9 @@ void	move_cursor_back(t_prompt *prompt)
   int	height;
   int	total_count;
 
-  total_count =
+  total_count = prompt->size_pwd +
   prompt->size_prompt + prompt->count_pos + (prompt->start_col - 1) +
-  size_of_int(prompt->nbr) + size_of_int(prompt-> count_char) + 4;
+  size_of_int(prompt->nbr) + size_of_int(prompt-> count_char) + 5;
   width = total_count % prompt->nbcols + 1;
   height = prompt->start_line + total_count / prompt->nbcols;
   fill_tab_caps(tab, height, width);

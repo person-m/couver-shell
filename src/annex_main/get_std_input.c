@@ -5,12 +5,15 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 04:12:22 2016
-** Last update Mon May 30 23:18:15 2016 vincent riamon
+** Last update Tue May 31 13:53:56 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
-char	*one_function_get_line(char *old_line, int turn, int old_size, int counter)
+char	*one_function_get_line(char *old_line,
+			       int turn,
+			       int old_size,
+			       int counter)
 {
   char	buffer[1024];
   char	*line;
@@ -47,14 +50,12 @@ void	get_std_input(t_shell *sh)
   i = -1;
   while (instr[++i])
     {
-      //temporary minishell
       cmd = lexer(instr[i]);
       ret = replace_var_env(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
       update_history(sh);
       if ((ret == 1 && ret2 == 1) && !check_command(cmd))
 	the_execution(cmd, sh);
-      //end
     }
   free(line);
   free_tab(instr);

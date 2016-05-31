@@ -5,14 +5,13 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 02:37:42 2016
-** Last update Mon May 30 16:49:46 2016 Bertrand Buffat
+** Last update Tue May 31 13:42:36 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 
 void	exit_shell(t_shell *sh)
 {
-  //  ioctl(0, TCSETS, &sh->prompt->standard_mode);
   tcsetattr(0, 0, &sh->prompt->standard_mode);
   write(1, "^D\nexit\n", 8);
   free_prompt(sh->prompt);
@@ -37,6 +36,33 @@ char	*stradd(char *str, char *add)
   ptr[size + size2] = 0;
   free(str);
   return (ptr);
+}
+
+int	dlen(char **s)
+{
+  int	i;
+
+  i = -1;
+  while (s[++i]);
+  return (i);
+}
+
+void	get_pwd_prompt(t_prompt *prompt)
+{
+  char	*term;
+
+  if (!(term = get_var_env(prompt->env, "PWD=")))
+    {
+      prompt->size_pwd = 0;
+      prompt->pwd = NULL;
+      return ;
+    }
+  prompt->pwd = term;
+  if (!strncmp(term, "/home/", 6))
+    prompt->pwd += 6;
+  if (!strncmp(prompt->pwd, prompt->prompt, prompt->size_prompt - 1))
+    prompt->pwd += (prompt->size_prompt - 1);
+  prompt->size_pwd = strlen(prompt->pwd);
 }
 
 void	check_auto_compet(t_shell *sh)
