@@ -28,6 +28,7 @@ typedef struct	s_shell
   char		**env;
   char		**alias;
   char		**history;
+  char		**set;
   int		size_hist;
   int		ret;
   t_prompt	*prompt;
@@ -44,6 +45,7 @@ void		aff_tab(char **tab);
 void		free_tab(char **tab);
 void		create_alias(t_shell *sh);
 void		create_oldpwd(t_shell *sh);
+void		create_set(t_shell *sh);
 void		*my_malloc(int size);
 char		*couvrc(char **env);
 void		the_execution(char **cmd, t_shell *sh);

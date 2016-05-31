@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Mon May 30 21:16:00 2016 Melvin Personnier
+** Last update Tue May 31 17:06:32 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -53,4 +53,21 @@ void		create_oldpwd(t_shell *sh)
   tab[2] = NULL;
   my_setenv(tab, sh);
   free(tab);
+}
+
+int		is_alphanum(char *str)
+{
+  int		i;
+
+  i = 0;
+  while (str[i])
+    {
+      if ((str[i] >= '0' && str[i] <= '9')
+	  || (str[i] >= 'a' && str[i] <= 'z')
+	  || (str[i] >= 'A' && str[i] <= 'Z'))
+	i = i + 1;
+      else
+	return (0);
+    }
+  return (1);
 }

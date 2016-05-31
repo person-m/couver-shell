@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Tue May 31 16:12:32 2016 vincent riamon
+** Last update Tue May 31 17:07:04 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -18,6 +18,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "../../include/shell.h"
 # include "../history/my.h"
 

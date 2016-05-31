@@ -5,46 +5,52 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Tue May 31 16:12:07 2016 vincent riamon
+** Last update Tue May 31 17:06:39 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-int		is_alphanum(char *str)
+void		create_set(t_shell *sh)
 {
-  int		i;
-
-  i = 0;
-  while (str[i])
-    {
-      if ((str[i] >= '0' && str[i] <= '9')
-	  || (str[i] >= 'a' && str[i] <= 'z')
-	  || (str[i] >= 'A' && str[i] <= 'Z'))
-	i = i + 1;
-      else
-	return (0);
-    }
-  return (1);
+  sh->set = my_malloc(sizeof(char *) * 2);
+  sh->set[0] = NULL;
 }
 
-static void	print_set(char **tab)
+static int	print_set(t_shell *sh)
 {
   int		i;
 
   i = -1;
-  printf("_\t");
-  while (tab[++i])
-    {
-      printf("%s", tab[i]);
-      if (tab[i + 1] != NULL)
-	printf(" ");
-    }
-  printf("\n\n");
+  printf("_\t%s\n\n", sh->prompt->line);
+  while (sh->set[++i])
+    printf("%s\n", sh->set[0]);
+  return (0);
 }
 
 int		cmd_set(char **tab, t_shell *sh)
 {
-  sh->alias = sh->alias;
-  print_set(tab);
+  int		i;
+  int		bol;
+
+  i = -1;
+  bol = 0;
+  if (!tab[1])
+    return (print_set(sh));
+  while (sh->set[++i])
+    {
+      if (!strncmp(sh->set[i], tab[1], strlen(tab[1])))
+	{
+	  free(sh->set[i]);
+	  sh->set[i] = concat_str(tab[1], tab[2], '=');
+	  bol = 1;
+	}
+    }
+  write(1, "a", 1);
+  if (!bol)
+    {
+      sh->set = realloc(sh->set, ((tab_len(sh->set) + 2) * sizeof(char *)));
+      sh->set[i] = concat_str(tab[1], tab[2], '\t');
+      sh->set[i + 1] = NULL;
+    }
   return (0);
 }
