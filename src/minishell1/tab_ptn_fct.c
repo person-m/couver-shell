@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Mon May 30 22:42:33 2016 Melvin Personnier
+** Last update Tue May 31 19:14:58 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -20,7 +20,8 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[5] = "alias";
   builtins_cmp[6] = "history";
   builtins_cmp[7] = "set";
-  builtins_cmp[8] = "bind";
+  builtins_cmp[8] = "unset";
+  builtins_cmp[9] = "bind";
 }
 
 static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
@@ -33,13 +34,14 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[5] = &my_alias;
   builtins[6] = &cmd_history;
   builtins[7] = &cmd_set;
-  builtins[8] = &rebind;
+  builtins[8] = &my_unset;
+  builtins[9] = &rebind;
 }
 
 static int     builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[9])(char **tab, t_shell *sh);
-  char	*builtins_cmp[9];
+  int	(*builtins[10])(char **tab, t_shell *sh);
+  char	*builtins_cmp[10];
   int	i;
   int	is_builtin;
 
@@ -47,7 +49,7 @@ static int     builtins(char **tab, t_shell *sh)
   is_builtin = 1;
   init_builtins_cmp(builtins_cmp);
   init_builtins(builtins);
-  while (++i < 9)
+  while (++i < 10)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
 	is_builtin = builtins[i](tab, sh);
