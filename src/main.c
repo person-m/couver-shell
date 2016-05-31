@@ -41,6 +41,7 @@ void	loop_42sh(t_shell *sh)
 
 void	free_shell(t_shell sh)
 {
+  free_tab(sh.set);
   free_tab(sh.env);
   free_tab(sh.alias);
   free_tab(sh.history);
@@ -51,7 +52,6 @@ int		main(__attribute__((unused))int argc,
 		     char **env)
 {
   t_shell	sh;
-
   /*char		*couv_rc;*/
 
   /*
@@ -82,9 +82,12 @@ int		main(__attribute__((unused))int argc,
   fill_history(&sh);
   create_alias(&sh);
   create_oldpwd(&sh);
+  create_set(&sh);
   if (!isatty(0))
     {
+      write(1, "aa\n", 3);
       get_std_input(&sh);
+      write(1, "aa\n", 3);
       free_shell(sh);
       return (sh.ret);
     }
