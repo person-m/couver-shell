@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 18:26:56 2016 mohamed-laid hedia
-** Last update Tue May 31 21:25:25 2016 mohamed-laid hedia
+** Last update Wed Jun  1 20:48:50 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -29,6 +29,7 @@ int	double_left_redirection(char *red, char *file)
 {
   int	p[2];
 
+  file = inhibitors_file(file);
   if (!strcmp(red, "<<"))
     {
       if (pipe(p) == -1)
@@ -45,7 +46,7 @@ int	double_left_redirection(char *red, char *file)
       close(p[0]);
       return (1);
     }
-  return (-1);
+  return (right_redirection(red, file));
 }
 
 int	left_redirection(char *red, char *file)
@@ -68,7 +69,7 @@ int	left_redirection(char *red, char *file)
       close(fd);
       return (1);
     }
-  return (double_left_redirection(red, file));
+  return (-1);
 }
 
 int	double_right_redirection(char *red, char *file)

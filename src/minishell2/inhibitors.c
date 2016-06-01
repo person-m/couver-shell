@@ -5,10 +5,20 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Mon May 30 17:41:19 2016 mohamed-laid hedia
-** Last update Mon May 30 22:37:37 2016 mohamed-laid hedia
+** Last update Wed Jun  1 20:50:32 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
+
+char	*inhibitors_file(char *t)
+{
+  if (t[0] == '\"')
+    {
+      t = t + 1;
+      t[strlen(t) - 1] = 0;
+    }
+  return (t);
+}
 
 void	delete_strs(char **tab, int i, int j)
 {

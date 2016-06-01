@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Tue May 24 21:22:01 2016 Vincent COUVERCHEL
-** Last update Tue May 24 21:22:01 2016 Vincent COUVERCHEL
+** Last update Wed Jun  1 22:12:28 2016 mohamed-laid hedia
 */
 
 #include "shell.h"
@@ -76,7 +76,7 @@ char		**lexer(char *line, int flag)
   if (init_struct(&lexer)
       || lexer_command(line, &lexer, flag))
     return (NULL);
-//  for (int i = 0; lexer.command[i]; i++)
-//    printf("<%s>\n", lexer.command[i]);
+  //for (int i = 0; lexer.command[i]; i++)
+  //printf("<%s>\n", lexer.command[i]);
   return (lexer.command);
 }

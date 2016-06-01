@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Mon May 30 20:31:17 2016 mohamed-laid hedia
+** Last update Wed Jun  1 20:46:48 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
@@ -82,7 +82,6 @@ char		*get_next_line(const int fd);
 void	check_inhibitors(char **tab);
 char	**delete_inhibitors(char **tab);
 void	add_to_str(char **tab, int i);
-
-
+char	*inhibitors_file(char *file);
 
 #endif  /* !MO_H_ */

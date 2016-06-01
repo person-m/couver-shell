@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 04:12:22 2016
-** Last update Wed Jun  1 14:38:08 2016 vincent riamon
+** Last update Wed Jun  1 22:16:10 2016 mohamed-laid hedia
 */
 
 #include "shell.h"
@@ -54,8 +54,8 @@ void	get_std_input(t_shell *sh)
       ret = replace_vars(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
       update_history(instr[i], sh);
-      if ((ret == 1 && ret2 == 1) && !check_command(cmd))
-	the_execution(cmd, sh);
+      if (ret == 1 && ret2 == 1)
+	do_the_thing(sh, &cmd);
     }
   free(line);
   free_tab(instr);
