@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 18:58:33 2016
-** Last update Wed Jun  1 22:41:25 2016 Bertrand Buffat
+** Last update Wed Jun  1 22:45:07 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -52,7 +52,7 @@ int		get_substr_tab(t_prompt *prompt, DIR *dir, char **save)
 	    *save = entry->d_name;
 	  else if ((ret = get_n_same_bytes(*save, entry->d_name)) == 0)
 	    return (0);
-	  if (ret < min)
+	  else if (ret < min)
 	    min = ret;
 	}
     }
