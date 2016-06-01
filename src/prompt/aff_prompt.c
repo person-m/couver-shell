@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:05:49 2016
-** Last update Wed Jun  1 16:39:59 2016 Bertrand Buffat
+** Last update Wed Jun  1 23:59:46 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -35,10 +35,10 @@ void	is_out_of_screen(t_prompt *prompt, int nb_lines_buffer)
 void	aff_line_prompt(t_prompt *prompt)
 {
   write(1, "\033[36m", strlen("\033[36m"));
+  write(1, prompt->prompt, prompt->size_prompt);
+  write(1, "\033[31m", strlen("\033[31m"));
   write(1, prompt->pwd, prompt->size_pwd);
   write(1, " ", 1);
-  write(1, "\033[31m", strlen("\033[31m"));
-  write(1, prompt->prompt, prompt->size_prompt);
   write(1, "\033[32m", strlen("\033[32m"));
   put_nbr(prompt->count_char);
   write(1, " ", 1);
