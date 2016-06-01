@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sat May 28 19:06:18 2016 vincent riamon
-** Last update Mon May 30 19:48:41 2016 vincent riamon
+** Last update Wed Jun  1 14:36:18 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -22,7 +22,13 @@ char		*error_history2()
   return (NULL);
 }
 
-int		replace_var_env(char ***cmd, t_shell *sh)
+static int	undef_var(char *str)
+{
+  fprintf(stderr, "%s: Undefined variable.\n", str);
+  return (0);
+}
+
+static int	replace_var_env(char ***cmd, t_shell *sh, int mode)
 {
   int		i;
   int		j;
@@ -35,11 +41,9 @@ int		replace_var_env(char ***cmd, t_shell *sh)
       while ((*cmd)[i][++j])
 	if ((*cmd)[i][j] == '$')
 	  {
-	    if ((tmp = get_var_env(sh->env, (*cmd)[i] + j + 1)) == NULL)
-	      {
-		fprintf(stderr, "%s: Undefined variable.\n", (*cmd)[i] + j + 1);
-		return (0);
-	      }
+	    if ((tmp = get_var_env((mode == 0 ? sh->env : sh->set),
+				   (*cmd)[i] + j + 1)) == NULL)
+	      return ((mode == 0 ? undef_var((*cmd)[i] + j + 1) : 0));
 	    (*cmd)[i][j] = 0;
 	    (*cmd)[i] = realloc((*cmd)[i], sizeof(char) *
 				(strlen((*cmd)[i]) + strlen(tmp)));
@@ -48,4 +52,13 @@ int		replace_var_env(char ***cmd, t_shell *sh)
 	  }
     }
   return (1);
+}
+
+int		replace_vars(char ***cmd, t_shell *sh)
+{
+  int		ret;
+
+  if ((ret = replace_var_env(cmd, sh, 1)) == 0)
+    return (replace_var_env(cmd, sh, 0));
+  return (ret);
 }

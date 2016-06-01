@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Tue May 31 17:00:38 2016 vincent riamon
+** Last update Wed Jun  1 14:38:41 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -56,7 +56,7 @@ char		*wordtab_in_str(char **tab, int mode);
 char		**error_history(char *var);
 char		*error_history2();
 
-int		replace_var_env(char ***cmd, t_shell *sh);
+int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
