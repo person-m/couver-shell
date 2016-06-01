@@ -1,11 +1,11 @@
- /*
+/*
 ** main.c for  in /home/buffat_b/couver-shell
 **
 ** Made by
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed Jun  1 14:37:54 2016 vincent riamon
+** Last update Wed Jun  1 22:43:05 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -90,10 +90,9 @@ int		main(__attribute__((unused))int argc,
       free_shell(sh);
       return (sh.ret);
     }
+
   if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
-
-
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);

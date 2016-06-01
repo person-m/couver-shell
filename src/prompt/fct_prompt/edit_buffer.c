@@ -5,10 +5,24 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:22 2016
-** Last update Sat May 28 23:06:30 2016 
+** Last update Wed Jun  1 22:39:53 2016 Bertrand Buffat
 */
 
 #include "shell.h"
+
+int	get_n_same_bytes(const char *s1, const char *s2)
+{
+  int	i;
+
+  i = 0;
+  while (*s1 && *s1 == *s2)
+    {
+      ++s1;
+      ++s2;
+      ++i;
+    }
+  return (i);
+}
 
 void	delete_char(t_shell *sh)
 {

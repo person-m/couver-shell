@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Tue May 31 12:59:21 2016 Bertrand Buffat
+** Last update Wed Jun  1 22:40:55 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -120,6 +120,7 @@ void		print_commands(t_prompt *, char **env, int count);
 void		get_pwd_prompt(t_prompt *);
 void		put_nbr(int);
 int		dlen(char **);
+int		get_n_same_bytes(const char *, const char *);
 int		get_offset(char *line, int pos, int *ret);
 int		get_offset_directory(char *line, int pos);
 void		get_path_from_line(t_prompt *, int offset_dir, char *path);
