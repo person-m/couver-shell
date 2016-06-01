@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed Jun  1 22:43:05 2016 Bertrand Buffat
+** Last update Thu Jun  2 00:25:28 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -93,6 +93,7 @@ int		main(__attribute__((unused))int argc,
 
   if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
+
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);
