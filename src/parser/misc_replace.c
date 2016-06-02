@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Thu Jun  2 13:31:04 2016 vincent riamon
-** Last update Thu Jun  2 13:41:00 2016 vincent riamon
+** Last update Fri Jun  3 00:34:42 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -29,13 +29,20 @@ char	*get_var(char *str)
 
   i = 0;
   tmp = my_malloc(sizeof(char) * (strlen(str)));
-  while (str[i] && str[i] != '"')
+  while (str[i] && str[i] != '}' && str[i] != '"')
     {
       tmp[i] = str[i];
       i = i + 1;
     }
   tmp[i] = 0;
   return (tmp);
+}
+
+int	error_accolades(int mode)
+{
+  if (mode == 0)
+    fprintf(stderr, "Missing }.\n");
+  return (0);
 }
 
 char	*put_cmd(char **cmd1, char *cmd2)
