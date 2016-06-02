@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Tue May 31 17:00:38 2016 vincent riamon
+** Last update Thu Jun  2 15:33:53 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -14,6 +14,8 @@
 /*
 **	Libraries
 */
+
+# define _GNU_SOURCE
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -54,11 +56,14 @@ void		the_execution(char **cmd, t_shell *sh);
 void		fill_history(t_shell *sh);
 void		update_history(char *line, t_shell *sh);
 char		*wordtab_in_str(char **tab, int mode);
+int		create_history_file(char **hist, t_shell *sh);
 char		**error_history(char *var);
 char		*error_history2();
 
 int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
+char		*get_var(char *str);
+char		*put_cmd(char **str, char *str1);
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
 char		*get_var_env(char **, char *);

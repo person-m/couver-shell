@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu Jun  2 00:25:28 2016 Bertrand Buffat
+** Last update Thu Jun  2 16:06:25 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -28,11 +28,13 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line, 0);
-      ret = replace_vars(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
+      ret = replace_vars(&cmd, sh);
       update_history(sh->prompt->line, sh);
+
       if (ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);
+
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);
@@ -56,19 +58,6 @@ int		main(__attribute__((unused))int argc,
   char		**cmd;
   char		*couv_rc;
 
-  /* char		*s;
-  char		**cmd;
-  write(1, "$> ", 3);
-  while ((s = get_next_line(0)))
-    {
-      cmd = lexer(s);
-      update_history(cmd, &sh);
-       if (!check_command(cmd))
-       	the_execution(cmd, &sh);
-      write(1, "$> ", 3);
-      free_tab(cmd);
-      free(s);
-    } */
   sh.ret = 0;
   sh.env = cpy_env(env);
   fill_history(&sh);
@@ -87,10 +76,8 @@ int		main(__attribute__((unused))int argc,
       free_shell(sh);
       return (sh.ret);
     }
-
   if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
-
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);

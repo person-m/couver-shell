@@ -5,10 +5,23 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed Jan  6 08:50:21 2016 vincent riamon
-** Last update Fri May 27 14:16:28 2016 vincent riamon
+** Last update Thu Jun  2 15:33:27 2016 vincent riamon
 */
 
 #include "my.h"
+
+int	create_history_file(char **hist, t_shell *sh)
+{
+  if (get_var_env(sh->env, "HOME=") != NULL)
+    *hist = concat_str(get_var_env(sh->env, "HOME="),
+		       ".42_history", '/');
+  else
+    {
+      *hist = NULL;
+      return (-1);
+    }
+  return (0);
+}
 
 int		lenstr(char *str, char c)
 {

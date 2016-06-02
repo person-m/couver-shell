@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 04:12:22 2016
-** Last update Wed Jun  1 22:16:10 2016 mohamed-laid hedia
+** Last update Thu Jun  2 13:54:36 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -51,8 +51,8 @@ void	get_std_input(t_shell *sh)
   while (instr[++i])
     {
       cmd = lexer(instr[i], 0);
-      ret = replace_vars(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
+      ret = replace_vars(&cmd, sh);
       update_history(instr[i], sh);
       if (ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);

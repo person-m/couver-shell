@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Tue May 31 17:35:06 2016 vincent riamon
+** Last update Thu Jun  2 13:42:08 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -93,15 +93,17 @@ int		replace_exclam_dot(char ***cmd, t_shell *sh)
   int		j;
   char		**tmp;
   char		**my_line;
+  char		*var;
 
   i = -1;
   while ((*cmd)[++i] && (j = -1))
     while ((*cmd)[i][++j])
       if ((*cmd)[i][j] == '!' && (*cmd)[i][j + 1])
 	{
-	  tmp = my_str_to_wordtab_pattern((*cmd)[i] + j + 1, ":");
+	  var = get_var((*cmd)[i] + j);
+	  tmp = my_str_to_wordtab_pattern(var + 1, ":");
 	  my_line = (tab_len(tmp) == 1 ?
-		     get_var_history(sh->history, (*cmd)[i] + j + 1) :
+		     get_var_history(sh->history, var + 1) :
 		     get_var_history2(sh->history, tmp));
 	    if (my_line != NULL)
 	      (*cmd) = insert_tab_in_tab((*cmd), my_line, i, 1);

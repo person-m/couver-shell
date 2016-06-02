@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Wed Jun  1 23:23:13 2016 Bertrand Buffat
+** Last update Thu Jun  2 02:56:01 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -31,8 +31,7 @@ t_caps		*init_caps(void)
       || !(caps->down = tigetstr("kcud1"))
       || !(caps->left = tigetstr("kcub1"))
       || !(caps->right = tigetstr("kcuf1"))
-      || !(caps->clear = tigetstr("clear"))
-      || !(smkx = tigetstr("smkx")))
+      || !(caps->clear = tigetstr("clear")))
     return (NULL);
   if (!(caps->ascii =
 	strdup("a,a:b,b:c,c:d,d:e,e:f,f:g,g:h,h:i,i:j,j:k,k:l,l:m,m:"))
@@ -46,7 +45,10 @@ t_caps		*init_caps(void)
 	   stradd(caps->ascii,
 		  "N,N:O,O:P,P:Q,Q:R,R:S,S:T,T:U,U:V,V:W,W:X,X:Y,Y:Z,Z")))
     return (NULL);
-  write(1, smkx, strlen(smkx));
+  if (!(smkx = tigetstr("smkx")))
+    write(1, "\033[?1h\033=", strlen("\033[?1h\033="));
+  else
+    write(1, smkx, strlen(smkx));
   return (caps);
 }
 
