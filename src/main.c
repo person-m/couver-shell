@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Wed Jun  1 22:43:05 2016 Bertrand Buffat
+** Last update Thu Jun  2 11:20:30 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -28,8 +28,10 @@ void	loop_42sh(t_shell *sh)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line, 0);
+aff_tab(cmd);
       ret = replace_vars(&cmd, sh);
       ret2 = replace_exclam_dot(&cmd, sh);
+      aff_tab(cmd);
       update_history(sh->prompt->line, sh);
       if (ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);
