@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sat May 28 19:06:18 2016 vincent riamon
-** Last update Thu Jun  2 15:30:48 2016 vincent riamon
+** Last update Thu Jun  2 18:08:45 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -27,11 +27,17 @@ static int	replace_ret_value(char ***cmd, int j, int i, t_shell *sh)
   return (1);
 }
 
-static void	insert_cmd(char ***cmd, int i, int j, char ***tmp2)
+static int	insert_cmd(char ***cmd, int i, int j, char *tmp)
 {
+  char		**tmp2;
+
+  tmp2 = lexer(tmp + 1, 0);
   (*cmd)[i][j] = 0;
-  (*cmd) = insert_tab_in_tab((*cmd), *tmp2, i, 1);
-  free_tab(*tmp2);
+  (*cmd) = insert_tab_in_tab((*cmd), tmp2, i, 1);
+  free_tab(tmp2);
+  if (!(*cmd)[0] || !(*cmd)[1])
+    return (0);
+  return (1);
 }
 
 static int	replace_var_env(char ***cmd, t_shell *sh, int mode)
@@ -39,7 +45,6 @@ static int	replace_var_env(char ***cmd, t_shell *sh, int mode)
   int		ind[2];
   char		*tmp;
   char		*var;
-  char		**tmp2;
 
   ind[0] = -1;
   while ((*cmd)[++ind[0]])
@@ -54,8 +59,8 @@ static int	replace_var_env(char ***cmd, t_shell *sh, int mode)
 	    if ((tmp = get_var_env((mode == 0 ? sh->env : sh->set),
 				   var + 1)) == NULL)
 	      return ((mode == 0 ? undef_var(var + 1, &var) : 0));
-	    tmp2 = lexer(tmp + 1, 0);
-	    insert_cmd(cmd, ind[0], ind[1], &tmp2);
+	    if (!insert_cmd(cmd, ind[0], ind[1], tmp))
+	      return (0);
 	    free(var);
 	    break ;
 	  }
