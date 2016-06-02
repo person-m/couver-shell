@@ -59,6 +59,18 @@ static char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
   return (new);
 }
 
+static void	tronc_tab(char **dest, int pos, int len)
+{
+  if (!dest || tab_len(dest) < pos + len)
+    return ;
+  while (dest[pos + len])
+  {
+    dest[pos] = dest[pos + len];
+    pos++;
+  }
+  dest[pos] = NULL;
+}
+
 static void	init_backquote(int q[2], char ***new_command, int *i)
 {
   q[0] = 0;
@@ -89,6 +101,8 @@ int	backquote(char ***command, t_shell *sh)
 	*command = insert_tab_in_tab(*command, new_command, i, j - i + 1);
       else if ((q[0] || q[1]) && (new_line = exec_in_q(&sub_command, sh)))
 	*command = insert_str_in_tab(*command, new_line, i, j - i + 1);
+      else
+	tronc_tab(*command, i, j - i + 1);
       free_tab(new_command);
       free_tab(sub_command);
     }
