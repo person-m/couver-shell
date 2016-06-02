@@ -12,38 +12,7 @@
 
 #include "shell.h"
 #include "backquote_utils.c"
-
-static char	*exec_in_q(char ***command, t_shell *sh)
-{
-  int		fd[2];
-  int		size;
-  char		*new_line;
-  int		ret_fork;
-
-  size = 0;
-  new_line = NULL;
-  pipe(fd);
-  if ((ret_fork = fork()) == -1)
-    return (NULL);
-  else if (ret_fork == 0)
-    son_action(fd, sh, command);
-  else
-    new_line = father_action(fd, &size);
-  return (new_line);
-}
-
-static	void	wordtabncpy(char **dest, char **src, int n)
-{
-  int		i;
-
-  i = 0;
-  while (i < n && src[i])
-  {
-    dest[i] = strdup(src[i]);
-    i++;
-  }
-  dest[i] = NULL;
-}
+#include "backquote_misc.c"
 
 static char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
 {
@@ -79,11 +48,17 @@ static void	init_backquote(int q[2], char ***new_command, int *i)
   *i = -1;
 }
 
-int	backquote(char ***command, t_shell *sh)
+static void	free_backquote(char **new_command, char **sub_command)
+{
+  free_tab(new_command);
+  free_tab(sub_command);
+}
+
+void	backquote(char ***command, t_shell *sh)
 {
   int	i;
   int	j;
-  char	**new_command = NULL;
+  char	**new_command;
   char	**sub_command;
   char	*new_line;
   int	q[2];
@@ -103,9 +78,7 @@ int	backquote(char ***command, t_shell *sh)
 	*command = insert_str_in_tab(*command, new_line, i, j - i + 1);
       else
 	tronc_tab(*command, i, j - i + 1);
-      free_tab(new_command);
-      free_tab(sub_command);
+      free_backquote(new_command, sub_command);
     }
   }
-  return (0);
 }

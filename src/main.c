@@ -13,9 +13,11 @@
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
-  if (!check_command(*cmd)
-      && !backquote(cmd, sh))
+  if (!check_command(*cmd))
+  {
+    backquote(cmd, sh);
     the_execution(*cmd, sh);
+  }
 }
 
 void	loop_42sh(t_shell *sh)
