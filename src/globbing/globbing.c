@@ -110,7 +110,7 @@ char	**glob_command(char **command)
   {
     quote = (strcmp(command[i], "\"")) ? quote : !quote;
     quote = (strcmp(command[i], "'")) ? quote : !quote;
-    if (strcmp(command[i], "\"") && strcmp(command[i], "'"))
+    if (strcmp(command[i], "\"") && strcmp(command[i], "'") && !quote)
       if (!(command = glob_parameters(command, &i)))
 	return (NULL);
     i++;

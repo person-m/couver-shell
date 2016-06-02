@@ -57,7 +57,6 @@ int		del_quote(char **command)
     if (!strcmp(command[j], "\"")
 	|| !strcmp(command[j], "'"))
     {
-      free(command[j]);
       j++;
     }
     else
