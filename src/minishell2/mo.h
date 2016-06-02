@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Wed Jun  1 20:46:48 2016 mohamed-laid hedia
+** Last update Thu Jun  2 23:08:25 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
@@ -42,7 +42,7 @@ void            the_execution(char **tab, t_shell *env);
 /* pars.c */
 
 int		length_param(char **tab, int i);
-char		**pars_param(char **tab, int i);
+char		**pars_param(char **tab, int i, t_shell *sh);
 
 /* pipe.c */
 

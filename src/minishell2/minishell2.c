@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Thu Jun  2 20:48:25 2016 mohamed-laid hedia
+** Last update Thu Jun  2 23:10:08 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -33,7 +33,7 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
   char	**b;
 
   s->failed = 1;
-  if ((b = pars_param(tab, s->i)) == NULL)
+  if ((b = pars_param(tab, s->i, env)) == NULL)
     {
       env->ret = EXIT_FAILURE;
       s->failed = -1;
@@ -49,8 +49,6 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
     }
   else
     my_process(env, s, b);
-  //if (b)
-    //free_tab(b);
   s->i = s->i + length_param(tab, s->i);
 }
 

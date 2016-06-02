@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Thu Jun  2 21:29:05 2016 vincent riamon
+** Last update Thu Jun  2 23:26:22 2016 mohamed-laid hedia
 */
 
 #ifndef SHELL_H_
@@ -36,6 +36,8 @@ typedef struct	s_shell
   int		bol;
   t_prompt	*prompt;
 }		t_shell;
+
+char		**alias(char **tab, t_shell *sh);
 
 void		get_std_input(t_shell *sh);
 
