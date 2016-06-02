@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Fri May 27 14:15:52 2016
-** Last update Thu Jun  2 00:24:54 2016 Bertrand Buffat
+** Last update Thu Jun  2 16:07:56 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -26,6 +26,8 @@ char		is_substr_in_path(t_prompt *prompt, DIR *dir, char flag)
 	memcpy(prompt->auto_completion, entry->d_name, prompt->size_completion);
 	flag = 1;	  
       }
+  if (!flag)
+    return (-1);
   return (flag);
 }
 
@@ -100,7 +102,7 @@ void	auto_completion(t_shell *sh)
       sh->prompt->size_completion = 0;
       return ;
     }
-  if (ret == 0)
+  if (!ret)
     search_command(sh->prompt, sh->env);
   else
     search_file(sh->prompt);
