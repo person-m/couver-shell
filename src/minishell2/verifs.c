@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:39:14 2016 mohamed-laid hedia
-** Last update Thu Jun  2 19:40:14 2016 vincent riamon
+** Last update Thu Jun  2 21:32:42 2016 vincent riamon
 */
 
 #include "mo.h"
@@ -39,7 +39,7 @@ int	is_builtin(char *str)
       strcmp(str, "setenv") && strcmp(str, "unsetenv")
       && strcmp(str, "alias") && strcmp(str, "history") &&
       strcmp(str, "set") && strcmp(str, "unset") && strcmp(str, "bind")
-      && strcmp(str, "couver"))
+      && strcmp(str, "couver") && strcmp(str, "madeby"))
     return (0);
   return (1);
 }
