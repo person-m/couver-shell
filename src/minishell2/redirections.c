@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 18:26:56 2016 mohamed-laid hedia
-** Last update Wed Jun  1 20:48:50 2016 mohamed-laid hedia
+** Last update Thu Jun  2 18:24:51 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -99,6 +99,8 @@ int	right_redirection(char *red, char *file)
 {
   int	fd;
 
+  if (!is_glob_redirect(&file))
+      return (-1);
   if (!strcmp(red, ">"))
     {
       if ((fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644)) == -1)

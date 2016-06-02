@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Wed Jun  1 16:35:48 2016 mohamed-laid hedia
+** Last update Thu Jun  2 16:58:41 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -49,8 +49,8 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
     }
   else
     my_process(env, s, b);
-  if (b)
-    free(b);
+  //if (b)
+  //free_tab(b);
   s->i = s->i + length_param(tab, s->i);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Wed Jun  1 21:10:44 2016 mohamed-laid hedia
+** Last update Thu Jun  2 16:58:12 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -59,13 +59,13 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 	  s->failed = -1;
 	  env->ret = EXIT_FAILURE;
 	}
-      free(b);
+      //free_tab(b);
     }
   else
     {
       p->i = p->i + 1;
       do_fork(b, env, p);
-      free(b);
+      //free_tab(b);
       close(p->p[p->i % 2][0]);
     }
   env->ret = wait_process(s, p, 0);
@@ -90,6 +90,7 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 	if (dup2(p->p[p->i % 2 ? 0 : 1][0], 0) == -1)
 	  exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
       f = minishell1(b, env);
+      //free(b);
       f == -1 ? exit(EXIT_FAILURE) : exit(EXIT_SUCCESS);
     }
   if (p->i)

@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Mon May 30 17:41:19 2016 mohamed-laid hedia
-** Last update Wed Jun  1 20:50:32 2016 mohamed-laid hedia
+** Last update Thu Jun  2 16:07:58 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -60,7 +60,7 @@ char	**delete_inhibitors(char **tab)
   i = 0;
   while (tab[i] != 0)
     {
-      if (tab[i][0] == '\'' || tab[i][0] == '\"')
+      if ((tab[i][0] == '\'' || tab[i][0] == '\"') && strlen(tab[i]) > 1)
 	{
 	  tab[i] = tab[i] + 1;
 	  tab[i][strlen(tab[i]) - 1] = 0;
