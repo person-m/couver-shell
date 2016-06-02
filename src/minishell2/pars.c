@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:54 2016 mohamed-laid hedia
-** Last update Wed Jun  1 20:16:00 2016 mohamed-laid hedia
+** Last update Thu Jun  2 18:20:37 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -51,5 +51,5 @@ char	**pars_param(char **tab, int i)
 	}
       i++;
     }
-  return (delete_inhibitors(b));
+  return (glob_command(delete_inhibitors(b)));
 }

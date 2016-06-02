@@ -99,27 +99,21 @@ static int	check_null_command(char **command)
   nul = 1;
   while (*command)
   {
-    if (!strcmp(">", *command) || !strcmp(">>", *command)
-	|| !strcmp("<", *command) || !strcmp("<<", *command))
+    if ((!strcmp(">", *command) || !strcmp(">>", *command)
+	|| !strcmp("<", *command) || !strcmp("<<", *command)) && !(nul = 0))
     {
-      command++;
-      if (*command)
+      if (++command && *command)
 	go_to_match_arg(&command);
-      nul = 0;
     }
     if (!(*command) || is_end_of_command(*command))
     {
       if (!exec && !nul)
 	return (fprintf(stderr, "Invalid null command.\n") || 1);
-      if (*command)
+      if ((nul = 1) && *command)
 	exec = 0;
-      nul = 1;
     }
-    else
-    {
-      exec = 1;
+    else if ((exec = 1))
       nul = 0;
-    }
     command += !!(*command);
   }
   return ((exec || nul) ? 0 : (fprintf(stderr, "Invalid null command.\n") || 1));

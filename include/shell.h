@@ -88,8 +88,10 @@ void		do_the_thing(t_shell *sh, char ***cmd);
 char		**lexer(char *line, int flag);
 int		check_command(char **command);
 int		globbing(char ***command);
-int		backquote(char ***command, t_shell *sh);
-int		del_quote(char **command);
+void		backquote(char ***command, t_shell *sh);
+void		del_quote(char **command);
+char		**glob_command(char **command);
+int		is_glob_redirect(char **str);
 
 void		strconcat(const char *, const char *, char *);
 int		my_getnbr(const char *str);
