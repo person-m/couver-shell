@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Thu Jun  2 15:33:53 2016 vincent riamon
+** Last update Thu Jun  2 19:37:21 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -51,6 +51,7 @@ void		create_oldpwd(t_shell *sh);
 void		create_set(t_shell *sh);
 void		*my_malloc(int size);
 char		*couvrc(char **env);
+int		logo(char **cmd, t_shell *sh);
 void		the_execution(char **cmd, t_shell *sh);
 
 void		fill_history(t_shell *sh);
