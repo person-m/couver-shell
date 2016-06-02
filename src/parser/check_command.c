@@ -93,8 +93,10 @@ static int	check_redirect_name(char **command)
 static int	check_null_command(char **command)
 {
   int		exec;
+  int		nul;
 
   exec = 0;
+  nul = 1;
   while (*command)
   {
     if (!strcmp(">", *command) || !strcmp(">>", *command)
@@ -103,20 +105,24 @@ static int	check_null_command(char **command)
       command++;
       if (*command)
 	go_to_match_arg(&command);
+      nul = 0;
     }
     if (!(*command) || is_end_of_command(*command))
     {
-      if (!exec)
+      if (!exec && !nul)
 	return (fprintf(stderr, "Invalid null command.\n") || 1);
       if (*command)
 	exec = 0;
+      nul = 1;
     }
     else
+    {
       exec = 1;
-    if (*command)
-      command++;
+      nul = 0;
+    }
+    command += !!(*command);
   }
-  return ((exec) ? 0 : (fprintf(stderr, "Invalid null command.\n") || 1));
+  return ((exec || nul) ? 0 : (fprintf(stderr, "Invalid null command.\n") || 1));
 }
 
 int	check_command(char **command)

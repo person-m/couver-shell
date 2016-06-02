@@ -32,10 +32,10 @@ char	*couvrc(char **env)
 
   cmd = my_malloc(sizeof(char) * 1);
   cmd[0] = 0;
-  home = concat_str(get_var_env(env, "HOME="), ".couvrc", '/');
+  home = concat_str(get_var_env(env, "HOME="), ".couverc", '/');
   if (home == NULL)
     {
-      if ((fd = open(".couvrc", O_RDONLY)) == -1)
+      if ((fd = open(".couverc", O_RDONLY)) == -1)
 	return (NULL);
       add_str(&s, fd, &cmd);
       return (cmd);

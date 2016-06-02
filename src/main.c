@@ -53,10 +53,10 @@ int		main(__attribute__((unused))int argc,
 		     char **env)
 {
   t_shell	sh;
-  /*char		*couv_rc;*/
+  char		**cmd;
+  char		*couv_rc;
 
-  /*
-  char		*s;
+  /* char		*s;
   char		**cmd;
   write(1, "$> ", 3);
   while ((s = get_next_line(0)))
@@ -68,22 +68,19 @@ int		main(__attribute__((unused))int argc,
       write(1, "$> ", 3);
       free_tab(cmd);
       free(s);
-    }
-  */
-
-  /*if ((couv_rc = couvrc(env)))
-    {
-      printf("%s\n", couv_rc);
-      lexer(couv_rc);
-    }
-  free(couv_rc); */
-
+    } */
   sh.ret = 0;
   sh.env = cpy_env(env);
   fill_history(&sh);
   create_alias(&sh);
   create_oldpwd(&sh);
   create_set(&sh);
+  if ((couv_rc = couvrc(env)))
+  {
+    cmd = lexer(couv_rc, 0);
+    do_the_thing(&sh, &cmd);
+    free(couv_rc);
+  }
   if (!isatty(0))
     {
       get_std_input(&sh);
