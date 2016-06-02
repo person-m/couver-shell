@@ -89,6 +89,8 @@ int		check_command(char **command);
 int		globbing(char ***command);
 int		backquote(char ***command, t_shell *sh);
 int		del_quote(char **command);
+char		**glob_command(char **command);
+int		is_glob_redirect(char **str);
 
 void		strconcat(const char *, const char *, char *);
 int		my_getnbr(const char *str);

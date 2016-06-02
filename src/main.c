@@ -13,8 +13,8 @@
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
-  if (!check_command(*cmd) && !globbing(cmd)
-      && !backquote(cmd, sh) && !del_quote(*cmd))
+  if (!check_command(*cmd)
+      && !backquote(cmd, sh))
     the_execution(*cmd, sh);
 }
 
