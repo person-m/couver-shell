@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Tue May 31 19:41:22 2016 Melvin Personnier
+** Last update Thu Jun  2 01:28:02 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -35,10 +35,9 @@ static int	exit_setenv(char **tab)
 int		my_setenv(char **tab, t_shell *sh)
 {
   int		i;
-  int		bol;
 
   i = -1;
-  bol = 0;
+  sh->bol = 0;
   if (!exit_setenv(tab))
     return (-1);
   if (!tab[1])
@@ -50,10 +49,10 @@ int		my_setenv(char **tab, t_shell *sh)
 	{
 	  free(sh->env[i]);
 	  sh->env[i] = concat_str(tab[1], tab[2], '=');
-	  bol = 1;
+	  sh->bol = 1;
 	}
     }
-  if (!bol)
+  if (!sh->bol)
     {
       sh->env = realloc(sh->env, ((tab_len(sh->env) + 2) * sizeof(char *)));
       sh->env[i] = concat_str(tab[1], tab[2], '=');

@@ -24,7 +24,7 @@ typedef struct		s_lexer
   int			len;
   int			ret_len;
   int			escape;
-  int			q[2];
+  int			q[3];
 }			t_lexer;
 
 #endif /* !LEXER_H_ */

@@ -37,8 +37,7 @@ static void	update_quote(t_lexer *l, char *line)
 {
   l->q[0] = (line[l->pos + l->len] != '\"' || l->q[1]) ? l->q[0] : !l->q[0];
   l->q[1] = (line[l->pos + l->len] != '\'' || l->q[0]) ? l->q[1] : !l->q[1];
-  l->q[0] = (line[l->pos + l->len] != '`') ? l->q[0] : 0;
-  l->q[1] = (line[l->pos + l->len] != '`') ? l->q[1] : 0;
+  l->q[2] = (line[l->pos + l->len] != '`') ? l->q[2] : !l->q[2];
 }
 
 static int	lexer_command(char *line, t_lexer *l, int flag)
@@ -48,19 +47,19 @@ static int	lexer_command(char *line, t_lexer *l, int flag)
     update_quote(l, line);
     l->len += (l->escape = ((line[l->pos + l->len] == '\\')
 			    && line[l->pos + l->len + 1]));
-    if (!l->q[0] && !l->q[1] && !l->escape
-	&& is_special(line[l->pos + l->len]))
+    if (((!l->q[0] && !l->q[1]) || l->q[2] || line[l->pos + l->len] == '`')
+	&& !l->escape && is_special(line[l->pos + l->len]))
     {
       if (push_word(l, line, &l->pos, &l->len) || !(++l->pos))
 	return (1);
     }
     else if (!flag && ((l->ret_len = is_separator(l, line + l->pos + l->len))
-	     && !l->escape && ((!l->q[0] && !l->q[1])
+	     && !l->escape && (((!l->q[0] && !l->q[1]) || l->q[2]
+				|| line[l->pos + l->len] == '`')
 			       || is_quote(line[l->pos + l->len], l->q))))
     {
       if (push_word(l, line, &l->pos, &l->len)
-	  || push_separator(l, line, &l->pos, l->ret_len)
-	  || (l->len = 0))
+	  || push_separator(l, line, &l->pos, l->ret_len) || (l->len = 0))
 	return (1);
     }
     else

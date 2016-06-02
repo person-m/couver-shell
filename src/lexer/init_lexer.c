@@ -73,6 +73,7 @@ static int	init_struct(t_lexer *lexer)
   lexer->len = 0;
   lexer->q[0] = 0;
   lexer->q[1] = 0;
+  lexer->q[2] = 0;
   if (!(lexer->command = malloc(sizeof(char *))))
     return (1);
   *lexer->command = NULL;

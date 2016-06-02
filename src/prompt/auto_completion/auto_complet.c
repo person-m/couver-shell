@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Fri May 27 14:15:52 2016
-** Last update Wed Jun  1 18:00:43 2016 Bertrand Buffat
+** Last update Thu Jun  2 00:24:54 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -18,17 +18,15 @@ char		is_substr_in_path(t_prompt *prompt, DIR *dir, char flag)
     if (!strncmp(entry->d_name, prompt->line + prompt->offset,
 		 prompt->count_char - prompt->offset) &&
 	entry->d_name[0] != '.')
-      {
+      {	
 	if (flag && strncmp(entry->d_name, prompt->auto_completion,
 			    prompt->size_completion))
 	  return (-1);
 	prompt->size_completion = strlen(entry->d_name);
 	memcpy(prompt->auto_completion, entry->d_name, prompt->size_completion);
-	flag = 1;
+	flag = 1;	  
       }
-  if (!flag)
-    return (-1);
-  return (1);
+  return (flag);
 }
 
 void	search_substr_in_path(t_prompt *prompt, char **path, char flag)
@@ -87,7 +85,6 @@ void	search_file(t_prompt *prompt)
       prompt->size_completion = 0;
       return ;
     }
-
   if (is_substr_in_path(prompt, dir, 0) == -1)
     prompt->size_completion = 0;
   closedir(dir);

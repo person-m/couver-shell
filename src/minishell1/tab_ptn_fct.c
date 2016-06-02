@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Tue May 31 19:14:58 2016 Melvin Personnier
+** Last update Wed Jun  1 23:08:44 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -62,6 +62,6 @@ int	minishell1(char **tab, t_shell *sh)
   int	is_builtin;
 
   if ((is_builtin = builtins(tab, sh)) == 1)
-    return (exec_sh1(tab, sh->env));
+    return (exec_sh1(tab, sh));
   return (is_builtin);
 }

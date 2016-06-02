@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat May 21 16:32:56 2016 Melvin Personnier
-** Last update Wed Jun  1 12:11:30 2016 Melvin Personnier
+** Last update Thu Jun  2 01:28:33 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -68,16 +68,17 @@ static int	instant_exec(char **tab, char **env)
       if (tab[0][0] == '/' && opendir(tab[0]) != NULL)
 	return (perm_denied(tab));
       if (my_errno == ENOEXEC)
-	fprintf(stderr, "%s: Exec format error. Binary file not executable.\n", tab[0]);
+	fprintf(stderr, "%s: Exec format error. "
+		"Binary file not executable.\n", tab[0]);
       else
 	fprintf(stderr, "%s: Command not found.\n", tab[0]);
     }
   return (a);
 }
 
-int		exec_sh1(char **tab, char **env)
+int		exec_sh1(char **tab, t_shell *sh)
 {
   if (tab[0][0] == '.' || tab[0][0] == '/' || slash_in_str(tab[0]) == 1)
-    return (instant_exec(tab, env));
-  return (test_path(tab, env));
+    return (instant_exec(tab, sh->env));
+  return (test_path(tab, sh->env));
 }

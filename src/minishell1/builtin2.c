@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Thu May 19 13:56:52 2016 vincent riamon
-** Last update Wed Jun  1 23:57:18 2016 vincent riamon
+** Last update Thu Jun  2 12:16:15 2016 vincent riamon
 */
 
 #include "my.h"
@@ -64,7 +64,7 @@ int		is_alphanum(char *str)
     {
       if ((str[i] >= '0' && str[i] <= '9')
 	  || (str[i] >= 'a' && str[i] <= 'z')
-	  || (str[i] >= 'A' && str[i] <= 'Z'))
+	  || (str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_')
 	i = i + 1;
       else
 	return (0);

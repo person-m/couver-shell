@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Tue May 31 21:05:54 2016 Bertrand Buffat
+## Last update Thu Jun  2 13:32:07 2016 vincent riamon
 ##
 
 NAME	=	42sh
@@ -31,6 +31,8 @@ SRC	=	src/main.c \
 		src/minishell1/builtin2.c \
 		src/minishell1/builtin3.c \
 		src/minishell1/builtin4.c \
+		src/minishell1/builtin5.c \
+		src/minishell1/builtin6.c \
 		src/minishell1/utils.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \
@@ -51,6 +53,7 @@ SRC	=	src/main.c \
 		src/parser/check_identity.c \
 		src/parser/replace_exclam.c \
 		src/parser/replace_dollar.c \
+		src/parser/misc_replace.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c \

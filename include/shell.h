@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Thu Jun  2 11:05:05 2016 vincent riamon
+** Last update Thu Jun  2 14:22:04 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -14,6 +14,8 @@
 /*
 **	Libraries
 */
+
+# define _GNU_SOURCE
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -31,6 +33,7 @@ typedef struct	s_shell
   char		**set;
   int		size_hist;
   int		ret;
+  int		bol;
   t_prompt	*prompt;
 }		t_shell;
 
@@ -58,6 +61,8 @@ char		*error_history2();
 
 int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
+char		*get_var(char *str);
+char		*put_cmd(char **str, char *str1);
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
 char		*get_var_env(char **, char *);

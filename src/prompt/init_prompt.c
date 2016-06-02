@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Tue May 31 13:45:00 2016 Bertrand Buffat
+** Last update Wed Jun  1 23:23:13 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -97,7 +97,8 @@ t_prompt	*init_prompt(char **env, char **history)
   size = prompt->nbcols * prompt->nblines;
   if (!(prompt->prompt = malloc(sizeof(char) * size))
       || (!(prompt->line = malloc(sizeof(char) * size)))
-      || (!(prompt->auto_completion = malloc(sizeof(char) * size))))
+      || (!(prompt->auto_completion = malloc(sizeof(char) * size)))
+      || (!(prompt->pwd = malloc(sizeof(char) * size))))
     return (NULL);
   init_prompt_line(prompt, env);
   prompt->tmp_history = NULL;
