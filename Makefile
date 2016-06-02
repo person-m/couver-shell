@@ -54,6 +54,7 @@ SRC	=	src/main.c \
 		src/parser/replace_exclam.c \
 		src/parser/replace_dollar.c \
 		src/parser/misc_replace.c \
+		src/parser/alias.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c \
@@ -61,7 +62,7 @@ SRC	=	src/main.c \
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-I./include/
+CFLAGS	=	-I./include/ -Iminishell1
 
 CC	=	cc -Wall -Wextra -Werror -g
 

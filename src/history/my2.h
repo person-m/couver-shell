@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
-#include "../minishell1/my.h"
+#include "my.h"
 
 #ifndef READ_SIZE
 # define READ_SIZE (7)

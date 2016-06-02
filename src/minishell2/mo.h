@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "../../include/shell.h"
-#include "../minishell1/my.h"
+#include "shell.h"
+#include "my.h"
 
 typedef struct	s_pipe
 {
