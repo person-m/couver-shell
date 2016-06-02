@@ -19,8 +19,17 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include <errno.h>
-# include "../../include/shell.h"
-# include "../history/my.h"
+# include "shell.h"
+
+# ifndef READ_SIZE
+#  define READ_SIZE (7)
+# endif /* !READ_SIZE */
+
+int	tab_len(char **tab);
+char	*get_next_line(const int fd);
+void	*my_malloc(int size);
+void	free_tab(char **tab);
+char	*get_var_env(char **env, char *name);
 
 char	**cpy_env(char **env);
 void	create_alias(t_shell *sh);
@@ -37,7 +46,7 @@ void	aff_tab_alias(char **tab);
 int	my_setenv(char **t, t_shell *sh);
 int	my_unsetenv(char **t, t_shell *sh);
 int	my_alias(char **tab, t_shell *sh);
-void	is_alias(char **s, t_shell *sh);
+int	is_alias(char **s, t_shell *sh);
 int	cmd_cd(char **t, t_shell *sh);
 int	cmd_history(char **t, t_shell *sh);
 int	my_echo(char **t, t_shell *sh);

@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Thu Jun  2 20:37:29 2016 mohamed-laid hedia
+** Last update Thu Jun  2 23:11:08 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -47,7 +47,7 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
   char	**b;
 
   env->ret = EXIT_SUCCESS;
-  if ((b = pars_param(tab, s->i)) == NULL)
+  if ((b = pars_param(tab, s->i, env)) == NULL)
     {
       env->ret = EXIT_FAILURE;
       s->failed = -1;
@@ -59,13 +59,11 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 	  s->failed = -1;
 	  env->ret = EXIT_FAILURE;
 	}
-      free_tab(b);
     }
   else
     {
       p->i = p->i + 1;
       do_fork(b, env, p);
-      free_tab(b);
       close(p->p[p->i % 2][0]);
     }
   env->ret = wait_process(s, p, 0);
@@ -82,7 +80,7 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
     return ;
   else if (t == 0)
     {
-      if ((b = pars_param(tab, s->i)) == NULL)
+      if ((b = pars_param(tab, s->i, env)) == NULL)
 	exit(EXIT_FAILURE);
       if (dup2(p->p[p->i % 2][1], 1) == -1)
 	exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
