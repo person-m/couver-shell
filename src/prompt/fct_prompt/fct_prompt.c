@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 02:37:42 2016
-** Last update Tue May 31 13:42:36 2016 Bertrand Buffat
+** Last update Wed Jun  1 23:55:20 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -50,6 +50,7 @@ int	dlen(char **s)
 void	get_pwd_prompt(t_prompt *prompt)
 {
   char	*term;
+  char	*home;  
 
   if (!(term = get_var_env(prompt->env, "PWD=")))
     {
@@ -57,12 +58,17 @@ void	get_pwd_prompt(t_prompt *prompt)
       prompt->pwd = NULL;
       return ;
     }
-  prompt->pwd = term;
-  if (!strncmp(term, "/home/", 6))
-    prompt->pwd += 6;
-  if (!strncmp(prompt->pwd, prompt->prompt, prompt->size_prompt - 1))
-    prompt->pwd += (prompt->size_prompt - 1);
-  prompt->size_pwd = strlen(prompt->pwd);
+  prompt->size_pwd = strlen(term);
+  memcpy(prompt->pwd, term, prompt->size_pwd);
+  if (!(home = get_var_env(prompt->env, "HOME=")))
+    return ;
+  if (!strncmp(term, home, strlen(home)))
+    {
+      term += strlen(home);
+      memcpy(prompt->pwd + 1, term, strlen(term));
+      prompt->pwd[0] = '~';
+      prompt->size_pwd = strlen(term) + 1;
+    }
 }
 
 void	check_auto_compet(t_shell *sh)

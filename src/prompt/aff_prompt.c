@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:05:49 2016
-** Last update Tue May 31 19:34:36 2016 Bertrand Buffat
+** Last update Thu Jun  2 00:09:51 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -35,10 +35,10 @@ void	is_out_of_screen(t_prompt *prompt, int nb_lines_buffer)
 void	aff_line_prompt(t_prompt *prompt)
 {
   write(1, "\033[36m", strlen("\033[36m"));
+  write(1, prompt->prompt, prompt->size_prompt);
+  write(1, "\033[31m", strlen("\033[31m"));
   write(1, prompt->pwd, prompt->size_pwd);
   write(1, " ", 1);
-  write(1, "\033[31m", strlen("\033[31m"));
-  write(1, prompt->prompt, prompt->size_prompt);
   write(1, "\033[32m", strlen("\033[32m"));
   put_nbr(prompt->count_char);
   write(1, " ", 1);
@@ -65,12 +65,10 @@ void	aff_prompt(t_prompt *prompt)
   int	nb_lines_buffer;
   int	total_count;
 
-  total_count = prompt->size_pwd +
+  total_count = prompt->size_pwd + prompt->size_completion +
   prompt->size_prompt + prompt->count_pos + (prompt->start_col - 1) +
   size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 5;
-
-  nb_lines_buffer = total_count / prompt->nbcols;
-
+  nb_lines_buffer = total_count / prompt->nbcols + 1;
   is_out_of_screen(prompt, nb_lines_buffer);
   erase_down_lines(prompt, nb_lines_buffer);
   aff_total_line(prompt);

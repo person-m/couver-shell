@@ -5,53 +5,63 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Tue May 31 19:22:56 2016 Melvin Personnier
+** Last update Thu Jun  2 01:53:00 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-void		create_set(t_shell *sh)
+void		init_one_two(char **one, char **two, char *total)
 {
-  sh->set = my_malloc(sizeof(char *) * 2);
-  sh->set[0] = NULL;
+  *one = cut_one(total);
+  *two = cut_two(total);
 }
 
-static int	print_set(t_shell *sh)
+void		add_line_set(int i, char *one, char *two, t_shell *sh)
+{
+  sh->set = realloc(sh->set, ((tab_len(sh->set) + 2) * sizeof(char *)));
+  sh->set[i] = concat_str(one, two, '\t');
+  sh->set[i + 1] = NULL;
+}
+
+void		modif_line(t_shell *sh, int *i, char *one, char *two)
+{
+  while (sh->set[++(*i)])
+    {
+      if (!strncmp(sh->set[*i], one, strlen(one)) &&
+	  sh->set[*i][strlen(one)] == '\t')
+	{
+	  free(sh->set[*i]);
+	  sh->set[*i] = concat_str(one, two, '\t');
+	  sh->bol = 1;
+	}
+    }
+}
+
+int		cmd_set(char **tab, t_shell *sh)
 {
   int		i;
+  int		j;
+  char		*one;
+  char		*two;
+  char		*total;
 
-  i = -1;
-  write(1, "_\t", 2);
-  if (tab_len(sh->history) > 1)
-    printf("%s\n\n", sh->history[sh->size_hist - 2]);
-  else
-    printf("\n");
-  while (sh->set[++i])
-    printf("%s\n", sh->set[i]);
-  return (0);
-}
-
-static int	is_already_in_set(char **my_set, char *str)
-{
-  int    	i;
-  char		*str2;
-
-  i = 0;
-  str2 = my_malloc(sizeof(char) * (strlen(str) + 2));
-  str2 = strcpy(str2, str);
-  str2[strlen(str)] = '\t';
-  str2[strlen(str) + 1] = 0;
-  while (my_set[i])
+  sh->bol = 0;
+  j = 0;
+  if (!tab[1])
+    return (print_set(sh));
+  while (tab[++j])
     {
-      if (!(strncmp(my_set[i], str2, strlen(str2))))
-	{
-	  free(str2);
-	  return (i);
-	}
-      i++;
+      total = modif_total(tab, &j);
+      init_one_two(&one, &two, total);
+      if (!verif_for_one(one))
+	  return (free_set_return(one, two, total));
+      i = -1;
+      modif_line(sh, &i, one, two);
+      if (!sh->bol)
+	add_line_set(i, one, two, sh);
+      free_set(one, two, total);
     }
-  free(str2);
-  return (i);
+  return (0);
 }
 
 int	my_unset(char **tab, t_shell *sh)
@@ -74,34 +84,6 @@ int	my_unset(char **tab, t_shell *sh)
 	  i = i + 1;
 	}
       sh->set[i] = NULL;
-    }
-  return (0);
-}
-
-int		cmd_set(char **tab, t_shell *sh)
-{
-  int		i;
-  int		bol;
-
-  i = -1;
-  bol = 0;
-  if (!tab[1])
-    return (print_set(sh));
-  while (sh->set[++i])
-    {
-      if (!strncmp(sh->set[i], tab[1], strlen(tab[1])) &&
-	  sh->set[i][strlen(tab[1])] == '\t')
-	{
-	  free(sh->set[i]);
-	  sh->set[i] = concat_str(tab[1], tab[2], '\t');
-	  bol = 1;
-	}
-    }
-  if (!bol)
-    {
-      sh->set = realloc(sh->set, ((tab_len(sh->set) + 2) * sizeof(char *)));
-      sh->set[i] = concat_str(tab[1], tab[2], '\t');
-      sh->set[i + 1] = NULL;
     }
   return (0);
 }

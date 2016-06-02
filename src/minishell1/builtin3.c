@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Mon May 30 21:16:01 2016 Melvin Personnier
+** Last update Wed Jun  1 23:14:45 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -84,19 +84,19 @@ void		create_alias(t_shell *sh)
   sh->alias[0] = NULL;
 }
 
-void	is_alias(char **s, t_shell sh)
+void	is_alias(char **s, t_shell *sh)
 {
   int	i;
   int	a;
 
   i = -1;
   a = strlen(*s);
-  while (sh.alias[++i])
+  while (sh->alias[++i])
     {
-      if (!strncmp(*s, sh.alias[i], a))
+      if (!strncmp(*s, sh->alias[i], a))
 	{
 	  free(*s);
-	  *s = strdup(sh.alias[i] + a + 1);
+	  *s = strdup(sh->alias[i] + a + 1);
 	}
     }
 }

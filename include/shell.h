@@ -31,6 +31,7 @@ typedef struct	s_shell
   char		**set;
   int		size_hist;
   int		ret;
+  int		bol;
   t_prompt	*prompt;
 }		t_shell;
 
@@ -56,7 +57,7 @@ char		*wordtab_in_str(char **tab, int mode);
 char		**error_history(char *var);
 char		*error_history2();
 
-int		replace_var_env(char ***cmd, t_shell *sh);
+int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
