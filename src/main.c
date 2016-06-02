@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu Jun  2 14:35:59 2016 vincent riamon
+** Last update Thu Jun  2 15:34:54 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -55,22 +55,6 @@ int		main(__attribute__((unused))int argc,
   t_shell	sh;
   /*char		*couv_rc;*/
 
-  /*
-  char		*s;
-  char		**cmd;
-  write(1, "$> ", 3);
-  while ((s = get_next_line(0)))
-    {
-      cmd = lexer(s);
-      update_history(cmd, &sh);
-       if (!check_command(cmd))
-       	the_execution(cmd, &sh);
-      write(1, "$> ", 3);
-      free_tab(cmd);
-      free(s);
-    }
-  */
-
   /*if ((couv_rc = couvrc(env)))
     {
       printf("%s\n", couv_rc);
@@ -90,10 +74,8 @@ int		main(__attribute__((unused))int argc,
       free_shell(sh);
       return (sh.ret);
     }
-
   if (!(sh.prompt = init_prompt(env, sh.history)))
     return (0);
-
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);

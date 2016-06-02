@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Thu Jun  2 14:22:04 2016 vincent riamon
+** Last update Thu Jun  2 15:33:53 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -56,6 +56,7 @@ void		the_execution(char **cmd, t_shell *sh);
 void		fill_history(t_shell *sh);
 void		update_history(char *line, t_shell *sh);
 char		*wordtab_in_str(char **tab, int mode);
+int		create_history_file(char **hist, t_shell *sh);
 char		**error_history(char *var);
 char		*error_history2();
 
