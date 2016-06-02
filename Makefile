@@ -31,6 +31,8 @@ SRC	=	src/main.c \
 		src/minishell1/builtin2.c \
 		src/minishell1/builtin3.c \
 		src/minishell1/builtin4.c \
+		src/minishell1/builtin5.c \
+		src/minishell1/builtin6.c \
 		src/minishell1/utils.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \

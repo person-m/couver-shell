@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Wed Jun  1 14:38:41 2016 vincent riamon
+** Last update Tue May 31 17:00:38 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -31,6 +31,7 @@ typedef struct	s_shell
   char		**set;
   int		size_hist;
   int		ret;
+  int		bol;
   t_prompt	*prompt;
 }		t_shell;
 

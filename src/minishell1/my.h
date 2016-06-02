@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Tue May 31 19:14:03 2016 Melvin Personnier
+** Last update Thu Jun  2 01:55:12 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -37,15 +37,26 @@ void	aff_tab_alias(char **tab);
 int	my_setenv(char **t, t_shell *sh);
 int	my_unsetenv(char **t, t_shell *sh);
 int	my_alias(char **tab, t_shell *sh);
+void	is_alias(char **s, t_shell *sh);
 int	cmd_cd(char **t, t_shell *sh);
 int	cmd_history(char **t, t_shell *sh);
 int	my_echo(char **t, t_shell *sh);
 int	my_exit(char **t, t_shell *sh);
 int	my_env(t_shell *sh);
 int	cmd_set(char **tab, t_shell *sh);
+int	equal_or_not(char **tab, int *i);
+char	*modif_total(char **tab, int *j);
+int	verif_for_one(char *str);
+void	free_set(char *one, char *two, char *total);
+int	free_set_return(char *one, char *two, char *total);
+void	create_set(t_shell *sh);
+int	is_already_in_set(char **my_set, char *str);
+char	*cut_one(char *str);
+char	*cut_two(char *str);
+int	print_set(t_shell *sh);
 int	my_unset(char **t, t_shell *sh);
 int	minishell1(char **t, t_shell *sh);
-int	exec_sh1(char **t, char **env);
+int	exec_sh1(char **t, t_shell *sh);
 int	slash_in_str(char *str);
 int	is_alphanum(char *str);
 
