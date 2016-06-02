@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Thu Jun  2 15:34:54 2016 vincent riamon
+** Last update Thu Jun  2 16:06:25 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -31,8 +31,10 @@ void	loop_42sh(t_shell *sh)
       ret2 = replace_exclam_dot(&cmd, sh);
       ret = replace_vars(&cmd, sh);
       update_history(sh->prompt->line, sh);
+
       if (ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);
+
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);
@@ -53,14 +55,6 @@ int		main(__attribute__((unused))int argc,
 		     char **env)
 {
   t_shell	sh;
-  /*char		*couv_rc;*/
-
-  /*if ((couv_rc = couvrc(env)))
-    {
-      printf("%s\n", couv_rc);
-      lexer(couv_rc);
-    }
-  free(couv_rc); */
 
   sh.ret = 0;
   sh.env = cpy_env(env);
@@ -68,6 +62,19 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
   create_set(&sh);
+
+  /* char	*couv_rc; */
+  /* char	**cmd; */
+
+  /* if ((couv_rc = couvrc(env))) */
+  /*   { */
+  /*     printf("%s\n", couv_rc); */
+  /*     cmd = lexer(couv_rc, 0); */
+  /*     do_the_thing(&sh, &cmd); */
+  /*     free(couv_rc); */
+  /*   } */
+  /* return (0); */
+
   if (!isatty(0))
     {
       get_std_input(&sh);
