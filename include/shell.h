@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Fri Jun  3 00:42:09 2016 vincent riamon
+** Last update Fri Jun  3 16:05:29 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -44,6 +44,7 @@ void		get_std_input(t_shell *sh);
 char		**cpy_env(char **env);
 char		**my_str_to_wordtab_pattern(char *s, char *pattern);
 int		minishell1(char **tab, t_shell *sh);
+int		lenstr(char *str, char c);
 int		is_a_builtin(char *str);
 int		tab_len(char **tab);
 void		aff_tab(char **tab);
@@ -66,8 +67,11 @@ char		*error_history2();
 
 int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
+int		replace_ret_value(char ***cmd, int j, int i, t_shell *sh);
+int		undef_var(char **str);
+int	        close_accolade(char **str);
 char		*get_var(char *str);
-char		*put_cmd(char **str, char *str1);
+char		*put_cmd(char *str, char *str1);
 int	        error_accolades(int mode);
 int		there_is_accolade(char *str, int *inc);
 char		**insert_tab_in_tab(char **dest, char **src,
