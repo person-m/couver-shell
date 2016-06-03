@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Wed May 25 15:34:56 2016 vincent riamon
-** Last update Thu Jun  2 13:42:08 2016 vincent riamon
+** Last update Fri Jun  3 16:45:13 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -72,6 +72,11 @@ static char	**get_var_history2(char **hist, char **tab)
   char		*ret;
 
   i = tab_len(hist);
+  if (tab == NULL || tab[0] == NULL)
+    {
+      fprintf(stderr, "!: Command not found.\n");
+      return (NULL);
+    }
   nb = my_getnbr(tab[0]);
   arg = my_getnbr(tab[1]);
   while (--i > 0 && nb == 0)
@@ -94,18 +99,20 @@ int		replace_exclam_dot(char ***cmd, t_shell *sh)
   char		**tmp;
   char		**my_line;
   char		*var;
+  char		**ret;
 
   i = -1;
   while ((*cmd)[++i] && (j = -1))
     while ((*cmd)[i][++j])
-      if ((*cmd)[i][j] == '!' && (*cmd)[i][j + 1])
+      if ((*cmd)[i][j] == '!' && (*cmd)[i][j + 1] &&
+	  (*cmd)[i][j + 1] != '=')
 	{
 	  var = get_var((*cmd)[i] + j);
 	  tmp = my_str_to_wordtab_pattern(var + 1, ":");
 	  my_line = (tab_len(tmp) == 1 ?
 		     get_var_history(sh->history, var + 1) :
-		     get_var_history2(sh->history, tmp));
-	    if (my_line != NULL)
+		     (ret = get_var_history2(sh->history, tmp)));
+	  if (my_line != NULL)
 	      (*cmd) = insert_tab_in_tab((*cmd), my_line, i, 1);
 	    free_tab(tmp);
 	    if (!my_line)
