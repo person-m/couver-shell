@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Fri Jun  3 16:28:26 2016 Bertrand Buffat
+** Last update Fri Jun  3 17:39:11 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -36,7 +36,7 @@ void	complex_string(t_shell *sh, char *buffer)
 
 char	get_input(t_shell *sh)
 {
-  char	buffer[1024];
+  char	buffer[2048];
   int	ret;
 
   ret = read(0, buffer, 1024);
@@ -84,7 +84,6 @@ void	loop_prompt(t_shell *sh)
   aff_prompt(sh->prompt);
   while ((input = get_input(sh)) != '\n')
     {
-
       check_signals(sh);
       if (input)
 	{
@@ -92,7 +91,6 @@ void	loop_prompt(t_shell *sh)
 	  auto_completion(sh);
 	  aff_prompt(sh->prompt);
 	}
-
     }
   clean_screen(sh->prompt);
   if (!sh->prompt->count_char)
