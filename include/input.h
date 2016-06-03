@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 22:37:36 2016
-** Last update Fri Jun  3 15:45:37 2016 Bertrand Buffat
+** Last update Fri Jun  3 21:36:46 2016 Bertrand Buffat
 */
 
 #ifndef INPUT_H

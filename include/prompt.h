@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Fri Jun  3 16:01:54 2016 Bertrand Buffat
+** Last update Fri Jun  3 22:02:31 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -130,6 +130,7 @@ void		get_path_from_line(t_prompt *, int offset_dir, char *path);
 
 int		next_range(char *, char);
 char		*get_range_ascii(char *, char);
+bool		is_alpha(char *);
 
 void		put_in_list(t_list **, char *);
 int		get_row_list(t_list **, int);
