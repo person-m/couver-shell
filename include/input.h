@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 22:37:36 2016
-** Last update Sun May 29 00:42:14 2016 
+** Last update Fri Jun  3 15:45:37 2016 Bertrand Buffat
 */
 
 #ifndef INPUT_H
@@ -15,21 +15,26 @@
 
 typedef struct  s_input
 {
-  char          input;
-  void          (*ptr)(t_shell *);
+  char		input;
+  void		(*ptr)(t_shell *);
 }               t_input;
 
 void	check_auto_compet(t_shell *sh);
 void	fct_clear(t_shell *sh);
 void	delete_char(t_shell *sh);
+void	start_line_cursor(t_shell *sh);
+void	end_line_cursor(t_shell *sh);
+void	erase_word(t_shell *sh);
+void	move_left_word(t_shell *sh);
+void	move_right_word(t_shell *sh);
 
 t_input list_input[] =
   {
-    {1, NULL},
+    {1, start_line_cursor},
     {2, NULL},
     {3, NULL},
     {4, exit_shell},
-    {5, NULL},
+    {5, end_line_cursor},
     {6, NULL},
     {7, NULL},
     {8, NULL},
@@ -44,12 +49,12 @@ t_input list_input[] =
     {17, NULL},
     {18, NULL},
     {19, NULL},
-    {20, NULL},
+    {20, move_left_word},
     {21, NULL},
     {22, NULL},
-    {23, NULL},
+    {23, erase_word},
     {24, NULL},
-    {25, NULL},
+    {25, move_right_word},
     {26, NULL},
     {27, NULL},
     {28, NULL},

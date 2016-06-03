@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Fri Jun  3 00:42:22 2016 vincent riamon
+## Last update Fri Jun  3 16:26:54 2016 Bertrand Buffat
 ##
 
 NAME	=	42sh
@@ -16,11 +16,13 @@ SRC	=	src/main.c \
 		src/prompt/aff_prompt.c \
 		src/prompt/manage_prompt.c \
 		src/prompt/fct_prompt/cursor.c \
+		src/prompt/fct_prompt/fct_cursor.c \
 		src/prompt/fct_prompt/edit_buffer.c \
 		src/prompt/fct_prompt/set_term.c \
 		src/prompt/fct_prompt/get_cursor_pos.c \
 		src/prompt/fct_prompt/fct_prompt.c \
 		src/prompt/fct_prompt/bltin_rebind.c \
+		src/prompt/fct_prompt/fct_rebind.c \
 		src/prompt/auto_completion/auto_complet.c \
 		src/prompt/auto_completion/bltin_completion.c \
 		src/prompt/auto_completion/bltin_completion_command.c \
@@ -33,6 +35,7 @@ SRC	=	src/main.c \
 		src/minishell1/builtin4.c \
 		src/minishell1/builtin5.c \
 		src/minishell1/builtin6.c \
+		src/minishell1/my_if.c \
 		src/minishell1/utils.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \

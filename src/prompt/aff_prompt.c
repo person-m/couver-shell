@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:05:49 2016
-** Last update Thu Jun  2 00:09:51 2016 Bertrand Buffat
+** Last update Fri Jun  3 14:10:49 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -66,8 +66,9 @@ void	aff_prompt(t_prompt *prompt)
   int	total_count;
 
   total_count = prompt->size_pwd + prompt->size_completion +
-  prompt->size_prompt + prompt->count_pos + (prompt->start_col - 1) +
+  prompt->size_prompt + prompt->count_char + (prompt->start_col - 1) +
   size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 5;
+
   nb_lines_buffer = total_count / prompt->nbcols + 1;
   is_out_of_screen(prompt, nb_lines_buffer);
   erase_down_lines(prompt, nb_lines_buffer);

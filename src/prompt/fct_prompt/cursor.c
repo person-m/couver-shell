@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:13 2016
-** Last update Tue May 31 14:40:07 2016 Bertrand Buffat
+** Last update Fri Jun  3 15:40:53 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -63,26 +63,19 @@ void	move_history_down(t_prompt *prompt, char **history)
   prompt->count_pos = prompt->count_char;
 }
 
-void	move_cursor(t_prompt *prompt, char *buffer, char **history)
+void	move_cursor(t_prompt *prompt, char *buffer, char **history, char flag)
 {
-
   if (!(strcmp(prompt->caps->left, buffer)) && prompt->count_pos > 0)
     --prompt->count_pos;
-
   else if (!(strcmp(prompt->caps->right, buffer))
 	   && prompt->count_pos < prompt->count_char)
     ++prompt->count_pos;
-
-  else if (!(strcmp(prompt->caps->up, buffer))
+  else if (flag && !(strcmp(prompt->caps->up, buffer))
   	   && prompt->curr_history > 0)
     move_history_up(prompt, history);
-
-  else if (!(strcmp(prompt->caps->down, buffer))
+  else if (flag && !(strcmp(prompt->caps->down, buffer))
   	   && prompt->curr_history < dlen(history))
     move_history_down(prompt, history);
-
-  else
-    return ;
 }
 
 void	move_cursor_back(t_prompt *prompt)

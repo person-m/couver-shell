@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Fri Jun  3 00:42:09 2016 vincent riamon
+** Last update Fri Jun  3 16:52:47 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -30,7 +30,9 @@ typedef struct	s_shell
   char		**env;
   char		**alias;
   char		**history;
+
   char		**set;
+
   int		size_hist;
   int		ret;
   int		bol;
@@ -44,6 +46,7 @@ void		get_std_input(t_shell *sh);
 char		**cpy_env(char **env);
 char		**my_str_to_wordtab_pattern(char *s, char *pattern);
 int		minishell1(char **tab, t_shell *sh);
+int		lenstr(char *str, char c);
 int		is_a_builtin(char *str);
 int		tab_len(char **tab);
 void		aff_tab(char **tab);
@@ -66,6 +69,7 @@ char		*error_history2();
 
 int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
+int	        close_accolade(char **str);
 char		*get_var(char *str);
 char		*put_cmd(char **str, char *str1);
 int	        error_accolades(int mode);
@@ -83,6 +87,8 @@ void		completion(t_shell *);
 int		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);
+char		get_input(t_shell *);
+void		which_input(t_shell *, char);
 char		*get_range_ascii(char *ascii, char input);
 
 void		signal_handler(void);
