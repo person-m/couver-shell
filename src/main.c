@@ -5,11 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Fri Jun  3 00:08:40 2016 vincent riamon
+** Last update Fri Jun  3 16:27:20 2016 Bertrand Buffat
 */
 
 #include "shell.h"
-
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
@@ -36,7 +35,6 @@ void	loop_42sh(t_shell *sh)
       /* aff_tab(cmd); */
       if (ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);
-
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);

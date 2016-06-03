@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Fri Jun  3 00:42:09 2016 vincent riamon
+** Last update Fri Jun  3 16:28:02 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -30,7 +30,9 @@ typedef struct	s_shell
   char		**env;
   char		**alias;
   char		**history;
+
   char		**set;
+
   int		size_hist;
   int		ret;
   int		bol;
@@ -83,6 +85,8 @@ void		completion(t_shell *);
 int		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);
+char		get_input(t_shell *);
+void		which_input(t_shell *, char);
 char		*get_range_ascii(char *ascii, char input);
 
 void		signal_handler(void);
