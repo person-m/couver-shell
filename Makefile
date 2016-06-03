@@ -5,12 +5,13 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Fri Jun  3 16:26:54 2016 Bertrand Buffat
+## Last update Fri Jun  3 22:00:28 2016 Bertrand Buffat
 ##
 
 NAME	=	42sh
 
 SRC	=	src/main.c \
+		repeat.c \
 		src/prompt/prompt.c \
 		src/prompt/init_prompt.c \
 		src/prompt/aff_prompt.c \
