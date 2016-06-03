@@ -69,11 +69,9 @@ char		*error_history2();
 
 int		replace_vars(char ***cmd, t_shell *sh);
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
-int		replace_ret_value(char ***cmd, int j, int i, t_shell *sh);
-int		undef_var(char **str);
 int	        close_accolade(char **str);
 char		*get_var(char *str);
-char		*put_cmd(char *str, char *str1);
+char		*put_cmd(char **str, char *str1);
 int	        error_accolades(int mode);
 int		there_is_accolade(char *str, int *inc);
 char		**insert_tab_in_tab(char **dest, char **src,
