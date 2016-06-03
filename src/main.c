@@ -5,11 +5,10 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Fri Jun  3 16:47:23 2016 vincent riamon
+** Last update Fri Jun  3 16:53:02 2016 vincent riamon
 */
 
 #include "shell.h"
-
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {

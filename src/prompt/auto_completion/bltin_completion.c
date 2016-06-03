@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 18:58:33 2016
-** Last update Wed Jun  1 22:45:07 2016 Bertrand Buffat
+** Last update Fri Jun  3 15:36:47 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -70,7 +70,7 @@ void	get_exact_substr(t_prompt *prompt, char *path, int offset_dir)
     return ;
   ret = get_substr_tab(prompt, dir, &save);
   if (offset_dir == -1)
-    offset_dir = prompt->offset;  
+    offset_dir = prompt->offset;
   memcpy(prompt->line + offset_dir, save, ret);
   prompt->count_char = offset_dir + ret;
   prompt->count_pos = prompt->count_char;

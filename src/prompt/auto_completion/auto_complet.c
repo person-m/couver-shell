@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Fri May 27 14:15:52 2016
-** Last update Thu Jun  2 16:07:56 2016 Bertrand Buffat
+** Last update Fri Jun  3 16:26:02 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -13,21 +13,23 @@
 char		is_substr_in_path(t_prompt *prompt, DIR *dir, char flag)
 {
   struct dirent	*entry;
+  char		*save;
 
   while ((entry = readdir(dir)))
     if (!strncmp(entry->d_name, prompt->line + prompt->offset,
 		 prompt->count_char - prompt->offset) &&
 	entry->d_name[0] != '.')
-      {	
-	if (flag && strncmp(entry->d_name, prompt->auto_completion,
-			    prompt->size_completion))
+      {
+	if (flag
+	    && (strncmp(prompt->auto_completion, entry->d_name,
+			prompt->size_completion)
+		|| (get_n_same_bytes(save, entry->d_name) == prompt->size_completion)))
 	  return (-1);
+	save = entry->d_name;
 	prompt->size_completion = strlen(entry->d_name);
 	memcpy(prompt->auto_completion, entry->d_name, prompt->size_completion);
-	flag = 1;	  
+	flag = 1;
       }
-  if (!flag)
-    return (-1);
   return (flag);
 }
 
@@ -73,6 +75,7 @@ void	search_file(t_prompt *prompt)
   DIR	*dir;
   int	offset_dir;
   char	path[1024];
+  int	ret;
 
   if ((offset_dir =
        get_offset_directory(prompt->line, prompt->count_char)) != -1)
@@ -87,7 +90,8 @@ void	search_file(t_prompt *prompt)
       prompt->size_completion = 0;
       return ;
     }
-  if (is_substr_in_path(prompt, dir, 0) == -1)
+  ret = is_substr_in_path(prompt, dir, 0);
+  if (ret == -1 || !ret)
     prompt->size_completion = 0;
   closedir(dir);
 }

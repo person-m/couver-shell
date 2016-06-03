@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Thu Jun  2 23:11:08 2016 mohamed-laid hedia
+** Last update Fri Jun  3 15:16:20 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -66,6 +66,7 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       do_fork(b, env, p);
       close(p->p[p->i % 2][0]);
     }
+  free_tab(b);
   env->ret = wait_process(s, p, 0);
 }
 

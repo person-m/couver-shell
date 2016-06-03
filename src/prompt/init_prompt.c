@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Thu Jun  2 02:56:01 2016 Bertrand Buffat
+** Last update Fri Jun  3 15:17:39 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -24,7 +24,6 @@ void	free_prompt(t_prompt *prompt)
 t_caps		*init_caps(void)
 {
   t_caps	*caps;
-  char		*smkx;
 
   if (!(caps = malloc(sizeof(*caps)))
       || !(caps->up = tigetstr("kcuu1"))
@@ -45,10 +44,6 @@ t_caps		*init_caps(void)
 	   stradd(caps->ascii,
 		  "N,N:O,O:P,P:Q,Q:R,R:S,S:T,T:U,U:V,V:W,W:X,X:Y,Y:Z,Z")))
     return (NULL);
-  if (!(smkx = tigetstr("smkx")))
-    write(1, "\033[?1h\033=", strlen("\033[?1h\033="));
-  else
-    write(1, smkx, strlen(smkx));
   return (caps);
 }
 
@@ -74,6 +69,7 @@ void	init_prompt_line(t_prompt *prompt, char **env)
 void	set_info_term(t_prompt *prompt, char **env)
 {
   char	*term;
+  char	*smkx;
 
   if ((term = get_var_env(env, "TERM=")))
     setupterm(term, 1, (int *)0);
@@ -82,6 +78,10 @@ void	set_info_term(t_prompt *prompt, char **env)
   tcgetattr(0, &prompt->standard_mode);
   get_non_canon(prompt);
   get_raw_mode(prompt);
+  if (!(smkx = tigetstr("smkx")))
+    write(1, "\033[?1h\033=", strlen("\033[?1h\033="));
+  else
+    write(1, smkx, strlen(smkx));
 }
 
 t_prompt	*init_prompt(char **env, char **history)

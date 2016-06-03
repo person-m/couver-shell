@@ -5,50 +5,52 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Thu Jun  2 16:09:56 2016 Bertrand Buffat
+** Last update Fri Jun  3 16:28:26 2016 Bertrand Buffat
 */
 
 #include "shell.h"
 #include "input.h"
 
-int	next_range(char *ptr, char tok)
+void	complex_string(t_shell *sh, char *buffer)
 {
-  char	*s;
+  int	i;
+  char	**cmd;
 
-  s = ptr;
-  while (*ptr && *ptr != tok)
-    ++ptr;
-  return (ptr - s);
-}
-
-char	*get_range_ascii(char *ascii, char input)
-{
-  while (strncmp(ascii, &input, next_range(ascii, ',')))
+  i = -1;
+  while (buffer[++i])
     {
-      ascii += next_range(ascii, ':');
-      if (!*ascii)
-	return (NULL);
-      ++ascii;
+      if (buffer[i] == '\n')
+	{
+	  sh->prompt->line[sh->prompt->count_char] = 0;
+	  cmd = lexer(sh->prompt->line, 0);
+	  aff_prompt(sh->prompt);
+	  write(1, "\n", 1);
+	  do_the_thing(sh, &cmd);
+	  update_prompt(sh->prompt);
+	  aff_prompt(sh->prompt);
+	}
+      else if (buffer[i] > 0)
+	which_input(sh, buffer[i]);
     }
-  return (ascii + next_range(ascii, ',') + 1);
 }
 
-char	get_input(t_prompt *prompt)
+char	get_input(t_shell *sh)
 {
   char	buffer[1024];
   int	ret;
 
-  ret = read(1, buffer, 1024);
+  ret = read(0, buffer, 1024);
   buffer[ret] = 0;
-
   if (!ret)
     return (0);
   else if (!buffer[1])
     return (buffer[0]);
-
-  move_cursor(prompt, buffer, prompt->history);
-
-  return (1);
+  if (buffer[0] == 27)
+    move_cursor(sh->prompt, buffer, sh->prompt->history, 1);
+  else
+    complex_string(sh, buffer);
+  aff_prompt(sh->prompt);
+  return (0);
 }
 
 void	which_input(t_shell *sh, char input)
@@ -80,8 +82,9 @@ void	loop_prompt(t_shell *sh)
 
   tcsetattr(0, 0, &sh->prompt->non_canon_mode);
   aff_prompt(sh->prompt);
-  while ((input = get_input(sh->prompt)) != '\n')
+  while ((input = get_input(sh)) != '\n')
     {
+
       check_signals(sh);
       if (input)
 	{
@@ -89,6 +92,7 @@ void	loop_prompt(t_shell *sh)
 	  auto_completion(sh);
 	  aff_prompt(sh->prompt);
 	}
+
     }
   clean_screen(sh->prompt);
   if (!sh->prompt->count_char)
@@ -96,3 +100,4 @@ void	loop_prompt(t_shell *sh)
   sh->prompt->line[sh->prompt->count_char] = 0;
   tcsetattr(0, 0, &sh->prompt->standard_mode);
 }
+

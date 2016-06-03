@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 02:37:42 2016
-** Last update Wed Jun  1 23:55:20 2016 Bertrand Buffat
+** Last update Fri Jun  3 15:38:07 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -50,7 +50,7 @@ int	dlen(char **s)
 void	get_pwd_prompt(t_prompt *prompt)
 {
   char	*term;
-  char	*home;  
+  char	*home;
 
   if (!(term = get_var_env(prompt->env, "PWD=")))
     {
