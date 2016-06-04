@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 16:03:13 2016 vincent riamon
+** Last update Sat Jun  4 19:26:38 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -70,13 +70,8 @@ int		create_history_file(char **hist, t_shell *sh);
 char		**error_history(char *var);
 char		*error_history2();
 
-/* int		replace_vars(char ***cmd, t_shell *sh); */
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
-/* int	        close_accolade(char **str); */
 char		*get_var(char *str);
-/* char		*put_cmd(char **str, char *str1); */
-/* int	        error_accolades(int mode); */
-/* int		there_is_accolade(char *str, int *inc); */
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
 char		**insert_str_in_tab(char **dest, char *src, int pos, int len);
