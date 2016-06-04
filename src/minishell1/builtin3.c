@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Thu Jun  2 23:30:24 2016 mohamed-laid hedia
+** Last update Sat Jun  4 15:55:22 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -93,7 +93,7 @@ int	is_alias(char **s, t_shell *sh)
   a = strlen(*s);
   while (sh->alias[++i])
     {
-      if (!strncmp(*s, sh->alias[i], a))
+      if (!strncmp(*s, sh->alias[i], a) && sh->alias[i][a] == '=')
 	{
 	  *s = strdup(sh->alias[i] + a + 1);
 	  return (1);
