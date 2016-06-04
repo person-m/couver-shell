@@ -11,7 +11,6 @@
 NAME	=	42sh
 
 SRC	=	src/main.c \
-		repeat.c \
 		src/prompt/prompt.c \
 		src/prompt/init_prompt.c \
 		src/prompt/aff_prompt.c \
@@ -38,6 +37,7 @@ SRC	=	src/main.c \
 		src/minishell1/builtin6.c \
 		src/minishell1/my_if.c \
 		src/minishell1/utils.c \
+		src/minishell1/repeat.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \
 		src/minishell1/cd.c \
