@@ -19,10 +19,11 @@ void	do_the_thing(t_shell *sh, char ***cmd, int flag)
   }
   if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
       replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
-    {
-      backquote(cmd, sh);
-      the_execution(*cmd, sh);
-    }
+  {
+    backquote(cmd, sh);
+    the_execution(*cmd, sh);
+    del_quote(*cmd);
+  }
 }
 
 void	loop_42sh(t_shell *sh)
