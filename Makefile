@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Fri Jun  3 22:00:28 2016 Bertrand Buffat
+## Last update Sat Jun  4 14:49:50 2016 mohamed-laid hedia
 ##
 
 NAME	=	42sh
@@ -49,6 +49,7 @@ SRC	=	src/main.c \
 		src/minishell2/verif_return.c \
 		src/minishell2/verifs.c \
 		src/minishell2/inhibitors.c \
+		src/minishell2/which.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
 		src/couvrc/couvrc.c \

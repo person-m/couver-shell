@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Fri Jun  3 16:45:02 2016 Vincent COUVERCHEL
-** Last update Fri Jun  3 16:45:02 2016 Vincent COUVERCHEL
+** Last update Sat Jun  4 14:36:32 2016 mohamed-laid hedia
 */
 
 #include <stdio.h>
@@ -32,7 +32,8 @@ char	*get_value(char *name, t_shell *sh)
 
   if (!strcmp(name, "?"))
   {
-    asprintf(&value, "%d", sh->ret);
+    //asprintf(&value, "%d", sh->ret);
+    value = NULL;
     return (value);
   }
   value = get_var_env(sh->set, (tmp = get_total_id(name, "\t")));
