@@ -69,22 +69,19 @@ static int	check_redirection(char **command)
   return (0);
 }
 
-static int	check_redirect_name(char **command)
+int		check_muli_end(char **command)
 {
+  int		end;
+  int		start;
+
+  start = 1;
+  end = 0;
   while (*command)
   {
-    if (!strcmp(">", *command) || !strcmp(">>", *command)
-	|| !strcmp("<", *command) || !strcmp("<<", *command))
-    {
-      command++;
-      while (*command && is_quote(*command))
-	command++;
-      if (!(*command) || is_end_of_command(*command))
-      {
-	fprintf(stderr, "Missing name for redirect.\n");
-	return (1);
-      }
-    }
+    if ((end && is_really_end(*command)) || (is_really_end(*command) && start))
+      return (fprintf(stderr, "Invalid null command.\n") || 1);
+    end = (is_end_of_command(*command));
+    start = 0;
     command++;
   }
   return (0);
@@ -109,7 +106,8 @@ static int	check_null_command(char **command)
     {
       if (!exec && !nul)
 	return (fprintf(stderr, "Invalid null command.\n") || 1);
-      if ((nul = 1) && *command)
+      nul = (*command && !strcmp(";", *command)) ? 1 : nul;
+      if (*command)
 	exec = 0;
     }
     else if ((exec = 1))
@@ -127,5 +125,6 @@ int	check_command(char **command)
 	  || check_redirection(command)
 	  || check_redirect_name(command)
 	  || check_muli_redirections(command)
+//	  || check_muli_end(command)
 	  || check_null_command(command));
 }

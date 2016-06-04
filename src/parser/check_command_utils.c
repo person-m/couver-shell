@@ -8,6 +8,36 @@
 ** Last update Fri May 27 14:16:32 2016 Vincent COUVERCHEL
 */
 
+static int	is_really_end(char *str)
+{
+  return (!strcmp(str, "||")
+	  || !strcmp(str, "&&")
+	  || !strcmp(str, "|")
+	  || !strcmp(str, "(")
+	  || !strcmp(str, ")"));
+}
+
+static int	check_redirect_name(char **command)
+{
+  while (*command)
+  {
+    if (!strcmp(">", *command) || !strcmp(">>", *command)
+	|| !strcmp("<", *command) || !strcmp("<<", *command))
+    {
+      command++;
+      while (*command && is_quote(*command))
+	command++;
+      if (!(*command) || is_end_of_command(*command))
+      {
+	fprintf(stderr, "Missing name for redirect.\n");
+	return (1);
+      }
+    }
+    command++;
+  }
+  return (0);
+}
+
 static void	go_to_match_arg(char ***command)
 {
   char		*str;

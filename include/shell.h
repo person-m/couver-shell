@@ -5,8 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 21:36:47 2016 Bertrand Buffat
-** Last update Sat Jun  4 19:26:38 2016 vincent riamon
+** Last update Sat Jun  4 22:32:44 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -66,6 +65,7 @@ int		made_by(char **cmd, t_shell *sh);
 void		the_execution(char **cmd, t_shell *sh);
 
 void		set_var_env(char ***env, char *var, char *value);
+void		is_to_large_history(t_shell *sh);
 void		fill_history(t_shell *sh);
 void		update_history(char *line, t_shell *sh);
 char		*wordtab_in_str(char **tab, int mode);

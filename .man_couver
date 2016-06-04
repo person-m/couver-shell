@@ -93,11 +93,14 @@ BUILTIN AND FEATURES
      alias: the alias command permits to rename a command
      	     usage: "alias [name] [cmd]"
 
+     unalias: unalias can remove one or more alias
+     	       usage: "unalias [alias1] [alias2] ..."
+
      history: hitory is a command that permits to display the shell history
      	       usage: "history"
 	       	      "history -c" permit to clear the history
 
-     setenv: the set command adds or changes a local variable
+     set: the set command adds or changes a local variable
      	      usage: "set [name] [value]"
 
      unset: unsetenv can remove a local variable
@@ -106,9 +109,24 @@ BUILTIN AND FEATURES
      bind: bind is a command that permits to change a key value
      	     usage: "bin [old_key] [new_key]"
 
-     couver: this command display the couver-shell's logo
+     couver-shell: this command display the couver-shell's logo
 
      madeby: madeby display the project contributors
+
+     which: which allow to know the first path where is an executable
+     	     usage: "which [binary name]"
+
+     where: where allow to know all paths where is an executable, he can
+     	    write error messages
+     	     usage: "where [binary name]"
+
+     repeat: repeat is a command who can repeat an other command
+     	      usage: "repeat [number] [command]"
+
+     exit: exit command permit to quit the shell. You can use this command
+     	   with a argument number to quit with his error code.
+	     usage: "exit"
+	     	    "exit [number]"
 
 
 FILES
@@ -135,6 +153,6 @@ AUTHORS
 THANKS TO
     Our mums.
     No one else, we are the bosses.
-    
+
 
 {EPITECH}			3 June 2016			COUVER-SHELL(1)
