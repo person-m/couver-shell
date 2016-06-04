@@ -35,6 +35,7 @@ SRC	=	src/main.c \
 		src/minishell1/builtin4.c \
 		src/minishell1/builtin5.c \
 		src/minishell1/builtin6.c \
+		src/minishell1/unalias.c \
 		src/minishell1/my_if.c \
 		src/minishell1/utils.c \
 		src/minishell1/repeat.c \

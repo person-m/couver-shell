@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Sat Jun  4 14:47:05 2016 mohamed-laid hedia
+** Last update Sat Jun  4 15:59:42 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -48,6 +48,7 @@ int	my_setenv(char **t, t_shell *sh);
 int	my_unsetenv(char **t, t_shell *sh);
 int	my_alias(char **tab, t_shell *sh);
 int	is_alias(char **s, t_shell *sh);
+int	my_unalias(char **tab, t_shell *sh);
 int	cmd_cd(char **t, t_shell *sh);
 int	my_if(char **tab, t_shell *sh);
 int	cmd_history(char **t, t_shell *sh);

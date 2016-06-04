@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat Jun  4 14:49:19 2016 mohamed-laid hedia
+** Last update Sat Jun  4 16:02:19 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -28,6 +28,7 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[13] = "repeat";
   builtins_cmp[14] = "which";
   builtins_cmp[15] = "where";
+  builtins_cmp[16] = "unalias";
 }
 
 static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
@@ -48,12 +49,13 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[13] = &repeat;
   builtins[14] = &my_which;
   builtins[15] = &my_where;
+  builtins[16] = &my_unalias;
 }
 
 static int     builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[16])(char **tab, t_shell *sh);
-  char	*builtins_cmp[16];
+  int	(*builtins[17])(char **tab, t_shell *sh);
+  char	*builtins_cmp[17];
   int	i;
   int	is_builtin;
 
@@ -61,7 +63,7 @@ static int     builtins(char **tab, t_shell *sh)
   is_builtin = 1;
   init_builtins_cmp(builtins_cmp);
   init_builtins(builtins);
-  while (++i < 16)
+  while (++i < 17)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
 	is_builtin = builtins[i](tab, sh);
