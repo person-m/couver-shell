@@ -12,7 +12,7 @@
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
-  if (!check_command(*cmd))
+  if (!check_command(*cmd) && !replace_variables(cmd, sh))
   {
     backquote(cmd, sh);
     the_execution(*cmd, sh);
@@ -23,16 +23,14 @@ void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
   int	ret;
-  int	ret2;
 
   while (1)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line, 0);
-      ret2 = replace_exclam_dot(&cmd, sh);
-      ret = replace_vars(&cmd, sh);
+      ret = replace_exclam_dot(&cmd, sh);
       update_history(sh->prompt->line, sh);
-      if (ret == 1 && ret2 == 1)
+      if (ret)
 	do_the_thing(sh, &cmd);
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;

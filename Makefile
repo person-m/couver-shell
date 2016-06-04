@@ -59,6 +59,7 @@ SRC	=	src/main.c \
 		src/parser/misc_replace.c \
 		src/parser/misc_replace2.c \
 		src/parser/alias.c \
+		src/variables/variables.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c \

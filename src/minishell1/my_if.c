@@ -56,13 +56,9 @@ static void	skip_parenth_two(char **tab, int *i, char **two)
     (*i)++;
 }
 
-static void	exec_for_if_(char *exec, t_shell *sh)
+static void	exec_for_if_(char **exec, t_shell *sh)
 {
-  char		**cmd;
-
-  cmd = lexer(exec, 0);
-  do_the_thing(sh, &cmd);
-  free(cmd);
+  do_the_thing(sh, &exec);
 }
 
 int		my_if(char **tab, t_shell *sh)
@@ -81,15 +77,10 @@ int		my_if(char **tab, t_shell *sh)
   if (skip_parenth_one(tab, &i, &one, &equal) == -1)
     return (-1);
   skip_parenth_two(tab, &i, &two);
-  while (tab[i])
-    {
-      exec = realloc(exec, sizeof(char) * (strlen(tab[i]) + strlen(exec) + 1));
-      exec = concat_str(exec, tab[i++], ' ');
-    }
   if (equal == 0 && !strcmp(one, two))
-    exec_for_if_(exec, sh);
+    exec_for_if_(tab + i, sh);
   else if (equal == 1 && strcmp(one, two))
-    exec_for_if_(exec, sh);
+    exec_for_if_(tab + i, sh);
   free(exec);
   return (0);
 }

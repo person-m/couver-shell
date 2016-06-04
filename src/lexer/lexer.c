@@ -42,7 +42,7 @@ static void	update_quote(t_lexer *l, char *line)
 
 static int	lexer_command(char *line, t_lexer *l, int flag)
 {
-  while (!(l->pos + l->len) || line[l->pos + l->len - 1])
+  while (line && (!(l->pos + l->len) || line[l->pos + l->len - 1]))
   {
     update_quote(l, line);
     l->len += (l->escape = ((line[l->pos + l->len] == '\\')
@@ -75,7 +75,7 @@ char		**lexer(char *line, int flag)
   if (init_struct(&lexer)
       || lexer_command(line, &lexer, flag))
     return (NULL);
-//   for (int i = 0; lexer.command[i]; i++) 
-//   printf("<%s>\n", lexer.command[i]); 
+//   for (int i = 0; lexer.command[i]; i++)
+//       printf("%s\n", lexer.command[i]);
   return (lexer.command);
 }

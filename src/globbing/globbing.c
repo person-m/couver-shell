@@ -106,14 +106,17 @@ char	**glob_command(char **command)
   i = 1;
   if (!glob_executable(command))
     return (NULL);
+  quote = (strcmp(command[0], "\"")) ? quote : !quote;
+  quote = (strcmp(command[0], "'")) ? quote : !quote;
   while (command[i])
   {
     quote = (strcmp(command[i], "\"")) ? quote : !quote;
     quote = (strcmp(command[i], "'")) ? quote : !quote;
-    quote = (strcmp(command[i], "`")) ? quote : !quote;
     if (strcmp(command[i], "\"") && strcmp(command[i], "'") && !quote)
+    {
       if (!(command = glob_parameters(command, &i)))
 	return (NULL);
+    }
     i++;
   }
   del_quote(command);
