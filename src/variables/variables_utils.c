@@ -45,3 +45,21 @@ char	*get_variable_name(char *str, char **end)
   *end = (str[++i] == '{' && i++) ? get_end_bracket(str + i) : str + strlen(str);
   return (str + i);
 }
+
+int	nb_digit(int nb)
+{
+  int	count;
+  
+  count = 1;
+  if (nb < 0)
+  {
+    nb = -nb;
+    count++;
+  }
+  while (nb >= 10)
+  {
+    nb *= 0.1;
+    count++;
+  }
+  return (count);
+}
