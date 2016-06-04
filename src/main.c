@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 19:40:43 2016 Bertrand Buffat
+** Last update Sat Jun  4 22:31:57 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -33,6 +33,7 @@ void	loop_42sh(t_shell *sh)
   while (1)
     {
       loop_prompt(sh);
+      is_to_large_history(sh);
       cmd = lexer(sh->prompt->line, 0);
       update_history(sh->prompt->line, sh);
       do_the_thing(sh, &cmd, 0);
@@ -80,6 +81,13 @@ int		main(__attribute__((unused))int argc,
     }
   if (!(sh.prompt = init_prompt(sh.env, sh.history)))
     return (0);
+
+  /* memcpy(sh.prompt->line, "ls .ma", 6); */
+  /* sh.prompt->count_char = 6; */
+  /* sh.prompt->count_pos = 6; */
+  /* bltin_completion(sh.prompt, sh.env); */
+  /* tcsetattr(0, 0, &sh.prompt->standard_mode); */
+  /* return (0); */
 
   signal_handler();
   loop_42sh(&sh);
