@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Sat Jun  4 15:55:22 2016 Melvin Personnier
+** Last update Sat Jun  4 16:35:20 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -54,6 +54,7 @@ int		my_alias(char **tab, t_shell *sh)
       sh->alias[i] = concat_str(tab[1], tab[2], '=');
       sh->alias[i + 1] = NULL;
     }
+  sh->alias = my_sort(sh->alias);
   return (0);
 }
 

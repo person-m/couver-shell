@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Thu Jun  2 01:53:00 2016 Melvin Personnier
+** Last update Sat Jun  4 16:34:05 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -61,6 +61,7 @@ int		cmd_set(char **tab, t_shell *sh)
 	add_line_set(i, one, two, sh);
       free_set(one, two, total);
     }
+  sh->set = my_sort(sh->set);
   return (0);
 }
 

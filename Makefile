@@ -29,6 +29,7 @@ SRC	=	src/main.c \
 		src/prompt/auto_completion/fct_completions.c \
 		src/prompt/auto_completion/list_completion.c \
 		src/minishell1/misc.c \
+		src/minishell1/order_by_asc.c \
 		src/minishell1/builtin.c \
 		src/minishell1/builtin2.c \
 		src/minishell1/builtin3.c \

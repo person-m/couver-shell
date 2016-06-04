@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Sat Jun  4 15:59:42 2016 Melvin Personnier
+** Last update Sat Jun  4 16:34:51 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -43,6 +43,7 @@ int	my_getnbr(const char *str);
 char	**my_str_to_wordtab_pattern(char *str, char *pattern);
 
 void	aff_tab(char **t);
+char	**my_sort(char **tab);
 void	aff_tab_alias(char **tab);
 int	my_setenv(char **t, t_shell *sh);
 int	my_unsetenv(char **t, t_shell *sh);
