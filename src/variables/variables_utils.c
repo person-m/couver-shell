@@ -49,7 +49,7 @@ char	*get_variable_name(char *str, char **end)
 int	nb_digit(int nb)
 {
   int	count;
-  
+
   count = 1;
   if (nb < 0)
   {
