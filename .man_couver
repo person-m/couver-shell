@@ -1,0 +1,139 @@
+			   Commands Commands Manual
+COUVER-SHELL(1)							COUVER-SHELL(1)
+
+
+NAME
+	couver-shell - C shell with file name completion and command line editing
+
+
+COPYRIGHT
+	Couver-shell is Copyright © 2015-2016 by EPITECH-Lyon
+
+
+DESCRIPTION
+	Couver-shell is an sh-compatible command language interpreter that
+	executes commands read from standard input or from a .couverc file.
+	It includes a command-line editor with an advandced auto completion
+	and a key rebinding, an history mechanism and features or builtins
+	which are specific to the couver-shell (see builtin and features).
+
+     Editing
+	We  first describe The command-line editor. The Completion and listing
+	and Spelling correction sections describe two sets of functionality that
+	are implemented as  editor  commands but which deserve their own treatment.
+	Finally, Editor commands lists and describes the editor commands specific
+	to the shell and their default bindings.
+
+     The command-line editor (+)
+       	Command-line input can be edited using key sequences much like those used
+        in  GNU Emacs  or  vi(1).The editor is active only when the edit shell variable
+        is set,  which it is by default in interactive shells.The bindkey builtin can
+        display  and change key bindings.
+
+		     down   	down-history
+		     up		up-history
+		     left	backward-char
+		     right	forward-char
+		     Ctrl-A	begin-line
+		     Ctrl-E	end-line
+		     Ctrl-T	last-word
+		     Ctrl-Y	pevious-word
+
+    Completion and listing (+)
+    	The shell is often able to complete words when given a unique abbreviation.
+	Type part of a word (for example `ls /usr/lost') and hit the tab key to run
+	the complete-word editor command.The shell completes the filename `/usr/lost'
+	to `/usr/lost+found/', replacing the incomplete word with the complete word in
+	the input buffer.(Note the terminal `/'; completion adds a `/' to the end of
+       	completed directories and a space to the end of other completed words,to speed
+	typing and provide a visual indicator of successful completion.The addsuffix
+	shell variable can be unset to prevent this.) If no match is found (perhaps
+	`/usr/lost+found' doesn't exist),the terminal bell rings.If the word is
+	already complete (perhaps there is a `/usr/lost' on your system, or perhaps
+	you were thinking too far ahead and typed the whole thing) a `/' or space is
+	added to the end if it isn't already there.
+
+       Completion works anywhere in the line, not at just the end; completed text
+       pushes the rest of the line to the right. Completion in the middle of a
+       word often results in leftover characters to the right of the cursor that
+       need to be deleted.
+
+       Commands and variables can be completed in much the same way. For example,
+       typing `em[tab]' would complete `em' to `emacs' if emacs were the only command
+       on your system beginning with `em'. Completion can find a command in any
+       directory in path or if given a full pathname.
+
+    Lexical structure
+       The shell splits input lines into words at blanks and tabs. The special
+       characters `|', `;', `<', `>', and the doubled characters `&&', `||', `<<'
+       and `>>' are always separate words, whether or not they  are  surrounded
+       by white-space.
+
+    Easy scripting (+)
+       The sell permit to make conditions to do some actions (for example
+       if (1 == 1) echo "1 is equal to 1"). Useful operators are '!=', '>',
+       '>=', '<', '<=', '=='.
+
+
+BUILTIN AND FEATURES
+     cd:  cd is a command who permit to move in a directory
+     	   usage: "cd [name directory]"
+	   	  "cd -" permit to move back
+	  	  "cd" permit to move in the home
+
+     echo: echo is a command wich display his arguments
+    	    usage: "echo [arg1] [arg2] ..."
+
+     setenv: the setenv command add or change an environment variable
+     	      usage: "setenv [name] [value]"
+
+     unsetenv: unsetenv can remove an environment variable
+     	        usage: "unsetenv [var1] [var2] ..."
+
+     alias: the alias command permit to rename a commande
+     	     usage: "alias [name] [cmd]"
+
+     history: hitory is a command who permit to display the history
+     	       usage: "history"
+	       	      "history -c" permit to clear the history
+
+     setenv: the set command add or change a local variable
+     	      usage: "set [name] [value]"
+
+     unset: unsetenv can remove a local variable
+     	      usage: "unset [var1] [var2] ..."
+
+     bind: bind is a command who permit to change a key value
+     	     usage: "bin [old_key] [new_key]"
+
+     couver: this command display the couver-shell's logo
+
+     madeby: madeby display the project contributors
+
+
+FILES
+    ~/.42_history
+    ~/.couverc
+
+
+BUGS
+    No bugs. :)
+
+
+SEE ALSO
+    bash(1), tcsh(1), csh(1)
+
+
+AUTHORS
+    Vincent Couverchel
+    Bertrand Buffat
+    Mohamed-Laïd Hedia
+    Melvin Personnier
+    Vincent Riamon
+
+
+THANKS TO
+    No one, we are the boss.
+
+
+{EPITECH}			3 June 2016			COUVER-SHELL(1)

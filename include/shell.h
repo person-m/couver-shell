@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Fri Jun  3 16:52:47 2016 vincent riamon
+** Last update Fri Jun  3 22:07:52 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -104,6 +104,8 @@ void		del_quote(char **command);
 char		**glob_command(char **command);
 int		is_glob_redirect(char **str);
 int		replace_variables(char ***cmd, t_shell *sh);
+
+int		repeat(char **, t_shell *);
 
 void		strconcat(const char *, const char *, char *);
 int		my_getnbr(const char *str);

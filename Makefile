@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Fri Jun  3 16:26:54 2016 Bertrand Buffat
+## Last update Fri Jun  3 22:00:28 2016 Bertrand Buffat
 ##
 
 NAME	=	42sh
@@ -37,6 +37,7 @@ SRC	=	src/main.c \
 		src/minishell1/builtin6.c \
 		src/minishell1/my_if.c \
 		src/minishell1/utils.c \
+		src/minishell1/repeat.c \
 		src/minishell1/tab_ptn_fct.c \
 		src/minishell1/my_str_to_wordtab_pattern.c \
 		src/minishell1/cd.c \
