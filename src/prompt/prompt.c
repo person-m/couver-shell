@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Fri Jun  3 17:39:11 2016 Bertrand Buffat
+** Last update Sat Jun  4 19:35:35 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -98,4 +98,6 @@ void	loop_prompt(t_shell *sh)
   sh->prompt->line[sh->prompt->count_char] = 0;
   tcsetattr(0, 0, &sh->prompt->standard_mode);
 }
+
+
 

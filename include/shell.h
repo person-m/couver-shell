@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 16:03:13 2016 vincent riamon
+** Last update Sat Jun  4 19:30:33 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -23,6 +23,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "prompt.h"
 
 typedef struct	s_shell
@@ -88,6 +90,7 @@ char		*get_next_line(const int);
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);
 void		completion(t_shell *);
+char		is_subcommand_in_path(t_prompt *, DIR *, char);
 int		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);

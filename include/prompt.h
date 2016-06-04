@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Fri Jun  3 22:02:31 2016 Bertrand Buffat
+** Last update Sat Jun  4 17:03:00 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -44,6 +44,7 @@ typedef struct		s_prompt
   char			*line;
   int			count_char;
   int			count_pos;
+  int			size;
 
   char			*prompt;
   int			size_prompt;
@@ -114,6 +115,8 @@ void		add_char(t_prompt *, char);
 char		*stradd(char *, char *);
 
 void		bltin_completion(t_prompt *, char **env);
+void		search_in_couverbin(t_prompt *);
+char		is_substr_in_path(t_prompt *, DIR *, char);
 
 bool		ask_print_commands(int);
 
