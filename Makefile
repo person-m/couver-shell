@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Sat Jun  4 00:55:08 2016 vincent riamon
+## Last update Sat Jun  4 14:57:39 2016 vincent riamon
 ##
 
 NAME	=	42sh
@@ -61,6 +61,7 @@ SRC	=	src/main.c \
 		src/parser/misc_replace2.c \
 		src/parser/alias.c \
 		src/variables/variables.c \
+		src/variables/nb_in_str.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c \

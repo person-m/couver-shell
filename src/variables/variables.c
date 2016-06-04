@@ -5,12 +5,9 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Fri Jun  3 16:45:02 2016 Vincent COUVERCHEL
-** Last update Fri Jun  3 16:45:02 2016 Vincent COUVERCHEL
+** Last update Sat Jun  4 15:33:45 2016 vincent riamon
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "shell.h"
 #include "variables_utils.c"
 
@@ -28,13 +25,21 @@ char	*get_total_id(char *start, char *end)
 char	*get_value(char *name, t_shell *sh)
 {
   char	*value;
+  char	**arg;
   char	*tmp;
 
   if (!strcmp(name, "?"))
-  {
-    asprintf(&value, "%d", sh->ret);
-    return (value);
-  }
+    {
+      asprintf(&value, "%d", sh->ret);
+      return (value);
+    }
+  if (!strcmp(name, "#"))
+    {
+      arg = my_str_to_wordtab_pattern(sh->history[sh->size_hist - 2], " ");
+      asprintf(&value, "%d", tab_len(arg) - 1);
+      free_tab(arg);
+      return (value);
+    }
   value = get_var_env(sh->set, (tmp = get_total_id(name, "\t")));
   free(tmp);
   if (value)

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 01:01:38 2016 vincent riamon
+** Last update Sat Jun  4 14:58:56 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -44,6 +44,7 @@ char		**alias(char **tab, t_shell *sh);
 void		get_std_input(t_shell *sh);
 
 char		**cpy_env(char **env);
+char		*nbr_in_str(int nb);
 char		**my_str_to_wordtab_pattern(char *s, char *pattern);
 int		minishell1(char **tab, t_shell *sh);
 int		lenstr(char *str, char c);
