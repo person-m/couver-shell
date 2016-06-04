@@ -10,8 +10,13 @@
 
 #include "shell.h"
 
-void	do_the_thing(t_shell *sh, char ***cmd)
+void	do_the_thing(t_shell *sh, char ***cmd, int flag)
 {
+  if (flag)
+  {
+    *cmd = insert_str_in_tab(*cmd, "\"", 0, 0);
+    *cmd = insert_str_in_tab(*cmd, "\"", tab_len(*cmd), 0);
+  }
   if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
       replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
     {
@@ -29,7 +34,7 @@ void	loop_42sh(t_shell *sh)
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line, 0);
       update_history(sh->prompt->line, sh);
-      do_the_thing(sh, &cmd);
+      do_the_thing(sh, &cmd, 0);
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);
@@ -67,7 +72,7 @@ int		main(__attribute__((unused))int argc,
   if ((couv_rc = couvrc(env)))
   {
     cmd = lexer(couv_rc, 0);
-    do_the_thing(&sh, &cmd);
+    do_the_thing(&sh, &cmd, 0);
     free(couv_rc);
   }
   if (!isatty(0))

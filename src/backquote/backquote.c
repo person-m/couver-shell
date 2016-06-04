@@ -14,7 +14,7 @@
 #include "backquote_utils.c"
 #include "backquote_misc.c"
 
-static char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
+char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
 {
   char		**new;
 
@@ -24,7 +24,6 @@ static char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
   new[pos] = src;
   wordtabncpy(new + pos + 1,
 	      dest + pos + len, tab_len(dest + pos + len));
-  free_tab(dest);
   return (new);
 }
 

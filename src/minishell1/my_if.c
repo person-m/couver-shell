@@ -58,7 +58,7 @@ static void	skip_parenth_two(char **tab, int *i, char **two)
 
 static void	exec_for_if_(char **exec, t_shell *sh)
 {
-  do_the_thing(sh, &exec);
+  do_the_thing(sh, &exec, 1);
 }
 
 int		my_if(char **tab, t_shell *sh)

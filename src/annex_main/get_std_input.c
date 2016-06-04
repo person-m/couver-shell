@@ -53,7 +53,7 @@ void	get_std_input(t_shell *sh)
       ret = replace_exclam_dot(&cmd, sh);
       update_history(instr[i], sh);
       if (ret)
-	do_the_thing(sh, &cmd);
+	do_the_thing(sh, &cmd, 0);
     }
   free(line);
   free_tab(instr);

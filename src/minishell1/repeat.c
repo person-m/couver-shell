@@ -50,7 +50,7 @@ static void	loop_repeat(t_shell *sh, char **cmd, int turn)
   while (--turn >= 0)
     {
       update_history(line, sh);
-      do_the_thing(sh, &cmd);
+      do_the_thing(sh, &cmd, 1);
     }
 }
 
@@ -61,7 +61,7 @@ int		repeat(char **cmd, t_shell *sh)
 
   if ((!cmd[1] || !cmd[2])
       && write(2, "repeat: Too few arguments.\n", 27))
-    return (0);
+    return (-1);
   tmp = cmd[1];
   if (tmp[0] == '"')
     ++tmp;
@@ -69,10 +69,10 @@ int		repeat(char **cmd, t_shell *sh)
     tmp[strlen(tmp) - 1] = 0;
   if ((!is_num(tmp))
       && write(2, "repeat: Badly formed number.\n", 29))
-    return (0);
+    return (-1);
   turn = get_nbr(tmp, 0);
   erase_first_line_tab(cmd);
   erase_first_line_tab(cmd);
   loop_repeat(sh, cmd, turn);
-  return (1);
+  return (0);
 }

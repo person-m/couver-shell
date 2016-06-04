@@ -79,6 +79,7 @@ char		*get_var(char *str);
 /* int		there_is_accolade(char *str, int *inc); */
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
+char		**insert_str_in_tab(char **dest, char *src, int pos, int len);
 char		*get_var_env(char **, char *);
 
 char		*get_next_line(const int fd);
@@ -98,7 +99,7 @@ void		signal_handler(void);
 void		check_signals(t_shell *);
 void		exit_shell(t_shell *);
 
-void		do_the_thing(t_shell *sh, char ***cmd);
+void		do_the_thing(t_shell *sh, char ***cmd, int flag);
 char		**lexer(char *line, int flag);
 int		check_command(char **command);
 int		globbing(char ***command);
