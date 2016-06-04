@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Fri Jun  3 22:07:08 2016 Bertrand Buffat
+** Last update Sat Jun  4 14:47:05 2016 mohamed-laid hedia
 */
 
 #ifndef	MY_H_
@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include <errno.h>
+# include "mo.h"
 # include "shell.h"
 
 # ifndef READ_SIZE

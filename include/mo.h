@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Thu Jun  2 23:08:25 2016 mohamed-laid hedia
+** Last update Sat Jun  4 14:42:59 2016 mohamed-laid hedia
 */
 
 #ifndef MO_H_
@@ -83,5 +83,12 @@ void	check_inhibitors(char **tab);
 char	**delete_inhibitors(char **tab);
 void	add_to_str(char **tab, int i);
 char	*inhibitors_file(char *file);
+
+/* which.c */
+
+int	my_which(char **tab, t_shell *sh);
+int	my_where(char **tab, t_shell *sh);
+char	**my_path_tab(t_shell *sh);
+int	check_in_path(char *str, char **tab_path, int o);
 
 #endif  /* !MO_H_ */
