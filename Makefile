@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Sat Jun  4 15:40:06 2016 vincent riamon
+## Last update Sat Jun  4 15:49:33 2016 vincent riamon
 ##
 
 NAME	=	42sh
@@ -53,6 +53,7 @@ SRC	=	src/main.c \
 		src/minishell2/which.c \
 		src/history/history_gestion.c \
 		src/history/get_next_line.c \
+		src/history/set_var_env.c \
 		src/couvrc/couvrc.c \
 		src/lexer/lexer.c \
 		src/parser/check_command.c \

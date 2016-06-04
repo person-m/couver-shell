@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 14:58:56 2016 vincent riamon
+** Last update Sat Jun  4 15:54:53 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -62,6 +62,7 @@ int		man_couver(char **cmd, t_shell *sh);
 int		made_by(char **cmd, t_shell *sh);
 void		the_execution(char **cmd, t_shell *sh);
 
+void		set_var_env(char ***env, char *var, char *value);
 void		fill_history(t_shell *sh);
 void		update_history(char *line, t_shell *sh);
 char		*wordtab_in_str(char **tab, int mode);
@@ -110,6 +111,7 @@ int		replace_variables(char ***cmd, t_shell *sh);
 int		repeat(char **, t_shell *);
 
 void		strconcat(const char *, const char *, char *);
+char		*concat_str(char *, char *, char);
 int		my_getnbr(const char *str);
 
 #endif /* !SHELL_H_ */

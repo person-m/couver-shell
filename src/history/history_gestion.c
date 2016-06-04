@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Thu Jun  2 15:34:06 2016 vincent riamon
+** Last update Sat Jun  4 15:53:17 2016 vincent riamon
 */
 
 #include "my.h"
@@ -71,6 +71,7 @@ void		update_history(char *line, t_shell *sh)
   sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
   sh->history[i] = strdup(line);
   sh->history[i + 1] = NULL;
+  set_var_env(&sh->env, "_=", sh->history[sh->size_hist - 1]);
   sh->size_hist += 1;
   if (ret == -1 || (fd = open(hist, O_RDWR | O_APPEND)) == -1)
     return ;
