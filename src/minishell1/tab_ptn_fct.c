@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Fri Jun  3 00:07:02 2016 Melvin Personnier
+** Last update Sat Jun  4 01:38:39 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -25,6 +25,7 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[10] = "couver";
   builtins_cmp[11] = "madeby";
   builtins_cmp[12] = "if";
+  builtins_cmp[13] = "repeat";
 }
 
 static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
@@ -42,12 +43,13 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[10] = &logo;
   builtins[11] = &made_by;
   builtins[12] = &my_if;
+  builtins[13] = &repeat;
 }
 
 static int     builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[13])(char **tab, t_shell *sh);
-  char	*builtins_cmp[13];
+  int	(*builtins[14])(char **tab, t_shell *sh);
+  char	*builtins_cmp[14];
   int	i;
   int	is_builtin;
 
@@ -55,7 +57,7 @@ static int     builtins(char **tab, t_shell *sh)
   is_builtin = 1;
   init_builtins_cmp(builtins_cmp);
   init_builtins(builtins);
-  while (++i < 13)
+  while (++i < 14)
     {
       if ((strcmp(tab[0], builtins_cmp[i])) == 0)
 	is_builtin = builtins[i](tab, sh);
