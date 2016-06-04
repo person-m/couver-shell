@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 16:12:26 2016 vincent riamon
+** Last update Sat Jun  4 19:20:58 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -65,11 +65,6 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
   create_set(&sh);
-
-  /* cmd = lexer("repeat 5000 ls -la yolo", 0); */
-  /* repeat(cmd, &sh); */
-  /* return (0); */
-
   if ((couv_rc = couvrc(env)))
   {
     cmd = lexer(couv_rc, 0);

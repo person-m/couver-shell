@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sat Jun  4 15:44:11 2016 vincent riamon
-** Last update Sat Jun  4 15:57:54 2016 vincent riamon
+** Last update Sat Jun  4 19:26:19 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -15,7 +15,7 @@ void		set_var_env(char ***env, char *var, char *value)
   int		i;
 
   i = 0;
-  while ((*env)[i] && strncmp((*env)[i], var, strlen(var)))
+  while ((*env) && (*env)[i] && strncmp((*env)[i], var, strlen(var)))
     i = i + 1;
   if (!(*env)[i])
     return ;
