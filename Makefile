@@ -35,6 +35,7 @@ SRC	=	src/main.c \
 		src/minishell1/builtin.c \
 		src/minishell1/builtin2.c \
 		src/minishell1/builtin3.c \
+		src/minishell1/builtin3-2.c \
 		src/minishell1/builtin4.c \
 		src/minishell1/builtin5.c \
 		src/minishell1/builtin6.c \
