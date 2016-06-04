@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 19:36:38 2016 Bertrand Buffat
+** Last update Sat Jun  4 19:40:43 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -19,10 +19,11 @@ void	do_the_thing(t_shell *sh, char ***cmd, int flag)
   }
   if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
       replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
-    {
-      backquote(cmd, sh);
-      the_execution(*cmd, sh);
-    }
+  {
+    backquote(cmd, sh);
+    the_execution(*cmd, sh);
+    del_quote(*cmd);
+  }
 }
 
 void	loop_42sh(t_shell *sh)
