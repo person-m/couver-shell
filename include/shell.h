@@ -5,11 +5,8 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-<<<<<<< HEAD
-** Last update Sat Jun  4 19:30:33 2016 Bertrand Buffat
-=======
+** Last update Sat Jun  4 21:36:47 2016 Bertrand Buffat
 ** Last update Sat Jun  4 19:26:38 2016 vincent riamon
->>>>>>> 0b25bc2e5bf6692d4795fd988c4365e0c9357ab7
 */
 
 #ifndef SHELL_H_
