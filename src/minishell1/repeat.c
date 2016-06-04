@@ -1,16 +1,16 @@
 /*
 ** repeat.c for  in /home/buffat_b/couver-shell
-** 
+**
 ** Made by Bertrand Buffat
 ** Login   <buffat_b@epitech.net>
-** 
+**
 ** Started on  Fri Jun  3 21:38:27 2016 Bertrand Buffat
-** Last update Fri Jun  3 23:24:49 2016 Bertrand Buffat
+** Last update Sat Jun  4 02:01:39 2016 Melvin Personnier
 */
 
 #include "shell.h"
 
-bool	is_num(char *s)
+static bool	is_num(char *s)
 {
   while (*s)
     {
@@ -21,7 +21,7 @@ bool	is_num(char *s)
   return (1);
 }
 
-int	get_nbr(char *s, int res)
+static int	get_nbr(char *s, int res)
 {
   if (!*s)
     return (res);
@@ -30,26 +30,23 @@ int	get_nbr(char *s, int res)
   return (get_nbr(++s, res));
 }
 
-void	erase_first_line_tab(char **tab)
+static void	erase_first_line_tab(char **tab)
 {
-  char	*tmp;
-  int	i;
+  int		i;
 
-  tmp = tab[0];
   i = 0;
   while (tab[i])
     {
       tab[i] = tab[i + 1];
       ++i;
     }
-  free(tmp);
 }
 
-void	loop_repeat(t_shell *sh, char **cmd, int turn)
+static void	loop_repeat(t_shell *sh, char **cmd, int turn)
 {
-  char	*line;
-  int	ret;
-  int	ret2;
+  char		*line;
+  int		ret;
+  int		ret2;
 
   line = wordtab_in_str(cmd, 0);
   while (--turn >= 0)
@@ -62,10 +59,10 @@ void	loop_repeat(t_shell *sh, char **cmd, int turn)
     }
 }
 
-int	repeat(char **cmd, t_shell *sh)
+int		repeat(char **cmd, t_shell *sh)
 {
-  char	*tmp;
-  int	turn;
+  char		*tmp;
+  int		turn;
 
   if ((!cmd[1] || !cmd[2])
       && write(2, "repeat: Too few arguments.\n", 27))

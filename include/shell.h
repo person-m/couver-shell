@@ -104,6 +104,7 @@ void		backquote(char ***command, t_shell *sh);
 void		del_quote(char **command);
 char		**glob_command(char **command);
 int		is_glob_redirect(char **str);
+int		replace_variables(char ***cmd, t_shell *sh);
 
 int		repeat(char **, t_shell *);
 

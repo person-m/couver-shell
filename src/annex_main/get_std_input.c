@@ -42,7 +42,6 @@ void	get_std_input(t_shell *sh)
   char	*line;
   int	i;
   int	ret;
-  int	ret2;
 
   if (!(line = one_function_get_line(NULL, 1, 0, 0))
       || !(instr = my_str_to_wordtab_pattern(line, "\n")))
@@ -51,10 +50,9 @@ void	get_std_input(t_shell *sh)
   while (instr[++i])
     {
       cmd = lexer(instr[i], 0);
-      ret2 = replace_exclam_dot(&cmd, sh);
-      ret = replace_vars(&cmd, sh);
+      ret = replace_exclam_dot(&cmd, sh);
       update_history(instr[i], sh);
-      if (ret == 1 && ret2 == 1)
+      if (ret)
 	do_the_thing(sh, &cmd);
     }
   free(line);

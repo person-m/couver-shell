@@ -5,14 +5,14 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 01:01:45 2016 vincent riamon
+** Last update Sat Jun  4 14:54:28 2016 vincent riamon
 */
 
 #include "shell.h"
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
-  if (!check_command(*cmd))
+  if (!check_command(*cmd) && !replace_variables(cmd, sh))
   {
     backquote(cmd, sh);
     the_execution(*cmd, sh);
