@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sat Jun  4 20:25:31 2016 mohamed-laid hedia
+** Last update Sat Jun  4 21:37:29 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -89,8 +89,6 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
     }
   if (p->i > 0 && is_valide(b, env))
     close(p->p[p->i % 2 ? 0 : 1][0]);
-  if (b)
-    free_tab(b);
   close(p->p[p->i % 2][1]);
 }
 
