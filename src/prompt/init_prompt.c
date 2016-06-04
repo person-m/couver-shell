@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Fri Jun  3 16:31:37 2016 Bertrand Buffat
+** Last update Sat Jun  4 14:25:44 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -87,7 +87,6 @@ void	set_info_term(t_prompt *prompt, char **env)
 t_prompt	*init_prompt(char **env, char **history)
 {
   t_prompt	*prompt;
-  int		size;
 
   if (!(prompt = malloc(sizeof(*prompt))))
     return (NULL);
@@ -96,11 +95,11 @@ t_prompt	*init_prompt(char **env, char **history)
     return (NULL);
   prompt->nbcols = tigetnum("cols");
   prompt->nblines = tigetnum("lines");
-  size = prompt->nbcols * prompt->nblines;
-  if (!(prompt->prompt = malloc(sizeof(char) * size))
-      || (!(prompt->line = malloc(sizeof(char) * size)))
-      || (!(prompt->auto_completion = malloc(sizeof(char) * size)))
-      || (!(prompt->pwd = malloc(sizeof(char) * size))))
+  prompt->size = prompt->nbcols * prompt->nblines;
+  if (!(prompt->prompt = malloc(sizeof(char) * prompt->size))
+      || (!(prompt->line = malloc(sizeof(char) * prompt->size)))
+      || (!(prompt->auto_completion = malloc(sizeof(char) * prompt->size)))
+      || (!(prompt->pwd = malloc(sizeof(char) * prompt->size))))
     return (NULL);
   init_prompt_line(prompt, env);
   prompt->tmp_history = NULL;

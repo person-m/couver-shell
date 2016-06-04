@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Fri Jun  3 15:16:20 2016 mohamed-laid hedia
+** Last update Sat Jun  4 21:37:29 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -34,9 +34,10 @@ void	do_fork(char **b, t_shell *env, t_pipe *p)
     return ;
   else if (f == 0)
     {
-      close(p->p[p->i % 2][1]);
       if (dup2(p->p[p->i % 2][0], 0) == -1)
 	exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
+      close(p->p[p->i % 2][0]);
+      close(p->p[p->i % 2][1]);
       if (minishell1(b, env) == -1)
 	exit(EXIT_FAILURE);
     }
@@ -53,13 +54,7 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       s->failed = -1;
     }
   else if (is_builtin(b[0]))
-    {
-      if (minishell1(b, env) == -1)
-	{
-	  s->failed = -1;
-	  env->ret = EXIT_FAILURE;
-	}
-    }
+    pipe_builtin(b, env, p, s);
   else
     {
       p->i = p->i + 1;
@@ -76,23 +71,23 @@ void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
   char	**b;
   int	f;
 
-  f = 69;
+  b = pars_param(tab, s->i, env);
   if ((t = fork()) == -1)
     return ;
   else if (t == 0)
     {
-      if ((b = pars_param(tab, s->i, env)) == NULL)
+      if (b == NULL)
 	exit(EXIT_FAILURE);
       if (dup2(p->p[p->i % 2][1], 1) == -1)
 	exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
+      close(p->p[p->i % 2][0]);
       if (p->i != 0)
 	if (dup2(p->p[p->i % 2 ? 0 : 1][0], 0) == -1)
 	  exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
       f = minishell1(b, env);
-      free_tab(b);
       f == -1 ? exit(EXIT_FAILURE) : exit(EXIT_SUCCESS);
     }
-  if (p->i)
+  if (p->i > 0 && is_valide(b, env))
     close(p->p[p->i % 2 ? 0 : 1][0]);
   close(p->p[p->i % 2][1]);
 }
@@ -112,6 +107,7 @@ void		pipe_execution(char **tab, t_shell *env, t_command *s)
       s->i = s->i + length_param(tab, s->i);
     }
   s->failed = 1;
+  dup2(s->save[1], 1);
   last_process(tab, env, s, &p);
   dup2(s->save[1], 1);
   dup2(s->save[0], 0);

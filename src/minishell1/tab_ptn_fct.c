@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat Jun  4 16:02:19 2016 Melvin Personnier
+** Last update Sat Jun  4 21:57:05 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -22,7 +22,7 @@ static void	init_builtins_cmp(char **builtins_cmp)
   builtins_cmp[7] = "set";
   builtins_cmp[8] = "unset";
   builtins_cmp[9] = "bind";
-  builtins_cmp[10] = "couver";
+  builtins_cmp[10] = "couver-shell";
   builtins_cmp[11] = "madeby";
   builtins_cmp[12] = "if";
   builtins_cmp[13] = "repeat";

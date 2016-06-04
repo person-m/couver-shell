@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 22:24:00 2016 vincent riamon
+** Last update Sat Jun  4 22:31:57 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -19,10 +19,11 @@ void	do_the_thing(t_shell *sh, char ***cmd, int flag)
   }
   if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
       replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
-    {
-      backquote(cmd, sh);
-      the_execution(*cmd, sh);
-    }
+  {
+    backquote(cmd, sh);
+    the_execution(*cmd, sh);
+    del_quote(*cmd);
+  }
 }
 
 void	loop_42sh(t_shell *sh)
@@ -65,6 +66,7 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
   create_set(&sh);
+
   if ((couv_rc = couvrc(env)))
   {
     cmd = lexer(couv_rc, 0);
@@ -77,8 +79,16 @@ int		main(__attribute__((unused))int argc,
       free_shell(sh);
       return (sh.ret);
     }
-  if (!(sh.prompt = init_prompt(env, sh.history)))
+  if (!(sh.prompt = init_prompt(sh.env, sh.history)))
     return (0);
+
+  /* memcpy(sh.prompt->line, "ls .ma", 6); */
+  /* sh.prompt->count_char = 6; */
+  /* sh.prompt->count_pos = 6; */
+  /* bltin_completion(sh.prompt, sh.env); */
+  /* tcsetattr(0, 0, &sh.prompt->standard_mode); */
+  /* return (0); */
+
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);

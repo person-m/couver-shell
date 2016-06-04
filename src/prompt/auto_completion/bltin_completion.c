@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 18:58:33 2016
-** Last update Fri Jun  3 15:36:47 2016 Bertrand Buffat
+** Last update Sat Jun  4 19:59:14 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -21,8 +21,7 @@ bool		print_substr_in_directory(t_prompt *prompt, DIR *dir)
     {
       if ((!prompt->count_char
 	   || !strncmp(entry->d_name, prompt->line + prompt->offset,
-		       prompt->count_char - prompt->offset))
-	  && entry->d_name[0] != '.')
+		       prompt->count_char - prompt->offset)))
 	{
 	  write(1, entry->d_name, strlen(entry->d_name));
 	  write(1, "\n", 1);
@@ -45,8 +44,7 @@ int		get_substr_tab(t_prompt *prompt, DIR *dir, char **save)
     {
       if ((!prompt->count_char
 	   || !strncmp(entry->d_name, prompt->line + prompt->offset,
-		       prompt->count_char - prompt->offset))
-	  && entry->d_name[0] != '.')
+		       prompt->count_char - prompt->offset)))
 	{
 	  if (!*save && (min = strlen(entry->d_name)))
 	    *save = entry->d_name;
@@ -108,4 +106,5 @@ void	bltin_completion(t_prompt *prompt, char **env)
     print_commands(prompt, env, count);
   else
     print_files(prompt);
+
 }
