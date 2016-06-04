@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Thu Jun  2 19:22:06 2016 vincent riamon
-** Last update Thu Jun  2 21:26:43 2016 vincent riamon
+** Last update Sat Jun  4 01:08:31 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -45,5 +45,29 @@ int		made_by(__attribute__((unused))char **cmd, t_shell *sh)
   else
     wait(NULL);
   free(tab);
+  return (0);
+}
+
+int		man_couver(char **cmd, t_shell *sh)
+{
+  char		**tab;
+
+  if (cmd[0] && !strcmp(cmd[0], "\"man\"") &&
+      cmd[1] && !strcmp(cmd[1], "\"couver-shell\""))
+    {
+      tab = my_malloc(sizeof(char *) * 3);
+      tab[0] = "less";
+      tab[1] = "./.man_couver";
+      tab[2] = NULL;
+      if (fork() == 0)
+	{
+	  if (execve("/usr/bin/less", tab, sh->env) == -1)
+	    return (-1);
+	}
+      else
+	wait(NULL);
+      free(tab);
+      return (1);
+    }
   return (0);
 }
