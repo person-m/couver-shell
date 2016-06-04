@@ -30,7 +30,9 @@ char	*get_value(char *name, t_shell *sh)
 
   if (!strcmp(name, "?"))
     {
-      asprintf(&value, "%d", sh->ret);
+      if (!(value = malloc(sizeof(char) * (nb_digit(sh->ret) + 1))))
+	exit(-1);
+      sprintf(value, "%d", sh->ret);
       return (value);
     }
   if (!strcmp(name, "#"))
