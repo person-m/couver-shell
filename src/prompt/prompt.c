@@ -25,7 +25,7 @@ void	complex_string(t_shell *sh, char *buffer)
 	  cmd = lexer(sh->prompt->line, 0);
 	  aff_prompt(sh->prompt);
 	  write(1, "\n", 1);
-	  do_the_thing(sh, &cmd);
+	  do_the_thing(sh, &cmd, 0);
 	  update_prompt(sh->prompt);
 	  aff_prompt(sh->prompt);
 	}

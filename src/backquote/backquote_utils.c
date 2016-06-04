@@ -63,7 +63,7 @@ static void	son_action(int fd[2], t_shell *sh, char ***command)
 {
   close(fd[0]);
   dup2(fd[1], 1);
-  do_the_thing(sh, command);
+  do_the_thing(sh, command, 0);
   close(fd[1]);
   exit(0);
 }
