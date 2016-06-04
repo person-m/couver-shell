@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Fri Jun  3 21:38:27 2016 Bertrand Buffat
-** Last update Sat Jun  4 02:01:39 2016 Melvin Personnier
+** Last update Sat Jun  4 16:12:32 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -45,17 +45,12 @@ static void	erase_first_line_tab(char **tab)
 static void	loop_repeat(t_shell *sh, char **cmd, int turn)
 {
   char		*line;
-  int		ret;
-  int		ret2;
 
   line = wordtab_in_str(cmd, 0);
   while (--turn >= 0)
     {
-      ret2 = replace_exclam_dot(&cmd, sh);
-      ret = replace_vars(&cmd, sh);
       update_history(line, sh);
-      if (ret == 1 && ret2 == 1)
-	do_the_thing(sh, &cmd);
+      do_the_thing(sh, &cmd);
     }
 }
 

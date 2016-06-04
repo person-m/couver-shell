@@ -5,35 +5,31 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 15:27:43 2016 vincent riamon
+** Last update Sat Jun  4 16:12:26 2016 vincent riamon
 */
 
 #include "shell.h"
 
 void	do_the_thing(t_shell *sh, char ***cmd)
 {
-  if (!check_command(*cmd) && !replace_variables(cmd, sh))
-  {
-    backquote(cmd, sh);
-    the_execution(*cmd, sh);
-  }
+  if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
+      replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
+    {
+      backquote(cmd, sh);
+      the_execution(*cmd, sh);
+    }
 }
 
 void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
-  int	ret;
-  int	ret_man;
 
   while (1)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line, 0);
-      ret_man = man_couver(cmd, sh);
-      ret = replace_exclam_dot(&cmd, sh);
       update_history(sh->prompt->line, sh);
-      if (ret_man == 0 && ret == 1)
-	do_the_thing(sh, &cmd);
+      do_the_thing(sh, &cmd);
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);
