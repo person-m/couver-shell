@@ -110,6 +110,13 @@ BUILTIN AND FEATURES
 
      madeby: madeby display the project contributors
 
+     which: which allow to know the first path where is an executable
+     	     usage: "which [binary name]"
+
+     where: where allow to know all paths where is an executable, he can
+     	    write error messages
+     	     usage: "where [binary name]"
+
 
 FILES
     ~/.42_history

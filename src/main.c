@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 19:20:58 2016 vincent riamon
+** Last update Sat Jun  4 22:24:00 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -32,6 +32,7 @@ void	loop_42sh(t_shell *sh)
   while (1)
     {
       loop_prompt(sh);
+      is_to_large_history(sh);
       cmd = lexer(sh->prompt->line, 0);
       update_history(sh->prompt->line, sh);
       do_the_thing(sh, &cmd, 0);
