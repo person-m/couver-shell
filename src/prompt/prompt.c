@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Sat Jun  4 19:41:42 2016 Bertrand Buffat
+** Last update Sat Jun  4 23:17:53 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -39,14 +39,17 @@ char	get_input(t_shell *sh)
   char	buffer[2048];
   int	ret;
 
-  ret = read(0, buffer, 1024);
+  ret = read(0, buffer, 2047);
   buffer[ret] = 0;
   if (!ret)
     return (0);
   else if (!buffer[1])
     return (buffer[0]);
   if (buffer[0] == 27)
-    move_cursor(sh->prompt, buffer, sh->prompt->history, 1);
+    {
+      move_cursor(sh->prompt, buffer, sh->prompt->history, 1);
+      more_complex_string(sh, buffer);
+    }
   else
     complex_string(sh, buffer);
   aff_prompt(sh->prompt);

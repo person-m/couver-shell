@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 22:32:44 2016 vincent riamon
+** Last update Sun Jun  5 01:49:28 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -93,6 +93,9 @@ void            loop_prompt(t_shell *);
 char		get_input(t_shell *);
 void		which_input(t_shell *, char);
 char		*get_range_ascii(char *ascii, char input);
+void		more_complex_string(t_shell *, char *);
+void		move_left_word(t_shell *);
+void		move_right_word(t_shell *);
 
 void		signal_handler(void);
 void		check_signals(t_shell *);
