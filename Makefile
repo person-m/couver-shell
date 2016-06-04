@@ -5,7 +5,7 @@
 ## Login   <buffat_b@epitech.net>
 ##
 ## Started on  Wed May 25 00:12:22 2016
-## Last update Sat Jun  4 14:49:50 2016 mohamed-laid hedia
+## Last update Sat Jun  4 15:09:28 2016 mohamed-laid hedia
 ##
 
 NAME	=	42sh
@@ -65,7 +65,7 @@ SRC	=	src/main.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c \
-		src/minishell1/logo.c \
+		src/minishell1/feature.c \
 		src/backquote/backquote.c
 
 OBJ	=	$(SRC:.c=.o)

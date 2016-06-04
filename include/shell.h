@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Fri Jun  3 22:07:52 2016 Bertrand Buffat
+** Last update Sat Jun  4 01:01:38 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -57,6 +57,7 @@ void		create_set(t_shell *sh);
 void		*my_malloc(int size);
 char		*couvrc(char **env);
 int		logo(char **cmd, t_shell *sh);
+int		man_couver(char **cmd, t_shell *sh);
 int		made_by(char **cmd, t_shell *sh);
 void		the_execution(char **cmd, t_shell *sh);
 

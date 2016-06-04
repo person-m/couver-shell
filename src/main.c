@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 00:21:13 2016 vincent riamon
+** Last update Sat Jun  4 14:54:28 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -23,14 +23,18 @@ void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
   int	ret;
+  int	ret2;
+  int	ret_man;
 
   while (1)
     {
       loop_prompt(sh);
       cmd = lexer(sh->prompt->line, 0);
-      ret = replace_exclam_dot(&cmd, sh);
+      ret_man = man_couver(cmd, sh);
+      ret2 = replace_exclam_dot(&cmd, sh);
+      ret = replace_vars(&cmd, sh);
       update_history(sh->prompt->line, sh);
-      if (ret)
+      if (ret_man == 0 && ret == 1 && ret2 == 1)
 	do_the_thing(sh, &cmd);
       sh->prompt->history = sh->history;
       sh->prompt->env = sh->env;
