@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 19:40:43 2016 Bertrand Buffat
+** Last update Sat Jun  4 19:59:20 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -80,6 +80,13 @@ int		main(__attribute__((unused))int argc,
     }
   if (!(sh.prompt = init_prompt(sh.env, sh.history)))
     return (0);
+
+  /* memcpy(sh.prompt->line, "ls .ma", 6); */
+  /* sh.prompt->count_char = 6; */
+  /* sh.prompt->count_pos = 6; */
+  /* bltin_completion(sh.prompt, sh.env); */
+  /* tcsetattr(0, 0, &sh.prompt->standard_mode); */
+  /* return (0); */
 
   signal_handler();
   loop_42sh(&sh);
