@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri Jun  3 17:45:44 2016 mohamed-laid hedia
-** Last update Sat Jun  4 15:06:21 2016 mohamed-laid hedia
+** Last update Sat Jun  4 15:25:00 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -71,10 +71,10 @@ int	my_which(char **tab, t_shell *sh)
   path = my_path_tab(sh);
   while (tab[++i])
     {
-      if (!access(tab[i], X_OK))
+      if (slash_in_str(tab[i]) && !access(tab[i], X_OK))
 	fprintf(stdout, "%s\n", tab[i]);
       else if (is_builtin(tab[i]))
-	fprintf(stdout, "%s: shell built-in command\n", tab[i]);
+	fprintf(stdout, "%s: shell built-in command.\n", tab[i]);
       else if (check_in_path(tab[i], path, 0) == 0)
 	t = fprintf(stdout, "%s: Command not found.\n", tab[i]) * 0 - 1;
     }

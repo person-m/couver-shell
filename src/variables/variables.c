@@ -75,13 +75,14 @@ char	**replace_variable(char *cmd, t_shell *sh)
 
   cmd++;
   cmd[strlen(cmd) - 1] = 0;
-  if (!(ret = get_value((name = get_variable_name(cmd, &end)), sh)))
+  name = get_variable_name(cmd, &end);
+  if (!end)
+    return (NULL);
+  if (!(ret = get_value(name, sh)))
   {
     fprintf(stderr, "%s: Undefined variable.\n", name);
     return (NULL);
   }
-  if (!end)
-    return (NULL);
   value = lexer(ret, 0);
   value[0] = insert_str_in_str(value[0], cmd, 1, 0);
   value[tab_len(value) - 1]

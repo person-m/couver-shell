@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 18:13:27 2016
-** Last update Fri Jun  3 19:27:23 2016 Bertrand Buffat
+** Last update Sat Jun  4 13:47:44 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -66,5 +66,5 @@ void	signal_handler(void)
 {
   signal(SIGINT, handler);
   signal(SIGWINCH, handler);
-  signal(SIGSTOP, handler);
+  signal(SIGTSTP, handler);
 }

@@ -5,7 +5,11 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 16:03:13 2016 vincent riamon
+<<<<<<< HEAD
+** Last update Sat Jun  4 19:30:33 2016 Bertrand Buffat
+=======
+** Last update Sat Jun  4 19:26:38 2016 vincent riamon
+>>>>>>> 0b25bc2e5bf6692d4795fd988c4365e0c9357ab7
 */
 
 #ifndef SHELL_H_
@@ -23,6 +27,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "prompt.h"
 
 typedef struct	s_shell
@@ -70,13 +76,8 @@ int		create_history_file(char **hist, t_shell *sh);
 char		**error_history(char *var);
 char		*error_history2();
 
-/* int		replace_vars(char ***cmd, t_shell *sh); */
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
-/* int	        close_accolade(char **str); */
 char		*get_var(char *str);
-/* char		*put_cmd(char **str, char *str1); */
-/* int	        error_accolades(int mode); */
-/* int		there_is_accolade(char *str, int *inc); */
 char		**insert_tab_in_tab(char **dest, char **src,
 				     int pos, int len);
 char		**insert_str_in_tab(char **dest, char *src, int pos, int len);
@@ -88,6 +89,7 @@ char		*get_next_line(const int);
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);
 void		completion(t_shell *);
+char		is_subcommand_in_path(t_prompt *, DIR *, char);
 int		rebind(char **cmd, t_shell *sh);
 
 void            loop_prompt(t_shell *);

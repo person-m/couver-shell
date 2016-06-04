@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Fri May 27 14:15:52 2016
-** Last update Fri Jun  3 16:26:02 2016 Bertrand Buffat
+** Last update Sat Jun  4 17:10:38 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -15,10 +15,10 @@ char		is_substr_in_path(t_prompt *prompt, DIR *dir, char flag)
   struct dirent	*entry;
   char		*save;
 
+  save = NULL;
   while ((entry = readdir(dir)))
     if (!strncmp(entry->d_name, prompt->line + prompt->offset,
-		 prompt->count_char - prompt->offset) &&
-	entry->d_name[0] != '.')
+		 prompt->count_char - prompt->offset))
       {
 	if (flag
 	    && (strncmp(prompt->auto_completion, entry->d_name,
@@ -33,23 +33,26 @@ char		is_substr_in_path(t_prompt *prompt, DIR *dir, char flag)
   return (flag);
 }
 
-void	search_substr_in_path(t_prompt *prompt, char **path, char flag)
+int	search_substr_in_path(t_prompt *prompt, char **path, char flag)
 {
   DIR	*dir;
 
   if (!*path)
     {
       if (!flag)
-	prompt->size_completion = 0;
-      return ;
+	{
+	  prompt->size_completion = 0;
+	  return (0);
+	}
+      return (-1);
     }
   if (!(dir = opendir(*path)))
     return (search_substr_in_path(prompt, ++path, flag));
-  if ((flag = is_substr_in_path(prompt, dir, flag)) == -1)
+  if ((flag = is_subcommand_in_path(prompt, dir, flag)) == -1)
     {
       prompt->size_completion = 0;
       closedir(dir);
-      return ;
+      return (-1);
     }
   closedir(dir);
   return (search_substr_in_path(prompt, ++path, flag));
@@ -66,7 +69,8 @@ void	search_command(t_prompt *prompt, char **env)
       return ;
     }
   path = my_str_to_wordtab_pattern(tmp, ":");
-  search_substr_in_path(prompt, path, 0);
+  if (!search_substr_in_path(prompt, path, 0))
+    search_in_couverbin(prompt);
   free_tab(path);
 }
 
@@ -91,7 +95,7 @@ void	search_file(t_prompt *prompt)
       return ;
     }
   ret = is_substr_in_path(prompt, dir, 0);
-  if (ret == -1 || !ret)
+  if (ret == -1)
     prompt->size_completion = 0;
   closedir(dir);
 }

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sun May 29 02:37:42 2016
-** Last update Fri Jun  3 15:38:07 2016 Bertrand Buffat
+** Last update Sat Jun  4 17:22:38 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -95,6 +95,5 @@ void	check_auto_compet(t_shell *sh)
   path[sh->prompt->count_char - offset] = 0;
   if (!(dir = opendir(path)))
     return ;
-  sh->prompt->line[sh->prompt->count_char++] = '/';
-  ++sh->prompt->count_pos;
+  add_char(sh->prompt, '/');
 }

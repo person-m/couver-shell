@@ -5,10 +5,26 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 19:01:23 2016
-** Last update Mon May 30 22:14:32 2016 Bertrand Buffat
+** Last update Sat Jun  4 16:59:37 2016 Bertrand Buffat
 */
 
 #include "shell.h"
+
+void	search_in_couverbin(t_prompt *prompt)
+{
+  DIR	*dir;
+  char	*path;
+  int	ret;
+
+  if (!(path = get_var_env(prompt->env, "BLTIN_PATH=")))
+    return ;
+  if (!(dir = opendir(path)))
+    return ;
+  ret = is_substr_in_path(prompt, dir, 0);
+  if (ret == -1)
+    prompt->size_completion = 0;
+  closedir(dir);
+}
 
 void	put_nbr(int nbr)
 {

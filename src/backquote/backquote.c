@@ -69,12 +69,9 @@ void	backquote(char ***command, t_shell *sh)
     {
       j = get_match_quote(*command, i);
       sub_command = get_sub_tab(*command, i + 1, j - i - 1);
-      if (!q[0] && !q[1] && (new_command = exec_backquote(&sub_command, sh)))
-      {
-	(*command)[i][0] = '\"';
-	(*command)[j][0] = '\"';
+      if (!q[0] && !q[1] && (new_command = exec_backquote(&sub_command, sh))
+	  && ((*command)[i][0] = '\"') && ((*command)[j][0] = '\"'))
 	*command = insert_tab_in_tab(*command, new_command, i + 1, j - i - 1);
-      }
       else if ((q[0] || q[1]) && (new_line = exec_in_q(&sub_command, sh)))
 	*command = insert_str_in_tab(*command, new_line, i, j - i + 1);
       else
