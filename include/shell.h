@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sun Jun  5 01:49:28 2016 Bertrand Buffat
+** Last update Sun Jun  5 03:43:29 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -17,24 +17,22 @@
 
 # define _GNU_SOURCE
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include "prompt.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "prompt.h"
 
 typedef struct	s_shell
 {
   char		**env;
   char		**alias;
   char		**history;
-
   char		**set;
-
   int		size_hist;
   int		ret;
   int		bol;
