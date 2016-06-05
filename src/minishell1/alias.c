@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Sun Jun  5 07:12:45 2016 Melvin Personnier
+** Last update Sun Jun  5 07:54:34 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -22,6 +22,11 @@ static int	exit_alias(char **tab, t_shell *sh)
       fprintf(stderr, "alias: Not enought arguments.\n");
       return (0);
     }
+  if (strcmp(tab[1], "alias") == 0)
+  {
+    fprintf(stderr, "alias: Too dangerous to alias that.\n");
+    return (0);
+  }
   return (1);
 }
 
