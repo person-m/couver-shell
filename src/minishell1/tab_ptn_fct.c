@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri May 20 15:21:34 2016 Melvin Personnier
-** Last update Sat Jun  4 21:57:05 2016 Melvin Personnier
+** Last update Sun Jun  5 03:54:41 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -52,12 +52,12 @@ static void	init_builtins(int (**builtins)(char **tab, t_shell *sh))
   builtins[16] = &my_unalias;
 }
 
-static int     builtins(char **tab, t_shell *sh)
+static int	builtins(char **tab, t_shell *sh)
 {
-  int	(*builtins[17])(char **tab, t_shell *sh);
-  char	*builtins_cmp[17];
-  int	i;
-  int	is_builtin;
+  int		(*builtins[17])(char **tab, t_shell *sh);
+  char		*builtins_cmp[17];
+  int		i;
+  int		is_builtin;
 
   i = -1;
   is_builtin = 1;
@@ -71,9 +71,9 @@ static int     builtins(char **tab, t_shell *sh)
   return (is_builtin);
 }
 
-int	minishell1(char **tab, t_shell *sh)
+int		minishell1(char **tab, t_shell *sh)
 {
-  int	is_builtin;
+  int		is_builtin;
 
   if ((is_builtin = builtins(tab, sh)) == 1)
     return (exec_sh1(tab, sh));

@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Sat Jun  4 16:34:05 2016 Melvin Personnier
+** Last update Sun Jun  5 03:43:39 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -65,7 +65,7 @@ int		cmd_set(char **tab, t_shell *sh)
   return (0);
 }
 
-int	my_unset(char **tab, t_shell *sh)
+int		my_unset(char **tab, t_shell *sh)
 {
   int		i;
   int		j;

@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Thu Jun  2 01:53:03 2016 Melvin Personnier
-** Last update Thu Jun  2 01:53:15 2016 Melvin Personnier
+** Last update Sun Jun  5 03:49:44 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -57,7 +57,7 @@ char		*modif_total(char **tab, int *j)
   return (total);
 }
 
-int	verif_for_one(char *str)
+int		verif_for_one(char *str)
 {
   if (str && ((str[0] < 'a' || str[0] > 'z') &&
 	      (str[0] < 'A' || str[0] > 'Z') && (str[0] >= '0' || str[0] <= '9')

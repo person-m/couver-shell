@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Thu Jun  2 11:57:01 2016 vincent riamon
+** Last update Sun Jun  5 03:52:18 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -70,7 +70,7 @@ void	        aff_tab(char **tab)
 
 int		slash_in_str(char *str)
 {
-  int	i;
+  int		i;
 
   i = -1;
   while (str[++i])

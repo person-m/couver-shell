@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Sun Jun  5 00:31:18 2016 Melvin Personnier
+** Last update Sun Jun  5 03:34:03 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -79,10 +79,10 @@ void		create_alias(t_shell *sh)
   sh->alias[0] = NULL;
 }
 
-int	is_alias(char **s, t_shell *sh)
+int		is_alias(char **s, t_shell *sh)
 {
-  int	i;
-  int	a;
+  int		i;
+  int		a;
 
   i = -1;
   a = strlen(*s);
