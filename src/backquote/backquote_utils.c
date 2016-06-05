@@ -49,7 +49,7 @@ static char	*father_action(int fd[2], int *size)
   while ((ret = read(fd[0], buf, BUF_SIZE)) > 0)
   {
     if (!(new_line = realloc(new_line, *size + ret + 1)))
-      return (NULL);
+      exit(-1);
     memcpy(new_line + *size, buf, ret);
     new_line[*size + ret] = 0;
     *size += ret;

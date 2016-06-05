@@ -14,7 +14,7 @@
 #include "backquote_utils.c"
 #include "backquote_misc.c"
 
-char	**insert_str_in_tab(char **dest, char *src, int pos, int len)
+char		**insert_str_in_tab(char **dest, char *src, int pos, int len)
 {
   char		**new;
 

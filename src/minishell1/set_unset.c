@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Mon May 30 22:36:13 2016 Melvin Personnier
-** Last update Sun Jun  5 03:43:39 2016 Melvin Personnier
+** Last update Sun Jun  5 04:43:15 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -18,7 +18,7 @@ void		init_one_two(char **one, char **two, char *total)
 
 void		add_line_set(int i, char *one, char *two, t_shell *sh)
 {
-  sh->set = realloc(sh->set, ((tab_len(sh->set) + 2) * sizeof(char *)));
+  sh->set = my_realloc(sh->set, ((tab_len(sh->set) + 2) * sizeof(char *)));
   sh->set[i] = concat_str(one, two, '\t');
   sh->set[i + 1] = NULL;
 }

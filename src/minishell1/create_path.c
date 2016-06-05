@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat Jun  4 21:24:16 2016 Melvin Personnier
-** Last update Sat Jun  4 21:24:36 2016 Melvin Personnier
+** Last update Sun Jun  5 04:29:57 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -19,4 +19,15 @@ char		*create_path()
   pathbuf = my_malloc(sizeof(char) * n);
   confstr(_CS_PATH, pathbuf, n);
   return (pathbuf);
+}
+
+void		*my_realloc(void *ptr, size_t size)
+{
+  ptr = realloc(ptr, size);
+  if (ptr == NULL)
+    {
+      fprintf(stderr, "realloc failure!\n");
+      exit(1);
+    }
+  return (ptr);
 }

@@ -1,11 +1,11 @@
 /*
 ** set_var_env.c for set_var_env in /home/riamon_v/couver-shell/src/history
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Sat Jun  4 15:44:11 2016 vincent riamon
-** Last update Sun Jun  5 03:55:07 2016 vincent riamon
+** Last update Sun Jun  5 04:46:19 2016 Melvin Personnier
 */
 
 #include "shell.h"
@@ -58,7 +58,7 @@ char		*wordtab_in_str(char **tab, int mode)
     {
       j = 0;
       len += strlen(tab[i]) + 1;
-      str = realloc(str, sizeof(char) * (len + 1));
+      str = my_realloc(str, sizeof(char) * (len + 1));
       while (tab[i][j])
 	str[k++] = tab[i][j++];
       str[k++] = ' ';

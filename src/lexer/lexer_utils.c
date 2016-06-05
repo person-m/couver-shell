@@ -43,7 +43,7 @@ static void	del_backslash(char *str)
   str[i] = 0;
 }
 
-static int		is_special(char c)
+static int	is_special(char c)
 {
   return (!c || c == '\t' || c == ' ' || c == '\n');
 }

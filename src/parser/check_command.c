@@ -97,11 +97,9 @@ static int	check_null_command(char **command)
   while (*command)
   {
     if ((!strcmp(">", *command) || !strcmp(">>", *command)
-	|| !strcmp("<", *command) || !strcmp("<<", *command)) && !(nul = 0))
-    {
+	 || !strcmp("<", *command) || !strcmp("<<", *command)) && !(nul = 0))
       if (++command && *command)
 	go_to_match_arg(&command);
-    }
     if (!(*command) || is_end_of_command(*command))
     {
       if (!exec && !nul)
@@ -125,6 +123,6 @@ int	check_command(char **command)
 	  || check_redirection(command)
 	  || check_redirect_name(command)
 	  || check_muli_redirections(command)
-//	  || check_muli_end(command)
+	  || check_muli_end(command)
 	  || check_null_command(command));
 }
