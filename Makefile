@@ -30,24 +30,25 @@ SRC	=	src/main.c \
 		src/prompt/auto_completion/bltin_completion_command.c \
 		src/prompt/auto_completion/fct_completions.c \
 		src/prompt/auto_completion/list_completion.c \
-		src/minishell1/misc.c \
-		src/minishell1/order_by_asc.c \
-		src/minishell1/create_path.c \
-		src/minishell1/builtin.c \
-		src/minishell1/builtin2.c \
-		src/minishell1/builtin3.c \
-		src/minishell1/builtin3-2.c \
-		src/minishell1/builtin4.c \
-		src/minishell1/builtin5.c \
-		src/minishell1/builtin6.c \
-		src/minishell1/unalias.c \
-		src/minishell1/my_if.c \
-		src/minishell1/utils.c \
-		src/minishell1/repeat.c \
-		src/minishell1/tab_ptn_fct.c \
-		src/minishell1/my_str_to_wordtab_pattern.c \
+		src/minishell1/alias_utils.c \
+		src/minishell1/alias.c \
 		src/minishell1/cd.c \
+		src/minishell1/create_path.c \
+		src/minishell1/echo_exit.c \
+		src/minishell1/env.c \
 		src/minishell1/exec_sh1.c \
+		src/minishell1/feature.c \
+		src/minishell1/misc.c \
+		src/minishell1/my_if.c \
+		src/minishell1/order_by_asc.c \
+		src/minishell1/repeat.c \
+		src/minishell1/set_unset.c \
+		src/minishell1/set_utils.c \
+		src/minishell1/set.c \
+		src/minishell1/my_str_to_wordtab_pattern.c \
+		src/minishell1/tab_ptn_fct.c \
+		src/minishell1/unalias.c \
+		src/minishell1/utils.c \
 		src/minishell2/minishell2.c \
 		src/minishell2/pars.c \
 		src/minishell2/pipe.c \
@@ -71,7 +72,6 @@ SRC	=	src/main.c \
 		src/globbing/globbing.c \
 		src/annex_main/get_std_input.c \
 		src/annex_main/signals.c \
-		src/minishell1/feature.c \
 		src/backquote/backquote.c
 
 OBJ	=	$(SRC:.c=.o)
