@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Thu Jun  2 01:51:38 2016 Melvin Personnier
-** Last update Thu Jun  2 13:38:34 2016 Melvin Personnier
+** Last update Sun Jun  5 03:49:13 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -16,7 +16,7 @@ void		create_set(t_shell *sh)
   sh->set[0] = NULL;
 }
 
-int	print_set(t_shell *sh)
+int		print_set(t_shell *sh)
 {
   int		i;
 
@@ -31,7 +31,7 @@ int	print_set(t_shell *sh)
   return (0);
 }
 
-int	is_already_in_set(char **my_set, char *str)
+int		is_already_in_set(char **my_set, char *str)
 {
   int    	i;
   char		*str2;
