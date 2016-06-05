@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:14:58 2016
-** Last update Fri Jun  3 22:27:01 2016 Bertrand Buffat
+** Last update Sun Jun  5 02:21:18 2016 Bertrand Buffat
 */
 
 #include "prompt.h"
@@ -21,7 +21,7 @@ void	get_actual_line(t_prompt *prompt)
   if (write(1, "\033[6n", 4) <= 0)
     return ;
   if (!(ret = read(0, buffer, 15)))
-    return (get_actual_line(prompt));  
+    return (get_actual_line(prompt));
   buffer[ret] = 0;
   if (buffer[0] != 27)
     return (get_actual_line(prompt));

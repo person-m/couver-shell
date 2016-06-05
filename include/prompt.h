@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Sat Jun  4 17:03:00 2016 Bertrand Buffat
+** Last update Sun Jun  5 02:10:39 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -60,7 +60,7 @@ typedef struct		s_prompt
   int			nblines;
 
   char			**env;
-
+  int			ret;
   char			**history;
   char			*tmp_history;
   int			curr_history;

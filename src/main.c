@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun Jun  5 01:49:13 2016 Bertrand Buffat
+** Last update Sun Jun  5 03:13:46 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -41,6 +41,9 @@ void	loop_42sh(t_shell *sh)
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);
       free_tab(cmd);
+      sh->prompt->ret = sh->ret;
+      if (!sh->prompt->count_char)
+	sh->ret = 0;
     }
 }
 
@@ -66,7 +69,6 @@ int		main(__attribute__((unused))int argc,
   create_alias(&sh);
   create_oldpwd(&sh);
   create_set(&sh);
-
   if ((couv_rc = couvrc(env)))
   {
     cmd = lexer(couv_rc, 0);
@@ -81,7 +83,6 @@ int		main(__attribute__((unused))int argc,
     }
   if (!(sh.prompt = init_prompt(sh.env, sh.history)))
     return (0);
-
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);
