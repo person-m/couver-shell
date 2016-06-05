@@ -5,16 +5,16 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 25 18:30:04 2016 Melvin Personnier
-** Last update Thu May 26 23:49:20 2016 Melvin Personnier
+** Last update Sun Jun  5 03:43:49 2016 vincent riamon
 */
 
 #ifndef MY_H
 # define MY_H
 
-#include <stdlib.h>
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <string.h>
+# include <unistd.h>
 
 #ifndef READ_SIZE
 # define READ_SIZE (42)

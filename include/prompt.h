@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:11:58 2016
-** Last update Sat Jun  4 17:03:00 2016 Bertrand Buffat
+** Last update Sun Jun  5 03:39:40 2016 Bertrand Buffat
 */
 
 #ifndef _PROMPT_H
@@ -40,31 +40,24 @@ typedef struct		s_prompt
   int			start_line;
   int			start_col;
   char			start_line_str[16];
-
   char			*line;
   int			count_char;
   int			count_pos;
   int			size;
-
   char			*prompt;
   int			size_prompt;
-
   char			*pwd;
   int			size_pwd;
-
   char			*auto_completion;
   int			size_completion;
   int			offset;
-
   int			nbcols;
   int			nblines;
-
   char			**env;
-
+  int			ret;
   char			**history;
   char			*tmp_history;
   int			curr_history;
-
   int			nbr;
 
   struct s_caps		*caps;
@@ -133,8 +126,8 @@ void		get_path_from_line(t_prompt *, int offset_dir, char *path);
 
 int		next_range(char *, char);
 char		*get_range_ascii(char *, char);
-bool		is_alpha(char *);
 
+bool		is_alpha(char *);
 void		put_in_list(t_list **, char *);
 int		get_row_list(t_list **, int);
 void		print_dat_list(t_prompt *, t_list *, int);

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:13 2016
-** Last update Fri Jun  3 15:40:53 2016 Bertrand Buffat
+** Last update Sun Jun  5 03:32:30 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -87,7 +87,7 @@ void	move_cursor_back(t_prompt *prompt)
 
   total_count = prompt->size_pwd +
   prompt->size_prompt + prompt->count_pos + (prompt->start_col - 1) +
-  size_of_int(prompt->nbr) + size_of_int(prompt-> count_char) + 5;
+  size_of_int(prompt->nbr) + size_of_int(prompt-> count_char) + 8;
   width = total_count % prompt->nbcols + 1;
   height = prompt->start_line + total_count / prompt->nbcols;
   fill_tab_caps(tab, height, width);

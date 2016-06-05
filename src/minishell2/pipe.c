@@ -5,15 +5,15 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sat Jun  4 21:37:29 2016 mohamed-laid hedia
+** Last update Sun Jun  5 03:37:15 2016 vincent riamon
 */
 
 #include "mo.h"
 
-int	wait_process(t_command *s, t_pipe *p, int ret)
+int		wait_process(t_command *s, t_pipe *p, int ret)
 {
-  int	*f;
-  int	i;
+  int		*f;
+  int		i;
 
   if ((f = malloc(sizeof(int) * (p->i + 1))) == NULL)
     return (-1);
@@ -26,9 +26,9 @@ int	wait_process(t_command *s, t_pipe *p, int ret)
   return (verif_ret_pipe(f, s, p, ret));
 }
 
-void	do_fork(char **b, t_shell *env, t_pipe *p)
+void		do_fork(char **b, t_shell *env, t_pipe *p)
 {
-  int	f;
+  int		f;
 
   if ((f = fork()) == -1)
     return ;
@@ -43,9 +43,9 @@ void	do_fork(char **b, t_shell *env, t_pipe *p)
     }
 }
 
-void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
+void		last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 {
-  char	**b;
+  char		**b;
 
   env->ret = EXIT_SUCCESS;
   if ((b = pars_param(tab, s->i, env)) == NULL)
@@ -65,11 +65,11 @@ void	last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
   env->ret = wait_process(s, p, 0);
 }
 
-void	do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
+void		do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 {
-  int	t;
-  char	**b;
-  int	f;
+  int		t;
+  char		**b;
+  int		f;
 
   b = pars_param(tab, s->i, env);
   if ((t = fork()) == -1)

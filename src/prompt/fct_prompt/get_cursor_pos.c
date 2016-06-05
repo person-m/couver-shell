@@ -5,26 +5,15 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:14:58 2016
-** Last update Fri Jun  3 22:27:01 2016 Bertrand Buffat
+** Last update Sun Jun  5 03:35:33 2016 Bertrand Buffat
 */
 
 #include "prompt.h"
 
-void	get_actual_line(t_prompt *prompt)
+void	catch_line(t_prompt *prompt, char *buffer)
 {
-  char	buffer[16];
-  int	ret;
   int	i;
-  
-  if (tcsetattr(0, 0, &prompt->raw_mode))
-    return (get_actual_line(prompt));  
-  if (write(1, "\033[6n", 4) <= 0)
-    return ;
-  if (!(ret = read(0, buffer, 15)))
-    return (get_actual_line(prompt));  
-  buffer[ret] = 0;
-  if (buffer[0] != 27)
-    return (get_actual_line(prompt));
+
   i = 0;
   while (buffer[i] != '[')
     ++i;
@@ -40,6 +29,23 @@ void	get_actual_line(t_prompt *prompt)
       prompt->start_col *= 10;
       prompt->start_col += (buffer[i] - '0');
     }
+}
+
+void	get_actual_line(t_prompt *prompt)
+{
+  char	buffer[16];
+  int	ret;
+
+  if (tcsetattr(0, 0, &prompt->raw_mode))
+    return (get_actual_line(prompt));
+  if (write(1, "\033[6n", 4) <= 0)
+    return ;
+  if (!(ret = read(0, buffer, 15)))
+    return (get_actual_line(prompt));
+  buffer[ret] = 0;
+  if (buffer[0] != 27)
+    return (get_actual_line(prompt));
+  catch_line(prompt, buffer);
 }
 
 int	size_of_int(int n)
