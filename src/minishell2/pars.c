@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:54 2016 mohamed-laid hedia
-** Last update Sun Jun  5 14:56:50 2016 mohamed-laid hedia
+** Last update Sun Jun  5 17:24:39 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -37,10 +37,8 @@ int	is_valide(char **tab, t_shell *sh)
 }
 
 void	pipe_builtin(char **b, t_shell *env, t_pipe *p, t_command *s)
-{
-  char	buff[234];
-
-  read(p->p[p->i % 2 ? 0 : 1][0], buff, 230);
+{ 
+  dup2(p->p[p->i % 2 ? 0 : 1][0], 0);
   close(p->p[p->i % 2 ? 0 : 1][0]);
   if (minishell1(b, env) == -1)
     {

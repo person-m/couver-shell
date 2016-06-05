@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sun Jun  5 13:37:41 2016 mohamed-laid hedia
+** Last update Sun Jun  5 17:04:57 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -61,7 +61,6 @@ void		last_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       do_fork(b, env, p);
       close(p->p[p->i % 2][0]);
     }
-  free_tab(b);
   env->ret = wait_process(s, p, 0);
 }
 
@@ -81,13 +80,13 @@ void		do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
       if (dup2(p->p[p->i % 2][1], 1) == -1)
 	exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
       close(p->p[p->i % 2][0]);
-      if (p->i != 0)
+      if (p->i != 0 && !is_builtin(b[0]))
 	if (dup2(p->p[p->i % 2 ? 0 : 1][0], 0) == -1)
 	  exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
       f = minishell1(b, env);
       f == -1 ? exit(EXIT_FAILURE) : exit(EXIT_SUCCESS);
     }
-  if (p->i > 0 && is_valide(b, env))
+  if (p->i > 0 && is_valide(b, env) && !is_builtin(b[0]))
     close(p->p[p->i % 2 ? 0 : 1][0]);
   close(p->p[p->i % 2][1]);
 }
