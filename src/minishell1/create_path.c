@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat Jun  4 21:24:16 2016 Melvin Personnier
-** Last update Sun Jun  5 06:32:19 2016 Melvin Personnier
+** Last update Sun Jun  5 21:28:13 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -40,4 +40,10 @@ char		*my_strdup(const char *s)
   if (!str)
     exit(1);
   return (str);
+}
+
+void		free_my_alias(t_shell *sh, int i, int *bol)
+{
+  free(sh->alias[i]);
+  *bol = 1;
 }

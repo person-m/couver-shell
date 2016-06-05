@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Sun Jun  5 07:54:34 2016 Melvin Personnier
+** Last update Sun Jun  5 21:28:23 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -46,11 +46,11 @@ int		my_alias(char **tab, t_shell *sh)
   tmp = concat_alias(tab);
   while (sh->alias[++i])
     {
-      if (!strncmp(sh->alias[i], tab[1], strlen(tab[1])))
+      if (!strncmp(sh->alias[i], tab[1], strlen(tab[1]))
+	  && sh->alias[i][strlen(tab[1])] == '=')
 	{
-	  free(sh->alias[i]);
+	  free_my_alias(sh, i, &bol);
 	  sh->alias[i] = concat_str(tab[1], tmp, '=');
-	  bol = 1;
 	}
     }
   if (!bol)
