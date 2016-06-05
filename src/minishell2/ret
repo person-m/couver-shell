@@ -1,0 +1,7 @@
+minishell2.c:  env->ret = verif_one_sig(st, s);
+minishell2.c:      env->ret = EXIT_FAILURE;
+minishell2.c:	  env->ret = EXIT_FAILURE;
+pars.c:      env->ret = EXIT_FAILURE;
+pipe.c:  env->ret = EXIT_SUCCESS;
+pipe.c:      env->ret = EXIT_FAILURE;
+pipe.c:  env->ret = wait_process(s, p, 0);

@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 21:09:32 2016 mohamed-laid hedia
-** Last update Thu Jun  2 23:10:08 2016 mohamed-laid hedia
+** Last update Sun Jun  5 13:07:52 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -40,7 +40,6 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
     }
   else if (is_builtin(b[0]))
     {
-      env->ret = 0;
       if (minishell1(b, env) == -1)
 	{
 	  env->ret = EXIT_FAILURE;
