@@ -5,40 +5,11 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Sat Jun  4 19:32:26 2016 vincent riamon
+** Last update Sun Jun  5 03:57:50 2016 vincent riamon
 */
 
 #include "my.h"
 #include "../../include/shell.h"
-
-char	*wordtab_in_str(char **tab, int mode)
-{
-  char		*str;
-  int		i;
-  int		j;
-  int		k;
-  int		len;
-
-  i = -1;
-  k = 0;
-  str = NULL;
-  len = 0;
-  if (!tab[0])
-    return (NULL);
-  while (tab[++i])
-    {
-      j = 0;
-      len += strlen(tab[i]) + 1;
-      str = realloc(str, sizeof(char) * (len + 1));
-      while (tab[i][j])
-	str[k++] = tab[i][j++];
-      str[k++] = ' ';
-      if (mode == 1)
-	free(tab[i]);
-    }
-  str[k - 1] = 0;
-  return (str);
-}
 
 int	        is_empty_line(char *str)
 {
@@ -82,6 +53,13 @@ void		update_history(char *line, t_shell *sh)
   free(hist);
 }
 
+void		end_history(t_shell *sh, int fd)
+{
+  sh->history[tab_len(sh->history)] = NULL;
+  sh->size_hist = tab_len(sh->history);
+  close(fd);
+}
+
 void		fill_history(t_shell *sh)
 {
   int		fd;
@@ -107,9 +85,7 @@ void		fill_history(t_shell *sh)
       free(s);
       i++;
     }
-  sh->history[tab_len(sh->history)] = NULL;
-  sh->size_hist = tab_len(sh->history);
-  close(fd);
+  end_history(sh, fd);
   free(hist);
 }
 
