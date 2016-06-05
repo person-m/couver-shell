@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun Jun  5 06:40:27 2016 vincent riamon
+** Last update Sun Jun  5 15:50:09 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -37,13 +37,8 @@ void	loop_42sh(t_shell *sh)
       cmd = lexer(sh->prompt->line, 0);
       update_history(sh->prompt->line, sh);
       do_the_thing(sh, &cmd, 0);
-      sh->prompt->history = sh->history;
-      sh->prompt->env = sh->env;
-      update_prompt(sh->prompt);
+      update_prompt_main_loop(sh);
       free_tab(cmd);
-      sh->prompt->ret = sh->ret;
-//      if (!sh->prompt->count_char)
-//	sh->ret = 0;
     }
 }
 
