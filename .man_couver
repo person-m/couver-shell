@@ -128,6 +128,11 @@ BUILTIN AND FEATURES
 	     usage: "exit"
 	     	    "exit [number]"
 
+OPTION
+	You can execute the couver-shell with two basics option. Option -c who
+	permit to execute one command with our shell and --version option wich
+	give you the shell's version. (for example; ./42sh -c "ls");
+
 
 FILES
     ~/.42_history
