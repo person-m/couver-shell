@@ -22,7 +22,7 @@ char		*error_history2()
   return (NULL);
 }
 
-char	*get_var(char *str)
+char		*get_var(char *str)
 {
   char		*tmp;
   int		i;
@@ -45,7 +45,7 @@ int	error_accolades(int mode)
   return (0);
 }
 
-char	*put_cmd(char **cmd1, char *cmd2)
+char		*put_cmd(char **cmd1, char *cmd2)
 {
   char		*tmp;
   int		i;

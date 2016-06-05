@@ -29,7 +29,7 @@ char		**insert_tab_in_tab(char **dest, char **src, int pos, int len)
   return (new);
 }
 
-int	is_glob_redirect(char **str)
+int		is_glob_redirect(char **str)
 {
   glob_t	globbuf;
   int		ret;
@@ -56,7 +56,7 @@ int	is_glob_redirect(char **str)
   return (1);
 }
 
-char		**glob_parameters(char **command, int *i)
+static char	**glob_parameters(char **command, int *i)
 {
   glob_t	globbuf;
   int		nb;
@@ -76,7 +76,7 @@ char		**glob_parameters(char **command, int *i)
   return (command);
 }
 
-int	glob_executable(char **str)
+static int	glob_executable(char **str)
 {
   glob_t	globbuf;
   int		ret;
@@ -104,6 +104,8 @@ char	**glob_command(char **command)
 
   quote = 0;
   i = 1;
+  if (!*command)
+    return (command);
   if (!glob_executable(command))
     return (NULL);
   quote = (strcmp(command[0], "\"")) ? quote : !quote;

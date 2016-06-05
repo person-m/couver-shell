@@ -14,6 +14,8 @@ char	**alias(char **cmd, t_shell *sh)
 {
   char	**new_cmd;
 
+  if (!*cmd)
+    return (cmd);
   if (strlen(cmd[0]) > 1)
   {
     cmd[0]++;
