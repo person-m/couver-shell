@@ -20,7 +20,7 @@ char		**insert_tab_in_tab(char **dest, char **src, int pos, int len)
   char		**new;
 
   if (!(new = malloc(sizeof(char *) * (tablen(dest) + tablen(src) - len + 1))))
-    return (NULL);
+    exit(-1);
   wordtabncpy(new, dest, pos);
   if (src)
     wordtabncpy(new + pos, src, tablen(src));
