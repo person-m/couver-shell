@@ -7,9 +7,9 @@
 
 **We fork since 2016 !!**
 
-   ### Menu
+   ###Menu
 
-   ### entrée:
+   ### Entrée:
    * Plateau de fruit de maire_q aux delm-oules d'Arcachon
    * Soupe de vermishell au shell de guérande   
 
@@ -20,4 +20,4 @@
    ### Boisson:
    * Pichard d'Huot fraîche
 
-*couver-shell is a C project that aims to recode a basic shell program. *
+*couver-shell is a C project that aims to recode a basic shell program.*
