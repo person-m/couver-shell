@@ -2,23 +2,22 @@
 
 ![logo](http://i.imgur.com/PgMmcMZ.png)
 
-We fork since 2016 !!
 
 ## Description
 
-   Menu
+**We fork since 2016 !!**
 
-   entrée:
-   Plateau de fruit de maire_q aux delm-oules d'Arcachon
-   ou
-   Soupe de vermishell au shell de guérande   
+   ### Menu
 
-   Plat:
-   B-oudin_c de pomme bouill-ies
-   ou
-   capra_ccio de boeuf pimenté au p(w)oiwre_q
+   ### entrée:
+   * Plateau de fruit de maire_q aux delm-oules d'Arcachon
+   * Soupe de vermishell au shell de guérande   
 
-   Boisson:
-   Pichard d'Huot fraîche
+   ### Plat:
+   * B-oudin_c de pomme bouill-ies
+   * capra_ccio de boeuf pimenté au p(w)oiwre_q
 
-couver-shell is a C project that aims to recode a basic shell program.
+   ### Boisson:
+   * Pichard d'Huot fraîche
+
+*couver-shell is a C project that aims to recode a basic shell program. *
