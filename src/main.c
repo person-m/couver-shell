@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun Jun  5 04:06:55 2016 vincent riamon
+** Last update Sun Jun  5 06:40:27 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -55,7 +55,7 @@ void	free_shell(t_shell sh)
   free_tab(sh.history);
 }
 
-void		setting_42sh(t_shell *sh, char **env)
+int		setting_42sh(t_shell *sh, char **argv, char **env)
 {
   sh->ret = 0;
   sh->env = cpy_env(env);
@@ -63,17 +63,21 @@ void		setting_42sh(t_shell *sh, char **env)
   create_alias(sh);
   create_oldpwd(sh);
   create_set(sh);
+  if (options(argv, sh))
+    return (0);
+  return (1);
 }
 
 int		main(__attribute__((unused))int argc,
-		     __attribute__((unused))char **argv,
+		     char **argv,
 		     char **env)
 {
   t_shell	sh;
   char		**cmd;
   char		*couv_rc;
 
-  setting_42sh(&sh, env);
+  if (!setting_42sh(&sh, argv, env))
+    return (0);
   if ((couv_rc = couvrc(env)))
     {
       cmd = lexer(couv_rc, 0);

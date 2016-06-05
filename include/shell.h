@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sun Jun  5 03:49:57 2016 Bertrand Buffat
+** Last update Sun Jun  5 06:22:57 2016 vincent riamon
 */
 
 #ifndef SHELL_H_
@@ -80,6 +80,7 @@ char		*get_var_env(char **, char *);
 
 char		*get_next_line(const int fd);
 char		*get_next_line(const int);
+int		options(char **argv, t_shell *sh);
 
 void		check_auto_compet(t_shell *);
 void		auto_completion(t_shell *);
