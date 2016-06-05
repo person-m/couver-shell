@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:13 2016
-** Last update Sun Jun  5 02:34:43 2016 Bertrand Buffat
+** Last update Sun Jun  5 03:32:30 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -75,7 +75,7 @@ void	move_cursor(t_prompt *prompt, char *buffer, char **history, char flag)
     move_history_up(prompt, history);
   else if (flag && !(strcmp(prompt->caps->down, buffer))
   	   && prompt->curr_history < dlen(history))
-    move_history_down(prompt, history);    
+    move_history_down(prompt, history);
 }
 
 void	move_cursor_back(t_prompt *prompt)

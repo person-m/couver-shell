@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sun Jun  5 03:43:29 2016 vincent riamon
+** Last update Sun Jun  5 03:49:57 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -74,7 +74,7 @@ char		*error_history2();
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
 char		*get_var(char *str);
 char		**insert_tab_in_tab(char **dest, char **src,
-				     int pos, int len);
+				    int pos, int len);
 char		**insert_str_in_tab(char **dest, char *src, int pos, int len);
 char		*get_var_env(char **, char *);
 
