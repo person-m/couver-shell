@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 ** 
 ** Started on  Sat Jun  4 15:44:11 2016 vincent riamon
-** Last update Sat Jun  4 22:28:54 2016 vincent riamon
+** Last update Sun Jun  5 03:55:07 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -38,4 +38,33 @@ void		set_var_env(char ***env, char *var, char *value)
   free((*env)[i]);
   (*env)[i] = my_malloc(sizeof(char) * (strlen(var) + strlen(value) + 1));
   strconcat(var, value, (*env)[i]);
+}
+
+char		*wordtab_in_str(char **tab, int mode)
+{
+  char		*str;
+  int		i;
+  int		j;
+  int		k;
+  int		len;
+
+  i = -1;
+  k = 0;
+  str = NULL;
+  len = 0;
+  if (!tab[0])
+    return (NULL);
+  while (tab[++i])
+    {
+      j = 0;
+      len += strlen(tab[i]) + 1;
+      str = realloc(str, sizeof(char) * (len + 1));
+      while (tab[i][j])
+	str[k++] = tab[i][j++];
+      str[k++] = ' ';
+      if (mode == 1)
+	free(tab[i]);
+    }
+  str[k - 1] = 0;
+  return (str);
 }
