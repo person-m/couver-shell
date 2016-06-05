@@ -57,6 +57,7 @@ void		create_alias(t_shell *sh);
 void		create_oldpwd(t_shell *sh);
 void		create_set(t_shell *sh);
 void		*my_malloc(size_t size);
+char		*my_strdup(const char *s);
 char		*couvrc(char **env);
 int		logo(char **cmd, t_shell *sh);
 int		man_couver(char **cmd, t_shell *sh);

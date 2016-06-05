@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Sat May 28 16:10:09 2016 Vincent COUVERCHEL
-** Last update Mon May 30 18:53:06 2016 vincent riamon
+** Last update Sun Jun  5 07:19:11 2016 Melvin Personnier
 */
 
 #include <stdlib.h>
@@ -44,7 +44,7 @@ int		is_glob_redirect(char **str)
     return (0);
   if (globbuf.gl_pathc == 1)
   {
-    *str = strdup(globbuf.gl_pathv[0]);
+    *str = my_strdup(globbuf.gl_pathv[0]);
   }
   else if (globbuf.gl_pathc > 1)
   {
@@ -91,7 +91,7 @@ static int	glob_executable(char **str)
     return (0);
   if (globbuf.gl_pathc)
   {
-    *str = strdup(globbuf.gl_pathv[0]);
+    *str = my_strdup(globbuf.gl_pathv[0]);
   }
   globfree(&globbuf);
   return (1);

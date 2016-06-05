@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Thu Jun  2 01:51:38 2016 Melvin Personnier
-** Last update Sun Jun  5 03:49:13 2016 Melvin Personnier
+** Last update Sun Jun  5 07:14:00 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -59,7 +59,7 @@ char		*cut_one(char *str)
   int		i;
   char		*tmp;
 
-  tmp = strdup(str);
+  tmp = my_strdup(str);
   i = -1;
   while (tmp[++i])
     {
@@ -80,7 +80,7 @@ char		*cut_two(char *str)
 
   j = 0;
   i = 0;
-  tmp = strdup(str);
+  tmp = my_strdup(str);
   while (tmp[i] && tmp[i] != '=')
     i++;
   if (tmp[i] == 0 || i == 0)

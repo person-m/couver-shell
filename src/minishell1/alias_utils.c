@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sun Jun  5 00:31:42 2016 Melvin Personnier
-** Last update Sun Jun  5 04:44:32 2016 Melvin Personnier
+** Last update Sun Jun  5 07:13:26 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -23,7 +23,7 @@ char	*concat_alias(char **tab)
       if (str[0] != 0)
 	str = concat_str(str, tab[i], ' ');
       else
-	str = strdup(tab[i]);;
+	str = my_strdup(tab[i]);;
     }
   return (str);
 }

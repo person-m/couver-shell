@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sat Jun  4 21:24:16 2016 Melvin Personnier
-** Last update Sun Jun  5 04:29:57 2016 Melvin Personnier
+** Last update Sun Jun  5 06:32:19 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -30,4 +30,14 @@ void		*my_realloc(void *ptr, size_t size)
       exit(1);
     }
   return (ptr);
+}
+
+char		*my_strdup(const char *s)
+{
+  char		*str;
+
+  str = strdup(s);
+  if (!str)
+    exit(1);
+  return (str);
 }

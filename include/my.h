@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:37:36 2016 Melvin Personnier
-** Last update Sun Jun  5 04:43:50 2016 Melvin Personnier
+** Last update Sun Jun  5 07:20:32 2016 Melvin Personnier
 */
 
 #ifndef	MY_H_
@@ -30,6 +30,7 @@ int	tab_len(char **tab);
 char	*get_next_line(const int fd);
 void	free_tab(char **tab);
 void	*my_realloc(void *ptr, size_t size);
+char	*my_strdup(const char *s);
 char	*get_var_env(char **env, char *name);
 
 char	**cpy_env(char **env);
@@ -37,6 +38,7 @@ void	create_alias(t_shell *sh);
 char	*concat_str(char *s1, char *s2, char c);
 void	strconcat(const char *s1, const char *s2, char *s3);
 void	*my_malloc(size_t size);
+char	*my_strdup(const char *s);
 void	free_tab(char **t);
 int	tab_len(char **t);
 int	my_getnbr(const char *str);
