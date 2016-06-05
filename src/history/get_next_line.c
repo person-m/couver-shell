@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed Jan  6 08:50:21 2016 vincent riamon
-** Last update Sun Jun  5 04:31:08 2016 Melvin Personnier
+** Last update Sun Jun  5 06:43:18 2016 vincent riamon
 */
 
 #include "my.h"
@@ -32,7 +32,7 @@ int		lenstr(char *str, char c)
   return (i);
 }
 
-static char	*my_realloc(char *str, int nbr_alloc)
+char	*realloc_gnl(char *str, int nbr_alloc)
 {
   int           i;
   char          *tmp;
@@ -59,7 +59,7 @@ char		*gnl2(int *i, char **my_line, int *lect, int mod)
 	  if ((*my_line = malloc(sizeof(char) * READ_SIZE + 1)) == NULL)
 	    return (NULL);
 	}
-      else if ((*my_line = my_realloc(*my_line, sizeof(char) * READ_SIZE + 1))
+      else if ((*my_line = realloc_gnl(*my_line, sizeof(char) * READ_SIZE + 1))
 	       == NULL)
 	return (NULL);
     }
