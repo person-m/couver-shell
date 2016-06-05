@@ -5,21 +5,22 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 25 18:30:25 2016 Melvin Personnier
-** Last update Sun Jun  5 04:45:08 2016 Melvin Personnier
+** Last update Sun Jun  5 22:00:27 2016 Melvin Personnier
 */
 
 #include <stdio.h>
 #include "couvrc.h"
 
+void	strconcat(char*, char*, char*);
+
 static void	add_str(char **s, int fd, char **cmd)
 {
   while ((*s = get_next_line(fd)))
     {
-      *cmd = my_realloc(*cmd, sizeof(char) * (strlen(*s) + strlen(*cmd) + 4));
-      *cmd = strcat(*cmd, *s);
+      *cmd = my_realloc(*cmd, sizeof(char) * (strlen(*s) + strlen(*cmd) + 2));
+      strconcat(*cmd, *s, *cmd);
       (*cmd)[strlen(*cmd) + 1] = 0;
       (*cmd)[strlen(*cmd)] = ';';
-      free(*s);
     }
 }
 
