@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 13:17:48 2016
-** Last update Sun Jun  5 03:29:45 2016 Bertrand Buffat
+** Last update Sun Jun  5 15:53:28 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -77,6 +77,16 @@ void	which_input(t_shell *sh, char input)
       }
   else
     add_char(sh->prompt, input);
+}
+
+void	update_prompt_main_loop(t_shell *sh)
+{
+  sh->prompt->history = sh->history;
+  sh->prompt->env = sh->env;
+  sh->prompt->ret = sh->ret;
+  if (!sh->prompt->count_char)
+    sh->prompt->ret = 0;
+  update_prompt(sh->prompt);
 }
 
 void	loop_prompt(t_shell *sh)

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:25:06 2016
-** Last update Sun Jun  5 02:34:30 2016 Bertrand Buffat
+** Last update Sun Jun  5 15:53:54 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -37,6 +37,7 @@ void	fct_clear(t_shell *sh)
   fill_tab_caps(sh->prompt->start_line_str, 0, 0);
   write(1, sh->prompt->start_line_str, strlen(sh->prompt->start_line_str));
   update_local_prompt(sh->prompt);
+  sh->prompt->ret = 0;
 }
 
 void	clear_line(t_prompt *prompt)

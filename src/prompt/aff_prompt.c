@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:05:49 2016
-** Last update Sun Jun  5 03:04:03 2016 Bertrand Buffat
+** Last update Sun Jun  5 16:03:57 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -56,7 +56,7 @@ void	aff_line_prompt(t_prompt *prompt)
     }
   write(1, "\033[0m", strlen("\033[0m"));
   write(1, "\033[1m", strlen("\033[1m"));
-  write(1, " > ", 3);
+  write(1, " - ", 3);
   write(1, "\033[0m", strlen("\033[0m"));
 }
 
