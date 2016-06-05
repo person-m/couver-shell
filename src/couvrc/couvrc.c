@@ -5,13 +5,11 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 25 18:30:25 2016 Melvin Personnier
-** Last update Sun Jun  5 22:00:27 2016 Melvin Personnier
+** Last update Sun Jun  5 22:09:04 2016 Melvin Personnier
 */
 
 #include <stdio.h>
 #include "couvrc.h"
-
-void	strconcat(char*, char*, char*);
 
 static void	add_str(char **s, int fd, char **cmd)
 {
