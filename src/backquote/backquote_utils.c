@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Tue May 31 01:04:39 2016 Vincent COUVERCHEL
-** Last update Tue May 31 01:04:39 2016 Vincent COUVERCHEL
+** Last update Sun Jun  5 07:10:32 2016 Melvin Personnier
 */
 
 static char	**get_sub_tab(char **tab, int pos, int len)
@@ -18,7 +18,7 @@ static char	**get_sub_tab(char **tab, int pos, int len)
     return (NULL);
   while (i < len && tab[pos + i])
   {
-    new[i] = strdup(tab[pos + i]);
+    new[i] = my_strdup(tab[pos + i]);
     i++;
   }
   new[i] = NULL;

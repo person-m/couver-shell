@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Thu Jun  2 01:53:03 2016 Melvin Personnier
-** Last update Sun Jun  5 03:49:44 2016 Melvin Personnier
+** Last update Sun Jun  5 07:14:31 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -53,7 +53,7 @@ char		*modif_total(char **tab, int *j)
       *j = *j + 1;
     }
   else
-    total = strdup(tab[*j]);
+    total = my_strdup(tab[*j]);
   return (total);
 }
 

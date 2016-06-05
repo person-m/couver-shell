@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Fri Jun  3 00:12:17 2016 Melvin Personnier
-** Last update Fri Jun  3 20:20:48 2016 Melvin Personnier
+** Last update Sun Jun  5 07:13:42 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -31,7 +31,7 @@ static int	skip_parenth_one(char **tab, int *i, char **one, int *equal)
 {
   while (strcmp(tab[*i], "(") == 0 || strcmp(tab[*i], ")") == 0)
     (*i)++;
-  *one = strdup(tab[(*i)++]);
+  *one = my_strdup(tab[(*i)++]);
   while (strcmp(tab[*i], "(") == 0 || strcmp(tab[*i], ")") == 0)
     (*i)++;
   if (strcmp(tab[*i], "==") == 0)
@@ -51,7 +51,7 @@ static void	skip_parenth_two(char **tab, int *i, char **two)
 {
   while (strcmp(tab[*i], "(") == 0 || strcmp(tab[*i], ")") == 0)
     (*i)++;
-  *two = strdup(tab[(*i)++]);
+  *two = my_strdup(tab[(*i)++]);
   while (strcmp(tab[*i], "(") == 0 || strcmp(tab[*i], ")") == 0)
     (*i)++;
 }

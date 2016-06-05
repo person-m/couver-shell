@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Sun May 29 16:54:59 2016 Vincent COUVERCHEL
-** Last update Sun May 29 16:54:59 2016 Vincent COUVERCHEL
+** Last update Sun Jun  5 07:14:54 2016 Melvin Personnier
 */
 
 static int	tablen(char **array)
@@ -25,7 +25,7 @@ static	void	wordtabncpy(char **dest, char **src, int n)
   i = 0;
   while (src && i < n && src[i])
   {
-    dest[i] = strdup(src[i]);
+    dest[i] = my_strdup(src[i]);
     i++;
   }
   dest[i] = NULL;

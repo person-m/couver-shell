@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:41:18 2016 vincent riamon
-** Last update Sun Jun  5 03:52:18 2016 Melvin Personnier
+** Last update Sun Jun  5 07:13:10 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -54,7 +54,7 @@ char		**cpy_env(char **env)
   tmp = my_malloc(sizeof(char *) * (tab_len(env) + 1));
   i = -1;
   while (env[++i])
-    tmp[i] = strdup(env[i]);
+    tmp[i] = my_strdup(env[i]);
   tmp[i] = NULL;
   return (tmp);
 }

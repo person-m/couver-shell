@@ -5,7 +5,7 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Thu Jun  2 19:22:38 2016 Vincent COUVERCHEL
-** Last update Thu Jun  2 19:22:38 2016 Vincent COUVERCHEL
+** Last update Sun Jun  5 07:11:56 2016 Melvin Personnier
 */
 
 static char	*exec_in_q(char ***command, t_shell *sh)
@@ -34,7 +34,7 @@ static	void	wordtabncpy(char **dest, char **src, int n)
   i = 0;
   while (i < n && src[i])
   {
-    dest[i] = strdup(src[i]);
+    dest[i] = my_strdup(src[i]);
     i++;
   }
   dest[i] = NULL;

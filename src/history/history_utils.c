@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sat Jun  4 15:44:11 2016 vincent riamon
-** Last update Sun Jun  5 04:46:19 2016 Melvin Personnier
+** Last update Sun Jun  5 07:19:58 2016 Melvin Personnier
 */
 
 #include "shell.h"
@@ -17,7 +17,7 @@ void		is_to_large_history(t_shell *sh)
 
   if (sh->size_hist > 2000)
     {
-      line = strdup("history -c");
+      line = my_strdup("history -c");
       tmp = lexer(line, 0);
       fprintf(stderr, "Your history is to large, he was clear automatically.\n");
       do_the_thing(sh, &tmp, 0);

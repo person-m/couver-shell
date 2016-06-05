@@ -16,7 +16,7 @@ void		put_in_list(t_list **list, char *name)
 
   if (!(elem = malloc(sizeof(*elem))))
     return ;
-  elem->name = strdup(name);
+  elem->name = my_strdup(name);
   elem->size = strlen(name);
   elem->next = *list;
   *list = elem;
