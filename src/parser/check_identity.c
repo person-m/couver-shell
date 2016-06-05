@@ -65,7 +65,7 @@ int		del_quote(char **command)
       command[i++] = command[j++];
   }
   command[i] = NULL;
-  if (i == 0)
+  if (i == 0 && j > 1)
   {
     command[0] = strdup("");
     command[1] = NULL;
