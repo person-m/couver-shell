@@ -12,18 +12,23 @@
 
 void	do_the_thing(t_shell *sh, char ***cmd, int flag)
 {
+  int	ret_check;
+  int	ret_exclam;
+
   if (flag)
   {
     *cmd = insert_str_in_tab(*cmd, "\"", 0, 0);
     *cmd = insert_str_in_tab(*cmd, "\"", tab_len(*cmd), 0);
   }
-  if (!check_command(*cmd) &&
-      replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
+  if (!(ret_check = check_command(*cmd)) &&
+      (ret_exclam = replace_exclam_dot(cmd, sh)) == 1 && !man_couver(*cmd, sh))
   {
     backquote(cmd, sh);
     the_execution(*cmd, sh);
     del_quote(*cmd);
   }
+  else if (ret_check || !ret_exclam)
+    sh->ret = 1;
 }
 
 void	loop_42sh(t_shell *sh)

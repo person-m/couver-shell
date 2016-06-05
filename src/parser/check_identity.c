@@ -10,7 +10,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include "shell.h"
 
 int	is_end_of_command(char *str)
 {
@@ -46,7 +46,7 @@ int	is_redirection(char *str)
 	  || !strcmp(str, ">>"));
 }
 
-int		del_quote(char **command)
+void		del_quote(char **command)
 {
   int		i;
   int		j;
@@ -67,8 +67,7 @@ int		del_quote(char **command)
   command[i] = NULL;
   if (i == 0 && j > 1)
   {
-    command[0] = strdup("");
+    command[0] = my_strdup("");
     command[1] = NULL;
   }
-  return (0);
 }

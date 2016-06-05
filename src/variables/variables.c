@@ -30,15 +30,15 @@ char	*get_value(char *name, t_shell *sh)
 
   if (!strcmp(name, "?"))
     {
-      if (!(value = malloc(sizeof(char) * (nb_digit(sh->ret) + 1))))
-	exit(-1);
+      value = my_malloc(sizeof(char) * (nb_digit(sh->ret) + 1));
       sprintf(value, "%d", sh->ret);
       return (value);
     }
   if (!strcmp(name, "#"))
     {
       arg = my_str_to_wordtab_pattern(sh->history[sh->size_hist - 2], " ");
-      asprintf(&value, "%d", tab_len(arg) - 1);
+      value = my_malloc(sizeof(char) * (nb_digit(tab_len(arg) - 1) + 1));
+      sprintf(value, "%d", tab_len(arg) - 1);
       free_tab(arg);
       return (value);
     }

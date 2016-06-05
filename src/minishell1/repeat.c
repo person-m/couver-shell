@@ -29,7 +29,7 @@ static int	get_nbr(char *str)
   int		i;
   int		nb;
   unsigned int	tmp;
-  
+
   i = 0;
   nb = 0;
   while (str[i] && str[i] >= '0' && str[i] <= '9')

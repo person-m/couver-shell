@@ -1,4 +1,4 @@
-/*
+	/*
 ** logo.c for logo.c in /home/riamon_v/rendu/PSU/couver-shell/src/minishell1
 ** 
 ** Made by vincent riamon
@@ -67,6 +67,7 @@ int		man_couver(char **cmd, t_shell *sh)
       else
 	wait(NULL);
       free(tab);
+      sh->ret = 0;
       return (1);
     }
   return (0);
