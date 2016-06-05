@@ -5,21 +5,21 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Fri May 20 22:26:56 2016 mohamed-laid hedia
-** Last update Sat Jun  4 20:24:31 2016 mohamed-laid hedia
+** Last update Sun Jun  5 03:45:35 2016 vincent riamon
 */
 
 #ifndef MO_H_
 # define MO_H_
 
-#include <unistd.h>
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include "shell.h"
-#include "my.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <errno.h>
+# include <string.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include "shell.h"
+# include "my.h"
 
 typedef struct	s_pipe
 {

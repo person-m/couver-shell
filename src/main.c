@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sat Jun  4 22:31:57 2016 vincent riamon
+** Last update Sun Jun  5 04:06:55 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -13,17 +13,17 @@
 void	do_the_thing(t_shell *sh, char ***cmd, int flag)
 {
   if (flag)
-  {
-    *cmd = insert_str_in_tab(*cmd, "\"", 0, 0);
-    *cmd = insert_str_in_tab(*cmd, "\"", tab_len(*cmd), 0);
-  }
+    {
+      *cmd = insert_str_in_tab(*cmd, "\"", 0, 0);
+      *cmd = insert_str_in_tab(*cmd, "\"", tab_len(*cmd), 0);
+    }
   if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
       replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
-  {
-    backquote(cmd, sh);
-    the_execution(*cmd, sh);
-    del_quote(*cmd);
-  }
+    {
+      backquote(cmd, sh);
+      the_execution(*cmd, sh);
+      del_quote(*cmd);
+    }
 }
 
 void	loop_42sh(t_shell *sh)
@@ -41,6 +41,9 @@ void	loop_42sh(t_shell *sh)
       sh->prompt->env = sh->env;
       update_prompt(sh->prompt);
       free_tab(cmd);
+      sh->prompt->ret = sh->ret;
+      if (!sh->prompt->count_char)
+	sh->ret = 0;
     }
 }
 
@@ -52,6 +55,16 @@ void	free_shell(t_shell sh)
   free_tab(sh.history);
 }
 
+void		setting_42sh(t_shell *sh, char **env)
+{
+  sh->ret = 0;
+  sh->env = cpy_env(env);
+  fill_history(sh);
+  create_alias(sh);
+  create_oldpwd(sh);
+  create_set(sh);
+}
+
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
 		     char **env)
@@ -60,19 +73,13 @@ int		main(__attribute__((unused))int argc,
   char		**cmd;
   char		*couv_rc;
 
-  sh.ret = 0;
-  sh.env = cpy_env(env);
-  fill_history(&sh);
-  create_alias(&sh);
-  create_oldpwd(&sh);
-  create_set(&sh);
-
+  setting_42sh(&sh, env);
   if ((couv_rc = couvrc(env)))
-  {
-    cmd = lexer(couv_rc, 0);
-    do_the_thing(&sh, &cmd, 0);
-    free(couv_rc);
-  }
+    {
+      cmd = lexer(couv_rc, 0);
+      do_the_thing(&sh, &cmd, 0);
+      free(couv_rc);
+    }
   if (!isatty(0))
     {
       get_std_input(&sh);
@@ -81,14 +88,6 @@ int		main(__attribute__((unused))int argc,
     }
   if (!(sh.prompt = init_prompt(sh.env, sh.history)))
     return (0);
-
-  /* memcpy(sh.prompt->line, "ls .ma", 6); */
-  /* sh.prompt->count_char = 6; */
-  /* sh.prompt->count_pos = 6; */
-  /* bltin_completion(sh.prompt, sh.env); */
-  /* tcsetattr(0, 0, &sh.prompt->standard_mode); */
-  /* return (0); */
-
   signal_handler();
   loop_42sh(&sh);
   free_prompt(sh.prompt);

@@ -5,12 +5,12 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Thu Jun  2 01:28:02 2016 Melvin Personnier
+** Last update Sun Jun  5 03:28:13 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-int	my_env(t_shell *sh)
+int		my_env(t_shell *sh)
 {
   aff_tab(sh->env);
   return (0);
@@ -61,10 +61,10 @@ int		my_setenv(char **tab, t_shell *sh)
   return (0);
 }
 
-int    is_already_in_env(char **my_env, char *str)
+int		is_already_in_env(char **my_env, char *str)
 {
-  int    i;
-  char    *str2;
+  int		i;
+  char		*str2;
 
   i = 0;
   str2 = my_malloc(sizeof(char) * (strlen(str) + 2));

@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Sat May 28 22:37:36 2016
-** Last update Fri Jun  3 21:36:46 2016 Bertrand Buffat
+** Last update Sat Jun  4 22:10:41 2016 Bertrand Buffat
 */
 
 #ifndef INPUT_H
@@ -27,6 +27,8 @@ void	end_line_cursor(t_shell *sh);
 void	erase_word(t_shell *sh);
 void	move_left_word(t_shell *sh);
 void	move_right_word(t_shell *sh);
+void	erase_from_cursor_to_beginning(t_shell *sh);
+void	erase_from_cursor_to_end(t_shell *sh);
 
 t_input list_input[] =
   {
@@ -44,8 +46,8 @@ t_input list_input[] =
     {12, fct_clear},
     {13, NULL},
     {14, NULL},
-    {15, NULL},
-    {16, NULL},
+    {15, erase_from_cursor_to_beginning},
+    {16, erase_from_cursor_to_end},
     {17, NULL},
     {18, NULL},
     {19, NULL},

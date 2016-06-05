@@ -5,12 +5,12 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 17:50:50 2016 vincent riamon
-** Last update Thu May 26 18:00:03 2016 vincent riamon
+** Last update Sun Jun  5 03:51:36 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-static int 	        cd_error(char *str)
+static int	cd_error(char *str)
 {
   struct stat	s;
 
@@ -23,7 +23,7 @@ static int 	        cd_error(char *str)
   return (-1);
 }
 
-static void		my_pwd(char **env, char *name, char *pwd)
+static void	my_pwd(char **env, char *name, char *pwd)
 {
   int		i;
 
@@ -36,7 +36,7 @@ static void		my_pwd(char **env, char *name, char *pwd)
   strconcat(name, pwd, env[i]);
 }
 
-static int		basic_cd(char ***env, int mode)
+static int	basic_cd(char ***env, int mode)
 {
   char		*path;
   char		pwd[2000];
@@ -61,7 +61,7 @@ static int		basic_cd(char ***env, int mode)
   return (0);
 }
 
-int			cmd_cd(char **tab, t_shell *sh)
+int		cmd_cd(char **tab, t_shell *sh)
 {
   char		pwd[2000];
 

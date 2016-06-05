@@ -5,14 +5,14 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:46:12 2016 Melvin Personnier
-** Last update Fri May 20 16:38:05 2016 vincent riamon
+** Last update Sun Jun  5 03:55:15 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-void	*my_malloc(int size)
+void		*my_malloc(int size)
 {
-  void	*ptr;
+  void		*ptr;
 
   ptr = malloc(size);
   if (ptr == NULL)
@@ -61,11 +61,11 @@ void		free_tab(char **tab)
   free(tab);
 }
 
-int	my_getnbr(const char *str)
+int		my_getnbr(const char *str)
 {
-  int   div;
-  int   i;
-  int   nb;
+  int   	div;
+  int   	i;
+  int   	nb;
 
   nb = 0;
   div = 1;

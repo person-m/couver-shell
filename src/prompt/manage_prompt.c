@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 14:25:06 2016
-** Last update Fri Jun  3 14:13:56 2016 Bertrand Buffat
+** Last update Sun Jun  5 02:34:30 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -46,7 +46,7 @@ void	clear_line(t_prompt *prompt)
 
   total_count = prompt->size_pwd +
   prompt->size_prompt + prompt->count_char + prompt->count_char +
-  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 5;
+  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 8;
   nb_lines_buffer = total_count / prompt->nbcols;
   erase_down_lines(prompt, nb_lines_buffer + 1);
 }
@@ -58,7 +58,7 @@ void	clean_screen(t_prompt *prompt)
 
   total_count = prompt->size_pwd +
   prompt->size_prompt + prompt->count_pos +
-  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 5;
+  size_of_int(prompt->nbr) + size_of_int(prompt->count_char) + 8;
   nb_lines_buffer = total_count / prompt->nbcols;
   erase_down_lines(prompt, nb_lines_buffer);
   aff_line_prompt(prompt);

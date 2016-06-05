@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:50:52 2016
-** Last update Sat Jun  4 22:32:44 2016 vincent riamon
+** Last update Sun Jun  5 03:49:57 2016 Bertrand Buffat
 */
 
 #ifndef SHELL_H_
@@ -17,24 +17,22 @@
 
 # define _GNU_SOURCE
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include "prompt.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "prompt.h"
 
 typedef struct	s_shell
 {
   char		**env;
   char		**alias;
   char		**history;
-
   char		**set;
-
   int		size_hist;
   int		ret;
   int		bol;
@@ -76,7 +74,7 @@ char		*error_history2();
 int		replace_exclam_dot(char ***cmd, t_shell *sh);
 char		*get_var(char *str);
 char		**insert_tab_in_tab(char **dest, char **src,
-				     int pos, int len);
+				    int pos, int len);
 char		**insert_str_in_tab(char **dest, char *src, int pos, int len);
 char		*get_var_env(char **, char *);
 
@@ -93,6 +91,9 @@ void            loop_prompt(t_shell *);
 char		get_input(t_shell *);
 void		which_input(t_shell *, char);
 char		*get_range_ascii(char *ascii, char input);
+void		more_complex_string(t_shell *, char *);
+void		move_left_word(t_shell *);
+void		move_right_word(t_shell *);
 
 void		signal_handler(void);
 void		check_signals(t_shell *);

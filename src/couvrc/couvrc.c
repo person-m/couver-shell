@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 25 18:30:25 2016 Melvin Personnier
-** Last update Fri May 27 00:34:40 2016 Melvin Personnier
+** Last update Sun Jun  5 03:41:25 2016 vincent riamon
 */
 
 #include <stdio.h>
@@ -23,12 +23,12 @@ static void	add_str(char **s, int fd, char **cmd)
     }
 }
 
-char	*couvrc(char **env)
+char		*couvrc(char **env)
 {
-  char	*home;
-  int	fd;
-  char	*s;
-  char	*cmd;
+  char		*home;
+  int		fd;
+  char		*s;
+  char		*cmd;
 
   cmd = my_malloc(sizeof(char) * 1);
   cmd[0] = 0;
@@ -46,14 +46,3 @@ char	*couvrc(char **env)
   free(home);
   return (cmd);
 }
-
-/*
-int	main(int argc, char **argv, char **env)
-{
-  char	*s;
-
-  if ((s = couvrc(env)))
-    printf("%s\n", s);
-  free(s);
-}
-*/

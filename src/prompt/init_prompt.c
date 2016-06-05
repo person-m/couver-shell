@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Tue May 24 11:56:28 2016
-** Last update Sat Jun  4 14:25:44 2016 Bertrand Buffat
+** Last update Sun Jun  5 02:12:33 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -105,6 +105,7 @@ t_prompt	*init_prompt(char **env, char **history)
   prompt->tmp_history = NULL;
   prompt->history = history;
   prompt->env = env;
+  prompt->ret = 0;
   get_pwd_prompt(prompt);
   update_prompt(prompt);
   return (prompt);

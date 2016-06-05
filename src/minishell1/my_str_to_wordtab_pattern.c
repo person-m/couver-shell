@@ -5,14 +5,14 @@
 ** Login   <couver_v@epitech.net>
 **
 ** Started on  Sun Jan 24 16:15:23 2016 Vincent COUVERCHEL
-** Last update Sat May 21 17:37:24 2016 Melvin Personnier
+** Last update Sun Jun  5 03:53:23 2016 Melvin Personnier
 */
 
 #include "my.h"
 
 static char	*my_strncpy(char *dest, char *src, int n)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (i < n && src[i] != '\0')
@@ -26,8 +26,8 @@ static char	*my_strncpy(char *dest, char *src, int n)
 
 static char	*my_strndup(char *src, int n)
 {
-  int	length;
-  char	*str;
+  int		length;
+  char		*str;
 
   length = strlen(src);
   str = my_malloc(length + 1);
@@ -39,7 +39,7 @@ static char	*my_strndup(char *src, int n)
 
 static int	is_in_str(char *str, char c)
 {
-  int	i;
+  int		i;
 
   i = 0;
   while (str[i])
@@ -54,9 +54,9 @@ static int	is_in_str(char *str, char c)
 static char	**make_wordtab_pattern(char **array, char *str,
 			       char *pattern, int word)
 {
-  int	i;
-  int	start;
-  int	count;
+  int		i;
+  int		start;
+  int		count;
 
   count = 0;
   start = 1;
@@ -81,12 +81,12 @@ static char	**make_wordtab_pattern(char **array, char *str,
   return (array);
 }
 
-char	**my_str_to_wordtab_pattern(char *str, char *pattern)
+char		**my_str_to_wordtab_pattern(char *str, char *pattern)
 {
-  int	i;
-  int	word;
-  int	count;
-  char	**array;
+  int		i;
+  int		word;
+  int		count;
+  char		**array;
 
   count = 0;
   i = 0;
