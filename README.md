@@ -10,14 +10,16 @@
 *We fork since 2016 !!*
 
 
-   ### Entree:
+### Entree:
    * Plateau de fruit de maire_q aux delm-oules d'Arcachon
-   * Soupe de vermishell au shell de guérande   
 
-   ### Plat:
-   * B-oudin_c de pomme bouill_h-ies
-   * capra_ccio de boeuf pimenté au p(w)oiwre_q
+### Plat:
+   * Capra_ccio de b-oudin_c de pomme bouill_h-ies
 
-   ### Boisson:
+### Boisson:
    * Pichard d'Huot fraîche
 
+
+Shell et poiwre_q fourni.
+
+Et noubliez pas, sortez couver !
