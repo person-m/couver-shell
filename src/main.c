@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun Jun  5 15:50:09 2016 Bertrand Buffat
+** Last update Sun Jun  5 16:23:17 2016 Bertrand Buffat
 */
 
 #include "shell.h"
@@ -84,7 +84,7 @@ int		main(__attribute__((unused))int argc,
       do_the_thing(&sh, &cmd, 0);
       free(couv_rc);
     }
-  if (!isatty(0))
+  if (!isatty(0) || !isatty(1))
     {
       get_std_input(&sh);
       free_shell(sh);
