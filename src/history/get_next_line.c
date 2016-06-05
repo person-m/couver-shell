@@ -1,11 +1,11 @@
 /*
 ** get_next_line.c for get_next_line in /home/riamon_v/rendu/CPE/CPE_2015_getnextline
-** 
+**
 ** Made by vincent riamon
 ** Login   <riamon_v@epitech.net>
-** 
+**
 ** Started on  Wed Jan  6 08:50:21 2016 vincent riamon
-** Last update Thu Jun  2 15:33:27 2016 vincent riamon
+** Last update Sun Jun  5 04:31:08 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -32,7 +32,7 @@ int		lenstr(char *str, char c)
   return (i);
 }
 
-char		*my_realloc(char *str, int nbr_alloc)
+static char	*my_realloc(char *str, int nbr_alloc)
 {
   int           i;
   char          *tmp;

@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Sun May 22 10:23:47 2016 vincent riamon
-** Last update Sun Jun  5 03:57:50 2016 vincent riamon
+** Last update Sun Jun  5 04:46:00 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -39,7 +39,7 @@ void		update_history(char *line, t_shell *sh)
   ret = create_history_file(&hist, sh);
   if (is_empty_line(line))
     return ;
-  sh->history = realloc(sh->history, (sizeof(char *) * (i + 2)));
+  sh->history = my_realloc(sh->history, (sizeof(char *) * (i + 2)));
   sh->history[i] = strdup(line);
   sh->history[i + 1] = NULL;
   if (sh->env && sh->env[0] && sh->history && sh->history[0] && sh->history[1])
@@ -79,7 +79,7 @@ void		fill_history(t_shell *sh)
     }
   while ((s = get_next_line(fd)))
     {
-      sh->history = realloc(sh->history, sizeof(char *) * (i + 2));
+      sh->history = my_realloc(sh->history, sizeof(char *) * (i + 2));
       sh->history[i] = strdup(s);
       sh->history[i + 1] = NULL;
       free(s);

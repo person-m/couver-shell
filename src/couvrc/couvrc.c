@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 25 18:30:25 2016 Melvin Personnier
-** Last update Sun Jun  5 03:41:25 2016 vincent riamon
+** Last update Sun Jun  5 04:45:08 2016 Melvin Personnier
 */
 
 #include <stdio.h>
@@ -15,7 +15,7 @@ static void	add_str(char **s, int fd, char **cmd)
 {
   while ((*s = get_next_line(fd)))
     {
-      *cmd = realloc(*cmd, sizeof(char) * (strlen(*s) + strlen(*cmd) + 4));
+      *cmd = my_realloc(*cmd, sizeof(char) * (strlen(*s) + strlen(*cmd) + 4));
       *cmd = strcat(*cmd, *s);
       (*cmd)[strlen(*cmd) + 1] = 0;
       (*cmd)[strlen(*cmd)] = ';';

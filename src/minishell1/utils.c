@@ -5,12 +5,12 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Wed May 18 15:46:12 2016 Melvin Personnier
-** Last update Sun Jun  5 03:55:15 2016 Melvin Personnier
+** Last update Sun Jun  5 04:22:33 2016 Melvin Personnier
 */
 
 #include "my.h"
 
-void		*my_malloc(int size)
+void		*my_malloc(size_t size)
 {
   void		*ptr;
 

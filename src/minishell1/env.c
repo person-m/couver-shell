@@ -5,7 +5,7 @@
 ** Login   <riamon_v@epitech.net>
 **
 ** Started on  Wed May 18 15:23:24 2016 vincent riamon
-** Last update Sun Jun  5 03:28:13 2016 Melvin Personnier
+** Last update Sun Jun  5 04:44:56 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -54,7 +54,7 @@ int		my_setenv(char **tab, t_shell *sh)
     }
   if (!sh->bol)
     {
-      sh->env = realloc(sh->env, ((tab_len(sh->env) + 2) * sizeof(char *)));
+      sh->env = my_realloc(sh->env, ((tab_len(sh->env) + 2) * sizeof(char *)));
       sh->env[i] = concat_str(tab[1], tab[2], '=');
       sh->env[i + 1] = NULL;
     }

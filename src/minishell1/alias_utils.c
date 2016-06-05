@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Sun Jun  5 00:31:42 2016 Melvin Personnier
-** Last update Sun Jun  5 00:34:14 2016 Melvin Personnier
+** Last update Sun Jun  5 04:44:32 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -30,7 +30,7 @@ char	*concat_alias(char **tab)
 
 void		add_line_alias(t_shell *sh, int i, char *tmp, char **tab)
 {
-  sh->alias = realloc(sh->alias, ((tab_len(sh->alias) + 2) * sizeof(char *)));
+  sh->alias = my_realloc(sh->alias, ((tab_len(sh->alias) + 2) * sizeof(char *)));
   sh->alias[i] = concat_str(tab[1], tmp, '=');
   sh->alias[i + 1] = NULL;
 }
