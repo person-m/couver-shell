@@ -5,7 +5,7 @@
 ** Login   <buffat_b@epitech.net>
 **
 ** Started on  Wed May 25 00:09:58 2016
-** Last update Sun Jun  5 03:13:46 2016 Bertrand Buffat
+** Last update Sun Jun  5 04:06:55 2016 vincent riamon
 */
 
 #include "shell.h"
@@ -29,7 +29,7 @@ void	do_the_thing(t_shell *sh, char ***cmd, int flag)
 void	loop_42sh(t_shell *sh)
 {
   char	**cmd;
-  
+
   while (1)
     {
       loop_prompt(sh);
@@ -55,6 +55,16 @@ void	free_shell(t_shell sh)
   free_tab(sh.history);
 }
 
+void		setting_42sh(t_shell *sh, char **env)
+{
+  sh->ret = 0;
+  sh->env = cpy_env(env);
+  fill_history(sh);
+  create_alias(sh);
+  create_oldpwd(sh);
+  create_set(sh);
+}
+
 int		main(__attribute__((unused))int argc,
 		     __attribute__((unused))char **argv,
 		     char **env)
@@ -63,18 +73,13 @@ int		main(__attribute__((unused))int argc,
   char		**cmd;
   char		*couv_rc;
 
-  sh.ret = 0;
-  sh.env = cpy_env(env);
-  fill_history(&sh);
-  create_alias(&sh);
-  create_oldpwd(&sh);
-  create_set(&sh);
+  setting_42sh(&sh, env);
   if ((couv_rc = couvrc(env)))
-  {
-    cmd = lexer(couv_rc, 0);
-    do_the_thing(&sh, &cmd, 0);
-    free(couv_rc);
-  }
+    {
+      cmd = lexer(couv_rc, 0);
+      do_the_thing(&sh, &cmd, 0);
+      free(couv_rc);
+    }
   if (!isatty(0))
     {
       get_std_input(&sh);
