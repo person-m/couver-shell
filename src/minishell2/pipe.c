@@ -5,7 +5,7 @@
 ** Login   <hedia_m@epitech.net>
 **
 ** Started on  Sun May 22 21:19:49 2016 mohamed-laid hedia
-** Last update Sun Jun  5 17:04:57 2016 mohamed-laid hedia
+** Last update Sun Jun  5 17:55:25 2016 mohamed-laid hedia
 */
 
 #include "mo.h"
@@ -79,7 +79,8 @@ void		do_process(char **tab, t_shell *env, t_command *s, t_pipe *p)
 	exit(EXIT_FAILURE);
       if (dup2(p->p[p->i % 2][1], 1) == -1)
 	exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
-      close(p->p[p->i % 2][0]);
+      if (!is_builtin(b[0]))
+	close(p->p[p->i % 2][0]);
       if (p->i != 0 && !is_builtin(b[0]))
 	if (dup2(p->p[p->i % 2 ? 0 : 1][0], 0) == -1)
 	  exit(fprintf(stderr, "%s\n", strerror(errno)) * 0 + 1);
