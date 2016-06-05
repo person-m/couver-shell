@@ -12,22 +12,43 @@
 
 static bool	is_num(char *s)
 {
-  while (*s)
+  int		i;
+
+  i = 0;
+  while (s[i])
     {
-      if (*s < '0' || *s > '9')
+      if ((s[i] < '0' || s[i] > '9') && (s[i] != '-' || i != 0))
 	return (0);
-      ++s;
+      ++i;
     }
   return (1);
 }
 
-static int	get_nbr(char *s, int res)
+static int	get_nbr(char *str)
 {
-  if (!*s)
-    return (res);
-  res *= 10;
-  res += (*s - '0');
-  return (get_nbr(++s, res));
+  int		i;
+  int		nb;
+  unsigned int	tmp;
+  
+  i = 0;
+  nb = 0;
+  while (str[i] && str[i] >= '0' && str[i] <= '9')
+    i++;
+  if (i < 10 || (i < 11 && *str < '3'))
+  {
+    i = 0;
+    while (str[i] && str[i] >= '0' && str[i] <= '9')
+    {
+      tmp = nb * 10 + (str[i] - '0');
+      if (tmp > 0x7fffffff)
+	return (0);
+      else
+	nb = tmp;
+      i++;
+    }
+    return (nb);
+  }
+  return (0);
 }
 
 static void	erase_first_line_tab(char **tab)
@@ -58,10 +79,10 @@ int		repeat(char **cmd, t_shell *sh)
   if ((!is_num(tmp))
       && write(2, "repeat: Badly formed number.\n", 29))
     return (-1);
-  turn = get_nbr(tmp, 0);
+  turn = get_nbr(tmp);
   erase_first_line_tab(cmd);
   erase_first_line_tab(cmd);
   while (--turn >= 0)
     do_the_thing(sh, &cmd, 1);
-  return (0);
+  return (-sh->ret);
 }

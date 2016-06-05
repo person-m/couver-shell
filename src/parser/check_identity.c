@@ -10,6 +10,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 int	is_end_of_command(char *str)
 {
@@ -63,6 +64,11 @@ int		del_quote(char **command)
     else
       command[i++] = command[j++];
   }
-  command[i++] = NULL;
+  command[i] = NULL;
+  if (i == 0)
+  {
+    command[0] = strdup("");
+    command[1] = NULL;
+  }
   return (0);
 }

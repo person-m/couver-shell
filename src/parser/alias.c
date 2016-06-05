@@ -48,7 +48,7 @@ char	**alias(char **cmd, t_shell *sh)
   if (i == 128)
   {
     fprintf(stderr, "Alias loop.\n");
-//    return (NULL);
+    return (NULL);
   }
   return (cmd);
 }

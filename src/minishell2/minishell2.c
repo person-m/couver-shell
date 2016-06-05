@@ -40,7 +40,6 @@ void	exec_command(char **tab, t_shell *env, t_command *s)
     }
   else if (is_builtin(b[0]))
     {
-      env->ret = 0;
       if (minishell1(b, env) == -1)
 	{
 	  env->ret = EXIT_FAILURE;

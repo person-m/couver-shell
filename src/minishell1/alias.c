@@ -19,8 +19,9 @@ static int	exit_alias(char **tab, t_shell *sh)
     }
   if (tab_len(tab) <= 2)
     {
-      fprintf(stderr, "alias: Not enought arguments.\n");
-      return (0);
+      if (is_alias(tab + 1, sh))
+	printf("%s\n", tab[1]);
+      return (1);
     }
   if (strcmp(tab[1], "alias") == 0)
   {
@@ -40,6 +41,8 @@ int		my_alias(char **tab, t_shell *sh)
   bol = 0;
   if (!exit_alias(tab, sh))
     return (-1);
+  if (tab_len(tab) < 3)
+    return (0);
   tmp = concat_alias(tab);
   while (sh->alias[++i])
     {

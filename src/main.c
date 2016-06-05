@@ -13,17 +13,17 @@
 void	do_the_thing(t_shell *sh, char ***cmd, int flag)
 {
   if (flag)
-    {
-      *cmd = insert_str_in_tab(*cmd, "\"", 0, 0);
-      *cmd = insert_str_in_tab(*cmd, "\"", tab_len(*cmd), 0);
-    }
-  if (!check_command(*cmd) && !replace_variables(cmd, sh) &&
+  {
+    *cmd = insert_str_in_tab(*cmd, "\"", 0, 0);
+    *cmd = insert_str_in_tab(*cmd, "\"", tab_len(*cmd), 0);
+  }
+  if (!check_command(*cmd) &&
       replace_exclam_dot(cmd, sh) == 1 && !man_couver(*cmd, sh))
-    {
-      backquote(cmd, sh);
-      the_execution(*cmd, sh);
-      del_quote(*cmd);
-    }
+  {
+    backquote(cmd, sh);
+    the_execution(*cmd, sh);
+    del_quote(*cmd);
+  }
 }
 
 void	loop_42sh(t_shell *sh)
@@ -42,8 +42,8 @@ void	loop_42sh(t_shell *sh)
       update_prompt(sh->prompt);
       free_tab(cmd);
       sh->prompt->ret = sh->ret;
-      if (!sh->prompt->count_char)
-	sh->ret = 0;
+//      if (!sh->prompt->count_char)
+//	sh->ret = 0;
     }
 }
 

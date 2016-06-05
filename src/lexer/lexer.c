@@ -75,5 +75,7 @@ char		**lexer(char *line, int flag)
   if (init_struct(&lexer)
       || lexer_command(line, &lexer, flag))
     return (NULL);
+//  for (int i = 0; lexer.command[i]; i++)
+//    fprintf(stderr, "{%s}\n", lexer.command[i]);
   return (lexer.command);
 }
