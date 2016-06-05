@@ -5,7 +5,7 @@
 ** Login   <person_m@epitech.eu>
 **
 ** Started on  Tue May 24 15:26:38 2016 Melvin Personnier
-** Last update Sun Jun  5 21:28:23 2016 Melvin Personnier
+** Last update Sun Jun  5 21:40:23 2016 Melvin Personnier
 */
 
 #include "my.h"
@@ -72,11 +72,13 @@ void	        aff_tab_alias(char **tab)
       j = -1;
       while (tab[i][++j])
 	{
+	  if (tab[i][j] == '=')
+	    {
+	      printf("\t");
+	      j++;
+	    }
 	  printf("%c", tab[i][j]);
-          if (tab[i][j] == '=')
-	    printf("\'");
 	}
-      printf("\'");
       printf("\n");
     }
 }
