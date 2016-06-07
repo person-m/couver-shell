@@ -79,15 +79,18 @@ char	**replace_variable(char *cmd, t_shell *sh)
   if (!end)
     return (NULL);
   if (!(ret = get_value(name, sh)))
-  {
-    fprintf(stderr, "%s: Undefined variable.\n", name);
-    return (NULL);
-  }
+    return ((char **)(long)
+	    (!fprintf(stderr, "%s: Undefined variable.\n", name) || 0));
   value = lexer(ret, 0);
-  value[0] = insert_str_in_str(value[0], cmd, 1, 0);
-  value[tab_len(value) - 1]
-    = insert_str_in_str(value[tab_len(value) - 1], end,
-			strlen(value[tab_len(value) - 1]) - 1, 0);
+  if (!value[0])
+    value = riamon_str_concatstr(cmd, end);
+  else
+  {
+    value[0] = insert_str_in_str(value[0], cmd, 1, 0);
+    value[tab_len(value) - 1] =
+    insert_str_in_str(value[tab_len(value) - 1],
+		      end, strlen(value[tab_len(value) - 1]) - 1, 0);
+  }
   return (value);
 }
 

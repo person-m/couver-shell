@@ -19,6 +19,20 @@ int	is_variable(char *str)
   return (0);
 }
 
+char	**riamon_str_concatstr(char *s1, char *s2)
+{
+  char	**new;
+
+  new = my_malloc(sizeof(char *) * 2);
+  new[0] = my_malloc(sizeof(char) * (strlen(s1) + strlen(s2) + 3));
+  strcpy(new[0], "\"");
+  strcat(new[0], s1);
+  strcat(new[0], s2);
+  strcat(new[0], "\"");
+  new[1] = NULL;
+  return (new);
+}
+
 char	*get_end_bracket(char *str)
 {
   while (*str)
