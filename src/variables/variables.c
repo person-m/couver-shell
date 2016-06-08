@@ -80,7 +80,7 @@ char	**replace_variable(char *cmd, t_shell *sh)
     return (NULL);
   if (!(ret = get_value(name, sh)))
     return ((char **)(long)
-	    (!fprintf(stderr, "%s: Undefined variable.\n", name) || 0));
+	    (!fprintf(stderr, "%s: Undefined variable.\n", name) && 0));
   value = lexer(ret, 0);
   if (!value[0])
     value = riamon_str_concatstr(cmd, end);
