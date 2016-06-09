@@ -61,7 +61,7 @@ void	backquote(char ***command, t_shell *sh)
   char	**sub_command;
   char	*new_line;
   int	q[2];
-  
+
   init_backquote(q, &new_command, &i);
   while ((*command)[++i])
   {
