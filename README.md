@@ -134,7 +134,7 @@
  * usage: `where [binary name]`  
   
 * <b>repeat</b>: repeat is a command who can repeat an other command  
- * usage: "repeat [number] [command]"  
+ * usage: `repeat [number] [command]`  
   
 * <b>exit</b>: exit command permit to quit the shell. You can use this command  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with a argument number to quit with his error code.  
