@@ -109,7 +109,7 @@
 * <b>unalias</b>: unalias can remove one or more alias  
  * usage: `unalias [alias1] [alias2] ...`  
   
-* <b>history</b>: hitory is a command that permits to display the shell history  
+* <b>history</b>: history is a command that permits to display the shell history  
  * usage: `history`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`history -c` permit to clear the history  
   
